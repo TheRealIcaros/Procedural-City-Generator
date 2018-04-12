@@ -79,6 +79,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -123,11 +124,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Includes\glad\src\glad.c" />
+    <ClCompile Include="Imgui\imgui.cpp" />
+    <ClCompile Include="Imgui\imgui_demo.cpp" />
+    <ClCompile Include="Imgui\imgui_draw.cpp" />
+    <ClCompile Include="libs\gl3w\GL\gl3w.c" />
+    <ClCompile Include="libs\usynergy\uSynergy.c" />
     <ClCompile Include="Graphic\source\shaderCreater.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="Imgui\imconfig.h" />
+    <ClInclude Include="Imgui\imgui.h" />
+    <ClInclude Include="Imgui\imgui_internal.h" />
+    <ClInclude Include="Imgui\stb_rect_pack.h" />
+    <ClInclude Include="Imgui\stb_textedit.h" />
+    <ClInclude Include="Imgui\stb_truetype.h" />
+    <ClInclude Include="libs\gl3w\GL\gl3w.h" />
+    <ClInclude Include="libs\gl3w\GL\glcorearb.h" />
+    <ClInclude Include="libs\glfw\include\GLFW\glfw3.h" />
+    <ClInclude Include="libs\glfw\include\GLFW\glfw3native.h" />
+    <ClInclude Include="libs\usynergy\uSynergy.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
   </ItemGroup>
   <ItemGroup>
