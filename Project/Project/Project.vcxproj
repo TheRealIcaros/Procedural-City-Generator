@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\adbr14\Source\Repos\Procedural-City-Generator\Project\Includes\glad\include;C:\Users\adbr14\Source\Repos\Procedural-City-Generator\Project\Includes\glfw\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\adbr14\Source\Repos\Procedural-City-Generator\Project\Includes\glfw\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Includes\glad\include;$(SolutionDir)\Includes\glfw\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Includes\glfw\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -82,7 +82,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>opengl32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\adbr14\Source\Repos\Procedural-City-Generator\Project\Includes\glfw\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Includes\glfw\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
