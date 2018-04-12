@@ -4,5 +4,6 @@
 #define WIDTH 800
 #define HEIGHT 600
 
+bool keyIsPressedF1 = false;
 
 #endif // !DEFINES_H

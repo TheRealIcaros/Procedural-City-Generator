@@ -1,6 +1,7 @@
 #include <glad/glad.h>
 #include <GLFW\glfw3.h>
 #include <iostream>
+#include "Imgui\imgui.h"
 
 //Defines
 #include "Defines.h"
@@ -10,6 +11,7 @@ void resizeWindow(GLFWwindow* window, int width, int height);
 bool initiateWindow(GLFWwindow* window);
 bool startSequence(GLFWwindow* window);
 void keyInput(GLFWwindow* window);
+void createTriangleData();
 void render();
 
 int main()
@@ -23,6 +25,8 @@ int main()
 		glfwTerminate();
 		return -1;
 	}
+
+	createTriangleData();
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -96,6 +100,17 @@ void keyInput(GLFWwindow* window)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
+
+	if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS && keyIsPressedF1 == false)
+	{
+		keyIsPressedF1 = true;
+		std::cout << "HEJ HEJ" << std::endl;
+	}
+	else if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_RELEASE && keyIsPressedF1 == true)
+	{
+		keyIsPressedF1 = false;
+		std::cout << "Kalle Anka" << std::endl;
+	}
 }
 
 void render()
@@ -103,4 +118,9 @@ void render()
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
 	glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void createTriangleData()
+{
+
 }
