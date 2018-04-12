@@ -9,7 +9,8 @@ void initiateGLFW();
 void resizeWindow(GLFWwindow* window, int width, int height);
 bool initiateWindow(GLFWwindow* window);
 bool startSequence(GLFWwindow* window);
-
+void keyInput(GLFWwindow* window);
+void render();
 
 int main()
 {
@@ -25,12 +26,16 @@ int main()
 
 	while (!glfwWindowShouldClose(window))
 	{
-		glfwSwapBuffers(window);
-		glfwPollEvents();
-	}
+		//inputs from the keyboard
+		keyInput(window);
 
-	std::system("PAUSE");
-	//Kaffe
+		//rendering happens here...
+		render();
+		
+		//Checks the call events and swap the buffers
+		glfwPollEvents();
+		glfwSwapBuffers(window);
+	}
 
 
 	glfwTerminate();
@@ -44,7 +49,6 @@ void initiateGLFW()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
-
 
 void resizeWindow(GLFWwindow* window, int width, int height)
 {
@@ -86,4 +90,17 @@ bool startSequence(GLFWwindow* window)
 	glfwSetFramebufferSizeCallback(window, resizeWindow);
 
 	return returnValue;
+}
+
+void keyInput(GLFWwindow* window)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, true);
+}
+
+void render()
+{
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+
+	glClear(GL_COLOR_BUFFER_BIT);
 }
