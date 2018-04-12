@@ -22,8 +22,13 @@ void createShaders();
 void createTriangleData();
 void render();
 
+//shader values
+unsigned int vertexShader;
+unsigned int fragmentShader;
+unsigned int shaderProgram;
+
 //Global values
-GLuint gVertexBuffer = 0;
+unsigned int VBO;
 GLuint gVertexAttribute = 0;
 GLuint gShaderProgram = 0;
 
@@ -185,7 +190,15 @@ void createShaders()
 
 void createTriangleData()
 {
-	
+	float vertices[] = {
+		-0.5f, -0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
+		0.0f,  0.5f, 0.0f
+	};
+
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 }
 
 void render()
