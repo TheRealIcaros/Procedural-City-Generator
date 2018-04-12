@@ -7,7 +7,7 @@
 
 //Graphic defines
 #define PI 3.14159265359f
-#define BUFFER_OFFSET(i) ((char *)nullptr + (i))
+//#define BUFFER_OFFSET(i) ((char *)nullptr + (i))
 
 //Mics
 bool keyIsPressedF1 = false;

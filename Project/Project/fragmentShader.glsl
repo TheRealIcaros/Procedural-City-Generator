@@ -11,5 +11,5 @@ void main()
 
 	//float diffuse = clamp(dot(normal.xyz, lightDirection), 0, 1);	//The diffuse-component
 
-	fragment_color = vec4(worldPosition.xyz, 1.0f); /** (ambientLight + diffuse);*/
+	fragment_color = vec4(1.0, 0.0, 0.0, 1.0f); /** (ambientLight + diffuse);*/
 }

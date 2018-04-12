@@ -5,8 +5,8 @@ layout(location = 1) in vec2 vertex_tex;
 layout(binding = 3, std140) uniform uniformBlock
 {
 	mat4 World;
-mat4 View;
-mat4 Projection;
+	mat4 View;
+	mat4 Projection;
 };
 
 //out vec2 texOut;
