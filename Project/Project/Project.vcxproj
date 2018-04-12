@@ -127,14 +127,17 @@
     <ClCompile Include="Imgui\imgui.cpp" />
     <ClCompile Include="Imgui\imgui_demo.cpp" />
     <ClCompile Include="Imgui\imgui_draw.cpp" />
+    <ClCompile Include="Imgui\imgui_impl_glfw_gl3.cpp" />
     <ClCompile Include="libs\gl3w\GL\gl3w.c" />
     <ClCompile Include="libs\usynergy\uSynergy.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Singleton\GenWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Imgui\imconfig.h" />
     <ClInclude Include="Imgui\imgui.h" />
+    <ClInclude Include="Imgui\imgui_impl_glfw_gl3.h" />
     <ClInclude Include="Imgui\imgui_internal.h" />
     <ClInclude Include="Imgui\stb_rect_pack.h" />
     <ClInclude Include="Imgui\stb_textedit.h" />
@@ -144,6 +147,7 @@
     <ClInclude Include="libs\glfw\include\GLFW\glfw3.h" />
     <ClInclude Include="libs\glfw\include\GLFW\glfw3native.h" />
     <ClInclude Include="libs\usynergy\uSynergy.h" />
+    <ClInclude Include="Singleton\GenWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragmentShader.glsl" />
