@@ -231,6 +231,7 @@ void createShaders()
 	//	exit(-1);
 	//}
 
+	//kaffe
 
 	//create fragment shader | same process.
 	GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
