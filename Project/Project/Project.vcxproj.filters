@@ -21,9 +21,15 @@
     <ClCompile Include="..\Includes\glad\src\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Graphic\source\shaderCreater.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphic\header\shaderCreater.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -123,10 +123,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Includes\glad\src\glad.c" />
+    <ClCompile Include="Graphic\source\shaderCreater.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h" />
+    <ClInclude Include="Graphic\header\shaderCreater.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragmentShader.glsl" />
