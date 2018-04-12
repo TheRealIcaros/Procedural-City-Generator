@@ -36,7 +36,7 @@
     <ClCompile Include="libs\usynergy\uSynergy.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Graphic\source\shaderCreater.cpp">
+    <ClCompile Include="Graphic\Source\shaderCreater.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -82,10 +82,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertexShader.glsl">
+    <None Include="Graphic\Shaders\fragmentShader.glsl">
       <Filter>Source Files</Filter>
     </None>
-    <None Include="fragmentShader.glsl">
+    <None Include="Graphic\Shaders\vertexShader.glsl">
       <Filter>Source Files</Filter>
     </None>
   </ItemGroup>

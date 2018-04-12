@@ -129,7 +129,7 @@
     <ClCompile Include="Imgui\imgui_draw.cpp" />
     <ClCompile Include="libs\gl3w\GL\gl3w.c" />
     <ClCompile Include="libs\usynergy\uSynergy.c" />
-    <ClCompile Include="Graphic\source\shaderCreater.cpp" />
+    <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -148,8 +148,8 @@
     <ClInclude Include="Graphic\header\shaderCreater.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="fragmentShader.glsl" />
-    <None Include="vertexShader.glsl" />
+    <None Include="Graphic\Shaders\fragmentShader.glsl" />
+    <None Include="Graphic\Shaders\vertexShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

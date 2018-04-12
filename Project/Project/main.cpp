@@ -1,9 +1,10 @@
 #include <glad/glad.h>
 #include <GLFW\glfw3.h>
-#include <iostream>
 #include <fstream>
 #include <string>
 #include "Imgui\imgui.h"
+
+#include "Graphic\header\shaderCreater.h"
 
 //3D-math
 #include <glm.hpp>
@@ -18,19 +19,15 @@ void resizeWindow(GLFWwindow* window, int width, int height);
 bool initiateWindow(GLFWwindow* window);
 bool startSequence(GLFWwindow* window);
 void keyInput(GLFWwindow* window);
-void createShaders();
 void createTriangleData();
 void render();
 
 //shader values
-unsigned int vertexShader;
-unsigned int fragmentShader;
-unsigned int shaderProgram;
+shaderCreater renderPass;
 
 //Global values
-unsigned int VBO;
-GLuint gVertexAttribute = 0;
-GLuint gShaderProgram = 0;
+GLuint VBO = 0;
+GLuint VAO = 0;
 
 GLuint gUbo = 0;  //Uniform Buffer Object identifyer
 
@@ -94,8 +91,7 @@ int main()
 		return -1;
 	}
 
-	createShaders();
-
+	renderPass.createShader("Graphic/Shaders/vertexShader", "NULL", "../Graphic/Shaders/fragmentShader");
 	createTriangleData();
 
 	while (!glfwWindowShouldClose(window))
@@ -183,17 +179,12 @@ void keyInput(GLFWwindow* window)
 	}
 }
 
-void createShaders()
-{
-	
-}
-
 void createTriangleData()
 {
 	float vertices[] = {
 		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
+		 0.5f, -0.5f, 0.0f,
+		 0.0f,  0.5f, 0.0f
 	};
 
 	glGenBuffers(1, &VBO);
