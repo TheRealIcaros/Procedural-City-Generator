@@ -16,6 +16,7 @@ void render();
 
 int main()
 {
+	////BLARG
 	initiateGLFW();
 	
 	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);;
