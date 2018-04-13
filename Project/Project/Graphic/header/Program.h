@@ -19,6 +19,10 @@ private:
 
 	void initiateGLFW();
 	bool initiateWindow(GLFWwindow* window);
+	void initiateVariables();
+
+	//Mics
+	bool keyIsPressedF1;
 
 public:
 	Program();

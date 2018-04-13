@@ -6,9 +6,6 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
-//Defines
-#include "Defines.h"
-
 //void initiateGLFW();
 //void resizeWindow(GLFWwindow* window, int width, int height);
 //bool initiateWindow(GLFWwindow* window);
@@ -75,34 +72,47 @@
 
 int main()
 {
-	initiateGLFW();
-	
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
+	/*initiateGLFW();
+	//
+	//GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
 
-	if (startSequence(window) == false)
-	{
-		glfwTerminate();
-		return -1;
-	}
+	//if (startSequence(window) == false)
+	//{
+	//	glfwTerminate();
+	//	return -1;
+	//}
 
-	renderPass.createShader("Graphic/Shaders/vertexShader", "NULL", "Graphic/Shaders/fragmentShader");
-	createTriangleData();
+	//renderPass.createShader("Graphic/Shaders/vertexShader", "NULL", "Graphic/Shaders/fragmentShader");
+	//createTriangleData();
 
-	while (!glfwWindowShouldClose(window))
-	{
-		//inputs from the keyboard
-		keyInput(window);
+	//while (!glfwWindowShouldClose(window))
+	//{
+	//	//inputs from the keyboard
+	//	keyInput(window);
 
-		//rendering happens here...
-		render();
-		
-		//Checks the call events and swap the buffers
-		glfwPollEvents();
-		glfwSwapBuffers(window);
-	}
+	//	//rendering happens here...
+	//	render();
+	//	
+	//	//Checks the call events and swap the buffers
+	//	glfwPollEvents();
+	//	glfwSwapBuffers(window);
+	}*/
 
+	Program* myProgram = new Program();
 
-	glfwTerminate();
+	if (myProgram == nullptr)
+		return NULL;
+
+	if (!myProgram->Start())
+		return NULL;
+
+	//The main loop
+	while (myProgram->Run());
+
+	//Delete and cleanup
+	myProgram->Stop();
+	delete myProgram;
+
 	return 0;
 }
 

@@ -24,9 +24,17 @@ bool Program::initiateWindow(GLFWwindow* window)
 	return returnValue;
 }
 
+void Program::initiateVariables()
+{
+	//Mics
+	this->keyIsPressedF1 = false;
+	this->shouldRun = true;
+}
+
 Program::Program()
 {
 	initiateGLFW();
+	initiateVariables();
 
 	this->window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
 }
