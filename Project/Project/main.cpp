@@ -6,69 +6,7 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
-//void initiateGLFW();
-//void resizeWindow(GLFWwindow* window, int width, int height);
-//bool initiateWindow(GLFWwindow* window);
-//bool startSequence(GLFWwindow* window);
-//void keyInput(GLFWwindow* window);
-//void createTriangleData();
-//void render();
-//
-////shader values
-//shaderCreater renderPass;
-//
-////Global values
-//GLuint VBO = 0;
-//GLuint VAO = 0;
-//
-//GLuint gUbo = 0;  //Uniform Buffer Object identifyer
-//
-//glm::mat4 WorldMatrix()
-//{
-//	glm::mat4 World;
-//
-//	//This rotates my matrices
-//	World = glm::rotate(World, 180.0f, glm::vec3(0, 1, 0));
-//
-//	return World;
-//}
-//
-//glm::mat4 ViewMatrix()
-//{
-//	glm::vec3 cameraPos(0.0f, 0.0f, -2.0f);
-//	glm::vec3 lookAtVector(0.0f, 0.0f, 0.0f);
-//	glm::vec3 upVector(0.0f, 1.0f, 0.0f);
-//
-//	glm::mat4 View = glm::lookAt(cameraPos, lookAtVector, upVector);
-//
-//	return View;
-//}
-//
-//glm::mat4 ProjectionMatrix()
-//{
-//	float FOV = 0.45f * PI;
-//	float aspectRatio = 640 / 480;
-//
-//	glm::mat4 Projection = glm::perspective(FOV, aspectRatio, 0.1f, 20.0f);
-//
-//	return Projection;
-//}
-//
-////My matrices
-//glm::mat4 World = WorldMatrix();
-//glm::mat4 View = ViewMatrix();
-//glm::mat4 Projection = ProjectionMatrix();
-//
-////The struct to be stored in a buffer
-//struct valuesFromCPUToGPU
-//{
-//	glm::mat4 World;
-//	glm::mat4 View;
-//	glm::mat4 Projection;
-//};
-//
-////The buffer data I send
-//valuesFromCPUToGPU myBufferData = { World, View, Projection };
+
 
 int main()
 {

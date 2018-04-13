@@ -8,7 +8,6 @@ void Program::initiateGLFW()
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
 
-
 bool Program::initiateWindow(GLFWwindow* window)
 {
 	bool returnValue = true;
@@ -29,14 +28,28 @@ void Program::initiateVariables()
 	//Mics
 	this->keyIsPressedF1 = false;
 	this->shouldRun = true;
+
+	//System stuff
+	this->window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
+	this->genWindow = GenWindow::getInstance();
+}
+
+void Program::initiateImgui(GLFWwindow* window)
+{
+	//Setup Imgui
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+	ImGui_ImplGlfwGL3_Init(window, true);
+
+	//Setup style
+	ImGui::StyleColorsDark();
 }
 
 Program::Program()
 {
 	initiateGLFW();
 	initiateVariables();
-
-	this->window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
 }
 
 Program::~Program()
@@ -51,6 +64,8 @@ bool Program::Start()
 		returnValue = false;
 
 	glfwMakeContextCurrent(window);
+
+	initiateImgui(window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -67,11 +82,13 @@ bool Program::Start()
 
 bool Program::Run()
 {
+	ImGui_ImplGlfwGL3_NewFrame();
+
 	keyInput(window);				//Checks if any key was pressed 
 
+	genWindow->draw();
 
-	glClearColor(0.0f, 0.3f, 0.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	render();
 
 	glfwSwapBuffers(window);
 	glfwPollEvents();
@@ -82,6 +99,9 @@ bool Program::Run()
 
 void Program::Stop()
 {
+	ImGui_ImplGlfwGL3_Shutdown();
+	ImGui::DestroyContext();
+
 	glfwTerminate();
 }
 
@@ -96,6 +116,7 @@ void Program::keyInput(GLFWwindow *window)
 	if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS && keyIsPressedF1 == false)
 	{
 		keyIsPressedF1 = true;
+		genWindow->toggleDebugToDraw();
 		std::cout << "HEJ HEJ" << std::endl;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_RELEASE && keyIsPressedF1 == true)
@@ -105,14 +126,16 @@ void Program::keyInput(GLFWwindow *window)
 	}
 }
 
-//void render()
-//{
-//	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
-//	glClear(GL_COLOR_BUFFER_BIT);
-//
-//	// draw our first triangle
-//	glUseProgram(renderPass.getShaderProgramID());
-//	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-//	glDrawArrays(GL_TRIANGLES, 0, 3);
-//
-//}
+void Program::render()
+{
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	ImGui::Render();
+	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+	//// draw our first triangle
+	//glUseProgram(renderPass.getShaderProgramID());
+	//glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	//glDrawArrays(GL_TRIANGLES, 0, 3);
+
+}
