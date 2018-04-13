@@ -134,6 +134,7 @@
     <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Singleton\GenWindow.cpp" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h" />
