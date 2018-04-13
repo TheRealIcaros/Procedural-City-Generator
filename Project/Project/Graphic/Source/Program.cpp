@@ -30,9 +30,10 @@ void Program::initiateVariables()
 	this->shouldRun = true;
 
 	//System stuff
-	this->window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
+	this->window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
 	this->genWindow = GenWindow::getInstance();
 	this->myKeyInput = new KeyIn();
+	this->myObjects = Object();
 }
 
 void Program::initiateImgui(GLFWwindow* window)
@@ -131,9 +132,12 @@ void Program::render()
 
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+
+	myObjects.renderObject();
 	//// draw our first triangle
 	//glUseProgram(renderPass.getShaderProgramID());
 	//glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	//glDrawArrays(GL_TRIANGLES, 0, 3);
 	//glDrawArrays(GL_TRIANGLES, 0, 3);
 
 }

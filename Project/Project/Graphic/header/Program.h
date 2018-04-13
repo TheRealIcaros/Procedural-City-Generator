@@ -12,7 +12,7 @@
 
 //Own made includes
 #include "../../Defines.h"
-#include "../../Graphic\header\shaderCreater.h"
+#include "../header/Object.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Singleton/GenWindow.h"
 
@@ -22,6 +22,7 @@ private:
 	GLFWwindow * window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
+	Object myObjects;
 	bool shouldRun;
 
 	void initiateGLFW();

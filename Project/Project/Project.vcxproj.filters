@@ -13,6 +13,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Singleton\GenWindow.cpp" />
     <ClCompile Include="Controlls\Source\KeyIn.cpp" />
+    <ClCompile Include="Graphic\Source\Object.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h" />
@@ -32,6 +33,7 @@
     <ClInclude Include="Singleton\GenWindow.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
     <ClInclude Include="Controlls\Header\KeyIn.h" />
+    <ClInclude Include="Graphic\header\Object.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\fragmentShader.glsl" />
