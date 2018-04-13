@@ -12,9 +12,10 @@
 
 //Own made includes
 #include "../../Defines.h"
-#include "../header/Object.h"
+//#include "../header/Object.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Singleton/GenWindow.h"
+#include "shaderCreater.h"
 
 class Program
 {
@@ -22,7 +23,8 @@ private:
 	GLFWwindow * window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
-	Object myObjects;
+	shaderCreater renderPass;
+	//Object myObjects;
 	bool shouldRun;
 
 	void initiateGLFW();
@@ -32,6 +34,8 @@ private:
 
 	//Mics
 	bool keyIsPressedF1;
+	GLuint VAO;
+	GLuint VBO;
 
 public:
 	Program();
@@ -41,6 +45,8 @@ public:
 	bool Run();		//The main-loop/ Returns false when we exit it 
 	void Stop();	//Cleans upp the memory and returns everything
 
+
+	void createTriangle();
 	void render();
 };
 

@@ -1,4 +1,5 @@
 #version 430
+in vec3 aPos;
 
 out vec4 FragColor;
 

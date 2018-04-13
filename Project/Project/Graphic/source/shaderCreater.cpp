@@ -138,6 +138,8 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 	if (geometryShader != "NULL")
 		glDeleteShader(gs);
 	glDeleteShader(fs);
+
+	
 }
 
 void shaderCreater::setFloat(std::string name, int value)const
