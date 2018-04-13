@@ -117,12 +117,10 @@ void Program::keyInput(GLFWwindow *window)
 	{
 		keyIsPressedF1 = true;
 		genWindow->toggleDebugToDraw();
-		std::cout << "HEJ HEJ" << std::endl;
 	}
 	else if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_RELEASE && keyIsPressedF1 == true)
 	{
 		keyIsPressedF1 = false;
-		std::cout << "Kalle Anka" << std::endl;
 	}
 }
 
