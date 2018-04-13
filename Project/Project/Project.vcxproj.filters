@@ -36,6 +36,12 @@
     <ClCompile Include="libs\usynergy\uSynergy.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Imgui\imgui_impl_glfw_gl3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton\GenWindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="Graphic\source\shaderCreater.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -75,6 +81,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="libs\usynergy\uSynergy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Imgui\imgui_impl_glfw_gl3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton\GenWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Graphic\header\shaderCreater.h">

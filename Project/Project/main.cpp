@@ -1,9 +1,11 @@
 #include <glad/glad.h>
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 #include <iostream>
 #include <fstream>
 #include <string>
-#include "Imgui\imgui.h"
+#include "Imgui/imgui.h"
+#include "Imgui/imgui_impl_glfw_gl3.h"
+#include "Singleton\GenWindow.h"
 
 //3D-math
 #include <glm.hpp>
@@ -21,6 +23,10 @@ void keyInput(GLFWwindow* window);
 void createShaders();
 void createTriangleData();
 void render();
+
+//IMGUI stuffs
+GenWindow* genWindow = GenWindow::getInstance();
+bool keyIsPressedF1 = false;
 
 //shader values
 unsigned int vertexShader;
@@ -83,10 +89,10 @@ valuesFromCPUToGPU myBufferData = { World, View, Projection };
 
 int main()
 {
-	////BLARG
 	initiateGLFW();
 	
-	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);;
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
+
 
 	if (startSequence(window) == false)
 	{
@@ -100,8 +106,12 @@ int main()
 
 	while (!glfwWindowShouldClose(window))
 	{
+		ImGui_ImplGlfwGL3_NewFrame();
+
 		//inputs from the keyboard
 		keyInput(window);
+
+		genWindow->draw();
 
 		//rendering happens here...
 		render();
@@ -111,6 +121,9 @@ int main()
 		glfwSwapBuffers(window);
 	}
 
+	// Cleanup
+	ImGui_ImplGlfwGL3_Shutdown();
+	ImGui::DestroyContext();
 
 	glfwTerminate();
 	return 0;
@@ -153,6 +166,15 @@ bool startSequence(GLFWwindow* window)
 
 	glfwMakeContextCurrent(window);
 
+	// Setup ImGui binding
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+	ImGui_ImplGlfwGL3_Init(window, true);
+
+	// Setup style
+	ImGui::StyleColorsDark();
+
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
 		std::cout << "Failed to initialize GLAD" << std::endl;
@@ -174,12 +196,11 @@ void keyInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS && keyIsPressedF1 == false)
 	{
 		keyIsPressedF1 = true;
-		std::cout << "HEJ HEJ" << std::endl;
+		genWindow->toggleDebugToDraw();
 	}
 	else if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_RELEASE && keyIsPressedF1 == true)
 	{
 		keyIsPressedF1 = false;
-		std::cout << "Kalle Anka" << std::endl;
 	}
 }
 
@@ -207,5 +228,6 @@ void render()
 	
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	
-	
+	ImGui::Render();
+	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
