@@ -3,7 +3,6 @@
 
 //General includes
 #include <glad/glad.h>
-#include <GLFW\glfw3.h>
 #include <fstream>
 #include <string>
 
@@ -14,6 +13,7 @@
 //Own made includes
 #include "../../Defines.h"
 #include "../../Graphic\header\shaderCreater.h"
+#include "../../Controlls/Header/KeyIn.h"
 #include "../../Singleton/GenWindow.h"
 
 class Program
@@ -21,6 +21,7 @@ class Program
 private:
 	GLFWwindow * window;
 	GenWindow* genWindow;
+	KeyIn* myKeyInput;
 	bool shouldRun;
 
 	void initiateGLFW();
@@ -38,7 +39,6 @@ public:
 	bool Start();	//Initiates the program
 	bool Run();		//The main-loop/ Returns false when we exit it 
 	void Stop();	//Cleans upp the memory and returns everything
-	void keyInput(GLFWwindow *window);
 
 	void render();
 };

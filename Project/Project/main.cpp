@@ -6,8 +6,6 @@
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
 
-
-
 int main()
 {
 	/*renderPass.createShader("Graphic/Shaders/vertexShader", "NULL", "Graphic/Shaders/fragmentShader");
@@ -44,73 +42,7 @@ int main()
 	return 0;
 }
 
-//void initiateGLFW()
-//{
-//	glfwInit();
-//	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-//	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-//	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-//}
-//
-//void resizeWindow(GLFWwindow* window, int width, int height)
-//{
-//	glViewport(0, 0, width, height);
-//}
-//
-//bool initiateWindow(GLFWwindow* window)
-//{
-//	bool returnValue = true;
-//	
-//	if (window == NULL)
-//	{
-//		std::cout << "Failed to create GLFW window" << std::endl;
-//		glfwTerminate();
-//		returnValue = false;
-//	}
-//	
-//
-//	return returnValue;
-//}
-//
-//bool startSequence(GLFWwindow* window)
-//{
-//	bool returnValue = true;
-//
-//	if (initiateWindow(window) == false)
-//		returnValue = false;
-//
-//	glfwMakeContextCurrent(window);
-//
-//	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-//	{
-//		std::cout << "Failed to initialize GLAD" << std::endl;
-//		returnValue = false;
-//	}
-//
-//	glViewport(0, 0, 800, 600);
-//
-//	glfwSetFramebufferSizeCallback(window, resizeWindow);
-//
-//	return returnValue;
-//}
-//
-//void keyInput(GLFWwindow* window)
-//{
-//	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-//		glfwSetWindowShouldClose(window, true);
-//
-//	if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS && keyIsPressedF1 == false)
-//	{
-//		keyIsPressedF1 = true;
-//		std::cout << "HEJ HEJ" << std::endl;
-//	}
-//	else if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_RELEASE && keyIsPressedF1 == true)
-//	{
-//		keyIsPressedF1 = false;
-//		std::cout << "Kalle Anka" << std::endl;
-//	}
-//}
-//
+
 //void createTriangleData()
 //{
 //	float vertices[] = {

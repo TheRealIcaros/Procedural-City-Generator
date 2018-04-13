@@ -32,6 +32,7 @@ void Program::initiateVariables()
 	//System stuff
 	this->window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
 	this->genWindow = GenWindow::getInstance();
+	this->myKeyInput = new KeyIn();
 }
 
 void Program::initiateImgui(GLFWwindow* window)
@@ -84,15 +85,14 @@ bool Program::Run()
 {
 	ImGui_ImplGlfwGL3_NewFrame();
 
-	keyInput(window);				//Checks if any key was pressed 
+	myKeyInput->keyInput(window, genWindow, shouldRun);		//Checks if any key was pressed 
 
-	genWindow->draw();
+	genWindow->draw();								//Draw function for ImGui
 
-	render();
+	render();										//The render loop for all the graphics
 
 	glfwSwapBuffers(window);
 	glfwPollEvents();
-
 
 	return shouldRun;
 }
@@ -105,26 +105,24 @@ void Program::Stop()
 	glfwTerminate();
 }
 
-void Program::keyInput(GLFWwindow *window)
-{
-	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-	{
-		glfwSetWindowShouldClose(window, true);
-		shouldRun = false;
-	}
-
-	if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS && keyIsPressedF1 == false)
-	{
-		keyIsPressedF1 = true;
-		genWindow->toggleDebugToDraw();
-		std::cout << "HEJ HEJ" << std::endl;
-	}
-	else if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_RELEASE && keyIsPressedF1 == true)
-	{
-		keyIsPressedF1 = false;
-		std::cout << "Kalle Anka" << std::endl;
-	}
-}
+//void Program::keyInput(GLFWwindow *window)
+//{
+//	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+//	{
+//		glfwSetWindowShouldClose(window, true);
+//		shouldRun = false;
+//	}
+//
+//	if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS && keyIsPressedF1 == false)
+//	{
+//		keyIsPressedF1 = true;
+//		genWindow->toggleDebugToDraw();
+//	}
+//	else if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_RELEASE && keyIsPressedF1 == true)
+//	{
+//		keyIsPressedF1 = false;
+//	}
+//}
 
 void Program::render()
 {
