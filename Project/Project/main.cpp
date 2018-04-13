@@ -72,17 +72,7 @@
 
 int main()
 {
-	/*initiateGLFW();
-	//
-	//GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "LearnOpenGL", NULL, NULL);
-
-	//if (startSequence(window) == false)
-	//{
-	//	glfwTerminate();
-	//	return -1;
-	//}
-
-	//renderPass.createShader("Graphic/Shaders/vertexShader", "NULL", "Graphic/Shaders/fragmentShader");
+	/*renderPass.createShader("Graphic/Shaders/vertexShader", "NULL", "Graphic/Shaders/fragmentShader");
 	//createTriangleData();
 
 	//while (!glfwWindowShouldClose(window))
