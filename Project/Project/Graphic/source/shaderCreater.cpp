@@ -22,6 +22,7 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 	GLuint vs = glCreateShader(GL_VERTEX_SHADER);
 	//Open glsl file and put it in a string
 	std::ifstream shaderFile(vertexShader + ".glsl");
+	//std::ifstream shaderFile(vertexShader);
 	std::string shaderText((std::istreambuf_iterator<char>(shaderFile)), std::istreambuf_iterator<char>());
 	shaderFile.close();
 	//Make a double pointer (only valid here)
@@ -34,7 +35,7 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 
 	//Test if compilation of shader-file went ok
 	glGetShaderiv(vs, GL_COMPILE_STATUS, &success);
-	if (success == GL_FALSE)
+	if (success == GL_FALSE || shaderText == "")
 	{
 		glGetShaderInfoLog(vs, 512, NULL, infoLog);
 		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
@@ -42,6 +43,9 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 		glDeleteShader(vs);
 		exit(-1);
 	}
+
+
+	std::cout << shaderText << std::endl;
 
 	//Geometry shader
 	GLuint gs = 0;
@@ -77,6 +81,7 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 	GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
 	//Open glsl file and put it in a string
 	shaderFile.open(fragmentShader + ".glsl");
+	//shaderFile.open(fragmentShader);
 	shaderText.assign((std::istreambuf_iterator<char>(shaderFile)), std::istreambuf_iterator<char>());
 	shaderFile.close();
 	//Make a double pointer (only valid here)
@@ -97,6 +102,9 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 		glDeleteShader(fs);
 		exit(-1);
 	}
+
+	std::cout << "\n" << shaderText << std::endl;
+
 
 	//Link shader-program (connect vs,(gs) and fs)
 	this->programID = glCreateProgram();

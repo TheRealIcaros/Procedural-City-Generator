@@ -32,3 +32,12 @@ void KeyIn::keyInput(GLFWwindow* window, GenWindow* genWindow, bool &shouldRun)
 		keyIsPressedF1 = false;
 	}
 }
+
+void KeyIn::keyInput(GLFWwindow* window, bool &shouldRun)
+{
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+	{
+		glfwSetWindowShouldClose(window, true);
+		shouldRun = false;
+	}
+}

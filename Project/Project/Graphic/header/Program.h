@@ -1,27 +1,29 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
+//Own made includes
+#include "shaderCreater.h"
+#include "../../Defines.h"
+#include "../../Controlls/Header/KeyIn.h"
+//#include "../../Singleton/GenWindow.h"
+
+
 //General includes
-#include <glad/glad.h>
+//#include <glad/glad.h>
 #include <fstream>
 #include <string>
 
 //Imgui stuff
-#include "../../Imgui/imgui.h"
-#include "../../Imgui/imgui_impl_glfw_gl3.h"
+//#include "../../Imgui/imgui.h"
+//#include "../../Imgui/imgui_impl_glfw_gl3.h"
 
-//Own made includes
-#include "../../Defines.h"
-//#include "../header/Object.h"
-#include "../../Controlls/Header/KeyIn.h"
-#include "../../Singleton/GenWindow.h"
-#include "shaderCreater.h"
+
 
 class Program
 {
 private:
 	GLFWwindow * window;
-	GenWindow* genWindow;
+	//GenWindow* genWindow;
 	KeyIn* myKeyInput;
 	shaderCreater renderPass;
 	//Object myObjects;
@@ -30,7 +32,7 @@ private:
 	void initiateGLFW();
 	bool initiateWindow(GLFWwindow* window);
 	void initiateVariables();
-	void initiateImgui(GLFWwindow* window);
+	//void initiateImgui(GLFWwindow* window);
 
 	//Mics
 	bool keyIsPressedF1;

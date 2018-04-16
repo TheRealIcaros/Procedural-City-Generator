@@ -34,7 +34,7 @@
     <ClInclude Include="Controlls\Header\KeyIn.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Graphic\Shaders\fragmentShader.glsl" />
-    <None Include="Graphic\Shaders\vertexShader.glsl" />
+    <None Include="Graphic\Shaders\fragment.glsl" />
+    <None Include="Graphic\Shaders\vertex.glsl" />
   </ItemGroup>
 </Project>

@@ -33,22 +33,22 @@ void Program::initiateVariables()
 
 	//System stuff
 	this->window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
-	this->genWindow = GenWindow::getInstance();
+	//this->genWindow = GenWindow::getInstance();
 	this->myKeyInput = new KeyIn();
 	//this->myObjects = Object();
 }
 
-void Program::initiateImgui(GLFWwindow* window)
-{
-	//Setup Imgui
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-
-	ImGui_ImplGlfwGL3_Init(window, true);
-
-	//Setup style
-	ImGui::StyleColorsDark();
-}
+//void Program::initiateImgui(GLFWwindow* window)
+//{
+//	//Setup Imgui
+//	ImGui::CreateContext();
+//	ImGuiIO& io = ImGui::GetIO(); (void)io;
+//
+//	ImGui_ImplGlfwGL3_Init(window, true);
+//
+//	//Setup style
+//	ImGui::StyleColorsDark();
+//}
 
 Program::Program()
 {
@@ -72,7 +72,7 @@ bool Program::Start()
 
 	glfwMakeContextCurrent(window);
 
-	initiateImgui(window);
+	//initiateImgui(window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -84,20 +84,21 @@ bool Program::Start()
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 	//glfwSetFramebufferSizeCallback(window, resizeWindow);
 
+	renderPass.createShader("../Shaders/new", "NULL", "../Shaders/b");
 	createTriangle();
-
-	renderPass.createShader("../Shaders/vertexShader", "NULL", "../Shaders/fragmentShader.glsl");
 
 	return returnValue;
 }
 
 bool Program::Run()
 {
-	ImGui_ImplGlfwGL3_NewFrame();
+	//ImGui_ImplGlfwGL3_NewFrame();
 
-	myKeyInput->keyInput(window, genWindow, shouldRun);		//Checks if any key was pressed 
+	/*myKeyInput->keyInput(window, genWindow, shouldRun);*/		//Checks if any key was pressed 
 
-	genWindow->draw();								//Draw function for ImGui
+	myKeyInput->keyInput(window, shouldRun);
+
+	//genWindow->draw();								//Draw function for ImGui
 
 	render();										//The render loop for all the graphics
 
@@ -109,8 +110,8 @@ bool Program::Run()
 
 void Program::Stop()
 {
-	ImGui_ImplGlfwGL3_Shutdown();
-	ImGui::DestroyContext();
+	//ImGui_ImplGlfwGL3_Shutdown();
+	//ImGui::DestroyContext();
 
 	glfwTerminate();
 }
@@ -148,8 +149,8 @@ void Program::render()
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	ImGui::Render();
-	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+	//ImGui::Render();
+	//ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 
 	//myObjects.renderObject();
 	//// draw our first triangle
