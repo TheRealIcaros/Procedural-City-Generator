@@ -4,28 +4,26 @@
 //Own made includes
 #include "shaderCreater.h"
 #include "../../Defines.h"
-#include "../../Controlls/Header/KeyIn.h"
+//#include "../../Controlls/Header/KeyIn.h"
 //#include "../../Singleton/GenWindow.h"
 
 
 //General includes
 //#include <glad/glad.h>
-#include <fstream>
-#include <string>
-
+//#include <fstream>
+//#include <string>
+//
 //Imgui stuff
 //#include "../../Imgui/imgui.h"
 //#include "../../Imgui/imgui_impl_glfw_gl3.h"
 
-
-
 class Program
 {
 private:
-	GLFWwindow * window;
+	GLFWwindow* window;
 	//GenWindow* genWindow;
-	KeyIn* myKeyInput;
-	shaderCreater renderPass;
+	//KeyIn* myKeyInput;
+	
 	//Object myObjects;
 	bool shouldRun;
 
@@ -36,12 +34,14 @@ private:
 
 	//Mics
 	bool keyIsPressedF1;
-	GLuint VAO;
-	GLuint VBO;
 
 public:
 	Program();
 	~Program();
+
+	shaderCreater renderPass;
+	GLuint VAO;
+	GLuint VBO;
 
 	bool Start();	//Initiates the program
 	bool Run();		//The main-loop/ Returns false when we exit it 

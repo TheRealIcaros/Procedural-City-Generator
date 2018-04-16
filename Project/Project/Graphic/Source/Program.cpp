@@ -19,7 +19,6 @@ bool Program::initiateWindow(GLFWwindow* window)
 		returnValue = false;
 	}
 
-
 	return returnValue;
 }
 
@@ -34,8 +33,7 @@ void Program::initiateVariables()
 	//System stuff
 	this->window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
 	//this->genWindow = GenWindow::getInstance();
-	this->myKeyInput = new KeyIn();
-	//this->myObjects = Object();
+	//this->myKeyInput = new KeyIn();
 }
 
 //void Program::initiateImgui(GLFWwindow* window)
@@ -54,9 +52,6 @@ Program::Program()
 {
 	initiateGLFW();
 	initiateVariables();
-
-	renderPass = shaderCreater();
-	
 }
 
 Program::~Program()
@@ -80,23 +75,21 @@ bool Program::Start()
 		returnValue = false;
 	}
 
+	createTriangle();
+	renderPass.createShader("../Shaders/vertex.glsl", "NULL", "../Shaders/fragment");
+
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
-	//glfwSetFramebufferSizeCallback(window, resizeWindow);
-
-	renderPass.createShader("../Shaders/new", "NULL", "../Shaders/b");
-	createTriangle();
-
+	
 	return returnValue;
 }
 
 bool Program::Run()
 {
 	//ImGui_ImplGlfwGL3_NewFrame();
+	//myKeyInput->keyInput(window, genWindow, shouldRun);	//Checks if any key was pressed 
 
-	/*myKeyInput->keyInput(window, genWindow, shouldRun);*/		//Checks if any key was pressed 
-
-	myKeyInput->keyInput(window, shouldRun);
+	//myKeyInput->keyInput(window, shouldRun);
 
 	//genWindow->draw();								//Draw function for ImGui
 
@@ -121,8 +114,8 @@ void Program::createTriangle()
 	float vertices[] = {
 
 		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
+		 0.5f, -0.5f, 0.0f,
+	  	 0.0f,  0.5f, 0.0f
 	};
 
 	glGenVertexArrays(1, &VAO);

@@ -1,149 +1,150 @@
 //Includes
-//#include "Graphic\header\Program.h"
-#include "Graphic\header\shaderCreater.h"
-#include "Defines.h"
+#include "Graphic\header\Program.h"
 
-void initiateGLFW();
-
-bool initiateWindow(GLFWwindow* window);
-void render();
-void createTriangle();
-//void createShader(std::string vertexShader,  std::string geometryShader, std::string fragmentShader);
+//#include "Graphic\header\shaderCreater.h"
+//#include "Defines.h"
+//
+//void initiateGLFW();
+//
+//bool initiateWindow(GLFWwindow* window);
+//void render();
+//void createTriangle();
+//void createShader(std::string vertexShader, std::string geometryShader, std::string fragmentShader);
 //GLuint getShaderProgramID();
-
-shaderCreater renderPass;
-GLuint VAO = 0;
-GLuint VBO = 0;
-GLuint programID = 0;
+//
+//shaderCreater renderPass;
+//GLuint VAO = 0;
+//GLuint VBO = 0;
+//GLuint programID = 0;
 
 int main()
 {
-	initiateGLFW();
+	/* initiateGLFW();
+	//
+	//GLFWwindow* window;
+	//window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
+	//
+	//if (initiateWindow(window) == false)
+	//{
+	//	std::system("PAUSE");
+	//	return -1;
+	//}
+	//	
+	//glfwMakeContextCurrent(window);
+	//
+	//if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	//{
+	//	std::cout << "Failed to initialize GLAD" << std::endl;
+	//	std::system("PAUSE");
+	//	return -1;
+	//}
+	//
+	//createTriangle();
+	////createShader("Graphic/Shaders/vertex", "NULL", "Graphic/Shaders/fragment");
+	//renderPass.createShader("Graphic/Shaders/vertex", "NULL", "Graphic/Shaders/fragment");
+	//
+	//glViewport(0, 0, WIDTH, HEIGHT);
+	//glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);
+	//
+	//
+	////createTriangleData();
+	////
+	//while (!glfwWindowShouldClose(window))
+	//{
+	//	//inputs from the keyboard
+	//	//keyInput(window);
+	//
+	//	//rendering happens here...
+	//	render();
+	//	
+	//	//Checks the call events and swap the buffers
+	//	glfwPollEvents();
+	//	glfwSwapBuffers(window);
+	//}*/ 
+
+	Program* myProgram = new Program();
 	
-	GLFWwindow* window;
-	window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
-
-	if (initiateWindow(window) == false)
-	{
-		std::system("PAUSE");
-		return -1;
-	}
-		
-	glfwMakeContextCurrent(window);
+	if (myProgram == nullptr)
+		return NULL;
 	
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		std::system("PAUSE");
-		return -1;
-	}
-
-	createTriangle();
-	//createShader("Graphic/Shaders/vertex", "NULL", "Graphic/Shaders/fragment");
-	renderPass.createShader("Graphic/Shaders/vertex", "NULL", "Graphic/Shaders/fragment");
-
-	glViewport(0, 0, WIDTH, HEIGHT);
-	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);
-
+	if (!myProgram->Start())
+		return NULL;
 	
-	//createTriangleData();
-	//
-	while (!glfwWindowShouldClose(window))
-	{
-		//inputs from the keyboard
-		//keyInput(window);
+	//The main loop
+	while (myProgram->Run());
 	
-		//rendering happens here...
-		render();
-		
-		//Checks the call events and swap the buffers
-		glfwPollEvents();
-		glfwSwapBuffers(window);
-	}
-
-	//Program* myProgram = new Program();
-	//
-	//if (myProgram == nullptr)
-	//	return NULL;
-	//
-	//if (!myProgram->Start())
-	//	return NULL;
-	//
-	////The main loop
-	//while (myProgram->Run());
-	//
-	////Delete and cleanup
-	//myProgram->Stop();
-	//delete myProgram;
+	//Delete and cleanup
+	myProgram->Stop();
+	delete myProgram;
 
 	std::system("PAUSE");
 
 	return 0;
 }
 
-void initiateGLFW()
-{
-	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);	 //This sets the Major requierments of Opengl to Version 4.x
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);	//This sets the Minor requierments of Opengl to Version x.3
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-}
-
-bool initiateWindow(GLFWwindow* window)
-{
-	bool returnValue = true;
-
-	if (window == NULL)
-	{
-		std::cout << "Failed to create GLFW window" << std::endl;
-		glfwTerminate();
-		returnValue = false;
-	}
-
-
-	return returnValue;
-}
-
-void render()
-{
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	// draw our first triangle
-	glUseProgram(renderPass.getShaderProgramID());
-	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-	
-}
-
-void createTriangle()
-{
-	float vertices[] = {
-
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
-	};
-
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	glBindVertexArray(VAO);
-
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-
-	// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-	// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-	// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-	glBindVertexArray(0);
-}
-
+//void initiateGLFW()
+//{
+//	glfwInit();
+//	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);	 //This sets the Major requierments of Opengl to Version 4.x
+//	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);	//This sets the Minor requierments of Opengl to Version x.3
+//	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+//}
+//
+//bool initiateWindow(GLFWwindow* window)
+//{
+//	bool returnValue = true;
+//
+//	if (window == NULL)
+//	{
+//		std::cout << "Failed to create GLFW window" << std::endl;
+//		glfwTerminate();
+//		returnValue = false;
+//	}
+//
+//
+//	return returnValue;
+//}
+//
+//void render()
+//{
+//	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+//	glClear(GL_COLOR_BUFFER_BIT);
+//
+//	 //draw our first triangle
+//	glUseProgram(renderPass.getShaderProgramID());
+//	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+//	glDrawArrays(GL_TRIANGLES, 0, 3);
+//	
+//}
+//
+//void createTriangle()
+//{
+//	float vertices[] = {
+//
+//		-0.5f, -0.5f, 0.0f,
+//		0.5f, -0.5f, 0.0f,
+//		0.0f,  0.5f, 0.0f
+//	};
+//
+//	glGenVertexArrays(1, &VAO);
+//	glGenBuffers(1, &VBO);
+//	 //bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
+//	glBindVertexArray(VAO);
+//
+//	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+//	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+//
+//	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+//	glEnableVertexAttribArray(0);
+//
+//	 //note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
+//	glBindBuffer(GL_ARRAY_BUFFER, 0);
+//
+//	 //You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
+//	 //VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
+//	glBindVertexArray(0);
+//}
+//
 //void createShader(std::string vertexShader, std::string geometryShader, std::string fragmentShader)
 //{
 //	GLint success = 0;
@@ -281,4 +282,4 @@ void createTriangle()
 //GLuint getShaderProgramID()
 //{
 //	return programID;
-//}
+//}  

@@ -7,8 +7,6 @@
 #include <iostream>
 #include <fstream>
 
-
-
 class shaderCreater
 {
 private:
