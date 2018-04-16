@@ -35,6 +35,15 @@ private:
 	int genTime;				//Total ammount of time to generate
 
 	char m_inputBuf[256] = "";
+	int tSizeX = 25;
+	int tSizeY = 25;
+	float terrainOctave1 = 1.0;
+	float terrainOctave2 = 1.0;
+	float terrainOctave3 = 1.0;
+	float terrainOctavePerc1 = 0.50;
+	float terrainOctavePerc2 = 0.35;
+	float terrainOctavePerc3 = 0.15;
+	float redistribution = 1.0;
 	int houseMinHeight = 1;
 	int houseMaxHeight = 2;
 	int houseDensity = 100;

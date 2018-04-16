@@ -87,6 +87,21 @@ void GenWindow::draw()
 	{
 		ImGui::InputText("Seed", m_inputBuf, 128, ImGuiInputTextFlags_CharsNoBlank);
 		ImGui::Separator();
+		ImGui::Text("Terrain");
+		ImGui::Text("Size");
+		ImGui::InputInt("X", &tSizeX, 1, 100);
+		ImGui::InputInt("Y", &tSizeY, 1, 100);
+		ImGui::Text("Octaves");
+		ImGui::InputFloat("1", &terrainOctave1);
+		ImGui::InputFloat("2", &terrainOctave2);
+		ImGui::InputFloat("3", &terrainOctave3);
+		ImGui::Text("Octaves Percentage");
+		ImGui::InputFloat("1 ", &terrainOctavePerc1);
+		ImGui::InputFloat("2 ", &terrainOctavePerc2);
+		ImGui::InputFloat("3 ", &terrainOctavePerc3);
+		ImGui::Text("Redistribution");
+		ImGui::InputFloat("##Redistribution", &redistribution);
+		ImGui::Separator();
 		ImGui::Text("Houses");
 		ImGui::Spacing();
 		ImGui::Text("Min. Height");
