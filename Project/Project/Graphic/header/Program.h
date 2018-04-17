@@ -6,31 +6,28 @@
 #include "../../Defines.h"
 
 //General includes
-//#include <glad/glad.h>
-//#include <GLFW/glfw3.h>
 #include <string>
 #include <fstream>
 #include <iostream>
-
-
-//#include "../../Controlls/Header/KeyIn.h"
-//#include "../../Singleton/GenWindow.h"
+#include "../../Controlls/Header/KeyIn.h"
+#include "../../Singleton/GenWindow.h"
 
 //Imgui stuff
-//#include "../../Imgui/imgui.h"
-//#include "../../Imgui/imgui_impl_glfw_gl3.h"
+#include "../../Imgui/imgui.h"
+#include "../../Imgui/imgui_impl_glfw_gl3.h"
 
 class Program
 {
 private:
 	GLFWwindow* window;
-	//GenWindow* genWindow;
-	//KeyIn* myKeyInput;
+	GenWindow* genWindow;
+	KeyIn* myKeyInput;
 	//Object myObjects;
 	bool shouldRun;
 
 	void initiateGLFW();
 	bool initiateWindow(GLFWwindow* window);
+	void initiateImgui(GLFWwindow* window);
 	void initiateVariables();
 
 	//Mics

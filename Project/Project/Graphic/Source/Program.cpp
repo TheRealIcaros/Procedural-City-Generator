@@ -12,7 +12,6 @@ bool Program::initiateWindow(GLFWwindow* window)
 {
 	bool returnValue = true;
 
-	//window = glfwCreateWindow(WIDTH, HEIGHT, "Perlin stuff", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -33,21 +32,21 @@ void Program::initiateVariables()
 	this->VBO = 0;
 	this->programID = 0;
 	
-	//this->genWindow = GenWindow::getInstance();
-	//this->myKeyInput = new KeyIn();
+	this->genWindow = GenWindow::getInstance();
+	this->myKeyInput = new KeyIn();
 }
 
-//void Program::initiateImgui(GLFWwindow* window)
-//{
-//	//Setup Imgui
-//	ImGui::CreateContext();
-//	ImGuiIO& io = ImGui::GetIO(); (void)io;
-//
-//	ImGui_ImplGlfwGL3_Init(window, true);
-//
-//	//Setup style
-//	ImGui::StyleColorsDark();
-//}
+void Program::initiateImgui(GLFWwindow* window)
+{
+	//Setup Imgui
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+
+	ImGui_ImplGlfwGL3_Init(window, true);
+
+	//Setup style
+	ImGui::StyleColorsDark();
+}
 
 Program::Program()
 {
@@ -71,7 +70,7 @@ bool Program::Start()
 
 	glfwMakeContextCurrent(window);
 
-	//initiateImgui(window);
+	initiateImgui(window);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 	{
@@ -84,19 +83,16 @@ bool Program::Start()
 
 	createTriangle();
 	this->renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
-	//createShader("../Shaders/vertex", "NULL", "../Shaders/fragment");
 
 	return returnValue;
 }
 
 bool Program::Run()
 {
-	//ImGui_ImplGlfwGL3_NewFrame();
-	//myKeyInput->keyInput(window, genWindow, shouldRun);	//Checks if any key was pressed 
+	ImGui_ImplGlfwGL3_NewFrame();
+	myKeyInput->keyInput(window, genWindow, shouldRun);	//Checks if any key was pressed 
 
-	//myKeyInput->keyInput(window, shouldRun);
-
-	//genWindow->draw();								//Draw function for ImGui
+	genWindow->draw();								//Draw function for ImGui
 
 	render();										//The render loop for all the graphics
 
@@ -108,8 +104,8 @@ bool Program::Run()
 
 void Program::Stop()
 {
-	//ImGui_ImplGlfwGL3_Shutdown();
-	//ImGui::DestroyContext();
+	ImGui_ImplGlfwGL3_Shutdown();
+	ImGui::DestroyContext();
 
 	glfwTerminate();
 }
@@ -147,12 +143,10 @@ void Program::render()
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	//ImGui::Render();
-	//ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+	ImGui::Render();
+	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 
-	//myObjects.renderObject();
 	//// draw our first triangle
-	//glUseProgram(renderPass.getShaderProgramID());
 	glUseProgram(renderPass.getShaderProgramID());
 	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 	glDrawArrays(GL_TRIANGLES, 0, 3);
