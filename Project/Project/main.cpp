@@ -5,6 +5,7 @@
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
+#include "Logic\header\PerlinNoise.h"
 
 
 
@@ -27,6 +28,8 @@ int main()
 	}*/
 
 	Program* myProgram = new Program();
+
+	PerlinNoise n(123);
 
 	if (myProgram == nullptr)
 		return NULL;
