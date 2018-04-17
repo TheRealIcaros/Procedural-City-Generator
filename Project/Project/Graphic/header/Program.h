@@ -3,13 +3,13 @@
 
 //General includes
 #include <glad/glad.h>
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 #include <string>
 #include <fstream>
 #include <iostream>
 
 //Own made includes
-//#include "shaderCreater.h"
+#include "shaderCreater.h"
 #include "../../Defines.h"
 //#include "../../Controlls/Header/KeyIn.h"
 //#include "../../Singleton/GenWindow.h"
@@ -33,7 +33,7 @@ private:
 
 	//Mics
 	bool keyIsPressedF1;	
-	//shaderCreater renderPass;
+	shaderCreater* renderPass;
 	GLuint VAO;
 	GLuint VBO;
 	GLuint programID;
@@ -47,11 +47,7 @@ public:
 	void Stop();	//Cleans upp the memory and returns everything
 
 	void createTriangle();
-	void render();
-
-	//TEST of tests
-	GLuint getShaderProgramID()const;
-	void createShader(std::string vertexShader, std::string geometryShader, std::string fragmentShader);
+	void render();				//The render loop in the application
 };
 
 #endif
