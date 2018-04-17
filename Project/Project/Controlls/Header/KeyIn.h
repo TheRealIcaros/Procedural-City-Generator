@@ -16,6 +16,5 @@ public:
 	~KeyIn();
 
 	void keyInput(GLFWwindow* window, GenWindow* genWindow, bool &shouldRun);
-	void keyInput(GLFWwindow* window, bool &shouldRun);
 };
 #endif

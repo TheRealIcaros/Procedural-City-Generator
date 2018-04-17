@@ -3,14 +3,15 @@
 
 //Own made includes
 #include "shaderCreater.h"
+#include "Object.h"
 #include "../../Defines.h"
+#include "../../Controlls/Header/KeyIn.h"
+#include "../../Singleton/GenWindow.h"
 
 //General includes
 #include <string>
 #include <fstream>
 #include <iostream>
-#include "../../Controlls/Header/KeyIn.h"
-#include "../../Singleton/GenWindow.h"
 
 //Imgui stuff
 #include "../../Imgui/imgui.h"
@@ -23,6 +24,8 @@ private:
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
 	shaderCreater renderPass;
+	Object* myObject;
+
 	bool shouldRun;
 
 	void initiateGLFW();
@@ -44,7 +47,7 @@ public:
 	bool Run();		//The main-loop/ Returns false when we exit it 
 	void Stop();	//Cleans upp the memory and returns everything
 
-	void createTriangle();
+	//void createTriangle();
 	void render();				//The render loop in the application
 };
 
