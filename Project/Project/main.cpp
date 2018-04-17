@@ -21,7 +21,5 @@ int main()
 	myProgram->Stop();
 	delete myProgram;
 
-	std::system("PAUSE");
-
 	return 0;
 }
