@@ -22,7 +22,7 @@ private:
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
-	//Object myObjects;
+	shaderCreater renderPass;
 	bool shouldRun;
 
 	void initiateGLFW();
@@ -32,7 +32,6 @@ private:
 
 	//Mics
 	bool keyIsPressedF1;	
-	shaderCreater renderPass;
 	GLuint VAO;
 	GLuint VBO;
 	GLuint programID;

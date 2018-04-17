@@ -22,7 +22,6 @@ bool Program::initiateWindow(GLFWwindow* window)
 	return returnValue;
 }
 
-
 void Program::initiateVariables()
 {
 	//Mics
@@ -51,11 +50,11 @@ void Program::initiateImgui(GLFWwindow* window)
 Program::Program()
 {
 	initiateGLFW();
-	//this->renderPass = new shaderCreater();
 }
 
 Program::~Program()
 {
+	
 }
 
 bool Program::Start()
@@ -108,6 +107,8 @@ void Program::Stop()
 	ImGui::DestroyContext();
 
 	glfwTerminate();
+
+	delete this->myKeyInput;
 }
 
 void Program::createTriangle()
