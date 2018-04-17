@@ -12,6 +12,18 @@
     <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Singleton\GenWindow.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="..\Includes\glad\src\glad.c" />
+    <ClCompile Include="Graphic\Source\Program.cpp" />
+    <ClCompile Include="Imgui\imgui.cpp" />
+    <ClCompile Include="Imgui\imgui_demo.cpp" />
+    <ClCompile Include="Imgui\imgui_draw.cpp" />
+    <ClCompile Include="Imgui\imgui_impl_glfw_gl3.cpp" />
+    <ClCompile Include="libs\gl3w\GL\gl3w.c" />
+    <ClCompile Include="libs\usynergy\uSynergy.c" />
+    <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Singleton\GenWindow.cpp" />
     <ClCompile Include="Controlls\Source\KeyIn.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -32,9 +44,27 @@
     <ClInclude Include="Singleton\GenWindow.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
     <ClInclude Include="Controlls\Header\KeyIn.h" />
+    <ClInclude Include="Defines.h" />
+    <ClInclude Include="Graphic\header\Program.h" />
+    <ClInclude Include="Imgui\imconfig.h" />
+    <ClInclude Include="Imgui\imgui.h" />
+    <ClInclude Include="Imgui\imgui_impl_glfw_gl3.h" />
+    <ClInclude Include="Imgui\imgui_internal.h" />
+    <ClInclude Include="Imgui\stb_rect_pack.h" />
+    <ClInclude Include="Imgui\stb_textedit.h" />
+    <ClInclude Include="Imgui\stb_truetype.h" />
+    <ClInclude Include="libs\gl3w\GL\gl3w.h" />
+    <ClInclude Include="libs\gl3w\GL\glcorearb.h" />
+    <ClInclude Include="libs\glfw\include\GLFW\glfw3.h" />
+    <ClInclude Include="libs\glfw\include\GLFW\glfw3native.h" />
+    <ClInclude Include="libs\usynergy\uSynergy.h" />
+    <ClInclude Include="Singleton\GenWindow.h" />
+    <ClInclude Include="Graphic\header\shaderCreater.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\fragment.glsl" />
     <None Include="Graphic\Shaders\vertex.glsl" />
+    <None Include="Graphic\Shaders\fragmentShader.glsl" />
+    <None Include="Graphic\Shaders\vertexShader.glsl" />
   </ItemGroup>
 </Project>
