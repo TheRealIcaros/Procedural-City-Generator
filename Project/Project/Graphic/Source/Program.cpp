@@ -12,6 +12,7 @@ bool Program::initiateWindow(GLFWwindow* window)
 {
 	bool returnValue = true;
 
+	//window = glfwCreateWindow(WIDTH, HEIGHT, "Perlin stuff", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -22,6 +23,20 @@ bool Program::initiateWindow(GLFWwindow* window)
 	return returnValue;
 }
 
+//GLFWwindow* Program::createWindow()
+//{
+//	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Perlin stuff", NULL, NULL);
+//	if (window == NULL)
+//	{
+//		std::cout << "Failes to create GLFW window" << std::endl;
+//		glfwTerminate();
+//		std::exit(-1);
+//	}
+//	glfwMakeContextCurrent(window);
+//
+//	return window;
+//}
+
 void Program::initiateVariables()
 {
 	//Mics
@@ -29,9 +44,8 @@ void Program::initiateVariables()
 	this->shouldRun = true;
 	this->VAO = 0;
 	this->VBO = 0;
-
-	//System stuff
-	this->window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
+	this->programID = 0;
+	
 	//this->genWindow = GenWindow::getInstance();
 	//this->myKeyInput = new KeyIn();
 }
@@ -51,7 +65,6 @@ void Program::initiateVariables()
 Program::Program()
 {
 	initiateGLFW();
-	initiateVariables();
 }
 
 Program::~Program()
@@ -62,7 +75,10 @@ bool Program::Start()
 {
 	bool returnValue = true;
 
-	if (initiateWindow(window) == false)
+	initiateVariables();
+
+	this->window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
+	if (initiateWindow(this->window) == false)
 		returnValue = false;
 
 	glfwMakeContextCurrent(window);
@@ -75,8 +91,9 @@ bool Program::Start()
 		returnValue = false;
 	}
 
-	createTriangle();
-	renderPass.createShader("../Shaders/vertex.glsl", "NULL", "../Shaders/fragment");
+	//createTriangle();
+	////renderPass.createShader("../Shaders/vertex", "NULL", "../Shaders/fragment");
+	//createShader("../Shaders/vertex", "NULL", "../Shaders/fragment");
 
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
@@ -147,7 +164,146 @@ void Program::render()
 
 	//myObjects.renderObject();
 	//// draw our first triangle
-	glUseProgram(renderPass.getShaderProgramID());
+	//glUseProgram(renderPass.getShaderProgramID());
+	glUseProgram(getShaderProgramID());
 	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 	glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
+GLuint Program::getShaderProgramID()const
+{
+	return this->programID;
+}
+
+void Program::createShader(std::string vertexShader, std::string geometryShader, std::string fragmentShader)
+{
+	GLint success = 0;
+	char infoLog[512];
+
+	//Vertex shader
+	GLuint vs = glCreateShader(GL_VERTEX_SHADER);
+	//Open glsl file and put it in a string
+	std::ifstream shaderFile(vertexShader + ".glsl");
+	//std::ifstream shaderFile(vertexShader);
+	std::string shaderText((std::istreambuf_iterator<char>(shaderFile)), std::istreambuf_iterator<char>());
+	shaderFile.close();
+	//Make a double pointer (only valid here)
+	const char* shaderTextPtr = shaderText.c_str();
+	//Ask GL to load this
+	glShaderSource(vs, 1, &shaderTextPtr, nullptr);
+
+	//Compile shader
+	glCompileShader(vs);
+
+	//Test if compilation of shader-file went ok
+	glGetShaderiv(vs, GL_COMPILE_STATUS, &success);
+	if (success == GL_FALSE)
+	{
+		glGetShaderInfoLog(vs, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::VERTEX::COMPILATION_FAILED\n" << infoLog << std::endl;
+		system("PAUSE");
+		glDeleteShader(vs);
+		exit(-1);
+	}
+
+	std::cout << "Vertex shader code:\n" << shaderText << std::endl;
+
+	//Geometry shader
+	GLuint gs = 0;
+	if (geometryShader != "NULL")
+	{
+		//Geometry shader
+		gs = glCreateShader(GL_GEOMETRY_SHADER);
+		//Open glsl file and put it in a string
+		shaderFile.open(geometryShader + ".glsl");
+		shaderText.assign((std::istreambuf_iterator<char>(shaderFile)), std::istreambuf_iterator<char>());
+		shaderFile.close();
+		//Make a double pointer (only valid here)
+		shaderTextPtr = shaderText.c_str();
+		//Ask GL to load this
+		glShaderSource(gs, 1, &shaderTextPtr, nullptr);
+
+		//////Compile shader
+		glCompileShader(gs);
+
+		////Test if compilation of shader-file went ok
+		glGetShaderiv(gs, GL_COMPILE_STATUS, &success);
+		if (success == GL_FALSE)
+		{
+			glGetShaderInfoLog(gs, 512, NULL, infoLog);
+			std::cout << "ERROR::SHADER::GEOMETRY::COMPILATION_FAILED\n" << infoLog << std::endl;
+			system("PAUSE");
+			glDeleteShader(gs);
+			exit(-1);
+		}
+	}
+
+	//Fragment shader
+	GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
+	//Open glsl file and put it in a string
+	shaderFile.open(fragmentShader + ".glsl");
+	//shaderFile.open(fragmentShader);
+	shaderText.assign((std::istreambuf_iterator<char>(shaderFile)), std::istreambuf_iterator<char>());
+	shaderFile.close();
+	//Make a double pointer (only valid here)
+	shaderTextPtr = shaderText.c_str();
+	//Ask GL to load this
+	glShaderSource(fs, 1, &shaderTextPtr, nullptr);
+
+	//Compile shader
+	glCompileShader(fs);
+
+	//Test if compilation of shader-file went ok
+	glGetShaderiv(fs, GL_COMPILE_STATUS, &success);
+	if (success == GL_FALSE)
+	{
+		glGetShaderInfoLog(fs, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::FRAGMENT::COMPILATION_FAILED\n" << infoLog << std::endl;
+		system("PAUSE");
+		glDeleteShader(fs);
+		exit(-1);
+	}
+
+	std::cout << "\nFragment shader code:\n" << shaderText << std::endl;
+
+	//Link shader-program (connect vs,(gs) and fs)
+	this->programID = glCreateProgram();
+	glAttachShader(this->programID, vs);
+	if (geometryShader != "NULL")
+		glAttachShader(this->programID, gs);
+	glAttachShader(this->programID, fs);
+	glLinkProgram(this->programID);
+
+	////Create a Uniform Buffer Object(UBO)
+	////Create a buffer name
+	//glGenBuffers(1, &UBO);
+	////Bind buffer to work further with it
+	//glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+	////Allocate memory for the buffer in the GPU
+	//glBufferData(GL_UNIFORM_BUFFER, sizeof(valuesFromCPUToGPU), NULL, GL_STATIC_DRAW);
+	////Because we hard-coded "Binding = 3" in the shader we can do this:
+	////Bind Uniform Buffer to binding point 3 (without caring about index of UBO)
+	//glBindBufferBase(GL_UNIFORM_BUFFER, 3, UBO);
+	////Good practice , unbind buffer
+	//glBindBuffer(GL_UNIFORM_BUFFER, 0);
+
+	//Checks if the linking between the shaders works
+	glGetProgramiv(this->programID, GL_LINK_STATUS, &success);
+	if (!success) {
+		glGetProgramInfoLog(this->programID, 512, NULL, infoLog);
+		std::cout << "ERROR::SHADER::PROGRAM::COMPILATION_FAILED\n" << infoLog << std::endl;
+		system("PAUSE");
+		exit(-1);
+	}
+
+	// in any case (compile sucess or not), we only want to keep the 
+	// Program around, not the shaders.
+	glDetachShader(this->programID, vs);
+	if (geometryShader != "NULL")
+		glDetachShader(this->programID, gs);
+	glDetachShader(this->programID, fs);
+	glDeleteShader(vs);
+	if (geometryShader != "NULL")
+		glDeleteShader(gs);
+	glDeleteShader(fs);
 }
