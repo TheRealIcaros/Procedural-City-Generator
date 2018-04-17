@@ -20,24 +20,22 @@
 class Program
 {
 private:
+	//Class objects
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
-	shaderCreater renderPass;
 	Object* myObject;
+	shaderCreater renderPass;
 
-	bool shouldRun;
-
+	//Initiation functions for the applications core functions
 	void initiateGLFW();
 	bool initiateWindow(GLFWwindow* window);
 	void initiateImgui(GLFWwindow* window);
 	void initiateVariables();
 
-	//Mics
-	bool keyIsPressedF1;	
-	GLuint VAO;
-	GLuint VBO;
-	GLuint programID;
+	//Mics variables
+	bool keyIsPressedF1;
+	bool shouldRun;
 
 public:
 	Program();
