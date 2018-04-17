@@ -5,7 +5,7 @@
 
 PerlinNoise::PerlinNoise()
 {
-	pn = {
+	p = {
 		151,160,137,91,90,15,131,13,201,95,96,53,194,233,7,225,140,36,103,30,69,142,
 		8,99,37,240,21,10,23,190, 6,148,247,120,234,75,0,26,197,62,94,252,219,203,117,
 		35,11,32,57,177,33,88,237,149,56,87,174,20,125,136,171,168, 68,175,74,165,71,
@@ -20,66 +20,68 @@ PerlinNoise::PerlinNoise()
 		138,236,205,93,222,114,67,29,24,72,243,141,128,195,78,66,215,61,156,180 };
 
 	// Duplicate the permutation vector
-	pn.insert(pn.end(), pn.begin(), pn.end());
+	p.insert(p.end(), p.begin(), p.end());
 }
 
 PerlinNoise::PerlinNoise(unsigned int seed)
 {
-	pn.resize(256);
+	p.resize(256);
 
 	// Fill p with values from 0 to 255
-	std::iota(pn.begin(), pn.end(), 0);
+	std::iota(p.begin(), p.end(), 0);
 
 	// Initialize a random engine with seed
 	std::default_random_engine engine(seed);
 
 	// Suffle  using the above random engine
-	std::shuffle(pn.begin(), pn.end(), engine);
+	std::shuffle(p.begin(), p.end(), engine);
 
 	// Duplicate the permutation vector
-	pn.insert(pn.end(), pn.begin(), pn.end());
+	p.insert(p.end(), p.begin(), p.end());
 }
 
-float PerlinNoise::noise(glm::vec2 p)
+double PerlinNoise::noise(double x, double y, double z) 
 {
-	//calculate the lattice points
-	glm::vec2 p0 = floor(p);
-	glm::vec2 p1 = p0 + glm::vec2(1.0, 0.0);
-	glm::vec2 p2 = p0 + glm::vec2(0.0, 1.0);
-	glm::vec2 p3 = p0 + glm::vec2(1.0, 1.0);
-	
-	/* Look up gradients at lattice points. */
-	float g0 = grad(p0);
-	float g1 = grad(p1);
-	float g2 = grad(p2);
-	float g3 = grad(p3);
+	// Find the unit cube that contains the point
+	int X = (int)floor(x) & 255;
+	int Y = (int)floor(y) & 255;
+	int Z = (int)floor(z) & 255;
 
-	float t_x = p.x - p0.x;
-	float fade_x = fade(t_x); /* Used for interpolation in horizontal direction */
+	// Find relative x, y,z of point in cube
+	x -= floor(x);
+	y -= floor(y);
+	z -= floor(z);
 
-	float t_y = p.x - p0.x;
-	float fade_y = fade(t_y); /* Used for interpolation in vertical direction. */
+	// Compute fade curves for each of x, y, z
+	double u = fade(x);
+	double v = fade(y);
+	double w = fade(z);
 
-	///* Calculate dot products and interpolate.*/
-	//float p0p1 = (1.0 - fade_x) * dot(g0, (p - p0)) + fade_x * dot(g1, (p - p1)); /* between upper two lattice points */
-	//float p2p3 = (1.0 - fade_x) * dot(g2, (p - p2)) + fade_x * dot(g3, (p - p3)); /* between lower two lattice points */
-	///* Calculate final result */
-	//return (1.0 - fade_y) * p0p1 + fade_y * p2p3;
-	return 1;
+	// Hash coordinates of the 8 cube corners
+	int A = p[X] + Y;
+	int AA = p[A] + Z;
+	int AB = p[A + 1] + Z;
+	int B = p[X + 1] + Y;
+	int BA = p[B] + Z;
+	int BB = p[B + 1] + Z;
+
+	// Add blended results from 8 corners of cube
+	double res = lerp(w, lerp(v, lerp(u, grad(p[AA], x, y, z), grad(p[BA], x - 1, y, z)), lerp(u, grad(p[AB], x, y - 1, z), grad(p[BB], x - 1, y - 1, z))), lerp(v, lerp(u, grad(p[AA + 1], x, y, z - 1), grad(p[BA + 1], x - 1, y, z - 1)), lerp(u, grad(p[AB + 1], x, y - 1, z - 1), grad(p[BB + 1], x - 1, y - 1, z - 1))));
+	return (res + 1.0) / 2.0;
 }
 
-double PerlinNoise::fade(double t)
-{
+double PerlinNoise::fade(double t) {
 	return t * t * t * (t * (t * 6 - 15) + 10);
 }
 
-double PerlinNoise::lerp(double t, double a, double b)
-{
+double PerlinNoise::lerp(double t, double a, double b) {
 	return a + t * (b - a);
 }
 
-float PerlinNoise::grad(glm::vec2 p)
-{
-	float x = p.x;
-	return pn[pn[pn[(int)p.x & 255] + (int)p.y & 255]];
+double PerlinNoise::grad(int hash, double x, double y, double z) {
+	int h = hash & 15;
+	// Convert lower 4 bits of hash into 12 gradient directions
+	double u = h < 8 ? x : y,
+		v = h < 4 ? y : h == 12 || h == 14 ? x : z;
+	return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
 }

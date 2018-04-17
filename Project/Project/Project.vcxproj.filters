@@ -14,6 +14,7 @@
     <ClCompile Include="Singleton\GenWindow.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Logic\Source\PerlinNoise.cpp" />
+    <ClCompile Include="Logic\Source\ppm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h" />
@@ -33,6 +34,7 @@
     <ClInclude Include="Singleton\GenWindow.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
     <ClInclude Include="Logic\header\PerlinNoise.h" />
+    <ClInclude Include="Logic\header\ppm.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\fragmentShader.glsl" />
