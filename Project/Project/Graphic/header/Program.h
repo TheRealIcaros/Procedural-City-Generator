@@ -1,16 +1,18 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
+//Own made includes
+#include "shaderCreater.h"
+#include "../../Defines.h"
+
 //General includes
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+//#include <glad/glad.h>
+//#include <GLFW/glfw3.h>
 #include <string>
 #include <fstream>
 #include <iostream>
 
-//Own made includes
-#include "shaderCreater.h"
-#include "../../Defines.h"
+
 //#include "../../Controlls/Header/KeyIn.h"
 //#include "../../Singleton/GenWindow.h"
 
@@ -33,7 +35,7 @@ private:
 
 	//Mics
 	bool keyIsPressedF1;	
-	shaderCreater* renderPass;
+	shaderCreater renderPass;
 	GLuint VAO;
 	GLuint VBO;
 	GLuint programID;

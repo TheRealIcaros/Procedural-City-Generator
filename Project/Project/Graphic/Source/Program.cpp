@@ -23,19 +23,6 @@ bool Program::initiateWindow(GLFWwindow* window)
 	return returnValue;
 }
 
-//GLFWwindow* Program::createWindow()
-//{
-//	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Perlin stuff", NULL, NULL);
-//	if (window == NULL)
-//	{
-//		std::cout << "Failes to create GLFW window" << std::endl;
-//		glfwTerminate();
-//		std::exit(-1);
-//	}
-//	glfwMakeContextCurrent(window);
-//
-//	return window;
-//}
 
 void Program::initiateVariables()
 {
@@ -65,7 +52,7 @@ void Program::initiateVariables()
 Program::Program()
 {
 	initiateGLFW();
-	this->renderPass = new shaderCreater();
+	//this->renderPass = new shaderCreater();
 }
 
 Program::~Program()
@@ -95,11 +82,10 @@ bool Program::Start()
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
-	this->renderPass->createShader("../Shaders/vertex", "NULL", "../Shaders/fragment");
 	createTriangle();
+	this->renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
 	//createShader("../Shaders/vertex", "NULL", "../Shaders/fragment");
 
-	
 	return returnValue;
 }
 
@@ -167,7 +153,7 @@ void Program::render()
 	//myObjects.renderObject();
 	//// draw our first triangle
 	//glUseProgram(renderPass.getShaderProgramID());
-	glUseProgram(renderPass->getShaderProgramID());
+	glUseProgram(renderPass.getShaderProgramID());
 	glBindVertexArray(VAO); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 }

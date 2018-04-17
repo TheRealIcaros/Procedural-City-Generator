@@ -2,67 +2,67 @@
 #include "Graphic\header\Program.h"
 #include <crtdbg.h>
 
-#/*include "Graphic\header\shaderCreater.h"
-#include "Defines.h"
+//#include "Graphic\header\shaderCreater.h"
+//#include "Defines.h"
 
-void initiateGLFW();
-
-bool initiateWindow(GLFWwindow* window);
-void render();
-void createTriangle();
-void createShader(std::string vertexShader, std::string geometryShader, std::string fragmentShader);
-GLuint getShaderProgramID();
-
-shaderCreater renderPass;
-GLuint VAO = 0;
-GLuint VBO = 0;
-GLuint programID = 0;*/
+//void initiateGLFW();
+//
+//bool initiateWindow(GLFWwindow* window);
+//void render();
+//void createTriangle();
+//void createShader(std::string vertexShader, std::string geometryShader, std::string fragmentShader);
+//GLuint getShaderProgramID();
+//
+//shaderCreater renderPass;
+//GLuint VAO = 0;
+//GLuint VBO = 0;
+//GLuint programID = 0;
 
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-	 /*initiateGLFW();
-	
-	GLFWwindow* window;
-	window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
-	
-	if (initiateWindow(window) == false)
-	{
-		std::system("PAUSE");
-		return -1;
-	}
-		
-	glfwMakeContextCurrent(window);
-	
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		std::system("PAUSE");
-		return -1;
-	}
-	
-	createTriangle();
-	createShader("Graphic/Shaders/vertex", "NULL", "Graphic/Shaders/fragment");
-	//renderPass.createShader("Graphic/Shaders/vertex", "NULL", "Graphic/Shaders/fragment");
-	
-	glViewport(0, 0, WIDTH, HEIGHT);
-	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);
-	
-	
-	//createTriangleData();
+	// initiateGLFW();
 	//
-	while (!glfwWindowShouldClose(window))
-	{
-		//inputs from the keyboard
-		//keyInput(window);
-	
-		//rendering happens here...
-		render();
-		
-		//Checks the call events and swap the buffers
-		glfwPollEvents();
-		glfwSwapBuffers(window);
-	} */
+	//GLFWwindow* window;
+	//window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
+	//
+	//if (initiateWindow(window) == false)
+	//{
+	//	std::system("PAUSE");
+	//	return -1;
+	//}
+	//	
+	//glfwMakeContextCurrent(window);
+	//
+	//if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	//{
+	//	std::cout << "Failed to initialize GLAD" << std::endl;
+	//	std::system("PAUSE");
+	//	return -1;
+	//}
+	//
+	//createTriangle();
+	//createShader("Graphic/Shaders/vertex", "NULL", "Graphic/Shaders/fragment");
+	////renderPass.createShader("Graphic/Shaders/vertex", "NULL", "Graphic/Shaders/fragment");
+	//
+	//glViewport(0, 0, WIDTH, HEIGHT);
+	//glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);
+	//
+	//
+	////createTriangleData();
+	////
+	//while (!glfwWindowShouldClose(window))
+	//{
+	//	//inputs from the keyboard
+	//	//keyInput(window);
+	//
+	//	//rendering happens here...
+	//	render();
+	//	
+	//	//Checks the call events and swap the buffers
+	//	glfwPollEvents();
+	//	glfwSwapBuffers(window);
+	//} 
 
 	Program* myProgram = new Program();
 	
