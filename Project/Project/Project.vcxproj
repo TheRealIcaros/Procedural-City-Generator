@@ -127,6 +127,7 @@
     <ClCompile Include="Controlls\Source\KeyIn.cpp" />
     <ClCompile Include="Graphic\Source\Object.cpp" />
     <ClCompile Include="Graphic\Source\Program.cpp" />
+    <ClCompile Include="Graphic\Source\Terrain.cpp" />
     <ClCompile Include="Imgui\imgui.cpp" />
     <ClCompile Include="Imgui\imgui_demo.cpp" />
     <ClCompile Include="Imgui\imgui_draw.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Graphic\header\Object.h" />
     <ClInclude Include="Graphic\header\Program.h" />
+    <ClInclude Include="Graphic\header\Terrain.h" />
     <ClInclude Include="Imgui\imconfig.h" />
     <ClInclude Include="Imgui\imgui.h" />
     <ClInclude Include="Imgui\imgui_impl_glfw_gl3.h" />
