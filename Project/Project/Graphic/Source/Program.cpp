@@ -117,16 +117,18 @@ void Program::Stop()
 
 void Program::render()
 {
-	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	//Cleans the color buffer and set the defaultbacgroundcolor
+	glClearColor(0.3f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	//Rendering the Deferred part
+	deferred.render();
+
+	//ImGui that handles the graphical interface
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 
-	//Render the Deferred-class object here
-
-	deferred.render();
-
+	
 	//// draw our first triangle
 	//glUseProgram(renderPass.getShaderProgramID());
 	////glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
