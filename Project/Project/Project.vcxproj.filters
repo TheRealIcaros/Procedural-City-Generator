@@ -12,6 +12,9 @@
     <ClCompile Include="libs\gl3w\GL\gl3w.c" />
     <ClCompile Include="libs\usynergy\uSynergy.c" />
     <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
+	<ClCompile Include="Graphic\Source\Terrain.cpp" />
+    <ClCompile Include="Graphic\Source\Camera.cpp" />
+    <ClCompile Include="Graphic\Source\Deferred.cpp" />
     <ClCompile Include="Logic\Source\PerlinNoise.cpp" />
     <ClCompile Include="Logic\Source\ppm.cpp" />
     <ClCompile Include="main.cpp" />
@@ -38,12 +41,19 @@
     <ClInclude Include="libs\usynergy\uSynergy.h" />
     <ClInclude Include="Logic\header\PerlinNoise.h" />
     <ClInclude Include="Logic\header\ppm.h" />
+    <ClInclude Include="Graphic\header\Object.h" />
+    <ClInclude Include="Graphic\header\Terrain.h" />
+    <ClInclude Include="Graphic\header\Camera.h" />
+    <ClInclude Include="Graphic\header\Deferred.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
     <ClInclude Include="Logic\header\GenWindow.h" />
     <ClInclude Include="Singleton\Values.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Graphic\Shaders\fragment.glsl" />
-    <None Include="Graphic\Shaders\vertex.glsl" />
+    <None Include="Graphic\Shaders\gfragment.glsl" />
+    <None Include="Graphic\Shaders\ggeometry.glsl" />
+    <None Include="Graphic\Shaders\gvertex.glsl" />
+    <None Include="Graphic\Shaders\ffragment.glsl" />
+    <None Include="Graphic\Shaders\fvertex.glsl" />
   </ItemGroup>
 </Project>

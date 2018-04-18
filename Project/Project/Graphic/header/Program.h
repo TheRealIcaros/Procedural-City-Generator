@@ -2,8 +2,7 @@
 #define PROGRAM_H
 
 //Own made includes
-#include "shaderCreater.h"
-#include "Object.h"
+#include "Deferred.h"
 #include "../../Defines.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Logic/header/GenWindow.h"
@@ -20,24 +19,23 @@
 class Program
 {
 private:
+	//Class objects
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
-	shaderCreater renderPass;
-	Object* myObject;
+	Deferred deferred;
+	//Object* myObject;
+	//shaderCreater renderPass;
 
-	bool shouldRun;
-
+	//Initiation functions for the applications core functions
 	void initiateGLFW();
 	bool initiateWindow(GLFWwindow* window);
 	void initiateImgui(GLFWwindow* window);
 	void initiateVariables();
 
-	//Mics
-	bool keyIsPressedF1;	
-	GLuint VAO;
-	GLuint VBO;
-	GLuint programID;
+	//Mics variables
+	bool keyIsPressedF1;
+	bool shouldRun;
 
 public:
 	Program();
@@ -47,7 +45,6 @@ public:
 	bool Run();		//The main-loop/ Returns false when we exit it 
 	void Stop();	//Cleans upp the memory and returns everything
 
-	//void createTriangle();
 	void render();				//The render loop in the application
 };
 

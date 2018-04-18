@@ -7,8 +7,7 @@
 class Object
 {
 private:
-	GLuint VAO;
-	GLuint VBO;
+	
 
 	void initiateVariables();
 
@@ -18,7 +17,7 @@ public:
 
 	void createT();
 
-	GLuint getVAO()const;
+	
 };
 
 #endif

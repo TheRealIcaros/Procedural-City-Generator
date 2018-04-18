@@ -75,6 +75,8 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 			glDeleteShader(gs);
 			exit(-1);
 		}
+
+		std::cout << "\nGeometry shader code:\n" << shaderText << std::endl;
 	}
 
 	//Fragment shader
