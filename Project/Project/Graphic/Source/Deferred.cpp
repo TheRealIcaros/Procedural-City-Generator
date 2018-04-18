@@ -2,30 +2,51 @@
 
 void Deferred::initiateVariables()
 {
+	// Vertex Array Object and Vertex Buffer Object
 	this->VAO = 0;
 	this->VBO = 0;
+	
+	//Uniform buffer Object
+	this->UBO = 0;
+
+	//Quad values
+	this->quadVAO = 0;
+	this->quadVBO = 0;
+
+	//G-buffer values
+	this->gBuffer = 0;
+	this->gPosition = 0;
+	this->gNormal = 0;
+	this->gColorSpec = 0;
+	this->gColorInfo = 0;
+
+	//Initiation of classes used by the Deferred class
+	this->camera = new Camera();
+
+	//Matrices and initiation of them
+	this->World = WorldMatrix();
+	this->Projection = ProjectionMatrix();
+	
 }
 
 bool Deferred::initiateDeferred()
 {
 	bool returnValue = true;
+	
+	//Creates the G-Buffer for the Deferred class
+	createGbuffer();
+
+	//Creates the Uniform Buffer Object for the Deferred class
+	createUBO();
+
+	this->gpuBufferData = { World, camera->getView(), Projection };
 
 	this->geometryPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
 
 	return returnValue;
 }
 
-Deferred::Deferred()
-{
-	initiateVariables();
-}
-
-Deferred::~Deferred()
-{
-
-}
-
-void Deferred::createUBP()
+void Deferred::createUBO()
 {
 	//Create a Uniform Buffer Object(UBO)
 	//Create a buffer name
@@ -92,7 +113,83 @@ void Deferred::createGbuffer()
 	glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
 }
 
+glm::mat4 Deferred::WorldMatrix()
+{
+	glm::mat4 World;
+	return World;
+}
+
+glm::mat4 Deferred::ProjectionMatrix()
+{
+	float FOV = 0.45f * PI;
+	float aspectRatio = 640 / 480;
+
+	glm::mat4 Projection = glm::perspective(FOV, aspectRatio, 0.1f, 200.0f);
+
+	return Projection;
+}
+
+void Deferred::renderGeometryPass()
+{
+
+}
+
+void Deferred::renderLightingPass()
+{
+
+}
+
+void Deferred::renderQuad()
+{
+	if (quadVAO == 0)
+	{
+		float quadVertices[] = {
+			// positions        // texture Coords
+			-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
+			-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
+			 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+			 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+		};
+
+		// Setup plane VAO
+		glGenVertexArrays(1, &quadVAO);
+		glGenBuffers(1, &quadVBO);
+		glBindVertexArray(quadVAO);
+		glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
+		glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+		glEnableVertexAttribArray(1);
+		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+	}
+
+	glBindVertexArray(quadVAO);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glBindVertexArray(0);
+}
+
+Deferred::Deferred()
+{
+	initiateVariables();
+}
+
+Deferred::~Deferred()
+{
+
+}
+
 GLuint Deferred::getVAO()const
 {
 	return this->VAO;
+}
+
+void Deferred::render()
+{
+	//1. first the geometry rendering pass
+	renderGeometryPass();
+
+	//2. Then the lighting rendering pass
+	renderLightingPass();
+
+
 }
