@@ -13,7 +13,7 @@
 int main()
 {
 	// Define the size of the image
-	unsigned int width = 1920, height = 1080;
+	unsigned int width = 300, height = 300;
 
 	// Create an empty PPM image
 	ppm image(width, height);
@@ -30,12 +30,12 @@ int main()
 			double y = (double)i / ((double)height);
 
 			// Typical Perlin noise
-			double n = 20 * 1 * pn.noise(1* 10 * x, 1 * 10 * y, 0.8)
-					+ 20 * 0.5 * pn.noise(2 * 10 * x, 2 * 10 * y, 0.8)
-					+ 20 * 0.25 * pn.noise(4 * 10 * x, 2 * 10 * y, 0.8);
+			double n = /*20 **/ 1 * pn.noise(1/** 10*/ * x, 1 * /*10 **/ y, 0.8)
+					+ /*20 **/ 0.5 * pn.noise(2 /** 10*/ * x, 2 * /*10 * */y, 0.8)
+					+ /*20 **/ 0.25 * pn.noise(4 /** 10*/ * x, 2 * /*10 **/ y, 0.8);
 
 			n /= 1 + 0.5 + 0.25;
-			n = n - floor(n);
+			/*n = n - floor(n);*/
 
 			////// Wood like structure
 			//n = 20 * pn.noise(10 * x, 10 * y, 0.8);
