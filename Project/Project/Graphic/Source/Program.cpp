@@ -79,6 +79,8 @@ bool Program::Start()
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
+	deferred.initiateDeferred();
+
 	//This creates the data to be drawm staticly
 	//myObject->createT();
 	//
@@ -120,6 +122,10 @@ void Program::render()
 
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
+
+	//Render the Deferred-class object here
+
+	deferred.render();
 
 	//// draw our first triangle
 	//glUseProgram(renderPass.getShaderProgramID());

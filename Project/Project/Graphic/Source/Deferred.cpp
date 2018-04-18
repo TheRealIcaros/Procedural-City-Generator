@@ -20,6 +20,11 @@ void Deferred::initiateVariables()
 	this->gColorSpec = 0;
 	this->gColorInfo = 0;
 
+	//Light-buffer values
+	this->lBuffer = 0;
+	this->lColor = 0;
+	this->lGlow = 0;
+
 	//Initiation of classes used by the Deferred class
 	this->camera = new Camera();
 
@@ -39,9 +44,15 @@ bool Deferred::initiateDeferred()
 	//Creates the Uniform Buffer Object for the Deferred class
 	createUBO();
 
+	//Creates the buffer, that sends data from CPU o GPU
 	this->gpuBufferData = { World, camera->getView(), Projection };
 
-	this->geometryPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
+	//This creates the lights in the scene
+	lights.push_back(Light(glm::vec3(15.0, -6.0, 12.0), glm::vec3(1.0, 1.0, 1.0)));
+
+	//Creates the shader-program
+	this->geometryPass.createShader("./Graphic/Shaders/gvertex", "NULL", "./Graphic/Shaders/gfragment");
+	this->lightingPass.createShader("./Graphic/Shaders/fvertex", "NULL", "./Graphic/Shaders/ffragment");
 
 	return returnValue;
 }
@@ -131,12 +142,80 @@ glm::mat4 Deferred::ProjectionMatrix()
 
 void Deferred::renderGeometryPass()
 {
+	//Use GeometryPass Shader Program
+	glUseProgram(geometryPass.getShaderProgramID());
+	glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	//Bind UBO for sending GPU data to GeometryPass Program
+	glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+	glBufferSubData(GL_UNIFORM_BUFFER, 0, sizeof(valuesFromCPUToGPU), &gpuBufferData);
+
+	/*
+	glActiveTexture(GL_TEXTURE19);
+	glUniform1i(glGetUniformLocation(geometryPass.getShaderProgramID(), "depthMap"), 19);
+	glBindTexture(GL_TEXTURE_2D, depthMap);
+	glUniformMatrix4fv(glGetUniformLocation(geometryPass.getShaderProgramID(), "lightSpaceMatrix"), 1, GL_FALSE, &lightSpaceTransFormMatrix[0][0]);
+	*/
+
+	//Back face culling camera pos
+	glUniform3fv(glGetUniformLocation(geometryPass.getShaderProgramID(), "cameraPos"), 1, &camera->getPosition()[0]);
+	
+	glm::vec3 lightDir = glm::vec3(5.0, -12.0, 6.0);
+	glUniform3fv(glGetUniformLocation(geometryPass.getShaderProgramID(), "lightDir"), 1, &lightDir[0]);
+
+	//terrain.Draw(geometryPass);
+	//objects.Draw(geometryPass);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void Deferred::renderLightingPass()
 {
+	glBindFramebuffer(GL_FRAMEBUFFER, lBuffer);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	//Use LightingPass Shader Program
+	glUseProgram(lightingPass.getShaderProgramID());
+
+	//	Bind all gBufferTextures
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, gPosition);
+	glUniform1i(glGetUniformLocation(lightingPass.getShaderProgramID(), "gPosition"), 0);
+
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, gNormal);
+	glUniform1i(glGetUniformLocation(lightingPass.getShaderProgramID(), "gNormal"), 1);
+
+	glActiveTexture(GL_TEXTURE2);
+	glBindTexture(GL_TEXTURE_2D, gColorSpec);
+	glUniform1i(glGetUniformLocation(lightingPass.getShaderProgramID(), "gColorSpec"), 2);
+
+	glActiveTexture(GL_TEXTURE3);
+	glUniform1i(glGetUniformLocation(lightingPass.getShaderProgramID(), "gColorInfo"), 3);
+	glBindTexture(GL_TEXTURE_2D, gColorInfo);
+
+	//	TODO:(Fix multiple lights and send it to LightingPassFS)
+	GLuint lightPos = glGetUniformLocation(lightingPass.getShaderProgramID(), "nrOfLights");
+	glUniform1i(lightPos, lights.size());
+	for (int i = 0; i < lights.size(); i++)
+	{
+		std::string lightPos = "lights[" + std::to_string(i) + "].Position";
+		std::string lightColor = "lights[" + std::to_string(i) + "].Color";
+
+		glUniform3fv(glGetUniformLocation(lightingPass.getShaderProgramID(), lightPos.c_str()), 1, &lights[i].lightPos[0]);
+		glUniform3fv(glGetUniformLocation(lightingPass.getShaderProgramID(), lightColor.c_str()), 1, &lights[i].lightColor[0]);
+	}
+
+	glUniform3f(glGetUniformLocation(lightingPass.getShaderProgramID(), "viewPos"), camera->getPosition().x, camera->getPosition().y, camera->getPosition().z);
+
+	//glUniform1i(glGetUniformLocation(lightingPass.getShaderProgramID(), "glowKey"), glowKey);
+	//glUniform1i(glGetUniformLocation(lightingPass.getShaderProgramID(), "intensityKey"), intensityKey);
+
+	//Render To Quad
+	renderQuad();
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 void Deferred::renderQuad()
@@ -190,6 +269,5 @@ void Deferred::render()
 
 	//2. Then the lighting rendering pass
 	renderLightingPass();
-
 
 }

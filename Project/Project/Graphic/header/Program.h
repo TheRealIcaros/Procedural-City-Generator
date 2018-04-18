@@ -3,7 +3,6 @@
 
 //Own made includes
 #include "Deferred.h"
-
 #include "../../Defines.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Singleton/GenWindow.h"
@@ -24,6 +23,7 @@ private:
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
+	Deferred deferred;
 	//Object* myObject;
 	//shaderCreater renderPass;
 
