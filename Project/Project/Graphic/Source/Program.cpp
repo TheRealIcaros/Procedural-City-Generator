@@ -28,6 +28,7 @@ void Program::initiateVariables()
 	this->keyIsPressedF1 = false;
 	this->shouldRun = true;
 	
+	this->seed = new SeedConverter();
 	this->value = Values::getInstance();
 	this->genWindow = new GenWindow();
 	this->myKeyInput = new KeyIn();
@@ -99,13 +100,16 @@ bool Program::Run()
 	if (value->getGenerate() == true)
 	{
 		// Create an empty PPM image
-		ppm image(value->getTSizeX, value->getTSizeY);
+		/*ppm image(value->getTSizeX(), value->getTSizeY());*/
 		// Create a PerlinNoise object with a random permutation vector generated with seed
 
 		//create a seed translate function use temp seed for now
-		unsigned int seed = 237;
-		PerlinNoise pn(seed);
-		
+
+		if (value->getInputBuf().compare("") != 0)
+		{
+			seed->setSeed(value->getInputBuf());
+		}
+		PerlinNoise pn(seed->getIntegerSeed());
 		unsigned int kk = 0;
 
 		// Visit every pixel of the image and assign a color generated with Perlin noise

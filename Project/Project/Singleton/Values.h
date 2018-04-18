@@ -1,6 +1,7 @@
 #ifndef VALUES_H
 #define VALUES_H
 
+#include <iostream>
 class Values
 {
 private:
@@ -33,6 +34,7 @@ public:
 	static Values* getInstance();
 	static void releaseInstance();
 	char * getInputBufPTR() { return inputBuf; }
+	std::string getInputBuf() { return inputBuf; }
 	int* getTSizeXPTR() { return &tSizeX; }
 	int* getTSizeYPTR() { return &tSizeY; }
 	float* getTerrainOctavePTR1() { return &terrainOctave1; }

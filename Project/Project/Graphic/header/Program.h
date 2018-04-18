@@ -20,11 +20,13 @@
 #include "../../Logic/header/PerlinNoise.h"
 #include "../../Logic/header/ppm.h"
 #include "../../Singleton/Values.h"
+#include "../../Logic/header/SeedConverter.h"
 
 class Program
 {
 private:
 	//Class objects
+	SeedConverter* seed;
 	Values* value;
 	GLFWwindow* window;
 	GenWindow* genWindow;
