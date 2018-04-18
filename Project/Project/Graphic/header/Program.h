@@ -16,10 +16,16 @@
 #include "../../Imgui/imgui.h"
 #include "../../Imgui/imgui_impl_glfw_gl3.h"
 
+//MISC STUFF
+#include "../../Logic/header/PerlinNoise.h"
+#include "../../Logic/header/ppm.h"
+#include "../../Singleton/Values.h"
+
 class Program
 {
 private:
 	//Class objects
+	Values* value;
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
@@ -45,7 +51,7 @@ public:
 	bool Run();		//The main-loop/ Returns false when we exit it 
 	void Stop();	//Cleans upp the memory and returns everything
 
-	void render();				//The render loop in the application
+	void render();	//The render loop in the application
 };
 
 #endif

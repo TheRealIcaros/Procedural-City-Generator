@@ -20,6 +20,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Logic\Source\GenWindow.cpp" />
     <ClCompile Include="Singleton\Values.cpp" />
+    <ClCompile Include="Logic\Source\SeedConverter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
@@ -47,6 +48,7 @@
     <ClInclude Include="Graphic\header\shaderCreater.h" />
     <ClInclude Include="Logic\header\GenWindow.h" />
     <ClInclude Include="Singleton\Values.h" />
+    <ClInclude Include="Logic\header\SeedConverter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\gfragment.glsl" />

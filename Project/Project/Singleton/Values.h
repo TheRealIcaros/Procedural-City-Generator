@@ -55,6 +55,28 @@ public:
 	int* getFactoriesDensityPTR() { return &factoriesDensity; }
 	int* getFactoriesBlockSizePTR() { return &factoriesBlockSize; }
 
+	int getTSizeX() { return tSizeX; }
+	int getTSizeY() { return tSizeY; }
+	float getTerrainOctave1() { return terrainOctave1; }
+	float getTerrainOctave2() { return terrainOctave2; }
+	float getTerrainOctave3() { return terrainOctave3; }
+	float getTerrainOctavePerc1() { return terrainOctavePerc1; }
+	float getTerrainOctavePerc2() { return terrainOctavePerc2; }
+	float getTerrainOctavePerc3() { return terrainOctavePerc3; }
+	float getRedistribution() { return redistribution; }
+	int getHouseMinHeight() { return houseMinHeight; }
+	int getHouseMaxHeight() { return houseMaxHeight; }
+	int getHouseDensity() { return houseDensity; }
+	int getHouseBlockSize() { return houseBlockSize; }
+	int getSkyscraperMinHeight() { return skyscraperMinHeight; }
+	int getSkyscraperMaxHeight() { return skyscraperMaxHeight; }
+	int getSkyscraperDensity() { return skyscraperDensity; }
+	int getSkyscraperBlockSize() { return skyscraperBlockSize; }
+	int getFactoriesMinHeight() { return factoriesMinHeight; }
+	int getFactoriesMaxHeight() { return factoriesMaxHeight; }
+	int getFactoriesDensity() { return factoriesDensity; }
+	int getFactoriesBlockSize() { return factoriesBlockSize; }
+
 	bool getGenerate() { return generate; }
 	void setGenerate(bool gen) { generate = gen; }
 };

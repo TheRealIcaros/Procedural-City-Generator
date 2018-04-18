@@ -139,6 +139,7 @@
     <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
     <ClCompile Include="Logic\Source\PerlinNoise.cpp" />
     <ClCompile Include="Logic\Source\ppm.cpp" />
+    <ClCompile Include="Logic\Source\SeedConverter.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Logic\Source\GenWindow.cpp" />
     <ClCompile Include="Singleton\Values.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="Logic\header\ppm.h" />
     <ClInclude Include="Logic\header\GenWindow.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
+    <ClInclude Include="Logic\header\SeedConverter.h" />
     <ClInclude Include="Singleton\Values.h" />
   </ItemGroup>
   <ItemGroup>
