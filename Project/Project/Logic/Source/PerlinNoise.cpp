@@ -25,19 +25,7 @@ PerlinNoise::PerlinNoise()
 
 PerlinNoise::PerlinNoise(unsigned int seed)
 {
-	p.resize(256);
-
-	// Fill p with values from 0 to 255
-	std::iota(p.begin(), p.end(), 0);
-
-	// Initialize a random engine with seed
-	std::default_random_engine engine(seed);
-
-	// Suffle  using the above random engine
-	std::shuffle(p.begin(), p.end(), engine);
-
-	// Duplicate the permutation vector
-	p.insert(p.end(), p.begin(), p.end());
+	this->seed(seed);
 }
 
 double PerlinNoise::noise(double x, double y, double z) 
@@ -68,6 +56,81 @@ double PerlinNoise::noise(double x, double y, double z)
 	// Add blended results from 8 corners of cube
 	double res = lerp(w, lerp(v, lerp(u, grad(p[AA], x, y, z), grad(p[BA], x - 1, y, z)), lerp(u, grad(p[AB], x, y - 1, z), grad(p[BB], x - 1, y - 1, z))), lerp(v, lerp(u, grad(p[AA + 1], x, y, z - 1), grad(p[BA + 1], x - 1, y, z - 1)), lerp(u, grad(p[AB + 1], x, y - 1, z - 1), grad(p[BB + 1], x - 1, y - 1, z - 1))));
 	return (res + 1.0) / 2.0;
+}
+
+double PerlinNoise::noise(double x, double y, double xMaxValue, double yMaxValue)
+{
+	this->counter++;
+	x /= xMaxValue;
+	y /= yMaxValue;
+	double z = 1.0;
+	int X = (int)floor(x) & 255;
+	int Y = (int)floor(y) & 255;
+	int Z = (int)floor(z) & 255;
+
+	x -= floor(x);
+	y -= floor(y);
+	z -= floor(z);
+
+	double u = fade(x);
+	double v = fade(y);
+	double w = fade(z);
+
+	int A = p[X] + Y;
+	int AA = p[A] + Z;
+	int AB = p[A + 1] + Z;
+	int B = p[X + 1] + Y;
+	int BA = p[B] + Z;
+	int BB = p[B + 1] + Z;
+
+	double res = lerp(w, lerp(v, lerp(u, grad(p[AA], x, y, z), grad(p[BA], x - 1, y, z)), lerp(u, grad(p[AB], x, y - 1, z), grad(p[BB], x - 1, y - 1, z))), lerp(v, lerp(u, grad(p[AA + 1], x, y, z - 1), grad(p[BA + 1], x - 1, y, z - 1)), lerp(u, grad(p[AB + 1], x, y - 1, z - 1), grad(p[BB + 1], x - 1, y - 1, z - 1))));
+	return (res + 1.0) / 2.0;
+}
+
+double PerlinNoise::noise(double x, double y, double z, double xMaxValue, double yMaxValue)
+{
+	this->counter++;
+	x /= xMaxValue;
+	y /= yMaxValue;
+
+	int X = (int)floor(x) & 255;
+	int Y = (int)floor(y) & 255;
+	int Z = (int)floor(z) & 255;
+
+	x -= floor(x);
+	y -= floor(y);
+	z -= floor(z);
+
+	double u = fade(x);
+	double v = fade(y);
+	double w = fade(z);
+
+	int A = p[X] + Y;
+	int AA = p[A] + Z;
+	int AB = p[A + 1] + Z;
+	int B = p[X + 1] + Y;
+	int BA = p[B] + Z;
+	int BB = p[B + 1] + Z;
+
+	double res = lerp(w, lerp(v, lerp(u, grad(p[AA], x, y, z), grad(p[BA], x - 1, y, z)), lerp(u, grad(p[AB], x, y - 1, z), grad(p[BB], x - 1, y - 1, z))), lerp(v, lerp(u, grad(p[AA + 1], x, y, z - 1), grad(p[BA + 1], x - 1, y, z - 1)), lerp(u, grad(p[AB + 1], x, y - 1, z - 1), grad(p[BB + 1], x - 1, y - 1, z - 1))));
+	return (res + 1.0) / 2.0;
+}
+
+void PerlinNoise::seed(unsigned int seed)
+{
+	p.clear();
+	p.resize(256);
+
+	// linear number insert in permutations 1.2.3
+	std::iota(p.begin(), p.end(), 0);
+
+	std::default_random_engine engine(seed);
+	std::shuffle(p.begin(), p.end(), engine);
+
+	// Duplicate the permutation vector
+	p.insert(p.end(), p.begin(), p.end());
+
+	counter = 0;
 }
 
 double PerlinNoise::fade(double t) {

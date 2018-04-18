@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VALUES_H
+#define VALUES_H
 
 class Values
 {
@@ -57,3 +58,5 @@ public:
 	bool getGenerate() { return generate; }
 	void setGenerate(bool gen) { generate = gen; }
 };
+
+#endif
