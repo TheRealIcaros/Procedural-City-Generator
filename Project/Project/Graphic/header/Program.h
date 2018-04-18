@@ -2,8 +2,8 @@
 #define PROGRAM_H
 
 //Own made includes
-#include "shaderCreater.h"
-#include "Object.h"
+#include "Deferred.h"
+
 #include "../../Defines.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Singleton/GenWindow.h"
@@ -24,8 +24,8 @@ private:
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
-	Object* myObject;
-	shaderCreater renderPass;
+	//Object* myObject;
+	//shaderCreater renderPass;
 
 	//Initiation functions for the applications core functions
 	void initiateGLFW();
@@ -45,7 +45,6 @@ public:
 	bool Run();		//The main-loop/ Returns false when we exit it 
 	void Stop();	//Cleans upp the memory and returns everything
 
-	//void createTriangle();
 	void render();				//The render loop in the application
 };
 

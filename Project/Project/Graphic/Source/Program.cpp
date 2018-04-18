@@ -31,7 +31,7 @@ void Program::initiateVariables()
 	
 	this->genWindow = GenWindow::getInstance();
 	this->myKeyInput = new KeyIn();
-	this->myObject = new Object();
+	//this->myObject = new Object();
 }
 
 void Program::initiateImgui(GLFWwindow* window)
@@ -80,9 +80,9 @@ bool Program::Start()
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
 	//This creates the data to be drawm staticly
-	myObject->createT();
-
-	this->renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
+	//myObject->createT();
+	//
+	//this->renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
 
 	return returnValue;
 }
@@ -110,7 +110,7 @@ void Program::Stop()
 	glfwTerminate();
 
 	delete this->myKeyInput;
-	delete this->myObject;
+	//delete this->myObject;
 }
 
 void Program::render()
@@ -122,7 +122,8 @@ void Program::render()
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 
 	//// draw our first triangle
-	glUseProgram(renderPass.getShaderProgramID());
-	glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	//glUseProgram(renderPass.getShaderProgramID());
+	////glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	//glBindVertexArray(myObject->getVAO());
+	//glDrawArrays(GL_TRIANGLES, 0, 3);
 }
