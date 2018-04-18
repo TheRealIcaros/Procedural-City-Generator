@@ -11,13 +11,16 @@
 #include <glad\glad.h>
 #include <GLFW\glfw3.h>
 #include <glm.hpp>
+#include <vector>
 
 class Deferred
 {
 private:
 	//Class object that the Deferred class uses
 	shaderCreater geometryPass;
+	shaderCreater lightingPass;
 	Camera* camera;
+	Object object;
 
 	//Vertex Array Object and Vertex Buffer Object
 	GLuint VAO;
@@ -52,6 +55,24 @@ private:
 	};
 	//The buffer data
 	valuesFromCPUToGPU gpuBufferData;
+
+	//lightbuffer
+	unsigned int lBuffer, lColor, lGlow;
+
+	//Struct that models the lights
+	struct Light
+	{
+		Light(glm::vec3 pos, glm::vec3 color)
+		{
+			lightPos = pos;
+			lightColor = color;
+		}
+
+		glm::vec3 lightPos;
+		glm::vec3 lightColor;
+	};
+	//Vector of the light-struct
+	std::vector<Light> lights;
 
 	//Render-functions
 	void renderGeometryPass();
