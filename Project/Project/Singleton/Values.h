@@ -40,6 +40,19 @@ public:
 	float* getTerrainOctavePercPTR1() { return &terrainOctavePerc1; }
 	float* getTerrainOctavePercPTR2() { return &terrainOctavePerc2; }
 	float* getTerrainOctavePercPTR3() { return &terrainOctavePerc3; }
+	float* getRedistributionPTR() { return &redistribution; }
+	int* getHouseMinHeightPTR() { return &houseMinHeight; }
+	int* getHouseMaxHeightPTR() { return &houseMaxHeight; }
+	int* getHouseDensityPTR() { return &houseDensity; }
+	int* getHouseBlockSizePTR() { return &houseBlockSize; }
+	int* getSkyscraperMinHeightPTR() { return &skyscraperMinHeight; }
+	int* getSkyscraperMaxHeightPTR() { return &skyscraperMaxHeight; }
+	int* getSkyscraperDensityPTR() { return &skyscraperDensity; }
+	int* getSkyscraperBlockSizePTR() { return &skyscraperBlockSize; }
+	int* getFactoriesMinHeightPTR() { return &factoriesMinHeight; }
+	int* getFactoriesMaxHeightPTR() { return &factoriesMaxHeight; }
+	int* getFactoriesDensityPTR() { return &factoriesDensity; }
+	int* getFactoriesBlockSizePTR() { return &factoriesBlockSize; }
 
 
 };
