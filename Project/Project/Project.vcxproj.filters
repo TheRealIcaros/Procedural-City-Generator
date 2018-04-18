@@ -16,6 +16,7 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Graphic\Source\Object.cpp" />
     <ClCompile Include="Graphic\Source\Terrain.cpp" />
+    <ClCompile Include="Graphic\Source\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
@@ -37,6 +38,7 @@
     <ClInclude Include="Graphic\header\shaderCreater.h" />
     <ClInclude Include="Graphic\header\Object.h" />
     <ClInclude Include="Graphic\header\Terrain.h" />
+    <ClInclude Include="Graphic\header\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\fragment.glsl" />
