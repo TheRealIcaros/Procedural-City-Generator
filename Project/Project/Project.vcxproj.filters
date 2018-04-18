@@ -16,6 +16,8 @@
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Graphic\Source\Object.cpp" />
     <ClCompile Include="Graphic\Source\Terrain.cpp" />
+    <ClCompile Include="Logic\Source\PerlinNoise.cpp" />
+    <ClCompile Include="Logic\Source\ppm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
@@ -35,6 +37,8 @@
     <ClInclude Include="libs\usynergy\uSynergy.h" />
     <ClInclude Include="Singleton\GenWindow.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
+    <ClInclude Include="Logic\header\PerlinNoise.h" />
+    <ClInclude Include="Logic\header\ppm.h" />
     <ClInclude Include="Graphic\header\Object.h" />
     <ClInclude Include="Graphic\header\Terrain.h" />
   </ItemGroup>
