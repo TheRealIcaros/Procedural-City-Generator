@@ -3,6 +3,8 @@
 #include <numeric>
 
 
+unsigned int PerlinNoise::counter = 0;
+
 PerlinNoise::PerlinNoise()
 {
 	p = {

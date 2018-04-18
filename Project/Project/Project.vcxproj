@@ -142,7 +142,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Logic\Source\GenWindow.cpp" />
     <ClCompile Include="Singleton\Values.cpp" />
-    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />

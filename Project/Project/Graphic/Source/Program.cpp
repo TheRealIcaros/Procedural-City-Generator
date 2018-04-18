@@ -112,6 +112,7 @@ void Program::Stop()
 	glfwTerminate();
 
 	delete this->myKeyInput;
+	delete this->genWindow;
 	//delete this->myObject;
 }
 
@@ -120,12 +121,12 @@ void Program::render()
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	ImGui::Render();
-	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
-
 	//Render the Deferred-class object here
 
 	deferred.render();
+
+	ImGui::Render();
+	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 
 	//// draw our first triangle
 	//glUseProgram(renderPass.getShaderProgramID());

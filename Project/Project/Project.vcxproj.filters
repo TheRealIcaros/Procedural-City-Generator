@@ -12,13 +12,12 @@
     <ClCompile Include="libs\gl3w\GL\gl3w.c" />
     <ClCompile Include="libs\usynergy\uSynergy.c" />
     <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
-	<ClCompile Include="Graphic\Source\Terrain.cpp" />
+    <ClCompile Include="Graphic\Source\Terrain.cpp" />
     <ClCompile Include="Graphic\Source\Camera.cpp" />
     <ClCompile Include="Graphic\Source\Deferred.cpp" />
     <ClCompile Include="Logic\Source\PerlinNoise.cpp" />
     <ClCompile Include="Logic\Source\ppm.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Source.cpp" />
     <ClCompile Include="Logic\Source\GenWindow.cpp" />
     <ClCompile Include="Singleton\Values.cpp" />
   </ItemGroup>

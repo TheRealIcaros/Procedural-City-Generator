@@ -254,7 +254,7 @@ Deferred::Deferred()
 
 Deferred::~Deferred()
 {
-
+	delete camera;
 }
 
 GLuint Deferred::getVAO()const

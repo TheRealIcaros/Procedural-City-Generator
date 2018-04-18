@@ -17,6 +17,7 @@ private:
 	double fade(double t);
 	double lerp(double t, double a, double b);
 	double grad(int hash, double x, double y, double z);
+	static unsigned int counter;
 public:
 	// Initialize with the reference values for the permutation vector
 	PerlinNoise();
@@ -28,8 +29,7 @@ public:
 	double noise(double x, double y, double z, double xMaxValue, double yMaxValue);
 
 	void seed(unsigned int seed);
-
-	static unsigned int counter;
+	int getCounter() { return counter; }
 };
 
 #endif

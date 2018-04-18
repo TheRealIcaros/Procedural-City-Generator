@@ -45,7 +45,7 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 		exit(-1);
 	}
 
-	std::cout << "Vertex shader code:\n" << shaderText << std::endl;
+	/*std::cout << "Vertex shader code:\n" << shaderText << std::endl;*/
 	
 	//Geometry shader
 	GLuint gs = 0;
@@ -76,7 +76,7 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 			exit(-1);
 		}
 
-		std::cout << "\nGeometry shader code:\n" << shaderText << std::endl;
+		/*std::cout << "\nGeometry shader code:\n" << shaderText << std::endl;*/
 	}
 
 	//Fragment shader
@@ -105,7 +105,7 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 		exit(-1);
 	}
 
-	std::cout << "\nFragment shader code:\n" << shaderText << std::endl;
+	/*std::cout << "\nFragment shader code:\n" << shaderText << std::endl;*/
 
 	//Link shader-program (connect vs,(gs) and fs)
 	this->programID = glCreateProgram();
