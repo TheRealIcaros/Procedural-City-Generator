@@ -6,7 +6,7 @@
 #include "Object.h"
 #include "../../Defines.h"
 #include "../../Controlls/Header/KeyIn.h"
-#include "../../Singleton/GenWindow.h"
+#include "../../Logic/header/GenWindow.h"
 
 //General includes
 #include <string>

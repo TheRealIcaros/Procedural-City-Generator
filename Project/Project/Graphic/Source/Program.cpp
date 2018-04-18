@@ -30,8 +30,7 @@ void Program::initiateVariables()
 	this->VAO = 0;
 	this->VBO = 0;
 	this->programID = 0;
-	
-	this->genWindow = GenWindow::getInstance();
+	this->genWindow = new GenWindow();
 	this->myKeyInput = new KeyIn();
 	this->myObject = new Object();
 }

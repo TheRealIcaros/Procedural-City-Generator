@@ -1,7 +1,8 @@
-#include "GenWindow.h"
+#include "../header/GenWindow.h"
 
 GenWindow::GenWindow()
 {
+	value = Values::getInstance();
 	this->perlinCalls = 0;
 	this->mainRoads = 0;
 	this->smallRoads = 0;
@@ -15,19 +16,10 @@ GenWindow::GenWindow()
 	this->grassTotal = 0;
 	this->intSeed = 0;
 	this->genTime = 0;
+	this->isDrawing = false;
 }
 
 GenWindow::~GenWindow()
-{
-}
-
-GenWindow * GenWindow::getInstance()
-{
-	static GenWindow instance;
-	return &instance;
-}
-
-void GenWindow::releaseInstance()
 {
 }
 
@@ -85,20 +77,20 @@ void GenWindow::draw()
 	begin = ImGui::Begin("##debugWin1", 0, { 0, 0 }, 0.6f, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
 	if (begin)
 	{
-		ImGui::InputText("Seed", m_inputBuf, 128, ImGuiInputTextFlags_CharsNoBlank);
+		ImGui::InputText("Seed", value->getInputBufPTR(), 128, ImGuiInputTextFlags_CharsNoBlank);
 		ImGui::Separator();
 		ImGui::Text("Terrain");
 		ImGui::Text("Size");
-		ImGui::InputInt("X", &tSizeX, 1, 100);
-		ImGui::InputInt("Y", &tSizeY, 1, 100);
+		ImGui::InputInt("X", value->getTSizeXPTR(), 1, 100);
+		ImGui::InputInt("Y", value->getTSizeYPTR(), 1, 100);
 		ImGui::Text("Octaves");
-		ImGui::InputFloat("1", &terrainOctave1);
-		ImGui::InputFloat("2", &terrainOctave2);
-		ImGui::InputFloat("3", &terrainOctave3);
+		ImGui::InputFloat("1", value->getTerrainOctavePTR1());
+		ImGui::InputFloat("2", value->getTerrainOctavePTR2());
+		ImGui::InputFloat("3", value->getTerrainOctavePTR3());
 		ImGui::Text("Octaves Percentage");
-		ImGui::InputFloat("1 ", &terrainOctavePerc1);
-		ImGui::InputFloat("2 ", &terrainOctavePerc2);
-		ImGui::InputFloat("3 ", &terrainOctavePerc3);
+		ImGui::InputFloat("1 ", value->getTerrainOctavePercPTR1);
+		ImGui::InputFloat("2 ", value->getTerrainOctavePercPTR2);
+		ImGui::InputFloat("3 ", value->getTerrainOctavePercPTR3);
 		ImGui::Text("Redistribution");
 		ImGui::InputFloat("##Redistribution", &redistribution);
 		ImGui::Separator();

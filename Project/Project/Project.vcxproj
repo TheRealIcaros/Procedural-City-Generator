@@ -137,7 +137,8 @@
     <ClCompile Include="Logic\Source\PerlinNoise.cpp" />
     <ClCompile Include="Logic\Source\ppm.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Singleton\GenWindow.cpp" />
+    <ClCompile Include="Logic\Source\GenWindow.cpp" />
+    <ClCompile Include="Singleton\Values.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -159,8 +160,9 @@
     <ClInclude Include="libs\usynergy\uSynergy.h" />
     <ClInclude Include="Logic\header\PerlinNoise.h" />
     <ClInclude Include="Logic\header\ppm.h" />
-    <ClInclude Include="Singleton\GenWindow.h" />
+    <ClInclude Include="Logic\header\GenWindow.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
+    <ClInclude Include="Singleton\Values.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\fragment.glsl" />

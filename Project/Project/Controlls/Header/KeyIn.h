@@ -3,7 +3,7 @@
 
 #include <GLFW\glfw3.h>
 
-#include "../../Singleton/GenWindow.h"
+#include "..\..\Logic\header\GenWindow.h"
 class KeyIn
 {
 private:
