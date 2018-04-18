@@ -54,5 +54,6 @@ public:
 	int* getFactoriesDensityPTR() { return &factoriesDensity; }
 	int* getFactoriesBlockSizePTR() { return &factoriesBlockSize; }
 
-
+	bool getGenerate() { return generate; }
+	void setGenerate(bool gen) { generate = gen; }
 };

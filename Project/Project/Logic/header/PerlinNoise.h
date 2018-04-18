@@ -2,6 +2,7 @@
 #define PERLINNOISE_H
 #include <vector>
 #include <glm.hpp>
+#include "../../Singleton/Values.h"
 
 class PerlinNoise 
 {
