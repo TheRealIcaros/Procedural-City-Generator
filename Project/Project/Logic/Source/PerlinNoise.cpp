@@ -28,10 +28,10 @@ PerlinNoise::PerlinNoise()
 
 PerlinNoise::PerlinNoise(unsigned int seed)
 {
-	this->seed(seed);
+	this->setSeed(seed);
 }
 
-double PerlinNoise::noise(double x, double y, double z) 
+double PerlinNoise::generate(double x, double y, double z)
 {
 	Values::getInstance()->increaseCount();
 	// Find the unit cube that contains the point
@@ -62,7 +62,7 @@ double PerlinNoise::noise(double x, double y, double z)
 	return (res + 1.0) / 2.0;
 }
 
-double PerlinNoise::noise(double x, double y, double xMaxValue, double yMaxValue)
+double PerlinNoise::generate(double x, double y, double xMaxValue, double yMaxValue)
 {
 	Values::getInstance()->increaseCount();
 	x /= xMaxValue;
@@ -91,7 +91,7 @@ double PerlinNoise::noise(double x, double y, double xMaxValue, double yMaxValue
 	return (res + 1.0) / 2.0;
 }
 
-double PerlinNoise::noise(double x, double y, double z, double xMaxValue, double yMaxValue)
+double PerlinNoise::generate(double x, double y, double z, double xMaxValue, double yMaxValue)
 {
 	Values::getInstance()->increaseCount();
 	x /= xMaxValue;
@@ -120,7 +120,7 @@ double PerlinNoise::noise(double x, double y, double z, double xMaxValue, double
 	return (res + 1.0) / 2.0;
 }
 
-void PerlinNoise::seed(unsigned int seed)
+void PerlinNoise::setSeed(unsigned int seed)
 {
 	p.clear();
 	p.resize(256);

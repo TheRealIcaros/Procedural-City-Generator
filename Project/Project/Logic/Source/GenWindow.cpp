@@ -131,6 +131,7 @@ void GenWindow::draw()
 		if (ImGui::Button("Generate"))
 		{
 			value->setGenerate(true);
+			value->resetCount();
 			sizeX = value->getTSizeX();
 			sizeY = value->getTSizeY();
 		}

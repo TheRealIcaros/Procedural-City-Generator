@@ -23,11 +23,10 @@ public:
 	// Generate a new permutation vector based on the value of seed
 	PerlinNoise(unsigned int seed);
 	// Get a noise value, for #D/2D images
-	double noise(double x, double y, double z);
-	double noise(double x, double y, double xMaxValue, double yMaxValue);
-	double noise(double x, double y, double z, double xMaxValue, double yMaxValue);
-
-	void seed(unsigned int seed);
+	double generate(double x, double y, double z);
+	double generate(double x, double y, double xMaxValue, double yMaxValue);
+	double generate(double x, double y, double z, double xMaxValue, double yMaxValue);
+	void setSeed(unsigned int seed);
 	int getCounter() { return counter; }
 };
 

@@ -85,6 +85,7 @@ public:
 	void setGenerate(bool gen) { generate = gen; }
 	int getCount() { return count; }
 	void increaseCount() { count++; }
+	void resetCount() { count = 0; }
 	int getSeed() { return seed; }
 	void setSeed(int s) { seed = s; }
 };

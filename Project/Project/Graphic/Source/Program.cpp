@@ -28,6 +28,8 @@ void Program::initiateVariables()
 	this->keyIsPressedF1 = false;
 	this->shouldRun = true;
 	
+	this->noise = new PerlinNoise();
+	this->map = new HeightMap();
 	this->seed = new SeedConverter();
 	this->value = Values::getInstance();
 	this->genWindow = new GenWindow();
@@ -99,55 +101,16 @@ bool Program::Run()
 
 	if (value->getGenerate() == true)
 	{
-		// Create an empty PPM image
-		ppm image(value->getTSizeX(), value->getTSizeY());
-		// Create a PerlinNoise object with a random permutation vector generated with seed
-
 		//create a seed translate function use temp seed for now
-
 		if (value->getInputBuf().compare("") != 0)
 		{
 			seed->setSeed(value->getInputBuf());
 		}
-		PerlinNoise pn(seed->getIntegerSeed());
-		unsigned int kk = 0;
+		noise->setSeed(seed->getIntegerSeed());
 
-		// Visit every pixel of the image and assign a color generated with Perlin noise
+		map->setNoise(noise);
 
-		float freq1 = value->getTerrainOctave1() * 10;
-		float freq2 = value->getTerrainOctave2() * 10;
-		float freq3 = value->getTerrainOctave3() * 10;
-		float perc1 = value->getTerrainOctavePerc1() * 20;
-		float perc2 = value->getTerrainOctavePerc2() * 20;
-		float perc3 = value->getTerrainOctavePerc3() * 20;
-		for (unsigned int i = 0; i < value->getTSizeY(); ++i)   // y
-		{
-			for (unsigned int j = 0; j < value->getTSizeX(); ++j)  // x
-			{
-				double x = (double)j / ((double)value->getTSizeY());
-				double y = (double)i / ((double)value->getTSizeX());
-
-				// Typical Perlin noise
-				double n = perc1 * pn.noise(freq1 * x, 1 * freq1 * y, 0.8)
-					+ perc2 * pn.noise(freq2 * x, freq2 * y, 0.8)
-					+ perc3 * pn.noise(freq3 * x, freq3 * y, 0.8);
-
-				n /= value->getTerrainOctavePerc1() + value->getTerrainOctavePerc2() + value->getTerrainOctavePerc3();
-				n = n - floor(n);
-
-				n = pow(n, value->getRedistribution());
-
-				// Map the values to the [0, 255] interval, for simplicity we use 
-				// tones of grey
-				image.r[kk] = floor(255 * n);
-				image.g[kk] = floor(255 * n);
-				image.b[kk] = floor(255 * n);
-				kk++;
-			}
-		}
-
-		// Save the image in a binary PPM file
-		image.write("figure_7_P.ppm");
+		map->generate();
 
 		value->setGenerate(false);
 	}
@@ -166,6 +129,8 @@ void Program::Stop()
 
 	glfwTerminate();
 
+	delete this->noise;
+	delete this->map;
 	delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;

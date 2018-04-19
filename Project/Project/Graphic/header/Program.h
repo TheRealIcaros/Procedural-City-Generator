@@ -21,12 +21,15 @@
 #include "../../Logic/header/ppm.h"
 #include "../../Singleton/Values.h"
 #include "../../Logic/header/SeedConverter.h"
+#include "../../Logic/header/HeightMap.h"
 #include <math.h>
 
 class Program
 {
 private:
 	//Class objects
+	PerlinNoise * noise;
+	HeightMap * map;
 	SeedConverter* seed;
 	Values* value;
 	GLFWwindow* window;

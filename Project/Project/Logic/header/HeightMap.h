@@ -1,11 +1,13 @@
 #ifndef HEIGHTMAP_H
 #define HEIGHTMAP_H
 #include "../../Logic/header/PerlinNoise.h"
+#include "../../Singleton/Values.h"
 
 class HeightMap
 {
 private:
 	PerlinNoise* noise;
+	Values* value;
 public:
 	HeightMap();
 	HeightMap(PerlinNoise* noise);
