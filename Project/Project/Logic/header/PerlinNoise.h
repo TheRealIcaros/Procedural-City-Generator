@@ -2,7 +2,6 @@
 #define PERLINNOISE_H
 #include <vector>
 #include <glm.hpp>
-#include "../../Singleton/Values.h"
 
 /*
 	Base Code from: SolarianProgrammer.com, upgraded by Niclas Ohlsson and Frank Elias

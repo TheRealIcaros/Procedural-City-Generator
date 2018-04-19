@@ -27,7 +27,9 @@ private:
 	int factoriesMaxHeight = 2;
 	int factoriesDensity = 100;
 	int factoriesBlockSize = 2;
+	int count = 0;
 	bool generate = false;
+	int seed = 0;
 public:
 	Values();
 	~Values();
@@ -81,6 +83,10 @@ public:
 
 	bool getGenerate() { return generate; }
 	void setGenerate(bool gen) { generate = gen; }
+	int getCount() { return count; }
+	void increaseCount() { count++; }
+	int getSeed() { return seed; }
+	void setSeed(int s) { seed = s; }
 };
 
 #endif

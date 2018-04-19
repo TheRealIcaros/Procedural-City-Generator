@@ -21,6 +21,7 @@
     <ClCompile Include="Logic\Source\GenWindow.cpp" />
     <ClCompile Include="Singleton\Values.cpp" />
     <ClCompile Include="Logic\Source\SeedConverter.cpp" />
+    <ClCompile Include="Logic\Source\HeightMap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
@@ -49,6 +50,7 @@
     <ClInclude Include="Logic\header\GenWindow.h" />
     <ClInclude Include="Singleton\Values.h" />
     <ClInclude Include="Logic\header\SeedConverter.h" />
+    <ClInclude Include="Logic\header\HeightMap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\gfragment.glsl" />

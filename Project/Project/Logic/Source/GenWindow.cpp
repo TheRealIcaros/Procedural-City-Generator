@@ -39,7 +39,7 @@ void GenWindow::draw()
 		ImGui::Text("Statistics");
 		ImGui::Separator();
 		ImGui::Text("Perlin calls");
-		ImGui::Text("%d", perlinCalls);
+		ImGui::Text("%d", value->getCount());
 		ImGui::Text("Map Size");
 		ImGui::Text("X %d", sizeX);
 		ImGui::Text("Y %d", sizeY);
@@ -64,7 +64,7 @@ void GenWindow::draw()
 		ImGui::Text("Total grass");
 		ImGui::Text("%d", grassTotal);
 		ImGui::Text("Integer Seed");
-		ImGui::Text("%d", intSeed);
+		ImGui::Text("%d", value->getSeed());
 		ImGui::Text("Generation Time");
 		ImGui::Text("%d", genTime);
 	}
@@ -131,6 +131,8 @@ void GenWindow::draw()
 		if (ImGui::Button("Generate"))
 		{
 			value->setGenerate(true);
+			sizeX = value->getTSizeX();
+			sizeY = value->getTSizeY();
 		}
 
 	}
