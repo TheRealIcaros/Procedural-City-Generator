@@ -81,11 +81,6 @@ bool Program::Start()
 
 	deferred.initiateDeferred();
 
-	//This creates the data to be drawm staticly
-	//myObject->createT();
-	//
-	//this->renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
-
 	return returnValue;
 }
 
@@ -112,7 +107,6 @@ void Program::Stop()
 	glfwTerminate();
 
 	delete this->myKeyInput;
-	//delete this->myObject;
 }
 
 void Program::render()
