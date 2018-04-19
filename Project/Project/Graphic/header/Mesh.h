@@ -1,12 +1,13 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include <glad\glad.h>
-#include <GLFW\glfw3.h>
+#include "shaderCreater.h"
+
+//#include <glad\glad.h>
+//#include <GLFW\glfw3.h>
 #include <vector>
 #include <glm.hpp>
 #include <string>
-
 
 struct Vertex
 {
@@ -23,9 +24,15 @@ struct Texture
 class Mesh
 {
 private:
-	
+	//Vertex Array Object and Vertex Buffer Object
+	GLuint VAO;
+	GLuint VBO;
+	GLuint EBO;
+
+	void setupMesh();
 public:
 	Mesh();
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> texture);
 	~Mesh();
 
 	//Mesh data
@@ -33,9 +40,9 @@ public:
 	std::vector<unsigned int> indices;
 	std::vector<Texture> textures;
 
-	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> texture);
-	//void Draw(Shader shader);
-
+	
+	void Draw(shaderCreater shader);
+	GLuint getVAO()const;
 };
 
 #endif

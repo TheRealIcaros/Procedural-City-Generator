@@ -1,11 +1,7 @@
 #include "../header/Deferred.h"
 
 void Deferred::initiateVariables()
-{
-	// Vertex Array Object and Vertex Buffer Object
-	this->VAO = 0;
-	this->VBO = 0;
-	
+{	
 	//Uniform buffer Object
 	this->UBO = 0;
 
@@ -255,11 +251,6 @@ Deferred::Deferred()
 Deferred::~Deferred()
 {
 	delete camera;
-}
-
-GLuint Deferred::getVAO()const
-{
-	return this->VAO;
 }
 
 void Deferred::render()

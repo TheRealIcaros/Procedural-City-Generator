@@ -22,10 +22,6 @@ private:
 	Camera* camera;
 	Object object;
 
-	//Vertex Array Object and Vertex Buffer Object
-	GLuint VAO;
-	GLuint VBO;
-
 	//Quad values
 	unsigned int quadVAO;
 	unsigned int quadVBO;
@@ -84,7 +80,6 @@ public:
 	~Deferred();
 
 	bool initiateDeferred();
-	GLuint getVAO()const;
 
 	void render();
 };
