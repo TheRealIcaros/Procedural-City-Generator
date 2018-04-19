@@ -21,6 +21,7 @@
 #include "../../Logic/header/ppm.h"
 #include "../../Singleton/Values.h"
 #include "../../Logic/header/SeedConverter.h"
+#include <math.h>
 
 class Program
 {
