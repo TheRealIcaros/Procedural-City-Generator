@@ -1,12 +1,26 @@
-#ifndef HEIGHTMAP_H
-#define HEIGHTMAP_H
+#include "..\header\HeightMap.h"
 
-class HeightMap
+HeightMap::HeightMap()
 {
-private:
+	this->noise = nullptr;
+}
 
-public:
+HeightMap::HeightMap(PerlinNoise* noise)
+{
+	this->noise = noise;
+}
 
-};
+HeightMap::~HeightMap()
+{
+}
 
-#endif // !
+void HeightMap::generate()
+{
+}
+
+void HeightMap::setNoise(PerlinNoise * noise)
+{
+	this->noise = noise;
+}
+
+
