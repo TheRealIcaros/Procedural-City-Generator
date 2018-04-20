@@ -31,7 +31,6 @@ void Program::initiateVariables()
 	this->noise = new PerlinNoise();
 	this->map = new HeightMap();
 	this->seed = new SeedConverter();
-	this->value = Values::getInstance();
 	this->genWindow = new GenWindow();
 	this->myKeyInput = new KeyIn();
 	//this->myObject = new Object();
@@ -99,20 +98,24 @@ bool Program::Run()
 
 	genWindow->draw();								//Draw function for ImGui
 
-	if (value->getGenerate() == true)
+	if (genWindow->getGenerate() == true)
 	{
-		//create a seed translate function use temp seed for now
-		if (value->getInputBuf().compare("") != 0)
+		if (genWindow->getInputBuf().compare("") != 0)
 		{
-			seed->setSeed(value->getInputBuf());
+			seed->setSeed(genWindow->getInputBuf());
 		}
+		genWindow->setSeed(seed->getIntegerSeed());
 		noise->setSeed(seed->getIntegerSeed());
 
 		map->setNoise(noise);
 
-		map->generate();
+		map->generate(genWindow->getTSizeX(), genWindow->getTSizeY(),genWindow->getTerrainOctave1(),
+			genWindow->getTerrainOctave2(), genWindow->getTerrainOctave3(),0.0f,0.0f,0.0f,0.0f,0.0f,
+			genWindow->getTerrainOctavePerc1(), genWindow->getTerrainOctavePerc2(), genWindow->getTerrainOctavePerc3(),
+			0.0f,0.0f,0.0f,0.0f,0.0f, genWindow->getRedistribution());
 
-		value->setGenerate(false);
+		genWindow->toggleGenerate();
+		genWindow->setCounter(noise->getCounter());
 	}
 	render();										//The render loop for all the graphics
 

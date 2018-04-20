@@ -1,5 +1,4 @@
 #include "..\header\SeedConverter.h"
-#include "../../Singleton/Values.h"
 
 SeedConverter::SeedConverter()
 {
@@ -32,5 +31,4 @@ void SeedConverter::setSeed(std::string seed)
 void SeedConverter::convertSeed()
 {
 	this->intSeed = hash(this->strSeed);
-	Values::getInstance()->setSeed(this->intSeed);
 }

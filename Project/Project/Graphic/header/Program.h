@@ -19,7 +19,6 @@
 //MISC STUFF
 #include "../../Logic/header/PerlinNoise.h"
 #include "../../Logic/header/ppm.h"
-#include "../../Singleton/Values.h"
 #include "../../Logic/header/SeedConverter.h"
 #include "../../Logic/header/HeightMap.h"
 #include <math.h>
@@ -31,7 +30,6 @@ private:
 	PerlinNoise * noise;
 	HeightMap * map;
 	SeedConverter* seed;
-	Values* value;
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;

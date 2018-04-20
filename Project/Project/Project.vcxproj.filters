@@ -19,7 +19,6 @@
     <ClCompile Include="Logic\Source\ppm.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Logic\Source\GenWindow.cpp" />
-    <ClCompile Include="Singleton\Values.cpp" />
     <ClCompile Include="Logic\Source\SeedConverter.cpp" />
     <ClCompile Include="Logic\Source\HeightMap.cpp" />
   </ItemGroup>
@@ -48,7 +47,6 @@
     <ClInclude Include="Graphic\header\Deferred.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
     <ClInclude Include="Logic\header\GenWindow.h" />
-    <ClInclude Include="Singleton\Values.h" />
     <ClInclude Include="Logic\header\SeedConverter.h" />
     <ClInclude Include="Logic\header\HeightMap.h" />
   </ItemGroup>

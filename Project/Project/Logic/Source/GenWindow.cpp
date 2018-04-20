@@ -2,9 +2,10 @@
 
 GenWindow::GenWindow()
 {
-	value = Values::getInstance();
 	this->perlinCalls = 0;
 	this->mainRoads = 0;
+	this->sizeX = 0;
+	this->sizeY = 0;
 	this->smallRoads = 0;
 	this->houses = 0;
 	this->skyscrapers = 0;
@@ -14,9 +15,33 @@ GenWindow::GenWindow()
 	this->grassD2 = 0;
 	this->grassD3 = 0;
 	this->grassTotal = 0;
-	this->intSeed = 0;
+	this->seed = 0;
 	this->genTime = 0;
 	this->isDrawing = false;
+	this->count = 0;
+
+	this->tSizeX = 25;
+	this->tSizeY = 25;
+	this->terrainOctave1 = 1.0;
+	this->terrainOctave2 = 1.0;
+	this->terrainOctave3 = 1.0;
+	this->terrainOctavePerc1 = 0.50;
+	this->terrainOctavePerc2 = 0.35;
+	this->terrainOctavePerc3 = 0.15;
+	this->redistribution = 1.0;
+	this->houseMinHeight = 1;
+	this->houseMaxHeight = 2;
+	this->houseDensity = 100;
+	this->houseBlockSize = 2;
+	this->skyscraperMinHeight = 1;
+	this->skyscraperMaxHeight = 2;
+	this->skyscraperDensity = 100;
+	this->skyscraperBlockSize = 2;
+	this->factoriesMinHeight = 1;
+	this->factoriesMaxHeight = 2;
+	this->factoriesDensity = 100;
+	this->factoriesBlockSize = 2;
+	this->generate = false;
 }
 
 GenWindow::~GenWindow()
@@ -39,7 +64,7 @@ void GenWindow::draw()
 		ImGui::Text("Statistics");
 		ImGui::Separator();
 		ImGui::Text("Perlin calls");
-		ImGui::Text("%d", value->getCount());
+		ImGui::Text("%d", count);
 		ImGui::Text("Map Size");
 		ImGui::Text("X %d", sizeX);
 		ImGui::Text("Y %d", sizeY);
@@ -64,7 +89,7 @@ void GenWindow::draw()
 		ImGui::Text("Total grass");
 		ImGui::Text("%d", grassTotal);
 		ImGui::Text("Integer Seed");
-		ImGui::Text("%d", value->getSeed());
+		ImGui::Text("%d", seed);
 		ImGui::Text("Generation Time");
 		ImGui::Text("%d", genTime);
 	}
@@ -77,63 +102,63 @@ void GenWindow::draw()
 	begin = ImGui::Begin("##debugWin1", 0, { 0, 0 }, 0.6f, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize);
 	if (begin)
 	{
-		ImGui::InputText("Seed", value->getInputBufPTR(), 128, ImGuiInputTextFlags_CharsNoBlank);
+		ImGui::InputText("Seed", inputBuf, 128, ImGuiInputTextFlags_CharsNoBlank);
 		ImGui::Separator();
 		ImGui::Text("Terrain");
 		ImGui::Text("Size");
-		ImGui::InputInt("X", value->getTSizeXPTR(), 1, 100);
-		ImGui::InputInt("Y", value->getTSizeYPTR(), 1, 100);
+		ImGui::InputInt("X", &tSizeX, 1, 100);
+		ImGui::InputInt("Y", &tSizeY, 1, 100);
 		ImGui::Text("Octaves");
-		ImGui::InputFloat("1", value->getTerrainOctavePTR1());
-		ImGui::InputFloat("2", value->getTerrainOctavePTR2());
-		ImGui::InputFloat("3", value->getTerrainOctavePTR3());
+		ImGui::InputFloat("1", &terrainOctave1);
+		ImGui::InputFloat("2", &terrainOctave2);
+		ImGui::InputFloat("3", &terrainOctave3);
 		ImGui::Text("Octaves Percentage");
-		ImGui::InputFloat("1 ", value->getTerrainOctavePercPTR1());
-		ImGui::InputFloat("2 ", value->getTerrainOctavePercPTR2());
-		ImGui::InputFloat("3 ", value->getTerrainOctavePercPTR3());
+		ImGui::InputFloat("1 ", &terrainOctavePerc1);
+		ImGui::InputFloat("2 ", &terrainOctavePerc2);
+		ImGui::InputFloat("3 ", &terrainOctavePerc3);
 		ImGui::Text("Redistribution");
-		ImGui::InputFloat("##Redistribution", value->getRedistributionPTR());
+		ImGui::InputFloat("##Redistribution", &redistribution);
 		ImGui::Separator();
 		ImGui::Text("Houses");
 		ImGui::Spacing();
 		ImGui::Text("Min. Height");
-		ImGui::SliderInt("##House.Min. Height", value->getHouseMinHeightPTR(), 1, 10);
+		ImGui::SliderInt("##House.Min. Height", &houseMinHeight, 1, 10);
 		ImGui::Text("Max. Height");
-		ImGui::SliderInt("##House.Max. Height", value->getHouseMaxHeightPTR(), 1, 10);
+		ImGui::SliderInt("##House.Max. Height", &houseMaxHeight, 1, 10);
 		ImGui::Text("Density");
-		ImGui::SliderInt("##House.Density", value->getHouseDensityPTR(), 1, 100);
+		ImGui::SliderInt("##House.Density", &houseDensity, 1, 100);
 		ImGui::Text("Block Size");
-		ImGui::SliderInt("##House.Block.Size", value->getHouseBlockSizePTR(), 1, 100);
+		ImGui::SliderInt("##House.Block.Size", &houseBlockSize, 1, 100);
 		ImGui::Separator();
 		ImGui::Text("Skyscrapers");
 		ImGui::Spacing();
 		ImGui::Text("Min. Height");
-		ImGui::SliderInt("##Skyscrapers.Min. Height", value->getSkyscraperMinHeightPTR(), 1, 10);
+		ImGui::SliderInt("##Skyscrapers.Min. Height", &skyscraperMinHeight, 1, 10);
 		ImGui::Text("Max. Height");
-		ImGui::SliderInt("##Skyscrapers.Max. Height", value->getSkyscraperMaxHeightPTR(), 1, 10);
+		ImGui::SliderInt("##Skyscrapers.Max. Height", &skyscraperMaxHeight, 1, 10);
 		ImGui::Text("Density");
-		ImGui::SliderInt("##Skyscrapers.Density", value->getSkyscraperDensityPTR(), 1, 100);
+		ImGui::SliderInt("##Skyscrapers.Density", &skyscraperDensity, 1, 100);
 		ImGui::Text("Block Size");
-		ImGui::SliderInt("##Skyscrapers.Block.Size", value->getSkyscraperBlockSizePTR(), 1, 100);
+		ImGui::SliderInt("##Skyscrapers.Block.Size", &skyscraperBlockSize, 1, 100);
 		ImGui::Separator();
 		ImGui::Text("Factories");
 		ImGui::Spacing();
 		ImGui::Text("Min. Height");
-		ImGui::SliderInt("##Factories.Min. Height", value->getFactoriesMinHeightPTR(), 1, 10);
+		ImGui::SliderInt("##Factories.Min. Height", &factoriesMinHeight, 1, 10);
 		ImGui::Text("Max. Height");
-		ImGui::SliderInt("##Factories.Max. Height", value->getFactoriesMaxHeightPTR(), 1, 10);
+		ImGui::SliderInt("##Factories.Max. Height", &factoriesMaxHeight, 1, 10);
 		ImGui::Text("Density");
-		ImGui::SliderInt("##Factories.Density", value->getFactoriesDensityPTR(), 1, 100);
+		ImGui::SliderInt("##Factories.Density", &factoriesDensity, 1, 100);
 		ImGui::Text("Block Size");
-		ImGui::SliderInt("##Factories.Block.Size", value->getFactoriesBlockSizePTR(), 1, 100);
+		ImGui::SliderInt("##Factories.Block.Size", &factoriesBlockSize, 1, 100);
 		ImGui::Separator();
 		ImGui::Spacing();
 		if (ImGui::Button("Generate"))
 		{
-			value->setGenerate(true);
-			value->resetCount();
-			sizeX = value->getTSizeX();
-			sizeY = value->getTSizeY();
+			generate = true;;
+			count = 0;
+			sizeX = tSizeX;
+			sizeY = tSizeY;
 		}
 
 	}

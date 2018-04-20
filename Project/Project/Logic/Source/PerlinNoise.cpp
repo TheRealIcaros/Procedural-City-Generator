@@ -1,7 +1,6 @@
 #include "..\header\PerlinNoise.h"
 #include <random>
 #include <numeric>
-#include "../../Singleton/Values.h"
 
 
 unsigned int PerlinNoise::counter = 0;
@@ -33,7 +32,7 @@ PerlinNoise::PerlinNoise(unsigned int seed)
 
 double PerlinNoise::generate(double x, double y, double z)
 {
-	Values::getInstance()->increaseCount();
+	counter++;
 	// Find the unit cube that contains the point
 	int X = (int)floor(x) & 255;
 	int Y = (int)floor(y) & 255;
@@ -64,7 +63,7 @@ double PerlinNoise::generate(double x, double y, double z)
 
 double PerlinNoise::generate(double x, double y, double xMaxValue, double yMaxValue)
 {
-	Values::getInstance()->increaseCount();
+	counter++;
 	x /= xMaxValue;
 	y /= yMaxValue;
 	double z = 1.0;
@@ -93,7 +92,7 @@ double PerlinNoise::generate(double x, double y, double xMaxValue, double yMaxVa
 
 double PerlinNoise::generate(double x, double y, double z, double xMaxValue, double yMaxValue)
 {
-	Values::getInstance()->increaseCount();
+	counter++;
 	x /= xMaxValue;
 	y /= yMaxValue;
 
