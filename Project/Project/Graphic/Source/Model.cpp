@@ -1,5 +1,10 @@
 #include "../header/Model.h"
 
+void Model::loadModel(std::string path)
+{
+	
+}
+
 Model::Model()
 {
 }
