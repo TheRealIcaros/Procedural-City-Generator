@@ -24,8 +24,6 @@ private:
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
 	Deferred deferred;
-	//Object* myObject;
-	//shaderCreater renderPass;
 
 	//Initiation functions for the applications core functions
 	void initiateGLFW();
