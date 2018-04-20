@@ -18,6 +18,7 @@
     <ClCompile Include="Graphic\Source\Camera.cpp" />
     <ClCompile Include="Graphic\Source\Deferred.cpp" />
     <ClCompile Include="Graphic\Source\Mesh.cpp" />
+    <ClCompile Include="Graphic\Source\Model.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
@@ -42,6 +43,7 @@
     <ClInclude Include="Graphic\header\Camera.h" />
     <ClInclude Include="Graphic\header\Deferred.h" />
     <ClInclude Include="Graphic\header\Mesh.h" />
+    <ClInclude Include="Graphic\header\Model.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\gfragment.glsl" />

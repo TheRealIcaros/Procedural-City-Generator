@@ -3,8 +3,6 @@
 
 #include "shaderCreater.h"
 
-//#include <glad\glad.h>
-//#include <GLFW\glfw3.h>
 #include <vector>
 #include <glm.hpp>
 #include <string>
@@ -19,8 +17,10 @@ struct Vertex
 struct Texture
 {
 	unsigned int id;
-	std::string TexCoords;
+	std::string type;
 };
+
+
 class Mesh
 {
 private:
@@ -32,7 +32,7 @@ private:
 	void setupMesh();
 public:
 	Mesh();
-	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> texture);
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
 	~Mesh();
 
 	//Mesh data
