@@ -7,7 +7,7 @@ void Object::initiateVariables()
 
 Object::Object()
 {
-	//initiateVariables();
+	initiateVariables();
 }
 
 Object::~Object()

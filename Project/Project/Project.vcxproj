@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)\Includes\glad\include;$(SolutionDir)\Includes\glm;$(SolutionDir)\Includes\glfw\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Includes\glad\include;$(SolutionDir)\Includes\glm;$(SolutionDir)\Includes\assimp;$(SolutionDir)\Includes\glfw\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\Includes\glfw\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -80,6 +80,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(SolutionDir)\Includes\assimp\include\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -128,6 +129,7 @@
     <ClCompile Include="Controlls\Source\KeyIn.cpp" />
     <ClCompile Include="Graphic\Source\Camera.cpp" />
     <ClCompile Include="Graphic\Source\Deferred.cpp" />
+    <ClCompile Include="Graphic\Source\Mesh.cpp" />
     <ClCompile Include="Graphic\Source\Object.cpp" />
     <ClCompile Include="Graphic\Source\Program.cpp" />
     <ClCompile Include="Graphic\Source\Terrain.cpp" />
@@ -146,6 +148,7 @@
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Graphic\header\Camera.h" />
     <ClInclude Include="Graphic\header\Deferred.h" />
+    <ClInclude Include="Graphic\header\Mesh.h" />
     <ClInclude Include="Graphic\header\Object.h" />
     <ClInclude Include="Graphic\header\Program.h" />
     <ClInclude Include="Graphic\header\Terrain.h" />
