@@ -27,11 +27,46 @@ void HeightMap::generate(int width, int height, float oct1, float oct2, float oc
 			double y = (double)i / ((double)width);
 
 			// Typical Perlin noise
-			double n = perc1 * noise->generate(oct1 * x, 1 * oct1 * y, 0.8)
-				+ perc2 *noise->generate(oct2 * x, oct2 * y, 0.8)
-				+ perc3 * noise->generate(oct3 * x, oct3 * y, 0.8);
+			double n = 0;
 
-			n /= perc1 + perc2 + perc3;
+			if (perc1 != 0)
+			{
+				n += perc1 * noise->generate(oct1 * x, 1 * oct1 * y, 0.8);
+			}
+			if (perc2 != 0)
+			{
+				n += perc2 * noise->generate(oct2 * x, 1 * oct2 * y, 0.8);
+			}
+			if (perc3 != 0)
+			{
+				n += perc3 * noise->generate(oct3 * x, 1 * oct3 * y, 0.8);
+			}
+			if (perc4 != 0)
+			{
+				n += perc4 * noise->generate(oct4 * x, 1 * oct4 * y, 0.8);
+			}
+			if (perc5 != 0)
+			{
+				n += perc5 * noise->generate(oct5 * x, 1 * oct5 * y, 0.8);
+			}
+			if (perc6 != 0)
+			{
+				n += perc6 * noise->generate(oct6 * x, 1 * oct6 * y, 0.8);
+			}
+			if (perc7 != 0)
+			{
+				n += perc7 * noise->generate(oct7 * x, 1 * oct7 * y, 0.8);
+			}
+			if (perc8 != 0)
+			{
+				n += perc8 * noise->generate(oct8 * x, 1 * oct8 * y, 0.8);
+			}
+
+			float percTot = perc1 + perc2 + perc3 + perc4 + perc5 + perc6 + perc7 + perc8;
+			if (percTot != 0)
+			{
+				n /= percTot;
+			}
 
 			n = pow(n, redistribution);
 		}

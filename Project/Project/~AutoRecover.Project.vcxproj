@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -165,7 +165,6 @@
     <ClInclude Include="libs\glfw\include\GLFW\glfw3native.h" />
     <ClInclude Include="libs\usynergy\uSynergy.h" />
     <ClInclude Include="Logic\header\Array2D.h" />
-    <ClInclude Include="Logic\header\Arrayh.h" />
     <ClInclude Include="Logic\header\HeightMap.h" />
     <ClInclude Include="Logic\header\PerlinNoise.h" />
     <ClInclude Include="Logic\header\ppm.h" />

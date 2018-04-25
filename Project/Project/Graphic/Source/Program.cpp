@@ -110,9 +110,10 @@ bool Program::Run()
 		map->setNoise(noise);
 
 		map->generate(genWindow->getTSizeX(), genWindow->getTSizeY(),genWindow->getTerrainOctave1(),
-			genWindow->getTerrainOctave2(), genWindow->getTerrainOctave3(),0.0f,0.0f,0.0f,0.0f,0.0f,
-			genWindow->getTerrainOctavePerc1(), genWindow->getTerrainOctavePerc2(), genWindow->getTerrainOctavePerc3(),
-			0.0f,0.0f,0.0f,0.0f,0.0f, genWindow->getRedistribution());
+			genWindow->getTerrainOctave2(), genWindow->getTerrainOctave3(), genWindow->getTerrainOctave4(), genWindow->getTerrainOctave5(), genWindow->getTerrainOctave6(),
+			genWindow->getTerrainOctave7(), genWindow->getTerrainOctave8(), genWindow->getTerrainOctavePerc1(), genWindow->getTerrainOctavePerc2(), genWindow->getTerrainOctavePerc3(),
+			genWindow->getTerrainOctavePerc4(), genWindow->getTerrainOctavePerc5(), genWindow->getTerrainOctavePerc6(), genWindow->getTerrainOctavePerc7(), genWindow->getTerrainOctavePerc8(),
+			genWindow->getRedistribution());
 
 		genWindow->toggleGenerate();
 		genWindow->setCounter(noise->getCounter());
