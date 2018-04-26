@@ -11,14 +11,12 @@ private:
 public:
 	static const int DEFAULT_SIZE = 10;
 
-	Array()
-		: size(0), capacity(DEFAULT_SIZE)
+	Array() : size(0), capacity(DEFAULT_SIZE)
 	{
 		data = new T[capacity];
 	}
 
-	Array(const Array& ref)
-		: size(ref.size), capacity(ref.capacity)
+	Array(const Array& ref) : size(ref.size), capacity(ref.capacity)
 	{
 		data = new T[capacity];
 		for (int i = 0; i<size; i++)
@@ -27,8 +25,7 @@ public:
 		}
 	}
 
-	Array(int initialSize)
-		: size(0), capacity(initialSize)
+	Array(int initialSize) : size(0), capacity(initialSize)
 	{
 		data = new T[capacity];
 	}
