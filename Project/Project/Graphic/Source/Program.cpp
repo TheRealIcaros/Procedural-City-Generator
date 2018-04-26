@@ -35,6 +35,8 @@ void Program::initiateVariables()
 	this->myKeyInput = new KeyIn();
 	this->dataManager = new DataManager();
 	//this->myObject = new Object();
+
+	terrainMap.fill(0.0f);
 }
 
 void Program::initiateData()
@@ -53,13 +55,12 @@ void Program::generate()
 	dataManager->addData("Seed", seed->getIntegerSeed());
 	noise->setSeed(seed->getIntegerSeed());
 
-	map->generate(genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave1(),
+	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave1(),
 		genWindow->getTerrainOctave2(), genWindow->getTerrainOctave3(), genWindow->getTerrainOctave4(), genWindow->getTerrainOctave5(), genWindow->getTerrainOctave6(),
 		genWindow->getTerrainOctave7(), genWindow->getTerrainOctave8(), genWindow->getTerrainOctavePerc1(), genWindow->getTerrainOctavePerc2(), genWindow->getTerrainOctavePerc3(),
 		genWindow->getTerrainOctavePerc4(), genWindow->getTerrainOctavePerc5(), genWindow->getTerrainOctavePerc6(), genWindow->getTerrainOctavePerc7(), genWindow->getTerrainOctavePerc8(),
 		genWindow->getRedistribution());
 
-	genWindow->toggleGenerate();
 	genWindow->setCounter(noise->getCounter());
 }
 
@@ -142,6 +143,7 @@ bool Program::Run()
 	if (genWindow->getGenerate() == true)
 	{
 		generate();
+		genWindow->toggleGenerate();
 	}
 
 	render();										//The render loop for all the graphics

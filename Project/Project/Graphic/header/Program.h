@@ -57,6 +57,7 @@ private:
 	//Mics variables
 	bool keyIsPressedF1;
 	bool shouldRun;
+	Array2D<float> terrainMap;
 
 public:
 	Program();
