@@ -44,6 +44,7 @@
     <ClInclude Include="Graphic\header\Deferred.h" />
     <ClInclude Include="Graphic\header\Mesh.h" />
     <ClInclude Include="Graphic\header\Model.h" />
+    <ClInclude Include="Graphic\header\stb_image.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\gfragment.glsl" />

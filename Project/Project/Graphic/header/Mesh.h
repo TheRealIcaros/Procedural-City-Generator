@@ -7,17 +7,23 @@
 #include <glm.hpp>
 #include <string>
 
-struct Vertex
-{
+struct Vertex {
+	// position
 	glm::vec3 Position;
-	glm::vec2 Normal;
+	// normal
+	glm::vec3 Normal;
+	// texCoords
 	glm::vec2 TexCoords;
+	// tangent
+	glm::vec3 Tangent;
+	// bitangent
+	glm::vec3 Bitangent;
 };
 
-struct Texture
-{
+struct Texture {
 	unsigned int id;
 	std::string type;
+	std::string path;
 };
 
 

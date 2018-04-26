@@ -153,6 +153,7 @@
     <ClInclude Include="Graphic\header\Model.h" />
     <ClInclude Include="Graphic\header\Object.h" />
     <ClInclude Include="Graphic\header\Program.h" />
+    <ClInclude Include="Graphic\header\stb_image.h" />
     <ClInclude Include="Graphic\header\Terrain.h" />
     <ClInclude Include="Imgui\imconfig.h" />
     <ClInclude Include="Imgui\imgui.h" />
