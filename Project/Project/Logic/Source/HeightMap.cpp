@@ -14,10 +14,10 @@ HeightMap::~HeightMap()
 {
 }
 
-void HeightMap::getData(DataManager * dataManager)
-{
-	
-}
+//void HeightMap::getData(DataManager * dataManager)
+//{
+//	
+//}
 
 void HeightMap::generate(Array2D<float>& terrainMap, int width, int height, float oct1, float oct2, float oct3,
 	float oct4, float oct5, float oct6, float oct7, float oct8, float perc1, float perc2,

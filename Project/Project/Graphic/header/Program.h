@@ -40,7 +40,7 @@ private:
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
 	Deferred deferred;
-	DataManager* dataManager;
+	/*DataManager* dataManager;*/
 	//Object* myObject;
 	//shaderCreater renderPass;
 

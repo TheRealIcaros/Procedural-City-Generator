@@ -33,7 +33,7 @@ void Program::initiateVariables()
 	this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
 	this->myKeyInput = new KeyIn();
-	this->dataManager = new DataManager();
+	/*this->dataManager = new DataManager();*/
 	//this->myObject = new Object();
 
 	terrainMap.fill(0.0f);
@@ -41,7 +41,7 @@ void Program::initiateVariables()
 
 void Program::initiateData()
 {
-	dataManager->addDataHolder(map);
+	/*dataManager->addDataHolder(map);*/
 
 	noiseGenerator(PERLIN_NOISE);
 }
@@ -52,7 +52,7 @@ void Program::generate()
 	{
 		seed->setSeed(genWindow->getInputBuf());
 	}
-	dataManager->addData("Seed", seed->getIntegerSeed());
+	/*dataManager->addData("Seed", seed->getIntegerSeed());*/
 	noise->setSeed(seed->getIntegerSeed());
 
 	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave1(),
@@ -166,7 +166,7 @@ void Program::Stop()
 	delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;
-	delete this->dataManager;
+	//delete this->dataManager;
 	//delete this->myObject;
 }
 
