@@ -4,12 +4,12 @@
 //My classes
 #include "shaderCreater.h"
 #include "Camera.h"
-#include "Object.h"
+#include "Model.h"
 #include "../../Defines.h"
 
 //Other classes
-#include <glad\glad.h>
-#include <GLFW\glfw3.h>
+//#include <glad\glad.h>
+//#include <GLFW\glfw3.h>
 #include <glm.hpp>
 #include <vector>
 
@@ -21,7 +21,7 @@ private:
 	shaderCreater geometryPass;
 	shaderCreater lightingPass;
 	Camera* camera;
-	Object object;
+	Model myModel;
 
 	//Quad values
 	unsigned int quadVAO;

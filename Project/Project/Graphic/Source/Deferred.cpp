@@ -27,6 +27,13 @@ void Deferred::initiateVariables()
 	//Matrices and initiation of them
 	this->World = WorldMatrix();
 	this->Projection = ProjectionMatrix();
+
+	//const char* path = "../../house/mnogohome/building.obj";
+	std::string path1 = "../../house/mnogohome/building.obj";
+	char* path = new char[path1.size() + 1];
+	memcpy(path, path1.c_str(), path1.size() + 1);
+	//Load a model
+	this->myModel = Model(path);
 	
 }
 
