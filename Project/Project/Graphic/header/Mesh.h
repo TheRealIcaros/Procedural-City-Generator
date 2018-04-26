@@ -26,7 +26,6 @@ struct Texture {
 	std::string path;
 };
 
-
 class Mesh
 {
 private:
@@ -37,6 +36,7 @@ private:
 
 	void setupMesh();
 public:
+
 	Mesh();
 	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
 	~Mesh();
@@ -46,7 +46,6 @@ public:
 	std::vector<unsigned int> indices;
 	std::vector<Texture> textures;
 
-	
 	void Draw(shaderCreater shader);
 	GLuint getVAO()const;
 };

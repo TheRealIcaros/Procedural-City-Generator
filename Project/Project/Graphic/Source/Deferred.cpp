@@ -27,14 +27,6 @@ void Deferred::initiateVariables()
 	//Matrices and initiation of them
 	this->World = WorldMatrix();
 	this->Projection = ProjectionMatrix();
-
-	//const char* path = "../../house/mnogohome/building.obj";
-	std::string path1 = "../../house/mnogohome/building.obj";
-	char* path = new char[path1.size() + 1];
-	memcpy(path, path1.c_str(), path1.size() + 1);
-	//Load a model
-	this->myModel = Model(path);
-	
 }
 
 bool Deferred::initiateDeferred()
@@ -56,6 +48,15 @@ bool Deferred::initiateDeferred()
 	//Creates the shader-program
 	this->geometryPass.createShader("./Graphic/Shaders/gvertex", "NULL", "./Graphic/Shaders/gfragment");
 	this->lightingPass.createShader("./Graphic/Shaders/fvertex", "NULL", "./Graphic/Shaders/ffragment");
+
+	//const char* path = "../../house/mnogohome/building.obj";
+	std::string path = "./house/mnogohome/building.obj";
+
+	////std::string path1 = "./Models/HDMonkey/HDMonkey.obj";
+	//char* path = new char[path1.size() + 1];
+	//memcpy(path, path1.c_str(), path1.size() + 1);
+	//Load a model
+	this->myModel = Model(path);
 
 	return returnValue;
 }
@@ -136,7 +137,7 @@ glm::mat4 Deferred::WorldMatrix()
 glm::mat4 Deferred::ProjectionMatrix()
 {
 	float FOV = 0.45f * PI;
-	float aspectRatio = 640 / 480;
+	float aspectRatio = WIDTH / HEIGHT;//640 / 480;
 
 	glm::mat4 Projection = glm::perspective(FOV, aspectRatio, 0.1f, 200.0f);
 
@@ -164,11 +165,12 @@ void Deferred::renderGeometryPass()
 	//Back face culling camera pos
 	glUniform3fv(glGetUniformLocation(geometryPass.getShaderProgramID(), "cameraPos"), 1, &camera->getPosition()[0]);
 	
-	glm::vec3 lightDir = glm::vec3(5.0, -12.0, 6.0);
+	glm::vec3 lightDir = glm::vec3(0.0, 3.0, 0.0);
 	glUniform3fv(glGetUniformLocation(geometryPass.getShaderProgramID(), "lightDir"), 1, &lightDir[0]);
 
 	//terrain.Draw(geometryPass);
 	//objects.Draw(geometryPass);
+	myModel.Draw(geometryPass);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

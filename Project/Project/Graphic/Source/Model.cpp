@@ -1,8 +1,42 @@
 #include "../header/Model.h"
 
-void Model::loadModel(std::string path)
+void Model::loadModel(std::string const &path)
 {
-	const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+	// read file via ASSIMP
+	Assimp::Importer importer;
+	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+	// check for errors
+	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
+	{
+		std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
+		return;
+	}
+	// retrieve the directory path of the filepath
+	directory = path.substr(0, path.find_last_of('/'));
+
+	// process ASSIMP's root node recursively
+	processNode(scene->mRootNode, scene);
+}
+
+/*void Model::loadModel(std::string path)
+{
+
+	// read file via ASSIMP
+	Assimp::Importer importer;
+	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
+	// check for errors
+	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
+	{
+		std::cout << "ERROR::ASSIMP:: " << importer.GetErrorString() << std::endl;
+		return;
+	}
+	// retrieve the directory path of the filepath
+	directory = path.substr(0, path.find_last_of('/'));
+
+	// process ASSIMP's root node recursively
+	processNode(scene->mRootNode, scene);
+	
+	/*const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -12,7 +46,7 @@ void Model::loadModel(std::string path)
 	directory = path.substr(0, path.find_last_of('/'));
 
 	processNode(scene->mRootNode, scene);
-}
+}*/
 
 void Model::processNode(aiNode *node, const aiScene *scene)
 {
@@ -31,10 +65,10 @@ void Model::processNode(aiNode *node, const aiScene *scene)
 
 Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 {
+	// data to fill
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
 	std::vector<Texture> textures;
-
 
 	// Walk through each of the mesh's vertices
 	for (unsigned int i = 0; i < mesh->mNumVertices; i++)
@@ -107,16 +141,44 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 
 	// return a mesh object created from the extracted mesh data
 	return Mesh(vertices, indices, textures);
+}
 
-	//for (unsigned int i = 0; i < mesh->mNumVertices; i++)
+	/*for (unsigned int i = 0; i < mesh->mNumVertices; i++)
 	//{
 	//	Vertex vertex;
 	//	// process vertex positions, normals and texture coordinates
-	//	//...
-	//		vertices.push_back(vertex);
+	//	glm::vec3 vector;
+	//	vector.x = mesh->mVertices[i].x;
+	//	vector.y = mesh->mVertices[i].y;
+	//	vector.z = mesh->mVertices[i].z;
+	//	vertex.Position = vector;
+	//	vertices.push_back(vertex);
+
+	//	vector.x = mesh->mNormals[i].x;
+	//	vector.y = mesh->mNormals[i].y;
+	//	vector.z = mesh->mNormals[i].z;
+	//	vertex.Normal = vector;
+	//	vertices.push_back(vertex);
+
+	//	if (mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
+	//	{
+	//		glm::vec2 vec;
+	//		vec.x = mesh->mTextureCoords[0][i].x;
+	//		vec.y = mesh->mTextureCoords[0][i].y;
+	//		vertex.TexCoords = vec;
+	//	}
+	//	else
+	//		vertex.TexCoords = glm::vec2(0.0f, 0.0f);
+	//	vertices.push_back(vertex);
 	//}
 	//// process indices
-	////...
+	//for (unsigned int i = 0; i < mesh->mNumFaces; i++)
+	//{
+	//	aiFace face = mesh->mFaces[i];
+	//	for (unsigned int j = 0; j < face.mNumIndices; j++)
+	//		indices.push_back(face.mIndices[j]);
+	//}
+
 	//// process material
 	//if (mesh->mMaterialIndex >= 0)
 	//{
@@ -127,8 +189,8 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 	//	textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 	//}
 	//
-	//return Mesh(vertices, indices, textures);
-}
+	//return Mesh(vertices, indices, textures);*/
+
 
 std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName)
 {
@@ -164,10 +226,15 @@ Model::Model()
 {
 }
 
-Model::Model(char* path)
+Model::Model(std::string const &path)
 {
 	loadModel(path);
 }
+
+//Model::Model(char* path)
+//{
+//	loadModel(path);
+//}
 
 Model::~Model()
 {
@@ -179,7 +246,7 @@ void Model::Draw(shaderCreater shader)
 		meshes[i].Draw(shader);
 }
 
-unsigned int TextureFromFile(const char *path, const std::string &directory, bool gamma)
+unsigned int Model::TextureFromFile(const char *path, const std::string &directory, bool gamma)
 {
 	std::string filename = std::string(path);
 	filename = directory + '/' + filename;

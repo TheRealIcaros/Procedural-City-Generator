@@ -3,7 +3,6 @@
 
 //Own made includes
 #include "Deferred.h"
-#include "../../Defines.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Singleton/GenWindow.h"
 
