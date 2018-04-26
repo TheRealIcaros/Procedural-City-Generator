@@ -16,7 +16,7 @@ HeightMap::~HeightMap()
 
 void HeightMap::getData(DataManager * dataManager)
 {
-	dataManager->addData("Terrain",)
+	
 }
 
 void HeightMap::generate(int width, int height, float oct1, float oct2, float oct3,

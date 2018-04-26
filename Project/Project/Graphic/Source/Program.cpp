@@ -33,7 +33,46 @@ void Program::initiateVariables()
 	this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
 	this->myKeyInput = new KeyIn();
+	this->dataManager = new DataManager();
 	//this->myObject = new Object();
+}
+
+void Program::initiateData()
+{
+	dataManager->addDataHolder(map);
+
+	noiseGenerator(PERLIN_NOISE);
+}
+
+void Program::generate()
+{
+	if (genWindow->getInputBuf().compare("") != 0)
+	{
+		seed->setSeed(genWindow->getInputBuf());
+	}
+	dataManager->addData("Seed", seed->getIntegerSeed());
+	noise->setSeed(seed->getIntegerSeed());
+
+	map->generate(genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave1(),
+		genWindow->getTerrainOctave2(), genWindow->getTerrainOctave3(), genWindow->getTerrainOctave4(), genWindow->getTerrainOctave5(), genWindow->getTerrainOctave6(),
+		genWindow->getTerrainOctave7(), genWindow->getTerrainOctave8(), genWindow->getTerrainOctavePerc1(), genWindow->getTerrainOctavePerc2(), genWindow->getTerrainOctavePerc3(),
+		genWindow->getTerrainOctavePerc4(), genWindow->getTerrainOctavePerc5(), genWindow->getTerrainOctavePerc6(), genWindow->getTerrainOctavePerc7(), genWindow->getTerrainOctavePerc8(),
+		genWindow->getRedistribution());
+
+	genWindow->toggleGenerate();
+	genWindow->setCounter(noise->getCounter());
+}
+
+void Program::noiseGenerator(int generator)
+{
+	if (generator == PERLIN_NOISE)
+	{
+		map->setNoise(noise);
+	}
+	else
+	{
+		//random
+	}
 }
 
 void Program::initiateImgui(GLFWwindow* window)
@@ -63,6 +102,8 @@ bool Program::Start()
 	bool returnValue = true;
 
 	initiateVariables();
+
+	initiateData();
 
 	this->window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
 	if (initiateWindow(this->window) == false)
@@ -100,24 +141,9 @@ bool Program::Run()
 
 	if (genWindow->getGenerate() == true)
 	{
-		if (genWindow->getInputBuf().compare("") != 0)
-		{
-			seed->setSeed(genWindow->getInputBuf());
-		}
-		genWindow->setSeed(seed->getIntegerSeed());
-		noise->setSeed(seed->getIntegerSeed());
-
-		map->setNoise(noise);
-
-		map->generate(genWindow->getTSizeX(), genWindow->getTSizeY(),genWindow->getTerrainOctave1(),
-			genWindow->getTerrainOctave2(), genWindow->getTerrainOctave3(), genWindow->getTerrainOctave4(), genWindow->getTerrainOctave5(), genWindow->getTerrainOctave6(),
-			genWindow->getTerrainOctave7(), genWindow->getTerrainOctave8(), genWindow->getTerrainOctavePerc1(), genWindow->getTerrainOctavePerc2(), genWindow->getTerrainOctavePerc3(),
-			genWindow->getTerrainOctavePerc4(), genWindow->getTerrainOctavePerc5(), genWindow->getTerrainOctavePerc6(), genWindow->getTerrainOctavePerc7(), genWindow->getTerrainOctavePerc8(),
-			genWindow->getRedistribution());
-
-		genWindow->toggleGenerate();
-		genWindow->setCounter(noise->getCounter());
+		generate();
 	}
+
 	render();										//The render loop for all the graphics
 
 	glfwSwapBuffers(window);
@@ -138,6 +164,7 @@ void Program::Stop()
 	delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;
+	delete this->dataManager;
 	//delete this->myObject;
 }
 

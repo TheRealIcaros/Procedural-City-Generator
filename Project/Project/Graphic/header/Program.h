@@ -23,6 +23,12 @@
 #include "../../Logic/header/HeightMap.h"
 #include <math.h>
 
+enum
+{
+	PERLIN_NOISE = 0,
+	RANDOM_NOISE
+};
+
 class Program
 {
 private:
@@ -34,6 +40,7 @@ private:
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
 	Deferred deferred;
+	DataManager* dataManager;
 	//Object* myObject;
 	//shaderCreater renderPass;
 
@@ -42,6 +49,10 @@ private:
 	bool initiateWindow(GLFWwindow* window);
 	void initiateImgui(GLFWwindow* window);
 	void initiateVariables();
+	void initiateData();
+
+	void generate();
+	void noiseGenerator(int generator);
 
 	//Mics variables
 	bool keyIsPressedF1;
