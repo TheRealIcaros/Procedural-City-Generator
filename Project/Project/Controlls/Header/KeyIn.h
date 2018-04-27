@@ -6,6 +6,7 @@
 #include "../../Singleton/GenWindow.h"
 #include "../../Graphic/header/Camera.h"
 
+//The struct to build up the delta time 
 struct Time
 {
 	float deltaTime;
@@ -19,12 +20,13 @@ struct Time
 class KeyIn
 {
 private:
+	//Key input variables
 	bool shouldRun;
 	bool keyIsPressedF1;
 	bool cameraCanMove;
 
+	//Time variable
 	Time time;
-
 
 	void initiateVariables();
 public:
