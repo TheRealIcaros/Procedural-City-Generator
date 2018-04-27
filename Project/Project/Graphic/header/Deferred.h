@@ -2,17 +2,18 @@
 #define DEFERRED_H
 
 //My classes
-#include "shaderCreater.h"
+#include "Object.h"
 #include "Camera.h"
-#include "Model.h"
 #include "../../Defines.h"
+//#include "Model.h"
+//#include "shaderCreater.h"
+
 
 //Other classes
-//#include <glad\glad.h>
-//#include <GLFW\glfw3.h>
-//#include <glm.hpp>
-//#include <vector>
-
+#include <glad\glad.h>
+#include <GLFW\glfw3.h>
+#include <glm.hpp>
+#include <vector>
 
 class Deferred
 {
@@ -21,7 +22,8 @@ private:
 	shaderCreater geometryPass;
 	shaderCreater lightingPass;
 	Camera* camera;
-	Model myModel;
+	Object myObjects;
+	//Model myModel;
 
 	//Quad values
 	unsigned int quadVAO;
@@ -83,6 +85,8 @@ public:
 	bool initiateDeferred();
 
 	void render();
+
+	Camera* getThisCamera();
 };
 
 #endif

@@ -191,7 +191,6 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 	//
 	//return Mesh(vertices, indices, textures);*/
 
-
 std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName)
 {
 	std::vector<Texture> textures;
@@ -238,6 +237,7 @@ Model::Model(std::string const &path)
 
 Model::~Model()
 {
+
 }
 
 void Model::Draw(shaderCreater shader)
@@ -284,4 +284,12 @@ unsigned int Model::TextureFromFile(const char *path, const std::string &directo
 	}
 
 	return textureID;
+}
+
+void Model::deallocate()
+{
+	for (int i = 0; i < this->meshes.size(); i++)
+	{
+		this->meshes[i].deallocate();
+	}
 }

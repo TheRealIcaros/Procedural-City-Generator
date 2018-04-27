@@ -1,46 +1,91 @@
 #include "../header/Object.h"
 
-void Object::initiateVariables()
-{
-	
-}
-
 Object::Object()
 {
-	initiateVariables();
+
 }
 
 Object::~Object()
 {
 }
 
-void Object::createT()
+void Object::loadObject(const char* objPath, vec3 startPosition)
 {
-	//float vertices[] = 
-	//{
+	vector<vec3> vertices;
+	vector<vec2> uvs;
+	vector<vec3> normals;
+	vector<vec3> tangents;
+	vector<Material> materials;
+	this->objLoader.loadOBJ(objPath, vertices, uvs, normals, tangents, materials);
 
-	//	-0.5f, -0.5f, 0.0f,
-	//	0.5f, -0.5f, 0.0f,
-	//	0.0f,  0.5f, 0.0f
-	//};
+	vector<Vertex> vertexes;
+	for (int i = 0; i < vertices.size(); i++)
+	{
+		Vertex temp;
+		temp.Position = vertices[i];
+		temp.Normal = normals[i];
+		temp.TexCoords = uvs[i];
+		temp.Tangent = tangents[i];
+		temp.Bitangent = cross(normals[i], tangents[i]);
+		vertexes.push_back(temp);
+	}
 
-	//glGenVertexArrays(1, &VAO);
-	//glGenBuffers(1, &VBO);
-	//// bind the Vertex Array Object first, then bind and set vertex buffer(s), and then configure vertex attributes(s).
-	//glBindVertexArray(VAO);
+	vector<unsigned int> indices;
+	for (unsigned int i = 0; i < vertexes.size() * 3; i++)
+	{
+		indices.push_back(i);
+	}
 
-	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	//glEnableVertexAttribArray(0);
-
-	//// note that this is allowed, the call to glVertexAttribPointer registered VBO as the vertex attribute's bound vertex buffer object so afterwards we can safely unbind
-	//glBindBuffer(GL_ARRAY_BUFFER, 0);
-
-
-	//// You can unbind the VAO afterwards so other VAO calls won't accidentally modify this VAO, but this rarely happens. Modifying other
-	//// VAOs requires a call to glBindVertexArray anyways so we generally don't unbind VAOs (nor VBOs) when it's not directly necessary.
-	//glBindVertexArray(0);
+	meshes.push_back(Mesh(vertexes, indices, materials, startPosition));
 }
 
+void Object::Draw(shaderCreater shader)
+{
+	for (int i = 0; i < this->meshes.size(); i++)
+	{
+		this->meshes[i].Draw(shader);
+	}
+}
+
+void Object::Sort(vec3 cameraPos)
+{
+	bool sorted = false;
+	int nrModels = this->meshes.size();
+	vector<float> distances(nrModels);
+	vec3 cam_pos = cameraPos;
+
+	for (int i = 0; i < nrModels; i++)
+	{
+		distances[i] = distance(cam_pos, meshes[i].getModelPosition());
+	}
+
+	while (!sorted)
+	{
+		sorted = true;
+		for (int i = 0; i < nrModels - 1; i++)
+		{
+			if (distances[i] > distances[i + 1])
+			{
+				swap(meshes[i], meshes[i + 1]);
+				swap(distances[i], distances[i + 1]);
+				sorted = false;
+			}
+		}
+	}
+}
+
+void Object::DrawDepth(shaderCreater shader)
+{
+	for (int i = 0; i < this->meshes.size(); i++)
+	{
+		this->meshes[i].DrawDepth(shader);
+	}
+}
+
+void Object::deallocate()
+{
+	for (int i = 0; i < this->meshes.size(); i++)
+	{
+		this->meshes[i].deallocate();
+	}
+}

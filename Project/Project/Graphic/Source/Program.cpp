@@ -79,7 +79,7 @@ bool Program::Start()
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
-	deferred.initiateDeferred();
+	deferred->initiateDeferred();
 
 	return returnValue;
 }
@@ -87,7 +87,7 @@ bool Program::Start()
 bool Program::Run()
 {
 	ImGui_ImplGlfwGL3_NewFrame();
-	myKeyInput->keyInput(window, genWindow, shouldRun);	//Checks if any key was pressed 
+	myKeyInput->keyInput(window, genWindow, deferred->getThisCamera(), shouldRun);	//Checks if any key was pressed 
 
 	genWindow->draw();								//Draw function for ImGui
 
@@ -116,7 +116,7 @@ void Program::render()
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	//Rendering the Deferred part
-	deferred.render();
+	deferred->render();
 
 	//ImGui that handles the graphical interface
 	ImGui::Render();

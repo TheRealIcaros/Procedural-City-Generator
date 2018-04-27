@@ -43,20 +43,24 @@ bool Deferred::initiateDeferred()
 	this->gpuBufferData = { World, camera->getView(), Projection };
 
 	//This creates the lights in the scene
-	lights.push_back(Light(glm::vec3(15.0, -6.0, 12.0), glm::vec3(1.0, 1.0, 1.0)));
+	lights.push_back(Light(glm::vec3(0.0, 6.0, 0.0), glm::vec3(1.0, 1.0, 1.0)));
 
 	//Creates the shader-program
 	this->geometryPass.createShader("./Graphic/Shaders/gvertex", "NULL", "./Graphic/Shaders/gfragment");
 	this->lightingPass.createShader("./Graphic/Shaders/fvertex", "NULL", "./Graphic/Shaders/ffragment");
 
 	//const char* path = "../../house/mnogohome/building.obj";
-	std::string path = "./house/mnogohome/building.obj";
-
+	//std::string path = "./house/mnogohome/building.obj";
+	//
 	////std::string path1 = "./Models/HDMonkey/HDMonkey.obj";
 	//char* path = new char[path1.size() + 1];
 	//memcpy(path, path1.c_str(), path1.size() + 1);
 	//Load a model
-	this->myModel = Model(path);
+	//this->myModel = Model(path);
+	//
+	//this->myObjects.loadObject("./Models/HDMonkey/HDMonkey.obj", glm::vec3(0.0, 0.0, -2.0));
+
+	this->myObjects.loadObject("./Models/Box/Box.obj", glm::vec3(1.0f, 0.0f, 2.0f));
 
 	return returnValue;
 }
@@ -137,7 +141,7 @@ glm::mat4 Deferred::WorldMatrix()
 glm::mat4 Deferred::ProjectionMatrix()
 {
 	float FOV = 0.45f * PI;
-	float aspectRatio = WIDTH / HEIGHT;//640 / 480;
+	float aspectRatio = 640 / 480; //WIDTH / HEIGHT;
 
 	glm::mat4 Projection = glm::perspective(FOV, aspectRatio, 0.1f, 200.0f);
 
@@ -170,7 +174,9 @@ void Deferred::renderGeometryPass()
 
 	//terrain.Draw(geometryPass);
 	//objects.Draw(geometryPass);
-	myModel.Draw(geometryPass);
+	//myModel.Draw(geometryPass);
+
+	this->myObjects.Draw(geometryPass);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -260,6 +266,7 @@ Deferred::Deferred()
 Deferred::~Deferred()
 {
 	delete camera;
+	//myModel.deallocate();
 }
 
 void Deferred::render()
@@ -270,4 +277,9 @@ void Deferred::render()
 	//2. Then the lighting rendering pass
 	renderLightingPass();
 
+}
+
+Camera* Deferred::getThisCamera()
+{
+	return this->camera;
 }

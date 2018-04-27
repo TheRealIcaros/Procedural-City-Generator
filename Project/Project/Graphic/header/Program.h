@@ -22,7 +22,7 @@ private:
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
-	Deferred deferred;
+	Deferred* deferred;
 
 	//Initiation functions for the applications core functions
 	void initiateGLFW();

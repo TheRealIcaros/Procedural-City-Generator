@@ -1,26 +1,25 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 
-//My includes
+#include "OBJLoader.h"
 #include "Mesh.h"
-
-//General includes
-
 
 class Object
 {
 private:
+	OBJLoader objLoader;
 	
-
-	void initiateVariables();
-
 public:
 	Object();
 	~Object();
 
-	void createT();
+	vector<Mesh> meshes;
 
-	
+	void loadObject(const char* objPath, vec3 startPosition);
+	void Draw(shaderCreater shader);
+	void Sort(vec3 cameraPos);
+	void DrawDepth(shaderCreater shader);
+	void deallocate();
 };
 
-#endif
+#endif // !OBJECT_H

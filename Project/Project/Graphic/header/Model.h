@@ -36,6 +36,7 @@ public:
 	std::vector<Mesh> meshes;
 	std::string directory;
 	void Draw(shaderCreater shader);
+	void deallocate();
 };
 
 #endif
