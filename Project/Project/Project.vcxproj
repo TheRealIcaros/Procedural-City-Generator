@@ -139,6 +139,7 @@
     <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
     <ClCompile Include="Logic\Source\DataHolder.cpp" />
     <ClCompile Include="Logic\Source\DataManager.cpp" />
+    <ClCompile Include="Logic\Source\District.cpp" />
     <ClCompile Include="Logic\Source\HeightMap.cpp" />
     <ClCompile Include="Logic\Source\PerlinNoise.cpp" />
     <ClCompile Include="Logic\Source\ppm.cpp" />
@@ -170,6 +171,7 @@
     <ClInclude Include="Logic\header\Array.h" />
     <ClInclude Include="Logic\header\DataHolder.h" />
     <ClInclude Include="Logic\header\DataManager.h" />
+    <ClInclude Include="Logic\header\District.h" />
     <ClInclude Include="Logic\header\HeightMap.h" />
     <ClInclude Include="Logic\header\PerlinNoise.h" />
     <ClInclude Include="Logic\header\ppm.h" />

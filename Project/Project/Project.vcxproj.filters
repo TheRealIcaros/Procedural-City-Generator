@@ -23,6 +23,7 @@
     <ClCompile Include="Logic\Source\HeightMap.cpp" />
     <ClCompile Include="Logic\Source\DataHolder.cpp" />
     <ClCompile Include="Logic\Source\DataManager.cpp" />
+    <ClCompile Include="Logic\Source\District.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
@@ -55,6 +56,7 @@
     <ClInclude Include="Logic\header\Array.h" />
     <ClInclude Include="Logic\header\DataHolder.h" />
     <ClInclude Include="Logic\header\DataManager.h" />
+    <ClInclude Include="Logic\header\District.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\gfragment.glsl" />

@@ -53,6 +53,7 @@ void Program::generate()
 		seed->setSeed(genWindow->getInputBuf());
 	}
 	/*dataManager->addData("Seed", seed->getIntegerSeed());*/
+	genWindow->setSeed(seed->getIntegerSeed());
 	noise->setSeed(seed->getIntegerSeed());
 
 	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave1(),
