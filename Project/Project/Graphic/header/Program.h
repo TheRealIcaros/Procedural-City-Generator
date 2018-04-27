@@ -58,6 +58,7 @@ private:
 	bool keyIsPressedF1;
 	bool shouldRun;
 	Array2D<float> terrainMap;
+	Array2D<int> cityMap;
 
 public:
 	Program();

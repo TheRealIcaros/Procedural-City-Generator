@@ -23,16 +23,18 @@ void HeightMap::generate(Array2D<float>& terrainMap, int width, int height, floa
 	float oct4, float oct5, float oct6, float oct7, float oct8, float perc1, float perc2,
 	float perc3, float perc4, float perc5, float perc6, float perc7, float perc8, float redistribution)
 {
-	terrainMap = Array2D<float>(width, height);
+	int offwidth = width + 1;
+	int offheight = height + 1;
+	terrainMap = Array2D<float>(offwidth, offheight);
 	terrainMap.fill(0.0f);
 
 	// Visit every pixel of the image and assign a color generated with Perlin noise
-	for (unsigned int i = 0; i < height; ++i)   // y
+	for (unsigned int i = 0; i < offheight; ++i)   // y
 	{
-		for (unsigned int j = 0; j < width; ++j)  // x
+		for (unsigned int j = 0; j < offwidth; ++j)  // x
 		{
-			double x = (double)j / ((double)width);
-			double y = (double)i / ((double)height);
+			double x = (double)j / ((double)offwidth);
+			double y = (double)i / ((double)offheight);
 
 			// Typical Perlin noise
 			double n = 0;

@@ -54,9 +54,91 @@ void District::setNoise(PerlinNoise * noise)
 
 void District::calculateMap(Array2D<int>& map)
 {
+	const int WIDTH = map.getWidth();
+	const int HEIGHT = map.getHeight();
+
+	for(int y = 0; y < HEIGHT; y++)
+	{
+		for (int x = 0; x < WIDTH; x++)
+		{
+			map.at(x, y) = this->closestDistrict(x, y);
+		}
+	}
+
+	Array<glm::vec2> borderCoordinates;
+
+	this->findBorder(map, borderCoordinates); // get border to alter
+
+	const int MIN_EFFECT_AMOUNT = 2; // calculate how many nodes to effect
+	int nodeEffectAmount = floor(width * PROCENTUAL_BORDER_EFFECT);
+	if (nodeEffectAmount < MIN_EFFECT_AMOUNT)
+		nodeEffectAmount = MIN_EFFECT_AMOUNT;
+
+	this->alterBorders(map, borderCoordinates, nodeEffectAmount);
+
+	//FORTSÄTT HÄR
 }
 
 void District::generate(Array2D<int>& map, float width, float height)
 {
-	setDistrict(width, height);
+	this->setDistrict(width, height);
+	this->calculateMap(map);
+}
+
+int District::closestDistrict(int x, int y)
+{
+	//return closest district to pos
+	glm::vec2 pos(x, y);
+	int closestDistrict = INT_MIN;
+	double firstDistance = vec2SquareDistance(positions[0], pos);
+	double secondDistance = vec2SquareDistance(positions[1], pos);
+	double thirdDistance = vec2SquareDistance(positions[2], pos);
+	
+	if (firstDistance < secondDistance && firstDistance < thirdDistance)
+	{
+		closestDistrict = 0;
+	}
+	else if (secondDistance < firstDistance && secondDistance < thirdDistance)
+	{
+		closestDistrict = 1;
+	}
+	else
+	{
+		closestDistrict = 2;
+	}
+
+	return closestDistrict;
+}
+
+double District::vec2SquareDistance(glm::vec2 first, glm::vec2 second)
+{
+	double xDistance = pow(first.x - second.x, 2);
+	double yDistance = pow(first.y - second.y, 2);
+
+	return sqrt(xDistance + yDistance);
+}
+
+void District::findBorder(Array2D<int>& map, Array<glm::vec2>& borders)
+{
+	const int WIDTH = map.getWidth();
+	const int HEIGHT = map.getHeight();
+	int previous = map.at(0, 0);
+
+	for (int y = 0; y < HEIGHT; y++)
+	{
+		previous = map.at(0, y);
+		for (int x = 0; x < WIDTH; x++)
+		{
+			if (previous != map.at(x, y)) // we found border
+			{
+				previous = map.at(x, y); // Change previous
+				borders.add(glm::vec2(x, y)); // change position
+			}
+		}
+	}
+
+}
+
+void District::alterBorders(Array2D<int>& map, Array<glm::vec2>& borders, int nodeChangeRange)
+{
 }
