@@ -137,6 +137,7 @@
     <ClCompile Include="libs\gl3w\GL\gl3w.c" />
     <ClCompile Include="libs\usynergy\uSynergy.c" />
     <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
+    <ClCompile Include="Logic\Source\Block.cpp" />
     <ClCompile Include="Logic\Source\DataHolder.cpp" />
     <ClCompile Include="Logic\Source\DataManager.cpp" />
     <ClCompile Include="Logic\Source\District.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="libs\usynergy\uSynergy.h" />
     <ClInclude Include="Logic\header\Array2D.h" />
     <ClInclude Include="Logic\header\Array.h" />
+    <ClInclude Include="Logic\header\Block.h" />
     <ClInclude Include="Logic\header\DataHolder.h" />
     <ClInclude Include="Logic\header\DataManager.h" />
     <ClInclude Include="Logic\header\District.h" />

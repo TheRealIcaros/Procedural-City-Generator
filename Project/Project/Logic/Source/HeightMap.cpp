@@ -23,6 +23,7 @@ void HeightMap::generate(Array2D<float>& terrainMap, int width, int height, floa
 	float oct4, float oct5, float oct6, float oct7, float oct8, float perc1, float perc2,
 	float perc3, float perc4, float perc5, float perc6, float perc7, float perc8, float redistribution)
 {
+	assert(noise != nullptr);
 	int offwidth = width + 1;
 	int offheight = height + 1;
 	terrainMap = Array2D<float>(offwidth, offheight);

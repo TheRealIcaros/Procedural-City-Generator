@@ -24,6 +24,7 @@
     <ClCompile Include="Logic\Source\DataHolder.cpp" />
     <ClCompile Include="Logic\Source\DataManager.cpp" />
     <ClCompile Include="Logic\Source\District.cpp" />
+    <ClCompile Include="Logic\Source\Block.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
@@ -57,6 +58,7 @@
     <ClInclude Include="Logic\header\DataHolder.h" />
     <ClInclude Include="Logic\header\DataManager.h" />
     <ClInclude Include="Logic\header\District.h" />
+    <ClInclude Include="Logic\header\Block.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\gfragment.glsl" />
