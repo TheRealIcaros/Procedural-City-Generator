@@ -13,13 +13,10 @@
     <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Singleton\GenWindow.cpp" />
-    <ClCompile Include="Graphic\Source\Object.cpp" />
     <ClCompile Include="Graphic\Source\Terrain.cpp" />
     <ClCompile Include="Graphic\Source\Camera.cpp" />
-    <ClCompile Include="Graphic\Source\Deferred.cpp" />
     <ClCompile Include="Graphic\Source\Mesh.cpp" />
     <ClCompile Include="Graphic\Source\Model.cpp" />
-    <ClCompile Include="Graphic\Source\OBJLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
@@ -39,19 +36,9 @@
     <ClInclude Include="libs\usynergy\uSynergy.h" />
     <ClInclude Include="Singleton\GenWindow.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
-    <ClInclude Include="Graphic\header\Object.h" />
     <ClInclude Include="Graphic\header\Terrain.h" />
     <ClInclude Include="Graphic\header\Camera.h" />
-    <ClInclude Include="Graphic\header\Deferred.h" />
     <ClInclude Include="Graphic\header\Mesh.h" />
     <ClInclude Include="Graphic\header\Model.h" />
-    <ClInclude Include="Graphic\header\OBJLoader.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Graphic\Shaders\gfragment.glsl" />
-    <None Include="Graphic\Shaders\ggeometry.glsl" />
-    <None Include="Graphic\Shaders\gvertex.glsl" />
-    <None Include="Graphic\Shaders\ffragment.glsl" />
-    <None Include="Graphic\Shaders\fvertex.glsl" />
   </ItemGroup>
 </Project>

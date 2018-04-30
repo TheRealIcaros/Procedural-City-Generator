@@ -79,6 +79,7 @@ bool Program::Start()
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
+	this->myModel = 
 	//deferred->initiateDeferred();
 
 	return returnValue;
