@@ -86,7 +86,7 @@ public:
 
 	void render();
 
-	Camera* getThisCamera();
+	//Camera& getThisCamera();
 };
 
 #endif

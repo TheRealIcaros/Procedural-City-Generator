@@ -279,7 +279,7 @@ void Deferred::render()
 
 }
 
-Camera* Deferred::getThisCamera()
-{
-	return this->camera;
-}
+//Camera& Deferred::getThisCamera()
+//{
+//	return this->camera;
+//}

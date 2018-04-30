@@ -7,7 +7,7 @@ uniform sampler2D gColorInfo;
 in vec2 textureCoordinates;
 //out vec4 FragColor;
 layout(location = 0) out vec4 lColor; //To Merge
-layout(location = 1) out vec4 lGlow; //To Gauss
+//layout(location = 1) out vec4 lGlow; //To Gauss
 
 struct Light {
 	vec3 Position;

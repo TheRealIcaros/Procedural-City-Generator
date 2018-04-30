@@ -1,15 +1,21 @@
 #ifndef PROGRAM_H
 #define PROGRAM_H
 
-//Own made includes
-#include "Deferred.h"
-#include "../../Controlls/Header/KeyIn.h"
-#include "../../Singleton/GenWindow.h"
-
 //General includes
+#include <glad\glad.h>
+#include <GLFW\glfw3.h>
+#include <glm.hpp>
+#include <vector>
 #include <string>
 #include <fstream>
 #include <iostream>
+
+
+//Own made includes
+//#include "Deferred.h"
+#include "../../Controlls/Header/KeyIn.h"
+#include "../../Singleton/GenWindow.h"
+
 
 //Imgui stuff
 #include "../../Imgui/imgui.h"
@@ -22,7 +28,7 @@ private:
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
-	Deferred* deferred;
+	//Deferred* deferred;
 
 	//Initiation functions for the applications core functions
 	void initiateGLFW();

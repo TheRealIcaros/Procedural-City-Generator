@@ -1,10 +1,18 @@
 #ifndef OBJLOADER_H
 #define OBJLOADER_H
 
-#include <vector>
+
 #include "SOIL.h"
-#include "ShaderCreater.h"
 #include "Mesh.h"
+
+ //My includes
+#include <stb_image.h>
+#include <vector>
+
+//Other includes
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
 
 using namespace std;
 using namespace glm;
