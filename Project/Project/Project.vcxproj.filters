@@ -59,6 +59,7 @@
     <ClInclude Include="Logic\header\DataManager.h" />
     <ClInclude Include="Logic\header\District.h" />
     <ClInclude Include="Logic\header\Block.h" />
+    <ClInclude Include="LogicDefines.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\gfragment.glsl" />

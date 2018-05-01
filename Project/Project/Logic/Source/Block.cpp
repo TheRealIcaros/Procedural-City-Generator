@@ -3,7 +3,7 @@
 Block::Block()
 {
 	noise = nullptr;
-
+	blockSizes = Array<int>(MAX_DISTRICTS);
 }
 
 Block::~Block()
@@ -46,4 +46,12 @@ void Block::generate(Array2D<int>& map, float width, float height)
 			}
 		}
 	}
+}
+
+void Block::setBlockSize(int district, int size)
+{
+	assert(district >= 0 && district < MAX_DISTRICTS);
+	assert(size > 0);
+
+	blockSizes[district] = size;
 }

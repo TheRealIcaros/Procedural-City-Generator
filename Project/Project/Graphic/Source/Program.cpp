@@ -58,11 +58,9 @@ void Program::generate()
 	genWindow->setSeed(seed->getIntegerSeed());
 	noise->setSeed(seed->getIntegerSeed());
 
-	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave1(),
-		genWindow->getTerrainOctave2(), genWindow->getTerrainOctave3(), genWindow->getTerrainOctave4(), genWindow->getTerrainOctave5(), genWindow->getTerrainOctave6(),
-		genWindow->getTerrainOctave7(), genWindow->getTerrainOctave8(), genWindow->getTerrainOctavePerc1(), genWindow->getTerrainOctavePerc2(), genWindow->getTerrainOctavePerc3(),
-		genWindow->getTerrainOctavePerc4(), genWindow->getTerrainOctavePerc5(), genWindow->getTerrainOctavePerc6(), genWindow->getTerrainOctavePerc7(), genWindow->getTerrainOctavePerc8(),
-		genWindow->getRedistribution());
+
+
+	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave(), genWindow->getTerrainOctavePerc(), genWindow->getRedistribution());
 
 	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
 

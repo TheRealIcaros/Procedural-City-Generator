@@ -24,22 +24,21 @@ GenWindow::GenWindow()
 	this->tSizeY = 25;
 	this->pSizeX = 15;
 	this->pSizeY = 15;
-	this->terrainOctave1 = 1.0;
-	this->terrainOctave2 = 1.0;
-	this->terrainOctave3 = 1.0;
-	this->terrainOctave4 = 1.0;
-	this->terrainOctave5 = 1.0;
-	this->terrainOctave6 = 1.0;
-	this->terrainOctave7 = 1.0;
-	this->terrainOctave8 = 1.0;
-	this->terrainOctavePerc1 = 0.50;
-	this->terrainOctavePerc2 = 0.35;
-	this->terrainOctavePerc3 = 0.15;
-	this->terrainOctavePerc4 = 0.0;
-	this->terrainOctavePerc5 = 0.0;
-	this->terrainOctavePerc6 = 0.0;
-	this->terrainOctavePerc7 = 0.0;
-	this->terrainOctavePerc8 = 0.0;
+
+	this->terrainOctave = Array<float>(octaveNumber);
+	this->terrainOctavePerc = Array<float>(octaveNumber);
+	for (int i = 0; i < octaveNumber; i++)
+	{
+		this->terrainOctave.add(1.0);
+	}
+	this->terrainOctavePerc.add(0.50);
+	this->terrainOctavePerc.add(0.35);
+	this->terrainOctavePerc.add(0.15);
+	this->terrainOctavePerc.add(0.0);
+	this->terrainOctavePerc.add(0.0);
+	this->terrainOctavePerc.add(0.0);
+	this->terrainOctavePerc.add(0.0);
+	this->terrainOctavePerc.add(0.0);
 	this->redistribution = 1.0;
 	this->borderPerc = 0.2;
 	this->houseMinHeight = 1;
@@ -50,10 +49,10 @@ GenWindow::GenWindow()
 	this->skyscraperMaxHeight = 2;
 	this->skyscraperDensity = 100;
 	this->skyscraperBlockSize = 2;
-	this->factoriesMinHeight = 1;
-	this->factoriesMaxHeight = 2;
-	this->factoriesDensity = 100;
-	this->factoriesBlockSize = 2;
+	this->factorieMinHeight = 1;
+	this->factorieMaxHeight = 2;
+	this->factorieDensity = 100;
+	this->factorieBlockSize = 2;
 	this->generate = false;
 }
 
@@ -127,23 +126,23 @@ void GenWindow::draw()
 		ImGui::InputInt("X ##Terrain", &tSizeX, 1, 1000);
 		ImGui::InputInt("Y ##Terrain", &tSizeY, 1, 1000);
 		ImGui::Text("Octaves");
-		ImGui::InputFloat("1", &terrainOctave1);
-		ImGui::InputFloat("2", &terrainOctave2);
-		ImGui::InputFloat("3", &terrainOctave3);
-		ImGui::InputFloat("4", &terrainOctave4);
-		ImGui::InputFloat("5", &terrainOctave5);
-		ImGui::InputFloat("6", &terrainOctave6);
-		ImGui::InputFloat("7", &terrainOctave7);
-		ImGui::InputFloat("8", &terrainOctave8);
+		ImGui::InputFloat("1", &terrainOctave[0]);
+		ImGui::InputFloat("2", &terrainOctave[1]);
+		ImGui::InputFloat("3", &terrainOctave[2]);
+		ImGui::InputFloat("4", &terrainOctave[3]);
+		ImGui::InputFloat("5", &terrainOctave[4]);
+		ImGui::InputFloat("6", &terrainOctave[5]);
+		ImGui::InputFloat("7", &terrainOctave[6]);
+		ImGui::InputFloat("8", &terrainOctave[7]);
 		ImGui::Text("Octaves Percentage");
-		ImGui::InputFloat("1", &terrainOctavePerc1);
-		ImGui::InputFloat("2", &terrainOctavePerc2);
-		ImGui::InputFloat("3", &terrainOctavePerc3);
-		ImGui::InputFloat("4", &terrainOctavePerc4);
-		ImGui::InputFloat("5", &terrainOctavePerc5);
-		ImGui::InputFloat("6", &terrainOctavePerc6);
-		ImGui::InputFloat("7", &terrainOctavePerc7);
-		ImGui::InputFloat("8", &terrainOctavePerc8);
+		ImGui::InputFloat("1", &terrainOctavePerc[0]);
+		ImGui::InputFloat("2", &terrainOctavePerc[1]);
+		ImGui::InputFloat("3", &terrainOctavePerc[2]);
+		ImGui::InputFloat("4", &terrainOctavePerc[3]);
+		ImGui::InputFloat("5", &terrainOctavePerc[4]);
+		ImGui::InputFloat("6", &terrainOctavePerc[5]);
+		ImGui::InputFloat("7", &terrainOctavePerc[6]);
+		ImGui::InputFloat("8", &terrainOctavePerc[7]);
 		ImGui::Text("Redistribution");
 		ImGui::InputFloat("##Redistribution", &redistribution);
 		ImGui::Separator();
@@ -175,13 +174,13 @@ void GenWindow::draw()
 		ImGui::Text("Factories");
 		ImGui::Spacing();
 		ImGui::Text("Min. Height");
-		ImGui::SliderInt("##Factories.Min. Height", &factoriesMinHeight, 1, 10);
+		ImGui::SliderInt("##Factories.Min. Height", &factorieMinHeight, 1, 10);
 		ImGui::Text("Max. Height");
-		ImGui::SliderInt("##Factories.Max. Height", &factoriesMaxHeight, 1, 10);
+		ImGui::SliderInt("##Factories.Max. Height", &factorieMaxHeight, 1, 10);
 		ImGui::Text("Density");
-		ImGui::SliderInt("##Factories.Density", &factoriesDensity, 1, 100);
+		ImGui::SliderInt("##Factories.Density", &factorieDensity, 1, 100);
 		ImGui::Text("Block Size");
-		ImGui::SliderInt("##Factories.Block.Size", &factoriesBlockSize, 1, 100);
+		ImGui::SliderInt("##Factories.Block.Size", &factorieBlockSize, 1, 100);
 		ImGui::Separator();
 		ImGui::Spacing();
 		if (ImGui::Button("Generate"))

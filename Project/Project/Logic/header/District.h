@@ -3,11 +3,11 @@
 #include "PerlinNoise.h"
 #include "Array2D.h"
 #include "Array.h"
+#include "../../LogicDefines.h"
 class District
 {
 private:
 	PerlinNoise * noise;
-	const int DISTRICT_AMOUNT = 3;
 	Array<glm::vec2> positions;
 	double vec2SquareDistance(glm::vec2 first, glm::vec2 second);
 	int closestDistrict(int x, int y);

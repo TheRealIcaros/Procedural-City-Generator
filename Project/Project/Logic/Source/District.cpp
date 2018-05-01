@@ -3,7 +3,7 @@
 District::District()
 {
 	this->noise = nullptr;
-	for (int i = 0; i < DISTRICT_AMOUNT; i++)
+	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
 		this->positions.add(glm::vec2());
 	}
@@ -12,7 +12,7 @@ District::District()
 District::District(PerlinNoise * noise)
 {
 	this->noise = noise;
-	for (int i = 0; i < DISTRICT_AMOUNT; i++)
+	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
 		this->positions.add(glm::vec2());
 	}
