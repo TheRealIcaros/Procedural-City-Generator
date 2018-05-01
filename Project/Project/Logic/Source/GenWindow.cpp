@@ -22,6 +22,8 @@ GenWindow::GenWindow()
 
 	this->tSizeX = 25;
 	this->tSizeY = 25;
+	this->pSizeX = 15;
+	this->pSizeY = 15;
 	this->terrainOctave1 = 1.0;
 	this->terrainOctave2 = 1.0;
 	this->terrainOctave3 = 1.0;
@@ -39,6 +41,7 @@ GenWindow::GenWindow()
 	this->terrainOctavePerc7 = 0.0;
 	this->terrainOctavePerc8 = 0.0;
 	this->redistribution = 1.0;
+	this->borderPerc = 0.2;
 	this->houseMinHeight = 1;
 	this->houseMaxHeight = 2;
 	this->houseDensity = 100;
@@ -114,10 +117,15 @@ void GenWindow::draw()
 	{
 		ImGui::InputText("Seed", inputBuf, 128, ImGuiInputTextFlags_CharsNoBlank);
 		ImGui::Separator();
+		ImGui::Text("Perlin");
+		ImGui::Text("Size");
+		ImGui::InputFloat("X ##Perlin", &pSizeX, 1, 100);
+		ImGui::InputFloat("Y ##Perlin", &pSizeY, 1, 100);
+		ImGui::Separator();
 		ImGui::Text("Terrain");
 		ImGui::Text("Size");
-		ImGui::InputInt("X", &tSizeX, 1, 100);
-		ImGui::InputInt("Y", &tSizeY, 1, 100);
+		ImGui::InputInt("X ##Terrain", &tSizeX, 1, 1000);
+		ImGui::InputInt("Y ##Terrain", &tSizeY, 1, 1000);
 		ImGui::Text("Octaves");
 		ImGui::InputFloat("1", &terrainOctave1);
 		ImGui::InputFloat("2", &terrainOctave2);
@@ -138,6 +146,9 @@ void GenWindow::draw()
 		ImGui::InputFloat("8", &terrainOctavePerc8);
 		ImGui::Text("Redistribution");
 		ImGui::InputFloat("##Redistribution", &redistribution);
+		ImGui::Separator();
+		ImGui::Text("Border Blend Percentage");
+		ImGui::InputFloat("##District Perc", &borderPerc);
 		ImGui::Separator();
 		ImGui::Text("Houses");
 		ImGui::Spacing();

@@ -15,7 +15,7 @@ void Block::setNoise(PerlinNoise * noise)
 	this->noise = noise;
 }
 
-void Block::generate(Array2D<int>& map)
+void Block::generate(Array2D<int>& map, float width, float height)
 {
 	assert(noise != nullptr);
 	const int WIDTH = map.getWidth();
@@ -29,6 +29,21 @@ void Block::generate(Array2D<int>& map)
 
 	for (int x = 0; x < WIDTH; x++)
 	{
-		float noiseResult = noise->generate(x * 10.0f, 0.0, WIDTH, HEIGHT); //get rid of magic number
+		float noiseResult = noise->generate(x * 10, 0.0, width, height); //get rid of magic number
+
+		noiseResult *= noiseResult; //Why?
+
+		if (noiseResult > MAIN_ROAD_THRESHOLD)
+		{
+			for (int y = 0; y<HEIGHT; y++)
+			{
+				map.at(x, y) = -1;
+			}
+
+			if (x == 0 || map.at(x - 1, 0) >= 0)
+			{
+				mainRoads++;
+			}
+		}
 	}
 }

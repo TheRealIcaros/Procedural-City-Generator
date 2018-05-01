@@ -48,7 +48,7 @@ void District::setNoise(PerlinNoise * noise)
 	this->noise = noise;
 }
 
-void District::calculateMap(Array2D<int>& map)
+void District::calculateMap(Array2D<int>& map, float borderPerc)
 {
 	const int WIDTH = map.getWidth();
 	const int HEIGHT = map.getHeight();
@@ -58,8 +58,6 @@ void District::calculateMap(Array2D<int>& map)
 		for (int x = 0; x < WIDTH; x++)
 		{
 			map.at(x, y) = this->closestDistrict(x, y);
-			int test = map.at(x, y);
-			int k = 0;
 		}
 	}
 
@@ -68,19 +66,18 @@ void District::calculateMap(Array2D<int>& map)
 	this->findBorder(map, borderCoordinates); // get border to alter
 
 	const int MIN_EFFECT_AMOUNT = 2; // calculate how many nodes to effect
-	int nodeEffectAmount = floor(WIDTH * PROCENTUAL_BORDER_EFFECT);
+	int nodeEffectAmount = floor(WIDTH * borderPerc);
 	if (nodeEffectAmount < MIN_EFFECT_AMOUNT)
 		nodeEffectAmount = MIN_EFFECT_AMOUNT;
 
 	this->alterBorders(map, borderCoordinates, nodeEffectAmount);
 }
 
-void District::generate(Array2D<int>& map, float width, float height)
+void District::generate(Array2D<int>& map, float width, float height, float borderPerc)
 {
 	assert(noise != nullptr);
 	this->setDistrict(width, height);
-	map = Array2D<int>(width, height);
-	this->calculateMap(map);
+	this->calculateMap(map, borderPerc);
 }
 
 int District::closestDistrict(int x, int y)
@@ -159,7 +156,7 @@ void District::alterBorders(Array2D<int>& map, Array<glm::vec2>& borders, int no
 
 		if (minRangePos < 0)
 		{
-			minRangePos = WIDTH - 1;
+			minRangePos = 0;
 		}
 		if (maxRangePos >= WIDTH)
 		{

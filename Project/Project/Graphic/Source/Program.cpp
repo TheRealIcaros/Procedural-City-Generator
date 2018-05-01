@@ -31,6 +31,7 @@ void Program::initiateVariables()
 	this->noise = new PerlinNoise();
 	this->map = new HeightMap();
 	this->district = new District();
+	this->block = new Block();
 	this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
 	this->myKeyInput = new KeyIn();
@@ -63,7 +64,11 @@ void Program::generate()
 		genWindow->getTerrainOctavePerc4(), genWindow->getTerrainOctavePerc5(), genWindow->getTerrainOctavePerc6(), genWindow->getTerrainOctavePerc7(), genWindow->getTerrainOctavePerc8(),
 		genWindow->getRedistribution());
 
-	district->generate(cityMap, genWindow->getTSizeX(), genWindow->getTSizeY());
+	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
+
+	district->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY(), genWindow->getBorderPerc());
+
+	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
 	
 	for (int i = 0; i < genWindow->getTSizeX(); i++)
 	{
@@ -80,6 +85,8 @@ void Program::generate()
 
 
 	genWindow->setCounter(noise->getCounter());
+	genWindow->setMainRoad(block->getMainRoad());
+	genWindow->setSmallRoad(block->getSmallRoad());
 }
 
 void Program::noiseGenerator(int generator)
@@ -88,6 +95,7 @@ void Program::noiseGenerator(int generator)
 	{
 		map->setNoise(noise);
 		district->setNoise(noise);
+		block->setNoise(noise);
 	}
 	else
 	{
@@ -183,6 +191,7 @@ void Program::Stop()
 	delete this->noise;
 	delete this->map;
 	delete this->district;
+	delete this->block;
 	delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;

@@ -37,6 +37,8 @@ private:
 	char inputBuf[256] = "";
 	int tSizeX;
 	int tSizeY;
+	float pSizeX;
+	float pSizeY;
 	float terrainOctave1;
 	float terrainOctave2;
 	float terrainOctave3;
@@ -54,6 +56,7 @@ private:
 	float terrainOctavePerc7;
 	float terrainOctavePerc8;
 	float redistribution;
+	float borderPerc;
 	int houseMinHeight;
 	int houseMaxHeight;
 	int houseDensity;
@@ -76,6 +79,8 @@ public:
 	void toggleDebugToDraw() { this->isDrawing = !this->isDrawing; }
 	std::string getInputBuf() { return this->inputBuf; }
 	bool isOpen() const { return this->isDrawing; }
+	int getPSizeX() { return this->pSizeX; }
+	int getPSizeY() { return this->pSizeY; }
 	int getTSizeX() { return this->tSizeX; }
 	int getTSizeY() { return this->tSizeY; }
 	float getTerrainOctave1() { return this->terrainOctave1; }
@@ -95,8 +100,11 @@ public:
 	float getTerrainOctavePerc7() { return this->terrainOctavePerc7; }
 	float getTerrainOctavePerc8() { return this->terrainOctavePerc8; }
 	float getRedistribution() { return this->redistribution; }
+	float getBorderPerc() { return this->borderPerc; }
 	void setSeed(int seed) { this->seed = seed; }
 	void setCounter(int count) { this->count = count; }
+	void setMainRoad(int roads) { this->mainRoads = roads; }
+	void setSmallRoad(int roads) { this->smallRoads = roads; }
 	bool getGenerate() { return this->generate; }
 	void toggleGenerate() { this->generate = !this->generate; }
 };
