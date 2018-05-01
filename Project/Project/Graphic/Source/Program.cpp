@@ -81,8 +81,12 @@ bool Program::Start()
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
+	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
+
 	renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
-	//"./Models/Box/Box.obj";
+
 	std::string const path = "./Models/Box/Box.obj";
 	models.push_back(path);
 	//deferred->initiateDeferred();
@@ -93,13 +97,14 @@ bool Program::Start()
 bool Program::Run()
 {
 	ImGui_ImplGlfwGL3_NewFrame();
-	//myKeyInput->keyInput(window, genWindow, deferred->getThisCamera(), shouldRun);	//Checks if any key was pressed 
+	
 	myKeyInput->keyInput(window, genWindow, shouldRun);	//Checks if any key was pressed 
 
 	genWindow->draw();								//Draw function for ImGui
 
 	render();										//The render loop for all the graphics
 
+	
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 
@@ -124,6 +129,9 @@ void Program::render()
 
 	//Rendering the Deferred part
 	//deferred->render();
+	//glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+	//glBindVertexArray(models);
+	//glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	//ImGui that handles the graphical interface
 	ImGui::Render();
@@ -143,10 +151,7 @@ void Program::render()
 	model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));	// it's a bit too big for our scene, so scale it down
 	renderPass.setMat4("model", model);
 
-	//glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-	//glBindVertexArray(models);
+	
 	for (int i = 0; i < models.size(); i++)
 		models[i].Draw(renderPass);
-
-	//glDrawArrays(GL_TRIANGLES, 0, 3);
 }
