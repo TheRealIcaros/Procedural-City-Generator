@@ -20,8 +20,9 @@ private:
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
+	Camera* camera;
 	//Model myModel;
-	Camera camera;
+	
 	shaderCreater renderPass;
 	std::vector<Model> models;
 	//Deferred* deferred;
@@ -36,13 +37,15 @@ private:
 	bool keyIsPressedF1;
 	bool shouldRun;
 	float FOV;
+
+
 public:
 	Program();
 	~Program();
 
-	bool Start();	//Initiates the program
-	bool Run();		//The main-loop/ Returns false when we exit it 
-	void Stop();	//Cleans upp the memory and returns everything
+	bool Start();				//Initiates the program
+	bool Run();					//The main-loop/ Returns false when we exit it 
+	void Stop();				//Cleans upp the memory and returns everything
 
 	void render();				//The render loop in the application
 };

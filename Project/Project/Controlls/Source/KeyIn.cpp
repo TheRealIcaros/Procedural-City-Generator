@@ -49,12 +49,16 @@ void KeyIn::keyInput(GLFWwindow* window, GenWindow* genWindow, bool &shouldRun)
 	{
 		this->keyIsPressedF1 = true;
 		this->cameraCanMove = false;
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		
 		genWindow->toggleDebugToDraw();
+		
 	}
 	else if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_RELEASE && keyIsPressedF1 == true)
 	{
 		this->keyIsPressedF1 = false;
 		this->cameraCanMove = true;
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
 	}
 
 	

@@ -29,11 +29,14 @@ void Program::initiateVariables()
 	this->shouldRun = true;
 	this->FOV = 0.45f * PI;
 	
-	
+	////Pitch/Yaw properties
+	//firstMouse = true;
+	//lastX = WIDTH / 2.0f;
+	//lastY = HEIGHT / 2.0f;
+
 	this->genWindow = GenWindow::getInstance();
 	this->myKeyInput = new KeyIn();
-	this->camera = Camera();
-	//this->myObject = new Object();
+	this->camera = new Camera();
 }
 
 void Program::initiateImgui(GLFWwindow* window)
@@ -81,6 +84,12 @@ bool Program::Start()
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
+	//mouse_callback(window, lastX, lastY);
+	//glfwSetCursorPosCallback(window, cursor);
+
+	//glfwSetCursorPosCallback(window, camera->mouse_callback);
+	
+
 	//glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
@@ -119,6 +128,7 @@ void Program::Stop()
 	glfwTerminate();
 
 	delete this->myKeyInput;
+	delete this->camera;
 }
 
 void Program::render()
@@ -132,17 +142,12 @@ void Program::render()
 	//glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
 	//glBindVertexArray(models);
 	//glDrawArrays(GL_TRIANGLES, 0, 3);
-
-	//ImGui that handles the graphical interface
-	ImGui::Render();
-	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
-
 	
 	//// draw our first triangle
 	glUseProgram(renderPass.getShaderProgramID());
 
 	glm::mat4 projection = glm::perspective(FOV, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
-	glm::mat4 view = camera.getView();
+	glm::mat4 view = camera->getView();
 	renderPass.setMat4("projection", projection);
 	renderPass.setMat4("view", view);
 
@@ -154,4 +159,8 @@ void Program::render()
 	
 	for (int i = 0; i < models.size(); i++)
 		models[i].Draw(renderPass);
+
+	//ImGui that handles the graphical interface
+	ImGui::Render();
+	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
