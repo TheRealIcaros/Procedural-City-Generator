@@ -2,8 +2,7 @@
 #define KEYIN_H
 
 #include <GLFW\glfw3.h>
-
-
+#include "../../Logic\header/GenWindow.h"
 //#include "../../Graphic/header/Camera.h"
 
 //The struct to build up the delta time 
@@ -16,8 +15,6 @@ struct Time
 	bool active;
 };
 
-
-#include "..\..\Logic\header\GenWindow.h"
 class KeyIn
 {
 private:

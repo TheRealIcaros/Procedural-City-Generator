@@ -9,10 +9,6 @@
 
 #include "../../Defines.h"
 
-
-
-
-
 class Camera
 {
 private:

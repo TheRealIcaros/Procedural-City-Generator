@@ -38,8 +38,8 @@ void Program::initiateVariables()
 	//lastX = WIDTH / 2.0f;
 	//lastY = HEIGHT / 2.0f;
 
-	this->genWindow = GenWindow::getInstance();
 	this->myKeyInput = new KeyIn();
+	this->camera = new Camera();
 	/*this->dataManager = new DataManager();*/
 	//this->myObject = new Object();
 
