@@ -1,4 +1,11 @@
 #include "../header/Program.h"
+#include <Windows.h> //take away once done
+
+void setColor(unsigned short color)
+{
+	HANDLE hcon = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hcon, color);
+}
 
 void Program::initiateGLFW()
 {
@@ -60,7 +67,7 @@ void Program::generate()
 
 	int size = genWindow->getBlockSize().getSize();
 
-	for (int i = 0; size; i++)
+	for (int i = 0; i < size; i++)
 	{
 		block->setBlockSize(i, genWindow->getBlockSize()[i]);
 	}
@@ -73,12 +80,33 @@ void Program::generate()
 
 	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
 	
-	for (int i = 0; i < genWindow->getTSizeX(); i++)
+	system("CLS");
+	for (int j = 0; j < genWindow->getTSizeY(); j++)
 	{
-		for (int j = 0; j < genWindow->getTSizeY(); j++)
+		for (int i = 0; i < genWindow->getTSizeX(); i++)
 		{
-			std::cout << cityMap.at(i,j);
-			if (j == genWindow->getTSizeY() - 1)
+			if (cityMap.at(i, j) == 0)
+			{
+				setColor(11);
+			}
+			else if (cityMap.at(i, j) == 1)
+			{
+				setColor(14);
+			}
+			else if (cityMap.at(i, j) == 2)
+			{
+				setColor(4);
+			}
+			else if (cityMap.at(i, j) == 8)
+			{
+				setColor(13);
+			}
+			else if (cityMap.at(i, j) == 9)
+			{
+				setColor(5);
+			}
+			std::cout << cityMap.at(i, j);
+			if (i == genWindow->getTSizeY() - 1)
 			{
 				std::cout << "\n";
 			}

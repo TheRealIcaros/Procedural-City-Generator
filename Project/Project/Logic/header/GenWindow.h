@@ -59,8 +59,8 @@ public:
 	void toggleDebugToDraw() { this->isDrawing = !this->isDrawing; }
 	std::string getInputBuf() { return this->inputBuf; }
 	bool isOpen() const { return this->isDrawing; }
-	int getPSizeX() { return this->pSizeX; }
-	int getPSizeY() { return this->pSizeY; }
+	float getPSizeX() { return this->pSizeX; }
+	float getPSizeY() { return this->pSizeY; }
 	int getTSizeX() { return this->tSizeX; }
 	int getTSizeY() { return this->tSizeY; }
 	Array<float> getTerrainOctave() { return this->terrainOctave; }

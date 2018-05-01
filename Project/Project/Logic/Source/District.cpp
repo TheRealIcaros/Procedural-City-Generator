@@ -111,7 +111,7 @@ double District::vec2SquareDistance(glm::vec2 first, glm::vec2 second)
 	double yDistance = pow(first.y - second.y, 2);
 
 	//No need to square it since the length diferences will still show which is closest
-	return xDistance + yDistance;
+	return sqrt(xDistance + yDistance);
 }
 
 void District::findBorder(Array2D<int>& map, Array<glm::vec2>& borders)
@@ -160,7 +160,7 @@ void District::alterBorders(Array2D<int>& map, Array<glm::vec2>& borders, int no
 		}
 		if (maxRangePos >= WIDTH)
 		{
-			minRangePos -= (maxRangePos - WIDTH);
+			minRangePos -= maxRangePos - WIDTH;
 			maxRangePos = WIDTH - 1;
 		}
 

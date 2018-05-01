@@ -31,7 +31,6 @@ void Block::generate(Array2D<int>& map, float width, float height)
 	//reset counters
 	mainRoads = 0;
 	smallRoads = 0;
-
 	for (int x = 0; x < WIDTH; x++)
 	{
 		float noiseResult = noise->generate(x * 10, 0.0, width, height); //get rid of magic number
@@ -40,9 +39,9 @@ void Block::generate(Array2D<int>& map, float width, float height)
 
 		if (noiseResult > MAIN_ROAD_THRESHOLD)
 		{
-			for (int y = 0; y<HEIGHT; y++)
+			for (int y = 0; y < HEIGHT; y++)
 			{
-				map.at(x, y) = -1;
+				map.at(x, y) = 9;
 			}
 
 			if (x == 0 || map.at(x - 1, 0) >= 0)
@@ -51,6 +50,54 @@ void Block::generate(Array2D<int>& map, float width, float height)
 			}
 		}
 	}
+
+	int next = 0;
+	for (int x = 0; x < WIDTH; x++)
+	{
+		int startX = x;
+		while (x < WIDTH && map.at(x, 0) != 9)
+		{
+			x++;
+		}
+
+		int endX = x;
+
+		if (startX != endX)
+		{
+			for (int y = 0; y < HEIGHT; y++)
+			{
+				if (next > 0)
+				{
+					next--;
+				}
+				else
+				{
+					float noiseResult = noise->generate(x, y, width, height);
+					if (noiseResult > SMALL_ROAD_THRESHOLD)
+					{
+						const int DISTRICT = map.at(startX, y);
+
+						for (int i = startX; i< endX; i++)
+						{
+							map.at(i, y) = 8;
+						}
+
+						smallRoads++;
+
+						if (noiseResult > ((1 - SMALL_ROAD_THRESHOLD) / 2) + SMALL_ROAD_THRESHOLD)
+						{
+							next = blockSizes[DISTRICT] + 1;
+						}
+						else
+						{
+							next = blockSizes[DISTRICT] + 0;
+						}
+					}
+				}
+			}
+		}
+	}
+
 }
 
 void Block::setBlockSize(int district, int size)

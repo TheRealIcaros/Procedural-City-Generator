@@ -41,6 +41,10 @@ void HeightMap::generate(Array2D<float>& terrainMap, int width, int height, Arra
 			int size = oct.getSize();
 			for (int k = 0; k < size; k++)
 			{
+				if (perc[k] == 0)
+				{
+					break;
+				}
 				n += perc[k] * noise->generate(oct[k] * x, 1 * oct[k] * y, 0.8);
 				percTot += perc[k];
 			}

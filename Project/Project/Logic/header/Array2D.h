@@ -63,7 +63,7 @@ public:
 	{
 		assert(x >= 0 && x < width && y >= 0 && y < height);
 
-		return data[y*width + x];
+		return data[y*height + x];
 	}
 
 	void fill(const T& value)
