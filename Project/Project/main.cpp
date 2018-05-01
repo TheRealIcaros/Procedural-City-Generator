@@ -20,7 +20,7 @@ int main()
 	
 	if (!myProgram->Start())
 		return NULL;
-	
+
 	//The main loop
 	while (myProgram->Run());
 	

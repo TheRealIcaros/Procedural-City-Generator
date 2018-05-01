@@ -3,8 +3,14 @@
 
 //3D-math
 #include <glm.hpp>
+#include <GLFW\glfw3.h>
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
+
+#include "../../Defines.h"
+
+
+
 
 
 class Camera
@@ -19,8 +25,12 @@ private:
 	float yaw;
 	float pitch;
 	float sensitivity;
-
 	float speed;
+
+	// Pitch/Yaw Properties
+	bool firstMouse;
+	float lastX;
+	float lastY;
 
 public:
 	Camera();
@@ -45,6 +55,9 @@ public:
 	void setCameraPosition(float xaxis, float yaxis, float zaxis);
 	void setHeight(float Y);
 
+
+	//Mic functions
+	//void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 };
 
 #endif

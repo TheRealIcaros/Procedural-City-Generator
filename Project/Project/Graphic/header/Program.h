@@ -2,15 +2,12 @@
 #define PROGRAM_H
 
 //Own made includes
-#include "Deferred.h"
-#include "../../Defines.h"
+#include "Model.h"
+//#include "Deferred.h"
+#include "Camera.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Logic/header/GenWindow.h"
 
-//General includes
-#include <string>
-#include <fstream>
-#include <iostream>
 
 //Imgui stuff
 #include "../../Imgui/imgui.h"
@@ -39,10 +36,12 @@ private:
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
-	Deferred deferred;
-	/*DataManager* dataManager;*/
-	//Object* myObject;
-	//shaderCreater renderPass;
+	Camera* camera;
+	//Model myModel;
+	
+	shaderCreater renderPass;
+	std::vector<Model> models;
+	//Deferred* deferred;
 
 	//Initiation functions for the applications core functions
 	void initiateGLFW();
@@ -57,6 +56,8 @@ private:
 	//Mics variables
 	bool keyIsPressedF1;
 	bool shouldRun;
+	float FOV;
+
 	Array2D<float> terrainMap;
 	Array2D<int> cityMap;
 
@@ -64,9 +65,9 @@ public:
 	Program();
 	~Program();
 
-	bool Start();	//Initiates the program
-	bool Run();		//The main-loop/ Returns false when we exit it 
-	void Stop();	//Cleans upp the memory and returns everything
+	bool Start();				//Initiates the program
+	bool Run();					//The main-loop/ Returns false when we exit it 
+	void Stop();				//Cleans upp the memory and returns everything
 
 	void render();	//The render loop in the application
 };
