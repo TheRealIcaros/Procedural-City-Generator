@@ -3,11 +3,10 @@
 
 //Own made includes
 #include "Model.h"
-//#include "Deferred.h"
 #include "Camera.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Logic/header/GenWindow.h"
-
+//#include "Deferred.h"
 
 //Imgui stuff
 #include "../../Imgui/imgui.h"
@@ -69,7 +68,7 @@ public:
 	bool Run();					//The main-loop/ Returns false when we exit it 
 	void Stop();				//Cleans upp the memory and returns everything
 
-	void render();	//The render loop in the application
+	void render();				//The render loop in the application
 };
 
 #endif

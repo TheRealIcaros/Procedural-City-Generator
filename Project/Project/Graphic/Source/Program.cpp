@@ -155,9 +155,9 @@ bool Program::Run()
 {
 	ImGui_ImplGlfwGL3_NewFrame();
 	
-	myKeyInput->keyInput(window, genWindow, shouldRun);	//Checks if any key was pressed 
+	myKeyInput->keyInput(window, genWindow, shouldRun);		//Checks if any key was pressed 
 
-	genWindow->draw();								//Draw function for ImGui
+	genWindow->draw();										//Draw function for ImGui
 
 	if (genWindow->getGenerate() == true)
 	{
@@ -165,9 +165,8 @@ bool Program::Run()
 		genWindow->toggleGenerate();
 	}
 
-	render();										//The render loop for all the graphics
+	render();												//The render loop for all the graphics
 
-	
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 
@@ -179,8 +178,6 @@ void Program::Stop()
 	ImGui_ImplGlfwGL3_Shutdown();
 	ImGui::DestroyContext();
 
-	glfwTerminate();
-
 	delete this->noise;
 	delete this->map;
 	delete this->seed;
@@ -189,6 +186,8 @@ void Program::Stop()
 	//delete this->dataManager;
 	//delete this->myObject;
 	delete this->camera;
+
+	glfwTerminate();
 }
 
 void Program::render()
@@ -212,8 +211,8 @@ void Program::render()
 	renderPass.setMat4("view", view);
 
 	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f)); // translate it down so it's at the center of the scene
-	model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));	// it's a bit too big for our scene, so scale it down
+	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));	  // translate it down so it's at the center of the scene
+	model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));			 // it's a bit too big for our scene, so scale it down
 	renderPass.setMat4("model", model);
 
 	
