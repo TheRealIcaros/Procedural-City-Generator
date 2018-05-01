@@ -166,6 +166,11 @@
     <ClInclude Include="Singleton\GenWindow.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Graphic\Shaders\fragment.glsl" />
+    <None Include="Graphic\Shaders\geometry.glsl" />
+    <None Include="Graphic\Shaders\vertex.glsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

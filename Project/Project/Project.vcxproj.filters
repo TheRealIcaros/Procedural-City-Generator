@@ -41,4 +41,9 @@
     <ClInclude Include="Graphic\header\Mesh.h" />
     <ClInclude Include="Graphic\header\Model.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Graphic\Shaders\fragment.glsl" />
+    <None Include="Graphic\Shaders\vertex.glsl" />
+    <None Include="Graphic\Shaders\geometry.glsl" />
+  </ItemGroup>
 </Project>

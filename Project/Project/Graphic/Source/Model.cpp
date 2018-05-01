@@ -137,7 +137,7 @@ Model::Model()
 {
 }
 
-Model::Model(char* path)
+Model::Model(std::string const &path, bool gamma) : gammaCorrection(gamma)
 {
 	loadModel(path);
 }

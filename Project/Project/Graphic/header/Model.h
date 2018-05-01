@@ -13,8 +13,7 @@
 class Model
 {
 private:
-	std::vector<Mesh> meshes;
-	std::string directory;
+	
 	/*  Functions   */
 	void loadModel(std::string path);
 	void processNode(aiNode *node, const aiScene *scene);
@@ -27,9 +26,13 @@ public:
 	Model();
 	~Model();
 
-	Model(char *path);
-	std::vector<Texture> textures_loaded;
+	Model(std::string const &path, bool gamma = false);
+	//Model(char *path);
 
+	std::vector<Texture> textures_loaded;
+	std::vector<Mesh> meshes;
+	std::string directory;
+	bool gammaCorrection;
 	void Draw(shaderCreater shader);
 };
 

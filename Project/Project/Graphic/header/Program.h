@@ -4,6 +4,7 @@
 //Own made includes
 #include "Model.h"
 //#include "Deferred.h"
+#include "Camera.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Singleton/GenWindow.h"
 
@@ -19,7 +20,10 @@ private:
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
-	Model myModel;
+	//Model myModel;
+	Camera camera;
+	shaderCreater renderPass;
+	std::vector<Model> models;
 	//Deferred* deferred;
 
 	//Initiation functions for the applications core functions
@@ -31,7 +35,7 @@ private:
 	//Mics variables
 	bool keyIsPressedF1;
 	bool shouldRun;
-
+	float FOV;
 public:
 	Program();
 	~Program();
