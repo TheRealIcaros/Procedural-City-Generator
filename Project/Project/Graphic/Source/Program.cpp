@@ -58,7 +58,12 @@ void Program::generate()
 	genWindow->setSeed(seed->getIntegerSeed());
 	noise->setSeed(seed->getIntegerSeed());
 
+	int size = genWindow->getBlockSize().getSize();
 
+	for (int i = 0; size; i++)
+	{
+		block->setBlockSize(i, genWindow->getBlockSize()[i]);
+	}
 
 	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave(), genWindow->getTerrainOctavePerc(), genWindow->getRedistribution());
 

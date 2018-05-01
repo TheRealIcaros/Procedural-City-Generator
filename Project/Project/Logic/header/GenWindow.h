@@ -6,6 +6,7 @@
 #include "Array.h"
 #include <string>
 #include <iostream>
+#include"../../LogicDefines.h"
 
 #pragma region Comment
 /*
@@ -14,7 +15,7 @@ Description:
 This class creates the window containing all parameters for the generation process, it also includes the trigger to begin a generation
 */
 #pragma endregion Description of class
-#define octaveNumber 8
+
 class GenWindow
 {
 private:
@@ -44,18 +45,10 @@ private:
 	Array<float> terrainOctavePerc;
 	float redistribution;
 	float borderPerc;
-	int houseMinHeight;
-	int houseMaxHeight;
-	int houseDensity;
-	int houseBlockSize;
-	int skyscraperMinHeight;
-	int skyscraperMaxHeight;
-	int skyscraperDensity;
-	int skyscraperBlockSize;
-	int factorieMinHeight;
-	int factorieMaxHeight;
-	int factorieDensity;
-	int factorieBlockSize;
+	Array<int> minHeight;
+	Array<int> maxHeight;
+	Array<int> density;
+	Array<int> blockSize;
 	int count;
 	bool generate = false;
 
@@ -74,9 +67,7 @@ public:
 	Array<float> getTerrainOctavePerc() { return this->terrainOctavePerc; }
 	float getRedistribution() { return this->redistribution; }
 	float getBorderPerc() { return this->borderPerc; }
-	int getHouseBlockSize() { return this->houseBlockSize; }
-	int getSkyscraperBlockSize() { return this->skyscraperBlockSize; }
-	int getFactorieBlockSize() { return this->factorieBlockSize; }
+	Array<int> getBlockSize() { return this->blockSize; }
 	void setSeed(int seed) { this->seed = seed; }
 	void setCounter(int count) { this->count = count; }
 	void setMainRoad(int roads) { this->mainRoads = roads; }

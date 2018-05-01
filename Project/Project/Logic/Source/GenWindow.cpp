@@ -25,9 +25,9 @@ GenWindow::GenWindow()
 	this->pSizeX = 15;
 	this->pSizeY = 15;
 
-	this->terrainOctave = Array<float>(octaveNumber);
-	this->terrainOctavePerc = Array<float>(octaveNumber);
-	for (int i = 0; i < octaveNumber; i++)
+	this->terrainOctave = Array<float>(OCTAVENUMBER);
+	this->terrainOctavePerc = Array<float>(OCTAVENUMBER);
+	for (int i = 0; i < OCTAVENUMBER; i++)
 	{
 		this->terrainOctave.add(1.0);
 	}
@@ -41,18 +41,17 @@ GenWindow::GenWindow()
 	this->terrainOctavePerc.add(0.0);
 	this->redistribution = 1.0;
 	this->borderPerc = 0.2;
-	this->houseMinHeight = 1;
-	this->houseMaxHeight = 2;
-	this->houseDensity = 100;
-	this->houseBlockSize = 2;
-	this->skyscraperMinHeight = 1;
-	this->skyscraperMaxHeight = 2;
-	this->skyscraperDensity = 100;
-	this->skyscraperBlockSize = 2;
-	this->factorieMinHeight = 1;
-	this->factorieMaxHeight = 2;
-	this->factorieDensity = 100;
-	this->factorieBlockSize = 2;
+	this->minHeight = Array<int>(MAX_DISTRICTS);
+	this->maxHeight = Array<int>(MAX_DISTRICTS);
+	this->density = Array<int>(MAX_DISTRICTS);
+	this->blockSize = Array<int>(MAX_DISTRICTS);
+	for (int j = 0; j < MAX_DISTRICTS; j++)
+	{
+		this->minHeight.add(1);
+		this->maxHeight.add(2);
+		this->density.add(100);
+		this->blockSize.add(2);
+	}
 	this->generate = false;
 }
 
@@ -152,35 +151,35 @@ void GenWindow::draw()
 		ImGui::Text("Houses");
 		ImGui::Spacing();
 		ImGui::Text("Min. Height");
-		ImGui::SliderInt("##House.Min. Height", &houseMinHeight, 1, 10);
+		ImGui::SliderInt("##House.Min. Height", &minHeight[0], 1, 10);
 		ImGui::Text("Max. Height");
-		ImGui::SliderInt("##House.Max. Height", &houseMaxHeight, 1, 10);
+		ImGui::SliderInt("##House.Max. Height", &maxHeight[0], 1, 10);
 		ImGui::Text("Density");
-		ImGui::SliderInt("##House.Density", &houseDensity, 1, 100);
+		ImGui::SliderInt("##House.Density", &density[0], 1, 100);
 		ImGui::Text("Block Size");
-		ImGui::SliderInt("##House.Block.Size", &houseBlockSize, 1, 100);
+		ImGui::SliderInt("##House.Block.Size", &blockSize[0], 1, 100);
 		ImGui::Separator();
 		ImGui::Text("Skyscrapers");
 		ImGui::Spacing();
 		ImGui::Text("Min. Height");
-		ImGui::SliderInt("##Skyscrapers.Min. Height", &skyscraperMinHeight, 1, 10);
+		ImGui::SliderInt("##Skyscrapers.Min. Height", &minHeight[1], 1, 10);
 		ImGui::Text("Max. Height");
-		ImGui::SliderInt("##Skyscrapers.Max. Height", &skyscraperMaxHeight, 1, 10);
+		ImGui::SliderInt("##Skyscrapers.Max. Height", &maxHeight[1], 1, 10);
 		ImGui::Text("Density");
-		ImGui::SliderInt("##Skyscrapers.Density", &skyscraperDensity, 1, 100);
+		ImGui::SliderInt("##Skyscrapers.Density", &density[1], 1, 100);
 		ImGui::Text("Block Size");
-		ImGui::SliderInt("##Skyscrapers.Block.Size", &skyscraperBlockSize, 1, 100);
+		ImGui::SliderInt("##Skyscrapers.Block.Size", &blockSize[1], 1, 100);
 		ImGui::Separator();
 		ImGui::Text("Factories");
 		ImGui::Spacing();
 		ImGui::Text("Min. Height");
-		ImGui::SliderInt("##Factories.Min. Height", &factorieMinHeight, 1, 10);
+		ImGui::SliderInt("##Factories.Min. Height", &minHeight[2], 1, 10);
 		ImGui::Text("Max. Height");
-		ImGui::SliderInt("##Factories.Max. Height", &factorieMaxHeight, 1, 10);
+		ImGui::SliderInt("##Factories.Max. Height", &maxHeight[2], 1, 10);
 		ImGui::Text("Density");
-		ImGui::SliderInt("##Factories.Density", &factorieDensity, 1, 100);
+		ImGui::SliderInt("##Factories.Density", &density[2], 1, 100);
 		ImGui::Text("Block Size");
-		ImGui::SliderInt("##Factories.Block.Size", &factorieBlockSize, 1, 100);
+		ImGui::SliderInt("##Factories.Block.Size", &blockSize[2], 1, 100);
 		ImGui::Separator();
 		ImGui::Spacing();
 		if (ImGui::Button("Generate"))
