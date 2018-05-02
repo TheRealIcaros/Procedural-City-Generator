@@ -4,6 +4,7 @@
 //Own headers
 #include "Mesh.h"
 
+
 //Other headers
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -15,10 +16,9 @@ class Model
 private:
 	
 	/*  Functions   */
-	void loadModel(std::string path);
-	void processNode(aiNode *node, const aiScene *scene);
-	Mesh processMesh(aiMesh *mesh, const aiScene *scene);
-	//std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);
+	
+	void processNode(aiNode *node, const aiScene *scene, glm::vec3 startPosition);
+	Mesh processMesh(aiMesh *mesh, const aiScene *scene, glm::vec3 startPosition);
 	std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);
 
 	unsigned int TextureFromFile(const char *path, const std::string &directory, bool gamma);
@@ -26,7 +26,8 @@ public:
 	Model();
 	~Model();
 
-	Model(std::string const &path, bool gamma = false);
+	Model(std::string const &path, glm::vec3 startPosition, bool gamma = false);
+	void loadModel(std::string path, glm::vec3 startPosition);
 	//Model(char *path);
 
 	std::vector<Texture> textures_loaded;

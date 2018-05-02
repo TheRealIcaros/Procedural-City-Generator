@@ -36,6 +36,7 @@ void Program::initiateVariables()
 	this->map = new HeightMap();
 	this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
+	this->models = Model();
 	////Pitch/Yaw properties
 	//firstMouse = true;
 	//lastX = WIDTH / 2.0f;
@@ -54,23 +55,6 @@ void Program::initiateData()
 	/*dataManager->addDataHolder(map);*/
 	noiseGenerator(PERLIN_NOISE);
 }
-
-//void mouse_callback(GLFWwindow* window, double xpos, double ypos)
-//{
-//	if (firstMouse)
-//	{
-//		lastX = xpos;
-//		lastY = ypos;
-//		firstMouse = false;
-//	}
-//
-//	float xoffset = xpos - lastX;
-//	float yoffset = lastY - ypos; //Reversed since y-coordinates go from bottom to top
-//	lastX = xpos;
-//	lastY = ypos;
-//
-//	camera->mouseMovement(xoffset, yoffset);
-//}
 
 
 void Program::generate()
@@ -152,16 +136,6 @@ bool Program::Start()
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
-	
-
-	//mouse_callback(window, lastX, lastY);
-	//glfwSetCursorPosCallback(window, cursor);
-
-	//glfwSetCursorPosCallback(window, mouse_callback);
-	//glfwSetCursorPos(window, camera->mouseMovement);
-	//glfwGetCursorPos(window, camera->mouseMovement);
-
-
 	//glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
@@ -169,7 +143,8 @@ bool Program::Start()
 	renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
 
 	std::string const path = "./Models/Box/Box.obj";
-	models.push_back(path);
+	//models.push_back(path);
+	models.loadModel(path, glm::vec3(0.0f, 0.0f, -2.0f));
 	//deferred->initiateDeferred();
 
 	return returnValue;
@@ -237,14 +212,16 @@ void Program::render()
 	renderPass.setMat4("projection", projection);
 	renderPass.setMat4("view", view);
 
-	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));	  // translate it down so it's at the center of the scene
-	model = glm::scale(model, glm::vec3(2.0f, 2.0f, 2.0f));			 // it's a bit too big for our scene, so scale it down
-	renderPass.setMat4("model", model);
+	//glm::mat4 model;
+	//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));	  // translate it down so it's at the center of the scene
+	//model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));			 // it's a bit too big for our scene, so scale it down
+	//renderPass.setMat4("model", model);
 
 	
-	for (int i = 0; i < models.size(); i++)
-		models[i].Draw(renderPass);
+	//for (int i = 0; i < models.; i++)
+
+	//Draws all the models in the application
+	models.Draw(renderPass);
 
 	//ImGui that handles the graphical interface
 	ImGui::Render();

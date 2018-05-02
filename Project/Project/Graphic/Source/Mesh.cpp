@@ -31,11 +31,14 @@ Mesh::Mesh()
 {
 }
 
-Mesh::Mesh(std::vector <Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures)
+Mesh::Mesh(std::vector <Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures, glm::vec3 startPosition)
 {
 	this->vertices = vertices;
 	this->indices = indices;
 	this->textures = textures;
+
+	this->localPosition = startPosition;
+	this->Model = glm::translate(this->Model, this->localPosition);
 
 	setupMesh();
 }
@@ -48,21 +51,27 @@ void Mesh::Draw(shaderCreater shader)
 {
 	unsigned int diffuseNr = 1;
 	unsigned int specularNr = 1;
-	for (unsigned int i = 0; i < textures.size(); i++)
-	{
-		glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
-										  // retrieve texture number (the N in diffuse_textureN)
-		std::string number;
-		std::string name = textures[i].type;
-		if (name == "texture_diffuse")
-			number = std::to_string(diffuseNr++);
-		else if (name == "texture_specular")
-			number = std::to_string(specularNr++);
 
-		shader.setFloat(("material." + name + number).c_str(), i);
-		glBindTexture(GL_TEXTURE_2D, textures[i].id);
-	}
-	glActiveTexture(GL_TEXTURE0);
+		for (unsigned int i = 0; i < textures.size(); i++)
+		{
+			glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
+												  // retrieve texture number (the N in diffuse_textureN)
+			std::string number;
+			std::string name = textures[i].type;
+			if (name == "texture_diffuse")
+				number = std::to_string(diffuseNr++);
+			else if (name == "texture_specular")
+				number = std::to_string(specularNr++);
+
+			shader.setFloat(("material." + name + number).c_str(), i);
+			GLuint pos = glGetUniformLocation(shader.getShaderProgramID(), (name + number).c_str());
+			glUniform1i(pos, i);
+			glBindTexture(GL_TEXTURE_2D, textures[i].id);
+		}
+
+	//glActiveTexture(GL_TEXTURE0);
+	GLuint pos = glGetUniformLocation(shader.getShaderProgramID(), "Model");
+	glUniformMatrix4fv(pos, 1, GL_FALSE, &this->Model[0][0]);
 
 	// draw mesh
 	glBindVertexArray(VAO);

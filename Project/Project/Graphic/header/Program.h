@@ -39,7 +39,8 @@ private:
 	//Model myModel;
 	
 	shaderCreater renderPass;
-	std::vector<Model> models;
+	Model models;
+	//std::vector<Model> models;
 	//Deferred* deferred;
 
 	//Initiation functions for the applications core functions
