@@ -1,6 +1,6 @@
 #include "../header/Camera.h"
 
-Camera::Camera()
+Camera::Camera(GLFWwindow* window)
 {
 	this->cameraPosition = { 0.0f, 0.0f, 0.0f };
 	this->lookAtVector = { 0.0f, 0.0f, -1.0f };
@@ -11,12 +11,12 @@ Camera::Camera()
 	this->speed = 5.0f;
 
 	//Initiates the mouse
-	this->myMouse = new Mouse();
+	this->myMouse = new Mouse(window);
 
 	this->View = glm::lookAt(this->cameraPosition, this->cameraPosition + this->lookAtVector, this->upVector);
 }
 
-Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector)
+Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, GLFWwindow* window)
 {
 	this->cameraPosition = cameraPosition;
 	this->lookAtVector = lookAtVector;
@@ -27,12 +27,12 @@ Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector)
 	this->speed = 5.0f;
 
 	//Initiates the mouse
-	//this->myMouse = new Mouse();
+	this->myMouse = new Mouse(window);
 
 	this->View = glm::lookAt(this->cameraPosition, this->cameraPosition + this->lookAtVector, this->upVector);
 }
 
-Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVector)
+Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVector, GLFWwindow* window)
 {
 	this->cameraPosition = cameraPosition;
 	this->lookAtVector = lookAtVector;
@@ -43,7 +43,7 @@ Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVec
 	this->speed = 5.0f;
 
 	//Initiates the mouse
-	//this->myMouse = new Mouse();
+	this->myMouse = new Mouse(window);
 
 	this->View = glm::lookAt(this->cameraPosition, this->cameraPosition + this->lookAtVector, this->upVector);
 }

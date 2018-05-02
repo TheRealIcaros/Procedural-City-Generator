@@ -20,6 +20,7 @@ private:
 	//Key input variables
 	bool shouldRun;
 	bool keyIsPressedF1;
+	bool keyIsPressedLControl;
 	bool cameraCanMove;
 
 	//Time variable

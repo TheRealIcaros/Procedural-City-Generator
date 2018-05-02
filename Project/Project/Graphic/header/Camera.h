@@ -28,9 +28,9 @@ private:
 	
 
 public:
-	Camera();
-	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector);
-	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVector);
+	Camera(GLFWwindow* window);
+	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, GLFWwindow* window);
+	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVector, GLFWwindow* window);
 	~Camera();
 	void setLookAtVector(glm::vec3 lookAtVector);
 	void moveCameraPosition(glm::vec3 movement);

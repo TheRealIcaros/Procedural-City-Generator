@@ -1,7 +1,9 @@
 #include "../Header/Mouse.h"
 
-Mouse::Mouse()
+Mouse::Mouse(GLFWwindow* window)
 {
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 	this->firstMouse = true;
 	this->lastX = WIDTH / 2.0f;
 	this->lastY = HEIGHT / 2.0f;

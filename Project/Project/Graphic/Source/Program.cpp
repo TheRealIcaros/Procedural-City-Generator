@@ -42,7 +42,7 @@ void Program::initiateVariables()
 	//lastY = HEIGHT / 2.0f;
 
 	this->myKeyInput = new KeyIn();
-	this->camera = new Camera();
+	this->camera = new Camera(window);
 	/*this->dataManager = new DataManager();*/
 	//this->myObject = new Object();
 
@@ -52,7 +52,6 @@ void Program::initiateVariables()
 void Program::initiateData()
 {
 	/*dataManager->addDataHolder(map);*/
-
 	noiseGenerator(PERLIN_NOISE);
 }
 
@@ -91,7 +90,7 @@ void Program::generate()
 		genWindow->getRedistribution());
 
 	genWindow->setCounter(noise->getCounter());
-	this->camera = new Camera();
+	this->camera = new Camera(window);
 }
 
 void Program::noiseGenerator(int generator)
@@ -132,15 +131,15 @@ bool Program::Start()
 {
 	bool returnValue = true;
 
-	initiateVariables();
-
-	initiateData();
-
 	this->window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
 	if (initiateWindow(this->window) == false)
 		returnValue = false;
 
 	glfwMakeContextCurrent(window);
+
+	initiateVariables();
+
+	initiateData();
 
 	initiateImgui(window);
 
@@ -152,6 +151,8 @@ bool Program::Start()
 	
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
+
+	
 
 	//mouse_callback(window, lastX, lastY);
 	//glfwSetCursorPosCallback(window, cursor);

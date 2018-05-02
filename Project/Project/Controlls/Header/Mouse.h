@@ -14,7 +14,7 @@ private:
 	double xPos;
 	double yPos;
 public:
-	Mouse();
+	Mouse(GLFWwindow* window);
 	~Mouse();
 
 	void moveMouse(GLFWwindow* window, float &xoffset, float &yoffset);
