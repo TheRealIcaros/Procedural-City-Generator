@@ -181,7 +181,8 @@ bool Program::Run()
 	
 	myKeyInput->keyInput(window, genWindow, shouldRun);		//Checks if any key was pressed 
 
-	camera->mouseMovement(window, cameraOffsetX, cameraOffsetY);
+	if(myKeyInput->getCameraShouldMove() == true)
+		camera->mouseMovement(window, cameraOffsetX, cameraOffsetY);
 
 	genWindow->draw();										//Draw function for ImGui
 
