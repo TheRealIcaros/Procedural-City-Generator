@@ -39,6 +39,7 @@ void Program::initiateVariables()
 	this->map = new HeightMap();
 	this->district = new District();
 	this->block = new Block();
+	this->building = new Building();
 	this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
 	this->myKeyInput = new KeyIn();
@@ -65,11 +66,12 @@ void Program::generate()
 	genWindow->setSeed(seed->getIntegerSeed());
 	noise->setSeed(seed->getIntegerSeed());
 
-	int size = genWindow->getBlockSize().getSize();
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
 		block->setBlockSize(i, genWindow->getBlockSize()[i]);
+		building->setDensity(i, genWindow->getDensity()[i]/100.0f);
+		building->setHeight(i, genWindow->getMinHeight()[i], genWindow->getMaxHeight()[i]);
 	}
 
 	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave(), genWindow->getTerrainOctavePerc(), genWindow->getRedistribution());
@@ -79,6 +81,8 @@ void Program::generate()
 	district->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY(), genWindow->getBorderPerc());
 
 	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
+
+	building->generate(cityMap, terrainMap, genWindow->getPSizeX(), genWindow->getPSizeY());
 	
 	system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
@@ -96,6 +100,10 @@ void Program::generate()
 			else if (cityMap.at(i, j) == 2)
 			{
 				setColor(4);
+			}
+			else if (cityMap.at(i, j) == 7)
+			{
+				setColor(2);
 			}
 			else if (cityMap.at(i, j) == 8)
 			{
@@ -118,6 +126,11 @@ void Program::generate()
 	genWindow->setCounter(noise->getCounter());
 	genWindow->setMainRoad(block->getMainRoad());
 	genWindow->setSmallRoad(block->getSmallRoad());
+	for (int i = 0; i < MAX_DISTRICTS; i++)
+	{
+		genWindow->setBuildings(i, building->getBuildings()[i]);
+		genWindow->setGrass(i, building->getGrassTiles()[i]);
+	}
 }
 
 void Program::noiseGenerator(int generator)
@@ -127,6 +140,7 @@ void Program::noiseGenerator(int generator)
 		map->setNoise(noise);
 		district->setNoise(noise);
 		block->setNoise(noise);
+		building->setNoise(noise);
 	}
 	else
 	{
@@ -223,6 +237,7 @@ void Program::Stop()
 	delete this->map;
 	delete this->district;
 	delete this->block;
+	delete this->building;
 	delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;

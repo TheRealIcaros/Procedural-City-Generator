@@ -3,12 +3,6 @@
 Block::Block()
 {
 	noise = nullptr;
-	blockSizes = Array<int>(MAX_DISTRICTS);
-
-	for (int i = 0; i < MAX_DISTRICTS; i++)
-	{
-		blockSizes.add(0);
-	}
 }
 
 Block::~Block()

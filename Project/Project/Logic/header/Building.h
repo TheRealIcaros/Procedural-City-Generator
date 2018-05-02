@@ -19,7 +19,9 @@ public:
 	~Building();
 	void setHeight(int district, int minHeight, int maxHeight);
 	void setDensity(int district, float density);
-	void generate(Array2D<int>& map, Array2D<int>& terrainMap);
+	void generate(Array2D<int>& map, Array2D<float>& terrainMap, int width, int height);
 	void setNoise(PerlinNoise* noise);
+	int* getBuildings() { return buildings; }
+	int* getGrassTiles() { return grassTiles; }
 };
 #endif

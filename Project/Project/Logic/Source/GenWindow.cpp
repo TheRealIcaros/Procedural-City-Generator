@@ -7,14 +7,6 @@ GenWindow::GenWindow()
 	this->sizeX = 0;
 	this->sizeY = 0;
 	this->smallRoads = 0;
-	this->houses = 0;
-	this->skyscrapers = 0;
-	this->factories = 0;
-	this->totalBuildings = 0;
-	this->grassD1 = 0;
-	this->grassD2 = 0;
-	this->grassD3 = 0;
-	this->grassTotal = 0;
 	this->seed = 0;
 	this->genTime = 0;
 	this->isDrawing = false;
@@ -31,26 +23,24 @@ GenWindow::GenWindow()
 	{
 		this->terrainOctave.add(1.0);
 	}
-	this->terrainOctavePerc.add(0.50);
-	this->terrainOctavePerc.add(0.35);
-	this->terrainOctavePerc.add(0.15);
-	this->terrainOctavePerc.add(0.0);
-	this->terrainOctavePerc.add(0.0);
-	this->terrainOctavePerc.add(0.0);
-	this->terrainOctavePerc.add(0.0);
-	this->terrainOctavePerc.add(0.0);
+	this->terrainOctavePerc.add(0.50f);
+	this->terrainOctavePerc.add(0.35f);
+	this->terrainOctavePerc.add(0.15f);
+	this->terrainOctavePerc.add(0.0f);
+	this->terrainOctavePerc.add(0.0f);
+	this->terrainOctavePerc.add(0.0f);
+	this->terrainOctavePerc.add(0.0f);
+	this->terrainOctavePerc.add(0.0f);
 	this->redistribution = 1.0;
-	this->borderPerc = 0.2;
-	this->minHeight = Array<int>(MAX_DISTRICTS);
-	this->maxHeight = Array<int>(MAX_DISTRICTS);
-	this->density = Array<int>(MAX_DISTRICTS);
-	this->blockSize = Array<int>(MAX_DISTRICTS);
-	for (int j = 0; j < MAX_DISTRICTS; j++)
+	this->borderPerc = 0.2f;
+	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
-		this->minHeight.add(1);
-		this->maxHeight.add(2);
-		this->density.add(100);
-		this->blockSize.add(2);
+		this->buildings[i] = 0;
+		this->grass[i] = 0;
+		this->minHeight[i] = 1;
+		this->maxHeight[i] = 2;
+		this->density[i] = 100;
+		this->blockSize[i] = 2;
 	}
 	this->generate = false;
 }
@@ -84,21 +74,21 @@ void GenWindow::draw()
 		ImGui::Text("Small roads");
 		ImGui::Text("%d", smallRoads);
 		ImGui::Text("Houses");
-		ImGui::Text("%d", houses);
+		ImGui::Text("%d", buildings[0]);
 		ImGui::Text("Skyscrapers");
-		ImGui::Text("%d", skyscrapers);
+		ImGui::Text("%d", buildings[1]);
 		ImGui::Text("Factories");
-		ImGui::Text("%d", factories);
+		ImGui::Text("%d", buildings[2]);
 		ImGui::Text("Total Buildings");
-		ImGui::Text("%d", totalBuildings);
+		ImGui::Text("%d", buildings[0] + buildings[1] + buildings[2]);
 		ImGui::Text("D1 grass");
-		ImGui::Text("%d", grassD1);
+		ImGui::Text("%d", grass[0]);
 		ImGui::Text("D2 grass");
-		ImGui::Text("%d", grassD2);
+		ImGui::Text("%d", grass[1]);
 		ImGui::Text("D3 grass");
-		ImGui::Text("%d", grassD3);
+		ImGui::Text("%d", grass[2]);
 		ImGui::Text("Total grass");
-		ImGui::Text("%d", grassTotal);
+		ImGui::Text("%d", grass[0] + grass[1] + grass[2]);
 		ImGui::Text("Integer Seed");
 		ImGui::Text("%d", seed);
 		ImGui::Text("Generation Time");

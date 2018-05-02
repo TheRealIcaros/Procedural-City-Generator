@@ -20,21 +20,15 @@ class GenWindow
 {
 private:
 	bool isDrawing;		
-	int perlinCalls;			//ammount of Perlin Calls
+	int perlinCalls;				//ammount of Perlin Calls
 	int sizeX;
 	int sizeY;
-	int mainRoads;				//ammount of Main Roads
-	int smallRoads;				//ammount of Small Roads
-	int houses;					//ammount of Normal Houses
-	int skyscrapers;			//ammount of Skyscrapers
-	int factories;				//ammount of Factories
-	int totalBuildings;			//Total ammount of Buildings
-	int grassD1;				//Total ammount of Grass Tiles in District 1
-	int grassD2;				//Total ammount of Grass Tiles in District 2
-	int grassD3;				//Total ammount of Grass Tiles in District 3
-	int grassTotal;				//Total ammount of Grass Tiles in all Districts
-	int seed;					//Perlin Noise generation seed in integer form
-	int genTime;				//Total ammount of time to generate
+	int mainRoads;					//ammount of Main Roads
+	int smallRoads;					//ammount of Small Roads
+	int buildings[MAX_DISTRICTS];	//house, skyscraper, factory
+	int grass[MAX_DISTRICTS];		//Total ammount of Grass Tiles in a District
+	int seed;						//Perlin Noise generation seed in integer form
+	int genTime;					//Total ammount of time to generate
 
 	char inputBuf[256] = "";
 	int tSizeX;
@@ -45,10 +39,10 @@ private:
 	Array<float> terrainOctavePerc;
 	float redistribution;
 	float borderPerc;
-	Array<int> minHeight;
-	Array<int> maxHeight;
-	Array<int> density;
-	Array<int> blockSize;
+	int minHeight[MAX_DISTRICTS];
+	int maxHeight[MAX_DISTRICTS];
+	int density[MAX_DISTRICTS];
+	int blockSize[MAX_DISTRICTS];
 	int count;
 	bool generate = false;
 
@@ -67,11 +61,16 @@ public:
 	Array<float> getTerrainOctavePerc() { return this->terrainOctavePerc; }
 	float getRedistribution() { return this->redistribution; }
 	float getBorderPerc() { return this->borderPerc; }
-	Array<int> getBlockSize() { return this->blockSize; }
+	int* getMinHeight() { return this->minHeight; }
+	int* getMaxHeight() { return this->maxHeight; }
+	int* getDensity() { return this->density; }
+	int* getBlockSize() { return this->blockSize; }
 	void setSeed(int seed) { this->seed = seed; }
 	void setCounter(int count) { this->count = count; }
 	void setMainRoad(int roads) { this->mainRoads = roads; }
 	void setSmallRoad(int roads) { this->smallRoads = roads; }
+	void setBuildings(int districts, int building) { this->buildings[districts] = building; }
+	void setGrass(int districts, int grass) { this->grass[districts] = grass; }
 	bool getGenerate() { return this->generate; }
 	void toggleGenerate() { this->generate = !this->generate; }
 };

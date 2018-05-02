@@ -14,7 +14,7 @@ private:
 	PerlinNoise* noise;
 	int mainRoads;
 	int smallRoads;
-	Array<int> blockSizes;
+	int blockSizes[MAX_DISTRICTS];
 public:
 	Block();
 	~Block();
