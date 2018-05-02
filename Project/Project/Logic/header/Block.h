@@ -5,6 +5,14 @@
 #include "Array.h"
 #include "../../LogicDefines.h"
 
+#pragma region Comment
+/*
+Class: Block
+Description:
+This class creates the roads for the map and also defines the district blocks.
+*/
+#pragma endregion Description of class
+
 #define MAIN_ROAD_THRESHOLD 0.35f
 #define SMALL_ROAD_THRESHOLD 0.2f
 

@@ -4,6 +4,16 @@
 #include "Array2D.h"
 #include"../../LogicDefines.h"
 
+#pragma region Comment
+/*
+Class: Building
+Description:
+This class checks which tiles of the map are to have a building on it. This is decided by 
+the checking the generated treshhold against the district density. In addition it also checks
+against the heightmap and its treshhold to decide if the angled elevation is too steep.
+*/
+#pragma endregion Description of class
+
 class Building
 {
 private:
@@ -14,6 +24,8 @@ private:
 
 	int buildings[MAX_DISTRICTS];
 	int grassTiles[MAX_DISTRICTS];
+
+	const int HEIGHTMAP_TRESHHOLD = 0.05;
 public:
 	Building();
 	~Building();

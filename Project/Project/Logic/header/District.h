@@ -4,6 +4,16 @@
 #include "Array2D.h"
 #include "Array.h"
 #include "../../LogicDefines.h"
+#pragma region Comment
+/*
+Class: District
+Description:
+This class creates 3 seperate district start points on the map. It then generates the points to be 
+of the same district as the starting point closest to it. After this the borders are found and mixed 
+as to create a more naturall looking border.
+*/
+#pragma endregion Description of class
+
 class District
 {
 private:

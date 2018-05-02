@@ -11,7 +11,6 @@ Building::~Building()
 void Building::setHeight(int district, int minHeight, int maxHeight)
 {
 	assert(district >= 0 && district < MAX_DISTRICTS);
-	/*assert(height > 0);*/
 
 	districtMinHeights[district] = minHeight;
 	districtMaxHeights[district] = maxHeight;
@@ -43,13 +42,18 @@ void Building::generate(Array2D<int>& map, Array2D<float>& terrainMap, int width
 		for (int y = 0; y < HEIGHT; y++)
 		{
 			int district = map.at(x, y);
+
 			if (district < 8 && district >= 0)
 			{
 				float noiseResult = noise->generate(x * 10, y * 10, width, height);
+				float terrain0 = terrainMap.at(x, y);
+				float terrain1 = terrainMap.at(x + 1, y);
+				float terrain2 = terrainMap.at(x, y + 1);
+				float terrain3 = terrainMap.at(x + 1, y + 1);
 
-				if (noiseResult < districtDensities[district])
+				//Check if the position is allowed to have a house on it and if the positions elevation angle isnt over the extreme point
+				if (noiseResult < districtDensities[district] && abs(terrain0 - terrain1) <= HEIGHTMAP_TRESHHOLD && abs(terrain0 - terrain2) <= HEIGHTMAP_TRESHHOLD && abs(terrain0 - terrain3) <= HEIGHTMAP_TRESHHOLD)
 				{
-
 					buildings[district]++;
 				}
 				else
