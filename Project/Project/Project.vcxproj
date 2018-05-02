@@ -128,6 +128,7 @@
   <ItemGroup>
     <ClCompile Include="..\Includes\glad\src\glad.c" />
     <ClCompile Include="Controlls\Source\KeyIn.cpp" />
+    <ClCompile Include="Controlls\Source\Mouse.cpp" />
     <ClCompile Include="Graphic\Source\Camera.cpp" />
     <ClCompile Include="Graphic\Source\Mesh.cpp" />
     <ClCompile Include="Graphic\Source\Model.cpp" />
@@ -152,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
+    <ClInclude Include="Controlls\Header\Mouse.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Graphic\header\Camera.h" />
     <ClInclude Include="Graphic\header\Mesh.h" />

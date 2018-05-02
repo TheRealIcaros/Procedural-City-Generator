@@ -48,6 +48,7 @@ private:
 	void initiateImgui(GLFWwindow* window);
 	void initiateVariables();
 	void initiateData();
+	//static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
 	void generate();
 	void noiseGenerator(int generator);
@@ -56,6 +57,9 @@ private:
 	bool keyIsPressedF1;
 	bool shouldRun;
 	float FOV;
+	float cameraOffsetX;
+	float cameraOffsetY;
+
 
 	Array2D<float> terrainMap;
 	Array2D<int> cityMap;

@@ -28,7 +28,10 @@ void Program::initiateVariables()
 	this->keyIsPressedF1 = false;
 	this->shouldRun = true;
 	this->FOV = 0.45f * PI;
-	
+
+	this->cameraOffsetX = 0.0f;
+	this->cameraOffsetY = 0.0f;
+
 	this->noise = new PerlinNoise();
 	this->map = new HeightMap();
 	this->seed = new SeedConverter();
@@ -52,6 +55,24 @@ void Program::initiateData()
 
 	noiseGenerator(PERLIN_NOISE);
 }
+
+//void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+//{
+//	if (firstMouse)
+//	{
+//		lastX = xpos;
+//		lastY = ypos;
+//		firstMouse = false;
+//	}
+//
+//	float xoffset = xpos - lastX;
+//	float yoffset = lastY - ypos; //Reversed since y-coordinates go from bottom to top
+//	lastX = xpos;
+//	lastY = ypos;
+//
+//	camera->mouseMovement(xoffset, yoffset);
+//}
+
 
 void Program::generate()
 {
@@ -135,8 +156,10 @@ bool Program::Start()
 	//mouse_callback(window, lastX, lastY);
 	//glfwSetCursorPosCallback(window, cursor);
 
-	//glfwSetCursorPosCallback(window, camera->mouse_callback);
-	
+	//glfwSetCursorPosCallback(window, mouse_callback);
+	//glfwSetCursorPos(window, camera->mouseMovement);
+	//glfwGetCursorPos(window, camera->mouseMovement);
+
 
 	//glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
@@ -156,6 +179,8 @@ bool Program::Run()
 	ImGui_ImplGlfwGL3_NewFrame();
 	
 	myKeyInput->keyInput(window, genWindow, shouldRun);		//Checks if any key was pressed 
+
+	camera->mouseMovement(window, cameraOffsetX, cameraOffsetY);
 
 	genWindow->draw();										//Draw function for ImGui
 
