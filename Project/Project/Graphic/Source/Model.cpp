@@ -1,6 +1,6 @@
 #include "../header/Model.h"
 
-void Model::loadModel(std::string path)
+void Model::loadModel(std::string path, glm::vec3 startPosition)
 {
 	Assimp::Importer import;
 	const aiScene *scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
@@ -12,25 +12,25 @@ void Model::loadModel(std::string path)
 	}
 	directory = path.substr(0, path.find_last_of('/'));
 
-	processNode(scene->mRootNode, scene);
+	processNode(scene->mRootNode, scene, startPosition);
 }
 
-void Model::processNode(aiNode *node, const aiScene *scene)
+void Model::processNode(aiNode *node, const aiScene *scene, glm::vec3 startPosition)
 {
 	// process all the node's meshes (if any)
 	for (unsigned int i = 0; i < node->mNumMeshes; i++)
 	{
 		aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
-		meshes.push_back(processMesh(mesh, scene));
+		meshes.push_back(processMesh(mesh, scene, startPosition));
 	}
 	// then do the same for each of its children
 	for (unsigned int i = 0; i < node->mNumChildren; i++)
 	{
-		processNode(node->mChildren[i], scene);
+		processNode(node->mChildren[i], scene, startPosition);
 	}
 }
 
-Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
+Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene, glm::vec3 startPosition)
 {
 	std::vector<Vertex> vertices;
 	std::vector<unsigned int> indices;
@@ -84,7 +84,7 @@ Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
 		textures.insert(textures.end(), specularMaps.begin(), specularMaps.end());
 	}
 
-	return Mesh(vertices, indices, textures);
+	return Mesh(vertices, indices, textures, startPosition);
 }
 
 //std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName)
@@ -137,9 +137,9 @@ Model::Model()
 {
 }
 
-Model::Model(std::string const &path, bool gamma) : gammaCorrection(gamma)
+Model::Model(std::string const &path, glm::vec3 startPosition, bool gamma) : gammaCorrection(gamma)
 {
-	loadModel(path);
+	loadModel(path, startPosition);
 }
 
 Model::~Model()

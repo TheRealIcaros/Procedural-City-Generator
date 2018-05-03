@@ -2,8 +2,7 @@
 #define KEYIN_H
 
 #include <GLFW\glfw3.h>
-#include "../../Logic\header/GenWindow.h"
-//#include "../../Graphic/header/Camera.h"
+#include "..\..\Logic\header\GenWindow.h"
 
 //The struct to build up the delta time 
 struct Time
@@ -21,6 +20,7 @@ private:
 	//Key input variables
 	bool shouldRun;
 	bool keyIsPressedF1;
+	bool keyIsPressedLControl;
 	bool cameraCanMove;
 
 	//Time variable
@@ -32,8 +32,7 @@ public:
 	~KeyIn();
 
 	void calculateDeltaTime();
-	/*void keyInput(GLFWwindow* window, GenWindow* genWindow, Camera& camera, bool &shouldRun);*/
 	void keyInput(GLFWwindow* window, GenWindow* genWindow, bool& shouldRun);	//Checks if any key was pressed 
-
+	bool getCameraShouldMove()const;
 };
 #endif

@@ -2,12 +2,6 @@
 #include "Graphic\header\Program.h"
 #include <crtdbg.h>
 
-//3D-math
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp>
-
-
 
 int main()
 {

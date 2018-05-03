@@ -3,6 +3,7 @@
 
 //Own headers
 #include "shaderCreater.h"
+#include "../../Defines.h"
 
 //General includes
 #include <glm.hpp>
@@ -30,6 +31,9 @@ private:
 	unsigned int VBO;
 	unsigned int EBO;
 
+	glm::mat4 Model;
+	glm::vec3 localPosition;
+
 	void setupMesh();
 public:
 	Mesh();
@@ -39,7 +43,7 @@ public:
 	std::vector<unsigned int> indices;
 	std::vector<Texture> textures;
 
-	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures);
+	Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices, std::vector<Texture> textures, glm::vec3 startPosition);
 	void Draw(shaderCreater shader);
 };
 

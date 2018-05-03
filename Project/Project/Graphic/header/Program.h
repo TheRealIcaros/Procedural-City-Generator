@@ -3,11 +3,10 @@
 
 //Own made includes
 #include "Model.h"
-//#include "Deferred.h"
 #include "Camera.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Logic/header/GenWindow.h"
-
+//#include "Deferred.h"
 
 //Imgui stuff
 #include "../../Imgui/imgui.h"
@@ -46,7 +45,8 @@ private:
 	//Model myModel;
 	
 	shaderCreater renderPass;
-	std::vector<Model> models;
+	Model models;
+	//std::vector<Model> models;
 	//Deferred* deferred;
 
 	//Initiation functions for the applications core functions
@@ -55,6 +55,7 @@ private:
 	void initiateImgui(GLFWwindow* window);
 	void initiateVariables();
 	void initiateData();
+	//static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
 	void generate();
 	void noiseGenerator(int generator);
@@ -63,6 +64,9 @@ private:
 	bool keyIsPressedF1;
 	bool shouldRun;
 	float FOV;
+	float cameraOffsetX;
+	float cameraOffsetY;
+
 
 	Array2D<float> terrainMap;
 	Array2D<int> cityMap;
@@ -75,7 +79,7 @@ public:
 	bool Run();					//The main-loop/ Returns false when we exit it 
 	void Stop();				//Cleans upp the memory and returns everything
 
-	void render();	//The render loop in the application
+	void render();				//The render loop in the application
 };
 
 #endif

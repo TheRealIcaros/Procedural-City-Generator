@@ -1,23 +1,6 @@
 #include "../header/Camera.h"
 
-//void Camera::mouse_callback(GLFWwindow* window, double xpos, double ypos)
-//{
-//	if (firstMouse)
-//	{
-//		lastX = xpos;
-//		lastY = ypos;
-//		firstMouse = false;
-//	}
-//
-//	float xoffset = xpos - lastX;
-//	float yoffset = lastY - ypos; //Reversed since y-coordinates go from bottom to top
-//	lastX = xpos;
-//	lastY = ypos;
-//
-//	mouseMovement(xoffset, yoffset);
-//}
-
-Camera::Camera()
+Camera::Camera(GLFWwindow* window)
 {
 	this->cameraPosition = { 0.0f, 0.0f, 0.0f };
 	this->lookAtVector = { 0.0f, 0.0f, -1.0f };
@@ -27,15 +10,13 @@ Camera::Camera()
 	this->sensitivity = 0.05f;
 	this->speed = 5.0f;
 
-	////Pitch/Yaw properties
-	firstMouse = true;
-	lastX = WIDTH / 2.0f;
-	lastY = HEIGHT / 2.0f;
+	//Initiates the mouse
+	this->myMouse = new Mouse(window);
 
 	this->View = glm::lookAt(this->cameraPosition, this->cameraPosition + this->lookAtVector, this->upVector);
 }
 
-Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector)
+Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, GLFWwindow* window)
 {
 	this->cameraPosition = cameraPosition;
 	this->lookAtVector = lookAtVector;
@@ -45,15 +26,13 @@ Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector)
 	this->sensitivity = 0.05f;
 	this->speed = 5.0f;
 
-	////Pitch/Yaw properties
-	firstMouse = true;
-	lastX = WIDTH / 2.0f;
-	lastY = HEIGHT / 2.0f;
+	//Initiates the mouse
+	this->myMouse = new Mouse(window);
 
 	this->View = glm::lookAt(this->cameraPosition, this->cameraPosition + this->lookAtVector, this->upVector);
 }
 
-Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVector)
+Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVector, GLFWwindow* window)
 {
 	this->cameraPosition = cameraPosition;
 	this->lookAtVector = lookAtVector;
@@ -63,17 +42,15 @@ Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVec
 	this->sensitivity = 0.05f;
 	this->speed = 5.0f;
 
-	////Pitch/Yaw properties
-	firstMouse = true;
-	lastX = WIDTH / 2.0f;
-	lastY = HEIGHT / 2.0f;
+	//Initiates the mouse
+	this->myMouse = new Mouse(window);
 
 	this->View = glm::lookAt(this->cameraPosition, this->cameraPosition + this->lookAtVector, this->upVector);
 }
 
 Camera::~Camera()
 {
-
+	delete this->myMouse;
 }
 
 void Camera::setLookAtVector(glm::vec3 lookAtVector)
@@ -88,8 +65,10 @@ void Camera::moveCameraPosition(glm::vec3 movement)
 	this->View = glm::lookAt(this->cameraPosition, this->cameraPosition + this->lookAtVector, this->upVector);
 }
 
-void Camera::mouseMovement(float xoffset, float yoffset)
+void Camera::mouseMovement(GLFWwindow* window, float xoffset, float yoffset)
 {
+	this->myMouse->moveMouse(window, xoffset, yoffset);
+
 	xoffset *= this->sensitivity;
 	yoffset *= this->sensitivity;
 
@@ -111,8 +90,6 @@ void Camera::mouseMovement(float xoffset, float yoffset)
 }
 
 // - GET/SET
-
-
 void Camera::setYaw(float yaw)
 {
 	this->yaw = yaw;

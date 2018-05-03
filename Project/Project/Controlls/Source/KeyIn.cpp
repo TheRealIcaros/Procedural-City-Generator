@@ -3,6 +3,7 @@
 void KeyIn::initiateVariables()
 {
 	this->keyIsPressedF1 = false; //The button isn't pressed from the start 
+	this->keyIsPressedLControl = false; //The button isn't pressed from the start 
 	this->cameraCanMove = true;
 
 	this->time.deltaTime = 0.0f;
@@ -45,11 +46,10 @@ void KeyIn::keyInput(GLFWwindow* window, GenWindow* genWindow, bool &shouldRun)
 		shouldRun = false;
 	}
 
+
 	if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_PRESS && keyIsPressedF1 == false)
 	{
 		this->keyIsPressedF1 = true;
-		this->cameraCanMove = false;
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		
 		genWindow->toggleDebugToDraw();
 		
@@ -57,11 +57,28 @@ void KeyIn::keyInput(GLFWwindow* window, GenWindow* genWindow, bool &shouldRun)
 	else if (glfwGetKey(window, GLFW_KEY_F1) == GLFW_RELEASE && keyIsPressedF1 == true)
 	{
 		this->keyIsPressedF1 = false;
+	}
+
+	//Mouse viseble or not
+	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS && keyIsPressedLControl == false)
+	{
+		this->keyIsPressedLControl = true;
+		this->cameraCanMove = false;
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+	}
+	else if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_RELEASE && keyIsPressedLControl == true)
+	{
+		this->keyIsPressedLControl = false;
 		this->cameraCanMove = true;
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
 
 	
+}
+
+bool KeyIn::getCameraShouldMove()const
+{
+	return cameraCanMove;
 }
 
 //void KeyIn::keyInput(GLFWwindow* window, GenWindow* genWindow, Camera& camera, bool &shouldRun)
