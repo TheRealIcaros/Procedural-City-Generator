@@ -40,6 +40,7 @@ void Program::initiateVariables()
 	this->cameraOffsetX = 0.0f;
 	this->cameraOffsetY = 0.0f;
 
+	//Class object used by the Program class
 	this->noise = new PerlinNoise();
 	this->map = new HeightMap();
 	this->district = new District();
@@ -60,7 +61,6 @@ void Program::initiateData()
 {
 	noiseGenerator(PERLIN_NOISE);
 }
-
 
 void Program::generate()
 {

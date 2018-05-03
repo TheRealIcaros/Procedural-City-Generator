@@ -22,6 +22,7 @@
 #include "../../Logic/header/Building.h"
 #include <math.h>
 
+
 enum
 {
 	PERLIN_NOISE = 0,
@@ -42,10 +43,11 @@ private:
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
 	Camera* camera;
-	//Model myModel;
 	
 	shaderCreater renderPass;
 	Model models;
+
+
 	//std::vector<Model> models;
 	//Deferred* deferred;
 
