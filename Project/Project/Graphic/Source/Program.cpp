@@ -1,6 +1,6 @@
 #include "../header/Program.h"
 #include <Windows.h> //take away once done
-#include <ctime>
+#include <chrono>
 
 void setColor(unsigned short color)
 {
@@ -64,7 +64,7 @@ void Program::initiateVariables()
 
 void Program::generate()
 {
-	unsigned int start = clock();
+	std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 	cityMap.fill(7);
 	terrainMap.fill(0);
 	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
@@ -93,6 +93,18 @@ void Program::generate()
 	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
 
 	building->generate(cityMap, terrainMap, genWindow->getPSizeX(), genWindow->getPSizeY());
+
+	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+	genWindow->setGenTime(std::chrono::duration<float>(end - start).count());
+	genWindow->setCounter(noise->getCounter());
+	genWindow->setMainRoad(block->getMainRoad());
+	genWindow->setSmallRoad(block->getSmallRoad());
+	genWindow->setSeed(seed->getSeed());
+	for (int i = 0; i < MAX_DISTRICTS; i++)
+	{
+		genWindow->setBuildings(i, building->getBuildings()[i]);
+		genWindow->setGrass(i, building->getGrassTiles()[i]);
+	}
 
 	system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
@@ -129,17 +141,6 @@ void Program::generate()
 				std::cout << "\n";
 			}
 		}
-	}
-	
-	genWindow->setGenTime((clock() - start));
-	genWindow->setCounter(noise->getCounter());
-	genWindow->setMainRoad(block->getMainRoad());
-	genWindow->setSmallRoad(block->getSmallRoad());
-	genWindow->setSeed(seed->getSeed());
-	for (int i = 0; i < MAX_DISTRICTS; i++)
-	{
-		genWindow->setBuildings(i, building->getBuildings()[i]);
-		genWindow->setGrass(i, building->getGrassTiles()[i]);
 	}
 }
 

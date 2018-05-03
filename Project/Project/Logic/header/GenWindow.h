@@ -72,7 +72,7 @@ public:
 	void setSmallRoad(int roads) { this->smallRoads = roads; }
 	void setBuildings(int districts, int building) { this->buildings[districts] = building; }
 	void setGrass(int districts, int grass) { this->grass[districts] = grass; }
-	void setGenTime(float genTime) { this->genTime = genTime / 1000.0f; }
+	void setGenTime(float genTime) { this->genTime = genTime; }
 	bool getRandom() { return this->random; }
 	bool getGenerate() { return this->generate; }
 	void toggleGenerate() { this->generate = !this->generate; }
