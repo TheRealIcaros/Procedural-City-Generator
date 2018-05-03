@@ -130,8 +130,12 @@
     <ClCompile Include="Controlls\Source\KeyIn.cpp" />
     <ClCompile Include="Controlls\Source\Mouse.cpp" />
     <ClCompile Include="Graphic\Source\Camera.cpp" />
-    <ClCompile Include="Graphic\Source\Mesh.cpp" />
-    <ClCompile Include="Graphic\Source\Model.cpp" />
+    <ClCompile Include="Graphic\Source\Mesh.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="Graphic\Source\Model.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Graphic\Source\Program.cpp" />
     <ClCompile Include="Graphic\Source\Terrain.cpp" />
     <ClCompile Include="Imgui\imgui.cpp" />
@@ -156,8 +160,12 @@
     <ClInclude Include="Controlls\Header\Mouse.h" />
     <ClInclude Include="Defines.h" />
     <ClInclude Include="Graphic\header\Camera.h" />
-    <ClInclude Include="Graphic\header\Mesh.h" />
-    <ClInclude Include="Graphic\header\Model.h" />
+    <ClInclude Include="Graphic\header\Mesh.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
+    <ClInclude Include="Graphic\header\Model.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Graphic\header\Program.h" />
     <ClInclude Include="Graphic\header\Terrain.h" />
     <ClInclude Include="Imgui\imconfig.h" />

@@ -45,7 +45,6 @@
     <ClInclude Include="Graphic\header\shaderCreater.h" />
     <ClInclude Include="Logic\header\PerlinNoise.h" />
     <ClInclude Include="Logic\header\ppm.h" />
-    <ClInclude Include="Graphic\header\Object.h" />
     <ClInclude Include="Graphic\header\Terrain.h" />
     <ClInclude Include="Graphic\header\Camera.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />

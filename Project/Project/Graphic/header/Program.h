@@ -2,7 +2,8 @@
 #define PROGRAM_H
 
 //Own made includes
-#include "Model.h"
+//#include "Model.h"
+#include "shaderCreater.h"
 #include "Camera.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Logic/header/GenWindow.h"
@@ -21,7 +22,6 @@
 #include "../../Logic/header/Block.h"
 #include "../../Logic/header/Building.h"
 #include <math.h>
-
 
 enum
 {
@@ -45,8 +45,7 @@ private:
 	Camera* camera;
 	
 	shaderCreater renderPass;
-	Model models;
-
+	//Model models;
 
 	//std::vector<Model> models;
 	//Deferred* deferred;

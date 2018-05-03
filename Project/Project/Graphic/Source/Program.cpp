@@ -48,7 +48,7 @@ void Program::initiateVariables()
 	this->building = new Building();
 	this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
-	this->models = Model();
+	//this->models = Model();
 
 	this->myKeyInput = new KeyIn();
 	this->camera = new Camera(window);
@@ -207,9 +207,9 @@ bool Program::Start()
 
 	renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
 
-	std::string const path = "./Models/Box/Box.obj";
+	//std::string const path = "./Models/Box/Box.obj";
 	//models.push_back(path);
-	models.loadModel(path, glm::vec3(0.0f, 0.0f, -2.0f));
+	//models.loadModel(path, glm::vec3(0.0f, 0.0f, -2.0f));
 	//deferred->initiateDeferred();
 
 	return returnValue;
@@ -284,11 +284,10 @@ void Program::render()
 	model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));			 // it's a bit too big for our scene, so scale it down
 	renderPass.setMat4("model", model);
 
-	
 	//for (int i = 0; i < models.; i++)
 
 	//Draws all the models in the application
-	models.Draw(renderPass);
+	//models.Draw(renderPass);
 
 	//ImGui that handles the graphical interface
 	ImGui::Render();
