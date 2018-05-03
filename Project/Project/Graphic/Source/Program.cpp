@@ -1,4 +1,11 @@
 #include "../header/Program.h"
+#include <Windows.h> //take away once done
+
+void setColor(unsigned short color)
+{
+	HANDLE hcon = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(hcon, color);
+}
 
 void Program::initiateGLFW()
 {
@@ -31,6 +38,9 @@ void Program::initiateVariables()
 	
 	this->noise = new PerlinNoise();
 	this->map = new HeightMap();
+	this->district = new District();
+	this->block = new Block();
+	this->building = new Building();
 	this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
 	////Pitch/Yaw properties
@@ -40,7 +50,6 @@ void Program::initiateVariables()
 
 	this->myKeyInput = new KeyIn();
 	this->camera = new Camera();
-	/*this->dataManager = new DataManager();*/
 	//this->myObject = new Object();
 
 	terrainMap.fill(0.0f);
@@ -48,28 +57,86 @@ void Program::initiateVariables()
 
 void Program::initiateData()
 {
-	/*dataManager->addDataHolder(map);*/
-
 	noiseGenerator(PERLIN_NOISE);
 }
 
 void Program::generate()
 {
+	cityMap.fill(7);
+	terrainMap.fill(0);
+
 	if (genWindow->getInputBuf().compare("") != 0)
 	{
 		seed->setSeed(genWindow->getInputBuf());
 	}
-	/*dataManager->addData("Seed", seed->getIntegerSeed());*/
 	genWindow->setSeed(seed->getIntegerSeed());
 	noise->setSeed(seed->getIntegerSeed());
 
-	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave1(),
-		genWindow->getTerrainOctave2(), genWindow->getTerrainOctave3(), genWindow->getTerrainOctave4(), genWindow->getTerrainOctave5(), genWindow->getTerrainOctave6(),
-		genWindow->getTerrainOctave7(), genWindow->getTerrainOctave8(), genWindow->getTerrainOctavePerc1(), genWindow->getTerrainOctavePerc2(), genWindow->getTerrainOctavePerc3(),
-		genWindow->getTerrainOctavePerc4(), genWindow->getTerrainOctavePerc5(), genWindow->getTerrainOctavePerc6(), genWindow->getTerrainOctavePerc7(), genWindow->getTerrainOctavePerc8(),
-		genWindow->getRedistribution());
+
+	for (int i = 0; i < MAX_DISTRICTS; i++)
+	{
+		block->setBlockSize(i, genWindow->getBlockSize()[i]);
+		building->setDensity(i, genWindow->getDensity()[i]/100.0f);
+		building->setHeight(i, genWindow->getMinHeight()[i], genWindow->getMaxHeight()[i]);
+	}
+
+	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave(), genWindow->getTerrainOctavePerc(), genWindow->getRedistribution());
+
+	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
+
+	district->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY(), genWindow->getBorderPerc());
+
+	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
+
+	building->generate(cityMap, terrainMap, genWindow->getPSizeX(), genWindow->getPSizeY());
+	
+	system("CLS");
+	for (int j = 0; j < genWindow->getTSizeY(); j++)
+	{
+		for (int i = 0; i < genWindow->getTSizeX(); i++)
+		{
+			if (cityMap.at(i, j) == 0)
+			{
+				setColor(11);
+			}
+			else if (cityMap.at(i, j) == 1)
+			{
+				setColor(14);
+			}
+			else if (cityMap.at(i, j) == 2)
+			{
+				setColor(4);
+			}
+			else if (cityMap.at(i, j) == 7)
+			{
+				setColor(2);
+			}
+			else if (cityMap.at(i, j) == 8)
+			{
+				setColor(13);
+			}
+			else if (cityMap.at(i, j) == 9)
+			{
+				setColor(5);
+			}
+			std::cout << cityMap.at(i, j);
+			if (i == genWindow->getTSizeY() - 1)
+			{
+				std::cout << "\n";
+			}
+		}
+	}
+
+
 
 	genWindow->setCounter(noise->getCounter());
+	genWindow->setMainRoad(block->getMainRoad());
+	genWindow->setSmallRoad(block->getSmallRoad());
+	for (int i = 0; i < MAX_DISTRICTS; i++)
+	{
+		genWindow->setBuildings(i, building->getBuildings()[i]);
+		genWindow->setGrass(i, building->getGrassTiles()[i]);
+	}
 	this->camera = new Camera();
 }
 
@@ -78,6 +145,9 @@ void Program::noiseGenerator(int generator)
 	if (generator == PERLIN_NOISE)
 	{
 		map->setNoise(noise);
+		district->setNoise(noise);
+		block->setNoise(noise);
+		building->setNoise(noise);
 	}
 	else
 	{
@@ -183,10 +253,12 @@ void Program::Stop()
 
 	delete this->noise;
 	delete this->map;
+	delete this->district;
+	delete this->block;
+	delete this->building;
 	delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;
-	//delete this->dataManager;
 	//delete this->myObject;
 	delete this->camera;
 }

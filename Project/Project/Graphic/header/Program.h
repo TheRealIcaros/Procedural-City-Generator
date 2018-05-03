@@ -18,6 +18,9 @@
 #include "../../Logic/header/ppm.h"
 #include "../../Logic/header/SeedConverter.h"
 #include "../../Logic/header/HeightMap.h"
+#include "../../Logic/header/District.h"
+#include "../../Logic/header/Block.h"
+#include "../../Logic/header/Building.h"
 #include <math.h>
 
 enum
@@ -32,6 +35,9 @@ private:
 	//Class objects
 	PerlinNoise * noise;
 	HeightMap * map;
+	District * district;
+	Block * block;
+	Building * building;
 	SeedConverter* seed;
 	GLFWwindow* window;
 	GenWindow* genWindow;
