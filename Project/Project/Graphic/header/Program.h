@@ -3,8 +3,7 @@
 
 //Own made includes
 //#include "Model.h"
-#include "shaderCreater.h"
-#include "Camera.h"
+#include "Render.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Logic/header/GenWindow.h"
 //#include "Deferred.h"
@@ -66,7 +65,6 @@ private:
 	float FOV;
 	float cameraOffsetX;
 	float cameraOffsetY;
-
 
 	Array2D<float> terrainMap;
 	Array2D<int> cityMap;

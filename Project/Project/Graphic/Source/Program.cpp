@@ -262,16 +262,9 @@ void Program::Stop()
 void Program::render()
 {
 	//Cleans the color buffer and set the defaultbacgroundcolor
-	glClearColor(0.3f, 1.0f, 1.0f, 1.0f);
+	//glClearColor(0.3f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	//Rendering the Deferred part
-	//deferred->render();
-	//glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-	//glBindVertexArray(models);
-	//glDrawArrays(GL_TRIANGLES, 0, 3);
-	
-	//// draw our first triangle
 	glUseProgram(renderPass.getShaderProgramID());
 
 	glm::mat4 projection = glm::perspective(FOV, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
@@ -285,7 +278,6 @@ void Program::render()
 	renderPass.setMat4("model", model);
 
 	//for (int i = 0; i < models.; i++)
-
 	//Draws all the models in the application
 	//models.Draw(renderPass);
 
@@ -293,3 +285,10 @@ void Program::render()
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
+
+//// draw our first triangle
+//Rendering the Deferred part
+//deferred->render();
+//glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+//glBindVertexArray(models);
+//glDrawArrays(GL_TRIANGLES, 0, 3);
