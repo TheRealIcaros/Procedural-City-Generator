@@ -212,10 +212,10 @@ void Program::render()
 	renderPass.setMat4("projection", projection);
 	renderPass.setMat4("view", view);
 
-	//glm::mat4 model;
-	//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));	  // translate it down so it's at the center of the scene
-	//model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));			 // it's a bit too big for our scene, so scale it down
-	//renderPass.setMat4("model", model);
+	glm::mat4 model;
+	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));	  // translate it down so it's at the center of the scene
+	model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));			 // it's a bit too big for our scene, so scale it down
+	renderPass.setMat4("model", model);
 
 	
 	//for (int i = 0; i < models.; i++)
