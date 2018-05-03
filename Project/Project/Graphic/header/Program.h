@@ -55,7 +55,6 @@ private:
 	void initiateImgui(GLFWwindow* window);
 	void initiateVariables();
 	void initiateData();
-	//static void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 
 	void generate();
 	void noiseGenerator(int generator);

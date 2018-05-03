@@ -60,13 +60,13 @@ void KeyIn::keyInput(GLFWwindow* window, GenWindow* genWindow, bool &shouldRun)
 	}
 
 	//Mouse viseble or not
-	if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS && keyIsPressedLControl == false)
+	if (glfwGetKey(window, GLFW_KEY_LEFT_ALT) == GLFW_PRESS && keyIsPressedLControl == false)
 	{
 		this->keyIsPressedLControl = true;
 		this->cameraCanMove = false;
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 	}
-	else if (glfwGetKey(window, GLFW_KEY_LEFT_CONTROL) == GLFW_RELEASE && keyIsPressedLControl == true)
+	else if (glfwGetKey(window, GLFW_KEY_LEFT_ALT) == GLFW_RELEASE && keyIsPressedLControl == true)
 	{
 		this->keyIsPressedLControl = false;
 		this->cameraCanMove = true;

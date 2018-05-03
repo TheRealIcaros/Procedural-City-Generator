@@ -36,6 +36,7 @@ void Program::initiateVariables()
 	this->shouldRun = true;
 	this->FOV = 0.45f * PI;
 
+	//Values for mousemovements
 	this->cameraOffsetX = 0.0f;
 	this->cameraOffsetY = 0.0f;
 
@@ -47,10 +48,6 @@ void Program::initiateVariables()
 	this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
 	this->models = Model();
-	////Pitch/Yaw properties
-	//firstMouse = true;
-	//lastX = WIDTH / 2.0f;
-	//lastY = HEIGHT / 2.0f;
 
 	this->myKeyInput = new KeyIn();
 	this->camera = new Camera(window);
@@ -131,8 +128,6 @@ void Program::generate()
 			}
 		}
 	}
-
-
 
 	genWindow->setCounter(noise->getCounter());
 	genWindow->setMainRoad(block->getMainRoad());
@@ -258,8 +253,8 @@ void Program::Stop()
 	delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;
-	//delete this->myObject;
 	delete this->camera;
+	//delete this->myObject;
 
 	glfwTerminate();
 }
