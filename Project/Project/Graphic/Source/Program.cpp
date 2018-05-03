@@ -53,7 +53,7 @@ void Program::initiateVariables()
 	//lastY = HEIGHT / 2.0f;
 
 	this->myKeyInput = new KeyIn();
-	this->camera = new Camera();
+	this->camera = new Camera(window);
 	//this->myObject = new Object();
 
 	terrainMap.fill(0.0f);
@@ -142,7 +142,6 @@ void Program::generate()
 		genWindow->setBuildings(i, building->getBuildings()[i]);
 		genWindow->setGrass(i, building->getGrassTiles()[i]);
 	}
-	this->camera = new Camera();
 }
 
 void Program::noiseGenerator(int generator)
