@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -145,7 +145,6 @@
     <ClCompile Include="Logic\Source\Building.cpp" />
     <ClCompile Include="Logic\Source\District.cpp" />
     <ClCompile Include="Logic\Source\HeightMap.cpp" />
-    <ClCompile Include="Logic\Source\Noise.cpp" />
     <ClCompile Include="Logic\Source\PerlinNoise.cpp" />
     <ClCompile Include="Logic\Source\RandomNoise.cpp" />
     <ClCompile Include="Logic\Source\SeedConverter.cpp" />

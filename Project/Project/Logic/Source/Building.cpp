@@ -1,4 +1,5 @@
 #include "..\header\Building.h"
+#include <vector>
 
 Building::Building()
 {
@@ -67,7 +68,7 @@ void Building::generate(Array2D<int>& map, Array2D<float>& terrainMap, int width
 
 }
 
-void Building::setNoise(PerlinNoise * noise)
+void Building::setNoise(Noise * noise)
 {
 	this->noise = noise;
 }

@@ -45,6 +45,7 @@ private:
 	int blockSize[MAX_DISTRICTS];
 	int count;
 	bool generate = false;
+	bool random = false;
 
 public:
 	GenWindow();
@@ -71,6 +72,7 @@ public:
 	void setSmallRoad(int roads) { this->smallRoads = roads; }
 	void setBuildings(int districts, int building) { this->buildings[districts] = building; }
 	void setGrass(int districts, int grass) { this->grass[districts] = grass; }
+	bool getRandom() { return this->random; }
 	bool getGenerate() { return this->generate; }
 	void toggleGenerate() { this->generate = !this->generate; }
 };

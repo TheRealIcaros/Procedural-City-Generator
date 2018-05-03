@@ -40,6 +40,7 @@ void Program::initiateVariables()
 	this->cameraOffsetY = 0.0f;
 
 	this->noise = new PerlinNoise();
+	this->randNoise = new RandomNoise();
 	this->map = new HeightMap();
 	this->district = new District();
 	this->block = new Block();
@@ -59,24 +60,18 @@ void Program::initiateVariables()
 	terrainMap.fill(0.0f);
 }
 
-void Program::initiateData()
-{
-	noiseGenerator(PERLIN_NOISE);
-}
-
 
 void Program::generate()
 {
 	cityMap.fill(7);
 	terrainMap.fill(0);
+	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
 
 	if (genWindow->getInputBuf().compare("") != 0)
 	{
 		seed->setSeed(genWindow->getInputBuf());
 	}
-	genWindow->setSeed(seed->getIntegerSeed());
-	noise->setSeed(seed->getIntegerSeed());
-
+	noiseGenerator(seed->getIntegerSeed());
 
 	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
@@ -86,8 +81,6 @@ void Program::generate()
 	}
 
 	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave(), genWindow->getTerrainOctavePerc(), genWindow->getRedistribution());
-
-	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
 
 	district->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY(), genWindow->getBorderPerc());
 
@@ -137,6 +130,7 @@ void Program::generate()
 	genWindow->setCounter(noise->getCounter());
 	genWindow->setMainRoad(block->getMainRoad());
 	genWindow->setSmallRoad(block->getSmallRoad());
+	genWindow->setSeed(seed->getIntegerSeed());
 	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
 		genWindow->setBuildings(i, building->getBuildings()[i]);
@@ -144,10 +138,11 @@ void Program::generate()
 	}
 }
 
-void Program::noiseGenerator(int generator)
+void Program::noiseGenerator(unsigned int seed)
 {
-	if (generator == PERLIN_NOISE)
+	if (!genWindow->getRandom())
 	{
+		noise->setSeed(seed);
 		map->setNoise(noise);
 		district->setNoise(noise);
 		block->setNoise(noise);
@@ -155,7 +150,11 @@ void Program::noiseGenerator(int generator)
 	}
 	else
 	{
-		//random
+		randNoise->setSeed(seed);
+		map->setNoise(randNoise);
+		district->setNoise(randNoise);
+		block->setNoise(randNoise);
+		building->setNoise(randNoise);
 	}
 }
 
@@ -192,8 +191,6 @@ bool Program::Start()
 	glfwMakeContextCurrent(window);
 
 	initiateVariables();
-
-	initiateData();
 
 	initiateImgui(window);
 
@@ -251,6 +248,7 @@ void Program::Stop()
 	ImGui::DestroyContext();
 
 	delete this->noise;
+	delete this->randNoise;
 	delete this->map;
 	delete this->district;
 	delete this->block;

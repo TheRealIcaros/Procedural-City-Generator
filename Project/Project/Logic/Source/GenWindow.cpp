@@ -172,6 +172,7 @@ void GenWindow::draw()
 		ImGui::SliderInt("##Factories.Block.Size", &blockSize[2], 1, 100);
 		ImGui::Separator();
 		ImGui::Spacing();
+		ImGui::Checkbox("Random Generator", &random);
 		if (ImGui::Button("Generate"))
 		{
 			generate = true;;

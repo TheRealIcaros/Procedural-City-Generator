@@ -25,7 +25,6 @@ void SeedConverter::setSeed(std::string seed)
 {
 	this->strSeed = seed;
 	this->convertSeed();
-	
 }
 
 void SeedConverter::convertSeed()

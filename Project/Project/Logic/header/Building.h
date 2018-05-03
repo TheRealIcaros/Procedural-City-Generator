@@ -1,6 +1,6 @@
 #ifndef BUILDING_H
 #define BUILDING_H
-#include "PerlinNoise.h"
+#include "Noise.h"
 #include "Array2D.h"
 #include"../../LogicDefines.h"
 
@@ -17,7 +17,7 @@ against the heightmap and its treshhold to decide if the angled elevation is too
 class Building
 {
 private:
-	PerlinNoise * noise;
+	Noise * noise;
 	int districtMinHeights[MAX_DISTRICTS];
 	int districtMaxHeights[MAX_DISTRICTS];
 	float districtDensities[MAX_DISTRICTS];
@@ -32,7 +32,7 @@ public:
 	void setHeight(int district, int minHeight, int maxHeight);
 	void setDensity(int district, float density);
 	void generate(Array2D<int>& map, Array2D<float>& terrainMap, int width, int height);
-	void setNoise(PerlinNoise* noise);
+	void setNoise(Noise* noise);
 	int* getBuildings() { return buildings; }
 	int* getGrassTiles() { return grassTiles; }
 };
