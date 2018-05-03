@@ -90,9 +90,9 @@ void GenWindow::draw()
 		ImGui::Text("Total grass");
 		ImGui::Text("%d", grass[0] + grass[1] + grass[2]);
 		ImGui::Text("Integer Seed");
-		ImGui::Text("%d", seed);
+		ImGui::Text("%u", seed);
 		ImGui::Text("Generation Time");
-		ImGui::Text("%d", genTime);
+		ImGui::Text("%f s", genTime);
 	}
 
 	ImGui::End();
@@ -147,7 +147,7 @@ void GenWindow::draw()
 		ImGui::Text("Density");
 		ImGui::SliderInt("##House.Density", &density[0], 1, 100);
 		ImGui::Text("Block Size");
-		ImGui::SliderInt("##House.Block.Size", &blockSize[0], 1, 100);
+		ImGui::SliderInt("##House.Block.Size", &blockSize[0], 1, 5);
 		ImGui::Separator();
 		ImGui::Text("Skyscrapers");
 		ImGui::Spacing();

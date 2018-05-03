@@ -27,8 +27,8 @@ private:
 	int smallRoads;					//ammount of Small Roads
 	int buildings[MAX_DISTRICTS];	//house, skyscraper, factory
 	int grass[MAX_DISTRICTS];		//Total ammount of Grass Tiles in a District
-	int seed;						//Perlin Noise generation seed in integer form
-	int genTime;					//Total ammount of time to generate
+	unsigned int seed;						//Perlin Noise generation seed in integer form
+	float genTime;					//Total ammount of time to generate
 
 	char inputBuf[256] = "";
 	int tSizeX;
@@ -66,12 +66,13 @@ public:
 	int* getMaxHeight() { return this->maxHeight; }
 	int* getDensity() { return this->density; }
 	int* getBlockSize() { return this->blockSize; }
-	void setSeed(int seed) { this->seed = seed; }
+	void setSeed(unsigned int seed) { this->seed = seed; }
 	void setCounter(int count) { this->count = count; }
 	void setMainRoad(int roads) { this->mainRoads = roads; }
 	void setSmallRoad(int roads) { this->smallRoads = roads; }
 	void setBuildings(int districts, int building) { this->buildings[districts] = building; }
 	void setGrass(int districts, int grass) { this->grass[districts] = grass; }
+	void setGenTime(float genTime) { this->genTime = genTime / 1000.0f; }
 	bool getRandom() { return this->random; }
 	bool getGenerate() { return this->generate; }
 	void toggleGenerate() { this->generate = !this->generate; }

@@ -1,5 +1,6 @@
 #include "../header/Program.h"
 #include <Windows.h> //take away once done
+#include <ctime>
 
 void setColor(unsigned short color)
 {
@@ -63,6 +64,7 @@ void Program::initiateVariables()
 
 void Program::generate()
 {
+	unsigned int start = clock();
 	cityMap.fill(7);
 	terrainMap.fill(0);
 	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
@@ -71,12 +73,16 @@ void Program::generate()
 	{
 		seed->setSeed(genWindow->getInputBuf());
 	}
-	noiseGenerator(seed->getIntegerSeed());
+	else
+	{
+		seed->setSeed("BLARGH");
+	}
+	noiseGenerator(seed->getSeed());
 
 	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
 		block->setBlockSize(i, genWindow->getBlockSize()[i]);
-		building->setDensity(i, genWindow->getDensity()[i]/100.0f);
+		building->setDensity(i, genWindow->getDensity()[i]);
 		building->setHeight(i, genWindow->getMinHeight()[i], genWindow->getMaxHeight()[i]);
 	}
 
@@ -87,7 +93,7 @@ void Program::generate()
 	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
 
 	building->generate(cityMap, terrainMap, genWindow->getPSizeX(), genWindow->getPSizeY());
-	
+
 	system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
 	{
@@ -124,13 +130,12 @@ void Program::generate()
 			}
 		}
 	}
-
-
-
+	
+	genWindow->setGenTime((clock() - start));
 	genWindow->setCounter(noise->getCounter());
 	genWindow->setMainRoad(block->getMainRoad());
 	genWindow->setSmallRoad(block->getSmallRoad());
-	genWindow->setSeed(seed->getIntegerSeed());
+	genWindow->setSeed(seed->getSeed());
 	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
 		genWindow->setBuildings(i, building->getBuildings()[i]);

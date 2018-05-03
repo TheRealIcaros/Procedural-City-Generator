@@ -19,10 +19,11 @@ void Building::setHeight(int district, int minHeight, int maxHeight)
 
 void Building::setDensity(int district, float density)
 {
+	float temp = density / 100.0f;
 	assert(district >= 0 && district < MAX_DISTRICTS);
-	assert(density >= 0.0f && density <= 1.0f);
+	assert(temp >= 0.0f && temp <= 1.0f);
 
-	districtDensities[district] = density;
+	districtDensities[district] = temp;
 }
 
 void Building::generate(Array2D<int>& map, Array2D<float>& terrainMap, int width, int height)

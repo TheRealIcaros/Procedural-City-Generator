@@ -16,7 +16,7 @@ SeedConverter::~SeedConverter()
 {
 }
 
-unsigned int SeedConverter::getIntegerSeed()
+unsigned int SeedConverter::getSeed()
 {
 	return this->intSeed;
 }
