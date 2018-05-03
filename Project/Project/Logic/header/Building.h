@@ -25,7 +25,7 @@ private:
 	int buildings[MAX_DISTRICTS];
 	int grassTiles[MAX_DISTRICTS];
 
-	const int HEIGHTMAP_TRESHHOLD = 0.05;
+	const float HEIGHTMAP_TRESHHOLD = 0.05f;
 public:
 	Building();
 	~Building();
