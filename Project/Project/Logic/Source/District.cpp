@@ -9,7 +9,7 @@ District::District()
 	}
 }
 
-District::District(PerlinNoise * noise)
+District::District(Noise * noise)
 {
 	this->noise = noise;
 	for (int i = 0; i < MAX_DISTRICTS; i++)
@@ -38,7 +38,7 @@ void District::setDistrict(float width, float height)
 	this->positions[2] = glm::vec2((noiseX - floor(noiseX)) * width, (noiseY - floor(noiseY)) * height);
 }
 
-void District::setNoise(PerlinNoise * noise)
+void District::setNoise(Noise * noise)
 {
 	this->noise = noise;
 }

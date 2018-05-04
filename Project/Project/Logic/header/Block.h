@@ -1,6 +1,6 @@
 #ifndef BLOCK_H
 #define BLOCK_H
-#include "PerlinNoise.h"
+#include "Noise.h"
 #include "Array2D.h"
 #include "Array.h"
 #include "../../LogicDefines.h"
@@ -19,14 +19,14 @@ This class creates the roads for the map and also defines the district blocks.
 class Block
 {
 private:
-	PerlinNoise* noise;
+	Noise* noise;
 	int mainRoads;
 	int smallRoads;
 	int blockSizes[MAX_DISTRICTS];
 public:
 	Block();
 	~Block();
-	void setNoise(PerlinNoise* noise);
+	void setNoise(Noise* noise);
 	void generate(Array2D<int>& map, float width, float height);
 	void setBlockSize(int district, int size);
 	int getMainRoad() { return mainRoads; }

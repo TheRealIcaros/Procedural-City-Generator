@@ -5,7 +5,7 @@ HeightMap::HeightMap()
 	this->noise = nullptr;
 }
 
-HeightMap::HeightMap(PerlinNoise* noise)
+HeightMap::HeightMap(Noise* noise)
 {
 	this->noise = noise;
 }
@@ -54,7 +54,7 @@ void HeightMap::generate(Array2D<float>& terrainMap, int width, int height, Arra
 	}
 }
 
-void HeightMap::setNoise(PerlinNoise * noise)
+void HeightMap::setNoise(Noise * noise)
 {
 	this->noise = noise;
 }

@@ -1,9 +1,10 @@
 #ifndef DISTRICT_H
 #define DISTRICT_H
-#include "PerlinNoise.h"
+#include "Noise.h"
 #include "Array2D.h"
 #include "Array.h"
 #include "../../LogicDefines.h"
+#include <glm.hpp>
 #pragma region Comment
 /*
 Class: District
@@ -17,7 +18,7 @@ as to create a more naturall looking border.
 class District
 {
 private:
-	PerlinNoise * noise;
+	Noise * noise;
 	Array<glm::vec2> positions;
 	double vec2SquareDistance(glm::vec2 first, glm::vec2 second);
 	int closestDistrict(int x, int y);
@@ -27,9 +28,9 @@ private:
 	void calculateMap(Array2D<int>& map, float borderPerc);
 public:
 	District();
-	District(PerlinNoise* noise);
+	District(Noise* noise);
 	~District();
-	void setNoise(PerlinNoise* noise);
+	void setNoise(Noise* noise);
 	void generate(Array2D<int>& map, float width, float height, float borderPerc);
 };
 

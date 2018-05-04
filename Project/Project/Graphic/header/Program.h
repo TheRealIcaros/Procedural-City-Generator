@@ -14,7 +14,7 @@
 
 //MISC STUFF
 #include "../../Logic/header/PerlinNoise.h"
-#include "../../Logic/header/ppm.h"
+#include "../../Logic/header/RandomNoise.h"
 #include "../../Logic/header/SeedConverter.h"
 #include "../../Logic/header/HeightMap.h"
 #include "../../Logic/header/District.h"
@@ -57,7 +57,7 @@ private:
 	void initiateData();
 
 	void generate();
-	void noiseGenerator(int generator);
+	void noiseGenerator(unsigned int seed);
 
 	void render();				//The render loop in the application
 
@@ -70,6 +70,7 @@ private:
 
 	Array2D<float> terrainMap;
 	Array2D<int> cityMap;
+	Array<Structure> structure;
 
 public:
 	Program();

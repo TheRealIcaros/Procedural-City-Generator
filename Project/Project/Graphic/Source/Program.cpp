@@ -1,5 +1,6 @@
 #include "../header/Program.h"
 #include <Windows.h> //take away once done
+#include <chrono>
 
 void setColor(unsigned short color)
 {
@@ -42,6 +43,7 @@ void Program::initiateVariables()
 
 	//Class object used by the Program class
 	this->noise = new PerlinNoise();
+	this->randNoise = new RandomNoise();
 	this->map = new HeightMap();
 	this->district = new District();
 	this->block = new Block();
@@ -57,41 +59,51 @@ void Program::initiateVariables()
 	terrainMap.fill(0.0f);
 }
 
-void Program::initiateData()
-{
-	noiseGenerator(PERLIN_NOISE);
-}
 
 void Program::generate()
 {
+	std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
 	cityMap.fill(7);
 	terrainMap.fill(0);
+	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
 
 	if (genWindow->getInputBuf().compare("") != 0)
 	{
 		seed->setSeed(genWindow->getInputBuf());
 	}
-	genWindow->setSeed(seed->getIntegerSeed());
-	noise->setSeed(seed->getIntegerSeed());
-
+	else
+	{
+		seed->setSeed("BLARGH");
+	}
+	noiseGenerator(seed->getSeed());
 
 	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
 		block->setBlockSize(i, genWindow->getBlockSize()[i]);
-		building->setDensity(i, genWindow->getDensity()[i]/100.0f);
+		building->setDensity(i, genWindow->getDensity()[i]);
 		building->setHeight(i, genWindow->getMinHeight()[i], genWindow->getMaxHeight()[i]);
 	}
 
 	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave(), genWindow->getTerrainOctavePerc(), genWindow->getRedistribution());
 
-	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
-
 	district->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY(), genWindow->getBorderPerc());
 
 	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
 
-	building->generate(cityMap, terrainMap, genWindow->getPSizeX(), genWindow->getPSizeY());
-	
+	building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
+
+	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+	genWindow->setGenTime(std::chrono::duration<float>(end - start).count());
+	genWindow->setCounter(noise->getCounter());
+	genWindow->setMainRoad(block->getMainRoad());
+	genWindow->setSmallRoad(block->getSmallRoad());
+	genWindow->setSeed(seed->getSeed());
+	for (int i = 0; i < MAX_DISTRICTS; i++)
+	{
+		genWindow->setBuildings(i, building->getBuildings()[i]);
+		genWindow->setGrass(i, building->getGrassTiles()[i]);
+	}
+
 	system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
 	{
@@ -128,21 +140,13 @@ void Program::generate()
 			}
 		}
 	}
-
-	genWindow->setCounter(noise->getCounter());
-	genWindow->setMainRoad(block->getMainRoad());
-	genWindow->setSmallRoad(block->getSmallRoad());
-	for (int i = 0; i < MAX_DISTRICTS; i++)
-	{
-		genWindow->setBuildings(i, building->getBuildings()[i]);
-		genWindow->setGrass(i, building->getGrassTiles()[i]);
-	}
 }
 
-void Program::noiseGenerator(int generator)
+void Program::noiseGenerator(unsigned int seed)
 {
-	if (generator == PERLIN_NOISE)
+	if (!genWindow->getRandom())
 	{
+		noise->setSeed(seed);
 		map->setNoise(noise);
 		district->setNoise(noise);
 		block->setNoise(noise);
@@ -150,7 +154,11 @@ void Program::noiseGenerator(int generator)
 	}
 	else
 	{
-		//random
+		randNoise->setSeed(seed);
+		map->setNoise(randNoise);
+		district->setNoise(randNoise);
+		block->setNoise(randNoise);
+		building->setNoise(randNoise);
 	}
 }
 
@@ -187,8 +195,6 @@ bool Program::Start()
 	glfwMakeContextCurrent(window);
 
 	initiateVariables();
-
-	initiateData();
 
 	initiateImgui(window);
 
@@ -246,6 +252,7 @@ void Program::Stop()
 	ImGui::DestroyContext();
 
 	delete this->noise;
+	delete this->randNoise;
 	delete this->map;
 	delete this->district;
 	delete this->block;
