@@ -70,6 +70,7 @@ private:
 
 	Array2D<float> terrainMap;
 	Array2D<int> cityMap;
+	Array<Structure> structure;
 
 public:
 	Program();

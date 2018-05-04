@@ -9,6 +9,14 @@ Building::~Building()
 {
 }
 
+void Building::addSection(int district, const Section & section, int type)
+{
+	assert(district >= 0 && district < MAX_DISTRICTS);
+	assert(type >= SECTION_BOTTOM && type <= SECTION_TOP);
+
+	districtSections[district][type].add(section);
+}
+
 void Building::setHeight(int district, int minHeight, int maxHeight)
 {
 	assert(district >= 0 && district < MAX_DISTRICTS);
@@ -26,7 +34,7 @@ void Building::setDensity(int district, float density)
 	districtDensities[district] = temp;
 }
 
-void Building::generate(Array2D<int>& map, Array2D<float>& terrainMap, int width, int height)
+void Building::generate(Array2D<int>& map, Array2D<float>& terrainMap, Array<Structure>& structures, int width, int height)
 {
 	// reset counters
 		for (int i = 0; i < MAX_DISTRICTS; i++)
@@ -54,8 +62,33 @@ void Building::generate(Array2D<int>& map, Array2D<float>& terrainMap, int width
 				float terrain3 = terrainMap.at(x + 1, y + 1);
 
 				//Check if the position is allowed to have a house on it and if the positions elevation angle isnt over the extreme point
-				if (noiseResult < districtDensities[district] && abs(terrain0 - terrain1) <= HEIGHTMAP_TRESHHOLD && abs(terrain0 - terrain2) <= HEIGHTMAP_TRESHHOLD && abs(terrain0 - terrain3) <= HEIGHTMAP_TRESHHOLD)
+				if (noiseResult < districtDensities[district] && abs(terrain0 - terrain1) <= HEIGHTMAP_TRESHHOLD && abs(terrain0 - terrain2) <= HEIGHTMAP_TRESHHOLD &&
+					abs(terrain0 - terrain3) <= HEIGHTMAP_TRESHHOLD)
 				{
+					Array<Section>& botSections = districtSections[district][SECTION_BOTTOM];
+					Array<Section>& midSections = districtSections[district][SECTION_MIDDLE];
+					Array<Section>& topSections = districtSections[district][SECTION_TOP];
+
+					const int MIN_HEIGHT = districtMinHeights[district];
+					const int MAX_HEIGHT = districtMaxHeights[district];
+					const int HEIGHT_DIF = MAX_HEIGHT - MIN_HEIGHT;
+
+					const int ARBITRARY_LARGE_NUMBER = 100;
+					int sectionOffset = (int)(noiseResult*(float)ARBITRARY_LARGE_NUMBER);
+					int botSection = sectionOffset % botSections.getSize();
+					int midSection = sectionOffset % midSections.getSize();
+					int topSection = sectionOffset % topSections.getSize();
+					int structureHeight = (int)(noiseResult * (float)(HEIGHT_DIF + 0.5f)) + MIN_HEIGHT;
+
+					Structure structure =
+					{
+						botSections[botSection],
+						midSections[midSection],
+						topSections[topSection],
+						structureHeight,
+					};
+
+					structures.add(structure);
 					buildings[district]++;
 				}
 				else
