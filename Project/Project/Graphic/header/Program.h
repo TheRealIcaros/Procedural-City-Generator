@@ -4,6 +4,7 @@
 //Own made includes
 //#include "Model.h"
 #include "Render.h"
+#include "Texture.h"
 #include "../../Controlls/Header/KeyIn.h"
 #include "../../Logic/header/GenWindow.h"
 //#include "Deferred.h"

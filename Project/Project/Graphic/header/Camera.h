@@ -1,10 +1,10 @@
 #ifndef CAMERA_H
 #define CARERA_H
 
-#include "../../Controlls/Header/Mouse.h"
+#include "..\..\Controlls\Header\Mouse.h"
 
 #include <GLFW\glfw3.h>
-#include "../../Defines.h"
+#include "..\..\Defines.h"
 
 
 class Camera

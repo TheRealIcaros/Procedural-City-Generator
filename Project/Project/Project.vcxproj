@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)\Includes\glad\include;$(SolutionDir)\Includes\glm;$(SolutionDir)\Includes\glfw\include;$(SolutionDir)\Includes\stb_image;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\Includes\glfw\lib-vc2015;$(SolutionDir)\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Includes\glad\include;$(SolutionDir)\Includes\glew\include;$(SolutionDir)\Includes\glfw\include;$(SolutionDir)\Includes\glm;$(SolutionDir)\Includes\stb_image;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Includes\glew\lib\Release\Win32;$(SolutionDir)\Includes\glfw\lib-vc2015;$(SolutionDir)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -81,12 +81,12 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories>$(SolutionDir)/Includes/assimp/include;$(SolutionDir)\Includes\SOIL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Includes\SOIL;$(SolutionDir)/Includes/assimp/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glfw3.lib;assimp-vc140-mt.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)/Includes/assimp/lib;$(SolutionDir)\Includes\glfw\lib-vc2015;$(SolutionDir)\lib\SOIL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;assimp-vc140-mt.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Includes\glew\lib\Release\Win32;$(SolutionDir)\lib\SOIL;$(SolutionDir)/Includes/assimp/lib;$(SolutionDir)\Includes\glfw\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -139,6 +139,9 @@
     <ClCompile Include="Graphic\Source\Program.cpp" />
     <ClCompile Include="Graphic\Source\Render.cpp" />
     <ClCompile Include="Graphic\Source\Terrain.cpp" />
+    <ClCompile Include="Graphic\Source\Texture.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Imgui\imgui.cpp" />
     <ClCompile Include="Imgui\imgui_demo.cpp" />
     <ClCompile Include="Imgui\imgui_draw.cpp" />
@@ -171,6 +174,9 @@
     <ClInclude Include="Graphic\header\Program.h" />
     <ClInclude Include="Graphic\header\Render.h" />
     <ClInclude Include="Graphic\header\Terrain.h" />
+    <ClInclude Include="Graphic\header\Texture.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Imgui\imconfig.h" />
     <ClInclude Include="Imgui\imgui.h" />
     <ClInclude Include="Imgui\imgui_impl_glfw_gl3.h" />
