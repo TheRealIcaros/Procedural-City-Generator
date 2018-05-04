@@ -32,11 +32,11 @@ class Program
 {
 private:
 	//Class objects
-	PerlinNoise * noise;
-	HeightMap * map;
-	District * district;
-	Block * block;
-	Building * building;
+	PerlinNoise* noise;
+	HeightMap* map;
+	District* district;
+	Block* block;
+	Building* building;
 	SeedConverter* seed;
 	GLFWwindow* window;
 	GenWindow* genWindow;
@@ -59,6 +59,8 @@ private:
 	void generate();
 	void noiseGenerator(int generator);
 
+	void render();				//The render loop in the application
+
 	//Mics variables
 	bool keyIsPressedF1;
 	bool shouldRun;
@@ -77,7 +79,6 @@ public:
 	bool Run();					//The main-loop/ Returns false when we exit it 
 	void Stop();				//Cleans upp the memory and returns everything
 
-	void render();				//The render loop in the application
 };
 
 #endif

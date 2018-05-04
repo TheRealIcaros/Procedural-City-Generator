@@ -16,7 +16,6 @@ class Model
 private:
 	
 	/*  Functions   */
-	
 	void processNode(aiNode *node, const aiScene *scene, glm::vec3 startPosition);
 	Mesh processMesh(aiMesh *mesh, const aiScene *scene, glm::vec3 startPosition);
 	std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);

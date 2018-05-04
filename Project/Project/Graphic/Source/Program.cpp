@@ -262,7 +262,7 @@ void Program::Stop()
 void Program::render()
 {
 	//Cleans the color buffer and set the defaultbacgroundcolor
-	//glClearColor(0.3f, 1.0f, 1.0f, 1.0f);
+	glClearColor(0.3f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glUseProgram(renderPass.getShaderProgramID());
