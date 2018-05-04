@@ -1,5 +1,6 @@
 #ifndef ARRAY_H
 #define ARRAY_H
+#include <assert.h>
 
 template<typename T>
 class Array
