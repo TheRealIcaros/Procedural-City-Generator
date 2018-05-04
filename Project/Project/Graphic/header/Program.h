@@ -33,6 +33,7 @@ class Program
 private:
 	//Class objects
 	PerlinNoise* noise;
+	RandomNoise* randNoise;
 	HeightMap* map;
 	District* district;
 	Block* block;
@@ -54,7 +55,6 @@ private:
 	bool initiateWindow(GLFWwindow* window);
 	void initiateImgui(GLFWwindow* window);
 	void initiateVariables();
-	void initiateData();
 
 	void generate();
 	void noiseGenerator(unsigned int seed);
