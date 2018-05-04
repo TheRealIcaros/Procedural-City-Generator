@@ -19,7 +19,7 @@ public:
 	SeedConverter(std::string seed);
 	~SeedConverter();
 
-	unsigned int getIntegerSeed();
+	unsigned int getSeed();
 	void setSeed(std::string seed);
 };
 #endif

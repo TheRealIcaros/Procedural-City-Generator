@@ -1,8 +1,9 @@
 #ifndef HEIGHTMAP_H
 #define HEIGHTMAP_H
-#include "../../Logic/header/PerlinNoise.h"
+#include "../../Logic/header/Noise.h"
 #include "Array2D.h"
 #include "Array.h"
+#include <vector>
 #pragma region Comment
 /*
 Class: HeightMap
@@ -14,13 +15,13 @@ This class creates a greyscale map which decides the elevation of each point in 
 class HeightMap
 {
 private:
-	PerlinNoise* noise;
+	Noise* noise;
 public:
 	HeightMap();
-	HeightMap(PerlinNoise* noise);
+	HeightMap(Noise* noise);
 	~HeightMap();
 	void generate(Array2D<float>& terrainMap, int width, int height, Array<float> oct, Array<float> perc, float redistribution);
-	void setNoise(PerlinNoise* noise);
+	void setNoise(Noise* noise);
 };
 
 #endif

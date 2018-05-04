@@ -16,7 +16,7 @@ SeedConverter::~SeedConverter()
 {
 }
 
-unsigned int SeedConverter::getIntegerSeed()
+unsigned int SeedConverter::getSeed()
 {
 	return this->intSeed;
 }
@@ -25,7 +25,6 @@ void SeedConverter::setSeed(std::string seed)
 {
 	this->strSeed = seed;
 	this->convertSeed();
-	
 }
 
 void SeedConverter::convertSeed()

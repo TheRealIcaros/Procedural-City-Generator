@@ -1,5 +1,6 @@
 #ifndef PERLINNOISE_H
 #define PERLINNOISE_H
+#include "Noise.h"
 #include <vector>
 #include <glm.hpp>
 
@@ -8,7 +9,7 @@
 	for Procedural city generation using Perlin noise
 */
 
-class PerlinNoise 
+class PerlinNoise : public Noise
 {
 private:
 	// The permutation vector
@@ -23,10 +24,10 @@ public:
 	// Generate a new permutation vector based on the value of seed
 	PerlinNoise(unsigned int seed);
 	// Get a noise value, for #D/2D images
-	double generate(double x, double y, double z);
-	double generate(double x, double y, double xMaxValue, double yMaxValue);
-	double generate(double x, double y, double z, double xMaxValue, double yMaxValue);
-	void setSeed(unsigned int seed);
+	double generate(double x, double y, double z) override;
+	double generate(double x, double y, double xMaxValue, double yMaxValue) override;
+	double generate(double x, double y, double z, double xMaxValue, double yMaxValue) override;
+	void setSeed(unsigned int seed) override;
 	int getCounter() { return counter; }
 };
 

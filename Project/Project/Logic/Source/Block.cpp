@@ -9,7 +9,7 @@ Block::~Block()
 {
 }
 
-void Block::setNoise(PerlinNoise * noise)
+void Block::setNoise(Noise * noise)
 {
 	this->noise = noise;
 }
