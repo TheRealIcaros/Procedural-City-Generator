@@ -1,4 +1,5 @@
 #include "../header/Texture.h"
+#include <GL\glew.h>
 
 Texture::Texture()
 	: id(0), width(0), height(0), format(GL_COMPRESSED_RGBA_S3TC_DXT1_EXT), pixels(nullptr)
@@ -30,10 +31,10 @@ bool Texture::load(const std::string& path)
 
 			switch (header.format.fourCC)
 			{
-			default:
-			case ID_DXT1: format = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT; break;
-			case ID_DXT3: format = GL_COMPRESSED_RGBA_S3TC_DXT3_EXT; break;
-			case ID_DXT5: format = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT; break;
+				default:
+				case ID_DXT1: format = GL_COMPRESSED_RGBA_S3TC_DXT1_EXT; break;
+				case ID_DXT3: format = GL_COMPRESSED_RGBA_S3TC_DXT3_EXT; break;
+				case ID_DXT5: format = GL_COMPRESSED_RGBA_S3TC_DXT5_EXT; break;
 			}
 
 			pixels = new GLbyte[size];

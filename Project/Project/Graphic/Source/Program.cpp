@@ -11,7 +11,7 @@ void setColor(unsigned short color)
 void Program::initiateGLFW()
 {
 	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);	 //This sets the Major requierments of Opengl to Version 4.x
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);	 //This sets the Major requierments of Opengl to Version 4.x
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);	//This sets the Minor requierments of Opengl to Version x.3
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 }
@@ -42,13 +42,13 @@ void Program::initiateVariables()
 	this->cameraOffsetY = 0.0f;
 
 	//Class object used by the Program class
-	this->noise = new PerlinNoise();
-	this->randNoise = new RandomNoise();
-	this->map = new HeightMap();
-	this->district = new District();
-	this->block = new Block();
-	this->building = new Building();
-	this->seed = new SeedConverter();
+	//this->noise = new PerlinNoise();
+	//this->randNoise = new RandomNoise();
+	//this->map = new HeightMap();
+	//this->district = new District();
+	//this->block = new Block();
+	//this->building = new Building();
+	//this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
 	//this->models = Model();
 
@@ -56,111 +56,111 @@ void Program::initiateVariables()
 	this->camera = new Camera(window);
 	//this->myObject = new Object();
 
-	terrainMap.fill(0.0f);
+	//terrainMap.fill(0.0f);
 }
 
 
-void Program::generate()
-{
-	std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
-	cityMap.fill(7);
-	terrainMap.fill(0);
-	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
+//void Program::generate()
+//{
+//	std::chrono::high_resolution_clock::time_point start = std::chrono::high_resolution_clock::now();
+//	cityMap.fill(7);
+//	terrainMap.fill(0);
+//	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
+//
+//	if (genWindow->getInputBuf().compare("") != 0)
+//	{
+//		seed->setSeed(genWindow->getInputBuf());
+//	}
+//	else
+//	{
+//		seed->setSeed("BLARGH");
+//	}
+//	noiseGenerator(seed->getSeed());
+//
+//	for (int i = 0; i < MAX_DISTRICTS; i++)
+//	{
+//		block->setBlockSize(i, genWindow->getBlockSize()[i]);
+//		building->setDensity(i, genWindow->getDensity()[i]);
+//		building->setHeight(i, genWindow->getMinHeight()[i], genWindow->getMaxHeight()[i]);
+//	}
+//
+//	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave(), genWindow->getTerrainOctavePerc(), genWindow->getRedistribution());
+//
+//	district->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY(), genWindow->getBorderPerc());
+//
+//	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
+//
+//	building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
+//
+//	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+//	genWindow->setGenTime(std::chrono::duration<float>(end - start).count());
+//	genWindow->setCounter(noise->getCounter());
+//	genWindow->setMainRoad(block->getMainRoad());
+//	genWindow->setSmallRoad(block->getSmallRoad());
+//	genWindow->setSeed(seed->getSeed());
+//	for (int i = 0; i < MAX_DISTRICTS; i++)
+//	{
+//		genWindow->setBuildings(i, building->getBuildings()[i]);
+//		genWindow->setGrass(i, building->getGrassTiles()[i]);
+//	}
+//
+//	system("CLS");
+//	for (int j = 0; j < genWindow->getTSizeY(); j++)
+//	{
+//		for (int i = 0; i < genWindow->getTSizeX(); i++)
+//		{
+//			if (cityMap.at(i, j) == 0)
+//			{
+//				setColor(11);
+//			}
+//			else if (cityMap.at(i, j) == 1)
+//			{
+//				setColor(14);
+//			}
+//			else if (cityMap.at(i, j) == 2)
+//			{
+//				setColor(4);
+//			}
+//			else if (cityMap.at(i, j) == 7)
+//			{
+//				setColor(2);
+//			}
+//			else if (cityMap.at(i, j) == 8)
+//			{
+//				setColor(13);
+//			}
+//			else if (cityMap.at(i, j) == 9)
+//			{
+//				setColor(5);
+//			}
+//			std::cout << cityMap.at(i, j);
+//			if (i == genWindow->getTSizeY() - 1)
+//			{
+//				std::cout << "\n";
+//			}
+//		}
+//	}
+//}
 
-	if (genWindow->getInputBuf().compare("") != 0)
-	{
-		seed->setSeed(genWindow->getInputBuf());
-	}
-	else
-	{
-		seed->setSeed("BLARGH");
-	}
-	noiseGenerator(seed->getSeed());
-
-	for (int i = 0; i < MAX_DISTRICTS; i++)
-	{
-		block->setBlockSize(i, genWindow->getBlockSize()[i]);
-		building->setDensity(i, genWindow->getDensity()[i]);
-		building->setHeight(i, genWindow->getMinHeight()[i], genWindow->getMaxHeight()[i]);
-	}
-
-	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave(), genWindow->getTerrainOctavePerc(), genWindow->getRedistribution());
-
-	district->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY(), genWindow->getBorderPerc());
-
-	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
-
-	building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
-
-	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
-	genWindow->setGenTime(std::chrono::duration<float>(end - start).count());
-	genWindow->setCounter(noise->getCounter());
-	genWindow->setMainRoad(block->getMainRoad());
-	genWindow->setSmallRoad(block->getSmallRoad());
-	genWindow->setSeed(seed->getSeed());
-	for (int i = 0; i < MAX_DISTRICTS; i++)
-	{
-		genWindow->setBuildings(i, building->getBuildings()[i]);
-		genWindow->setGrass(i, building->getGrassTiles()[i]);
-	}
-
-	system("CLS");
-	for (int j = 0; j < genWindow->getTSizeY(); j++)
-	{
-		for (int i = 0; i < genWindow->getTSizeX(); i++)
-		{
-			if (cityMap.at(i, j) == 0)
-			{
-				setColor(11);
-			}
-			else if (cityMap.at(i, j) == 1)
-			{
-				setColor(14);
-			}
-			else if (cityMap.at(i, j) == 2)
-			{
-				setColor(4);
-			}
-			else if (cityMap.at(i, j) == 7)
-			{
-				setColor(2);
-			}
-			else if (cityMap.at(i, j) == 8)
-			{
-				setColor(13);
-			}
-			else if (cityMap.at(i, j) == 9)
-			{
-				setColor(5);
-			}
-			std::cout << cityMap.at(i, j);
-			if (i == genWindow->getTSizeY() - 1)
-			{
-				std::cout << "\n";
-			}
-		}
-	}
-}
-
-void Program::noiseGenerator(unsigned int seed)
-{
-	if (!genWindow->getRandom())
-	{
-		noise->setSeed(seed);
-		map->setNoise(noise);
-		district->setNoise(noise);
-		block->setNoise(noise);
-		building->setNoise(noise);
-	}
-	else
-	{
-		randNoise->setSeed(seed);
-		map->setNoise(randNoise);
-		district->setNoise(randNoise);
-		block->setNoise(randNoise);
-		building->setNoise(randNoise);
-	}
-}
+//void Program::noiseGenerator(unsigned int seed)
+//{
+//	if (!genWindow->getRandom())
+//	{
+//		noise->setSeed(seed);
+//		map->setNoise(noise);
+//		district->setNoise(noise);
+//		block->setNoise(noise);
+//		building->setNoise(noise);
+//	}
+//	else
+//	{
+//		randNoise->setSeed(seed);
+//		map->setNoise(randNoise);
+//		district->setNoise(randNoise);
+//		block->setNoise(randNoise);
+//		building->setNoise(randNoise);
+//	}
+//}
 
 void Program::initiateImgui(GLFWwindow* window)
 {
@@ -232,11 +232,11 @@ bool Program::Run()
 
 	genWindow->draw();										//Draw function for ImGui
 
-	if (genWindow->getGenerate() == true)
+	/*if (genWindow->getGenerate() == true)
 	{
 		generate();
 		genWindow->toggleGenerate();
-	}
+	}*/
 
 	render();												//The render loop for all the graphics
 
@@ -251,13 +251,13 @@ void Program::Stop()
 	ImGui_ImplGlfwGL3_Shutdown();
 	ImGui::DestroyContext();
 
-	delete this->noise;
-	delete this->randNoise;
-	delete this->map;
-	delete this->district;
-	delete this->block;
-	delete this->building;
-	delete this->seed;
+	//delete this->noise;
+	//delete this->randNoise;
+	//delete this->map;
+	//delete this->district;
+	//delete this->block;
+	//delete this->building;
+	//delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;
 	delete this->camera;
@@ -285,7 +285,7 @@ void Program::render()
 	renderPass.setMat4("model", model);
 
 	//for (int i = 0; i < models.; i++)
-	//Draws all the models in the application
+	////Draws all the models in the application
 	//models.Draw(renderPass);
 
 	//ImGui that handles the graphical interface

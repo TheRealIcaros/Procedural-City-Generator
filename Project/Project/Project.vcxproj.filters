@@ -3,13 +3,7 @@
   <ItemGroup>
     <ClCompile Include="..\Includes\glad\src\glad.c" />
     <ClCompile Include="Controlls\Source\KeyIn.cpp" />
-    <ClCompile Include="Controlls\Source\Mouse.cpp" />
-    <ClCompile Include="Graphic\Source\Camera.cpp" />
-    <ClCompile Include="Graphic\Source\Mesh.cpp" />
-    <ClCompile Include="Graphic\Source\Model.cpp" />
     <ClCompile Include="Graphic\Source\Program.cpp" />
-    <ClCompile Include="Graphic\Source\Render.cpp" />
-    <ClCompile Include="Graphic\Source\Terrain.cpp" />
     <ClCompile Include="Imgui\imgui.cpp" />
     <ClCompile Include="Imgui\imgui_demo.cpp" />
     <ClCompile Include="Imgui\imgui_draw.cpp" />
@@ -17,6 +11,14 @@
     <ClCompile Include="libs\gl3w\GL\gl3w.c" />
     <ClCompile Include="libs\usynergy\uSynergy.c" />
     <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Graphic\Source\Terrain.cpp" />
+    <ClCompile Include="Graphic\Source\Camera.cpp" />
+    <ClCompile Include="Controlls\Source\Mouse.cpp" />
+    <ClCompile Include="Graphic\Source\Mesh.cpp" />
+    <ClCompile Include="Graphic\Source\Model.cpp" />
+    <ClCompile Include="Graphic\Source\Render.cpp" />
+    <ClCompile Include="Graphic\Source\Texture.cpp" />
     <ClCompile Include="Logic\Source\Block.cpp" />
     <ClCompile Include="Logic\Source\Building.cpp" />
     <ClCompile Include="Logic\Source\District.cpp" />
@@ -25,20 +27,12 @@
     <ClCompile Include="Logic\Source\PerlinNoise.cpp" />
     <ClCompile Include="Logic\Source\RandomNoise.cpp" />
     <ClCompile Include="Logic\Source\SeedConverter.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Logic\Source\GenWindow.cpp" />
-    <ClCompile Include="Graphic\Source\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
-    <ClInclude Include="Controlls\Header\Mouse.h" />
     <ClInclude Include="Defines.h" />
-    <ClInclude Include="Graphic\header\Camera.h" />
-    <ClInclude Include="Graphic\header\Mesh.h" />
-    <ClInclude Include="Graphic\header\Model.h" />
     <ClInclude Include="Graphic\header\Program.h" />
-    <ClInclude Include="Graphic\header\Render.h" />
-    <ClInclude Include="Graphic\header\Terrain.h" />
     <ClInclude Include="Imgui\imconfig.h" />
     <ClInclude Include="Imgui\imgui.h" />
     <ClInclude Include="Imgui\imgui_impl_glfw_gl3.h" />
@@ -51,6 +45,14 @@
     <ClInclude Include="libs\glfw\include\GLFW\glfw3.h" />
     <ClInclude Include="libs\glfw\include\GLFW\glfw3native.h" />
     <ClInclude Include="libs\usynergy\uSynergy.h" />
+    <ClInclude Include="Graphic\header\shaderCreater.h" />
+    <ClInclude Include="Graphic\header\Terrain.h" />
+    <ClInclude Include="Graphic\header\Camera.h" />
+    <ClInclude Include="Controlls\Header\Mouse.h" />
+    <ClInclude Include="Graphic\header\Mesh.h" />
+    <ClInclude Include="Graphic\header\Model.h" />
+    <ClInclude Include="Graphic\header\Render.h" />
+    <ClInclude Include="Graphic\header\Texture.h" />
     <ClInclude Include="LogicDefines.h" />
     <ClInclude Include="Logic\header\Array2D.h" />
     <ClInclude Include="Logic\header\Array.h" />
@@ -61,10 +63,8 @@
     <ClInclude Include="Logic\header\Noise.h" />
     <ClInclude Include="Logic\header\PerlinNoise.h" />
     <ClInclude Include="Logic\header\GenWindow.h" />
-    <ClInclude Include="Graphic\header\shaderCreater.h" />
     <ClInclude Include="Logic\header\RandomNoise.h" />
     <ClInclude Include="Logic\header\SeedConverter.h" />
-    <ClInclude Include="Graphic\header\Texture.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\fragment.glsl" />

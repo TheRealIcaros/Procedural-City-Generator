@@ -2,9 +2,10 @@
 #define RENDER_H
 
 //Inlcuded classes
-#include "shaderCreater.h"
-#include "Camera.h"
-#include "../../Logic/header/Array.h"
+#include "Texture.h"
+
+//#include "shaderCreater.h"
+//#include "Camera.h"
 
 class Render
 {

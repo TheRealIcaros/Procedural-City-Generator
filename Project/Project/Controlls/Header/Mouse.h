@@ -13,6 +13,7 @@ private:
 	float lastY;
 	double xPos;
 	double yPos;
+
 public:
 	Mouse(GLFWwindow* window);
 	~Mouse();
