@@ -2,7 +2,6 @@
 #define SHADERCREATER_H
 
 #include <glad/glad.h>
-//#include <GL\glew.h>
 #include <GLFW/glfw3.h>
 #include <glm.hpp>
 #include <string>
@@ -13,7 +12,6 @@ class shaderCreater
 {
 private:
 	GLuint programID;
-
 public:
 	shaderCreater();
 	~shaderCreater();

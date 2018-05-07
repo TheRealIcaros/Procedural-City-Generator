@@ -13,7 +13,6 @@ private:
 	//Mouse movements
 	Mouse* myMouse;
 
-
 	glm::mat4 View;
 
 	glm::vec3 cameraPosition;

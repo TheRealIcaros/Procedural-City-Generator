@@ -3,12 +3,12 @@
 
 
 #include "shaderCreater.h"
+//#include <GL\glxew.h>
+//#include <gl\glxew.h>
 #include "Camera.h"
 #include "../../Logic/header/Array.h"
 
 #include <cstdlib>
-#include <string>
-
 //#include <glm.hpp>
 
 #define DDS_MAGIC_NUMBER 0x20534444 // 'DDS ' in hex

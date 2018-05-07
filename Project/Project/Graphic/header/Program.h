@@ -2,19 +2,12 @@
 #define PROGRAM_H
 
 //Own made includes
-//#include "Model.h"
-//#include "Texture.h"
-//#include "Render.h"
 #include "Render.h"
-//#include "shaderCreater.h"
-//#include <glad\glad.h>
-//#include <GL\glew.h>
-//#include "Camera.h"
-#include "../../Controlls/Header/KeyIn.h"
 #include "../../Logic/header/GenWindow.h"
+#include "../../Controlls/Header/KeyIn.h"
 //#include "Deferred.h"
 
-////Imgui stuff
+//Imgui stuff
 #include "../../Imgui/imgui.h"
 #include "../../Imgui/imgui_impl_glfw_gl3.h"
 
@@ -40,11 +33,11 @@ private:
 	//Class objects
 	PerlinNoise* noise;
 	RandomNoise* randNoise;
-	//HeightMap* map;
+	HeightMap* map;
 	District* district;
 	Block* block;
 	Building* building;
-	//SeedConverter* seed;
+	SeedConverter* seed;
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
@@ -62,8 +55,8 @@ private:
 	void initiateImgui(GLFWwindow* window);
 	void initiateVariables();
 
-	//void generate();
-	//void noiseGenerator(unsigned int seed);
+	void generate();
+	void noiseGenerator(unsigned int seed);
 
 	void render();				//The render loop in the application
 

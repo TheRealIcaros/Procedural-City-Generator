@@ -2,7 +2,6 @@
 #include "Graphic\header\Program.h"
 #include <crtdbg.h>
 
-
 int main()
 {
 	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
@@ -14,7 +13,7 @@ int main()
 	
 	if (!myProgram->Start())
 		return NULL;
-
+	
 	//The main loop
 	while (myProgram->Run());
 	

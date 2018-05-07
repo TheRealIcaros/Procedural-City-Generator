@@ -1,4 +1,5 @@
 #include "../header/Texture.h"
+#define STATIC_GLEW
 #include <GL\glew.h>
 
 Texture::Texture()

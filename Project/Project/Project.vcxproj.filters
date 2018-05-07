@@ -70,5 +70,32 @@
     <None Include="Graphic\Shaders\fragment.glsl" />
     <None Include="Graphic\Shaders\geometry.glsl" />
     <None Include="Graphic\Shaders\vertex.glsl" />
+    <None Include="Debug\vc141.idb" />
+    <None Include="Debug\vc141.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Debug\Camera.obj" />
+    <Object Include="Debug\Deferred.obj" />
+    <Object Include="Debug\GenWindow.obj" />
+    <Object Include="Debug\gl3w.obj" />
+    <Object Include="Debug\glad.obj" />
+    <Object Include="Debug\imgui.obj" />
+    <Object Include="Debug\imgui_demo.obj" />
+    <Object Include="Debug\imgui_draw.obj" />
+    <Object Include="Debug\imgui_impl_glfw_gl3.obj" />
+    <Object Include="Debug\KeyIn.obj" />
+    <Object Include="Debug\main.obj" />
+    <Object Include="Debug\Mouse.obj" />
+    <Object Include="Debug\Object.obj" />
+    <Object Include="Debug\Program.obj" />
+    <Object Include="Debug\Render.obj" />
+    <Object Include="Debug\shaderCreater.obj" />
+    <Object Include="Debug\Source.obj" />
+    <Object Include="Debug\Terrain.obj" />
+    <Object Include="Debug\uSynergy.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Debug\Project.Build.CppClean.log" />
+    <Text Include="Debug\Project.log" />
   </ItemGroup>
 </Project>
