@@ -42,12 +42,12 @@ void Program::initiateVariables()
 	this->cameraOffsetY = 0.0f;
 
 	//Class object used by the Program class
-	//this->noise = new PerlinNoise();
-	//this->randNoise = new RandomNoise();
+	this->noise = new PerlinNoise();
+	this->randNoise = new RandomNoise();
 	//this->map = new HeightMap();
-	//this->district = new District();
-	//this->block = new Block();
-	//this->building = new Building();
+	this->district = new District();
+	this->block = new Block();
+	this->building = new Building();
 	//this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
 	//this->models = Model();
@@ -251,12 +251,12 @@ void Program::Stop()
 	ImGui_ImplGlfwGL3_Shutdown();
 	ImGui::DestroyContext();
 
-	//delete this->noise;
-	//delete this->randNoise;
+	delete this->noise;
+	delete this->randNoise;
 	//delete this->map;
-	//delete this->district;
-	//delete this->block;
-	//delete this->building;
+	delete this->district;
+	delete this->block;
+	delete this->building;
 	//delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;

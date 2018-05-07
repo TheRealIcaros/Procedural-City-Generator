@@ -38,12 +38,12 @@ class Program
 {
 private:
 	//Class objects
-	//PerlinNoise* noise;
-	//RandomNoise* randNoise;
+	PerlinNoise* noise;
+	RandomNoise* randNoise;
 	//HeightMap* map;
-	//District* district;
-	//Block* block;
-	//Building* building;
+	District* district;
+	Block* block;
+	Building* building;
 	//SeedConverter* seed;
 	GLFWwindow* window;
 	GenWindow* genWindow;

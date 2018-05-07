@@ -4,7 +4,7 @@
 
 #include "shaderCreater.h"
 #include "Camera.h"
-//#include "../../Logic/header/Array.h"
+#include "../../Logic/header/Array.h"
 
 #include <cstdlib>
 #include <string>
