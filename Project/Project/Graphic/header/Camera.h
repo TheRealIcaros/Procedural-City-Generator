@@ -27,6 +27,7 @@ private:
 	
 
 public:
+	Camera();
 	Camera(GLFWwindow* window);
 	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, GLFWwindow* window);
 	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVector, GLFWwindow* window);

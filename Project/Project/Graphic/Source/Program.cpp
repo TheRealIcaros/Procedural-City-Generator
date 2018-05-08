@@ -91,6 +91,9 @@ void Program::generate()
 
 	building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
 
+	//Add structures render
+	//render->begin();
+
 	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
 	genWindow->setGenTime(std::chrono::duration<float>(end - start).count());
 	genWindow->setCounter(noise->getCounter());

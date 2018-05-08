@@ -110,7 +110,6 @@
 #define __gl_ATI_h_
 
 #if defined(_WIN32)
-
 /*
 * GLEW does not include <windows.h> to avoid name space pollution.
 * GL needs GLAPI and GLAPIENTRY, GLU needs APIENTRY, CALLBACK, and wchar_t

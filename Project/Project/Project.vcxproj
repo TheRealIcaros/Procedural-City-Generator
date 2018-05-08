@@ -133,6 +133,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Graphic\Source\Model.cpp" />
+    <ClCompile Include="Graphic\Source\ModelLoader.cpp" />
     <ClCompile Include="Graphic\Source\Program.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -200,9 +201,8 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Graphic\header\Model.h" />
-    <ClInclude Include="Graphic\header\Program.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="Graphic\header\ModelLoader.h" />
+    <ClInclude Include="Graphic\header\Program.h" />
     <ClInclude Include="Graphic\header\Render.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>

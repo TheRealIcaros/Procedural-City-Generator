@@ -1,6 +1,5 @@
 #include "../header/Model.h"
 
-
 Model::Model()
 	: vertexBuffer(0), indexBuffer(0), vertexArray(0), vertexCount(0), indexCount(0)
 {

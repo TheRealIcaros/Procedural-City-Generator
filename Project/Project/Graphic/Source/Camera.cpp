@@ -1,5 +1,10 @@
 #include "../header/Camera.h"
 
+Camera::Camera()
+{
+
+}
+
 Camera::Camera(GLFWwindow* window)
 {
 	this->cameraPosition = { 0.0f, 0.0f, 0.0f };
