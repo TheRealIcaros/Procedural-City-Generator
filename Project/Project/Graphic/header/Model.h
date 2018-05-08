@@ -1,39 +1,43 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-//Own headers
-#include "Mesh.h"
+//#include "Texture.h"
+#include "../../glew.h"
+#include <GLFW\glfw3.h>
+#include <glm.hpp>
+#include <string>
 
-
-//Other headers
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-#include <stb_image.h>
+struct Vertex
+{
+	glm::vec3 position;
+	glm::vec2 uv;
+	glm::vec3 normal;
+	glm::vec3 tangent;
+	glm::vec3 bitangent;
+};
 
 class Model
 {
 private:
-	
-	/*  Functions   */
-	void processNode(aiNode *node, const aiScene *scene, glm::vec3 startPosition);
-	Mesh processMesh(aiMesh *mesh, const aiScene *scene, glm::vec3 startPosition);
-	std::vector<Texture> loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName);
+	Vertex* vertices;
+	GLuint* indices;
+	GLuint vertexBuffer, indexBuffer;
+	GLuint vertexArray;
+	int vertexCount, indexCount;
 
-	unsigned int TextureFromFile(const char *path, const std::string &directory, bool gamma);
 public:
 	Model();
 	~Model();
 
-	Model(std::string const &path, glm::vec3 startPosition, bool gamma = false);
-	void loadModel(std::string path, glm::vec3 startPosition);
-	//Model(char *path);
+	bool load(const std::string& path);
+	void unload();
+	void upload();
+	void render(int instances);
 
-	std::vector<Texture> textures_loaded;
-	std::vector<Mesh> meshes;
-	std::string directory;
-	bool gammaCorrection;
-	void Draw(shaderCreater shader);
+	GLuint getVertexArray() const;
+	int getVertexCount() const;
+	int getIndexCount() const;
+
 };
 
 #endif

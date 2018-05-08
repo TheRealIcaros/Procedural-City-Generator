@@ -15,8 +15,6 @@
     <ClCompile Include="Graphic\Source\Terrain.cpp" />
     <ClCompile Include="Graphic\Source\Camera.cpp" />
     <ClCompile Include="Controlls\Source\Mouse.cpp" />
-    <ClCompile Include="Graphic\Source\Mesh.cpp" />
-    <ClCompile Include="Graphic\Source\Model.cpp" />
     <ClCompile Include="Graphic\Source\Render.cpp" />
     <ClCompile Include="Graphic\Source\Texture.cpp" />
     <ClCompile Include="Logic\Source\Block.cpp" />
@@ -28,6 +26,7 @@
     <ClCompile Include="Logic\Source\RandomNoise.cpp" />
     <ClCompile Include="Logic\Source\SeedConverter.cpp" />
     <ClCompile Include="Logic\Source\GenWindow.cpp" />
+    <ClCompile Include="Graphic\Source\Model.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
@@ -49,8 +48,6 @@
     <ClInclude Include="Graphic\header\Terrain.h" />
     <ClInclude Include="Graphic\header\Camera.h" />
     <ClInclude Include="Controlls\Header\Mouse.h" />
-    <ClInclude Include="Graphic\header\Mesh.h" />
-    <ClInclude Include="Graphic\header\Model.h" />
     <ClInclude Include="Graphic\header\Render.h" />
     <ClInclude Include="Graphic\header\Texture.h" />
     <ClInclude Include="LogicDefines.h" />
@@ -65,6 +62,8 @@
     <ClInclude Include="Logic\header\GenWindow.h" />
     <ClInclude Include="Logic\header\RandomNoise.h" />
     <ClInclude Include="Logic\header\SeedConverter.h" />
+    <ClInclude Include="glew.h" />
+    <ClInclude Include="Graphic\header\Model.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Graphic\Shaders\fragment.glsl" />

@@ -1,15 +1,11 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-
 #include "shaderCreater.h"
-//#include <GL\glxew.h>
-//#include <gl\glxew.h>
-#include "Camera.h"
+#include "../../glew.h"
 #include "../../Logic/header/Array.h"
-
 #include <cstdlib>
-//#include <glm.hpp>
+
 
 #define DDS_MAGIC_NUMBER 0x20534444 // 'DDS ' in hex
 #define ID_DXT1 0x31545844

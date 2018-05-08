@@ -1,6 +1,4 @@
 #include "../header/Texture.h"
-#define STATIC_GLEW
-#include <GL\glew.h>
 
 Texture::Texture()
 	: id(0), width(0), height(0), format(GL_COMPRESSED_RGBA_S3TC_DXT1_EXT), pixels(nullptr)
