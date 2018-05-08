@@ -23,25 +23,73 @@ void Render::load()
 
 void Render::unload()
 {
-
+	// unload shaders
+	//objectShader.unload();
 }
 
 void Render::begin()
 {
-
+	objectElements.clear();
+	objectInstances.clear();
+	worldMatrices.clear();
 }
 
 void Render::end()
 {
+	// sort elements
+	std::qsort(objectElements.getData(), objectElements.getSize(), sizeof(ObjectElement), compareElements);
 
+	// create world matrices from positions
+	const glm::mat4 IDENT;
+	for (int i = 0; i<objectElements.getSize(); i++)
+	{
+		worldMatrices[i] = glm::translate(IDENT, objectElements[i].position);
+	}
+
+	// convert elements to instances
+	int first = 0;
+	while (first < objectElements.getSize())
+	{
+		int last = first;
+		int curModel = objectElements[first].model;
+		int curTexture = objectElements[first].texture;
+
+		for (int i = first + 1; i<objectElements.getSize() && last - first + 1 < MAX_INSTANCES_PER_DRAW; i++, last++)
+		{
+			if (objectElements[i].model != curModel || objectElements[i].texture != curTexture)
+			{
+				break;
+			}
+		}
+
+		int instances = last - first + 1;
+		ObjectInstance instance = { curModel, curTexture, instances };
+		objectInstances.add(instance);
+
+		first = last + 1;
+	}
 }
 
 void Render::addElement(int model, int texture, const glm::vec3& position)
 {
+	assert(model >= 0);
+	assert(texture >= 0);
 
+	ObjectElement element = { model, texture, position };
+
+	objectElements.add(element);
+	worldMatrices.add(glm::mat4());
 }
 
 void Render::render(ModelLoader* models)
 {
-
+	int worldMatrixOffset = 0;
+	for (int i = 0; i<objectInstances.getSize(); i++)
+	{
+		ObjectInstance& instance = objectInstances[i];
+		objectShader.setMat4v(objectWorldLocation, &worldMatrices[worldMatrixOffset], instance.instances);
+		models->bindTexture(instance.texture);
+		models->renderModel(instance.model, instance.instances);
+		worldMatrixOffset += instance.instances;
+	}
 }
