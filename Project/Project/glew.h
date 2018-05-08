@@ -81,21 +81,22 @@
 #define __glew_h__
 #define __GLEW_H__
 #endif
-#if defined(__gl2_h_)
-#error gl2.h included before glew.h
-#endif
-#if defined(__gltypes_h_)
-#error gltypes.h included before glew.h
-#endif
-#if defined(__REGAL_H__)
-#error Regal.h included before glew.h
-#endif
-#if defined(__glext_h_) || defined(__GLEXT_H_)
-#error glext.h included before glew.h
-#endif
-#if defined(__gl_ATI_h_)
-#error glATI.h included before glew.h
-#endif
+//Might wan't to add/un-comment the lines below "_CATS_"
+//#if defined(__gl2_h_)
+//#error gl2.h included before glew.h
+//#endif
+//#if defined(__gltypes_h_)
+//#error gltypes.h included before glew.h
+//#endif
+//#if defined(__REGAL_H__)
+//#error Regal.h included before glew.h
+//#endif
+//#if defined(__glext_h_) || defined(__GLEXT_H_)
+//#error glext.h included before glew.h
+//#endif
+//#if defined(__gl_ATI_h_)
+//#error glATI.h included before glew.h
+//#endif
 
 #define __gl_h_
 #define __gl2_h_
