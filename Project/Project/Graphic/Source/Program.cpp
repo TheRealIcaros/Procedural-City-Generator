@@ -35,11 +35,13 @@ void Program::initiateVariables()
 	//Mics
 	this->keyIsPressedF1 = false;
 	this->shouldRun = true;
-	this->FOV = 0.45f * PI;
+	//this->FOV = 0.45f * PI;
 
 	//Values for mousemovements
-	this->cameraOffsetX = 0.0f;
+	
 	this->cameraOffsetY = 0.0f;
+	this->cameraOffsetX = 0.0f;
+	
 
 	//Class object used by the Program class
 	this->noise = new PerlinNoise();
@@ -53,7 +55,7 @@ void Program::initiateVariables()
 	//this->models = Model();
 
 	this->myKeyInput = new KeyIn();
-	this->camera = new Camera(window);
+	//this->camera = new Camera(window);
 	//this->myObject = new Object();
 
 	terrainMap.fill(0.0f);
@@ -215,7 +217,9 @@ bool Program::Start()
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
 
-	renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
+	/*
+		renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
+	*/
 
 	//std::string const path = "./Models/Box/Box.obj";
 	//models.push_back(path);
@@ -232,7 +236,7 @@ bool Program::Run()
 	myKeyInput->keyInput(window, genWindow, shouldRun);		//Checks if any key was pressed 
 
 	if(myKeyInput->getCameraShouldMove() == true)
-		camera->mouseMovement(window, cameraOffsetX, cameraOffsetY);
+		//camera->mouseMovement(window, cameraOffsetX, cameraOffsetY);
 
 	genWindow->draw();										//Draw function for ImGui
 
@@ -264,7 +268,7 @@ void Program::Stop()
 	delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;
-	delete this->camera;
+	//delete this->camera;
 	//delete this->myObject;
 
 	glfwTerminate();

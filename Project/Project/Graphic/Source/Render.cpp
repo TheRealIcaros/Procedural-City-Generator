@@ -18,13 +18,23 @@ Render::~Render()
 
 void Render::load()
 {
+	objectShader.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
+	//terrainShader.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
+
+	objectWorldLocation = objectShader.getUniform("WorldMatrices");
+	objectProjectionLocation = objectShader.getUniform("ProjectionMatrix");
+	objectViewLocation = objectShader.getUniform("ViewMatrix");
+
+	myCamera.setPosition(glm::vec3(0, 0, -10));
+	//myCamera.
 
 }
 
 void Render::unload()
 {
 	// unload shaders
-	//objectShader.unload();
+	objectShader.unload();
+	//terrainShader.unload();
 }
 
 void Render::begin()
@@ -85,8 +95,8 @@ void Render::render(ModelLoader* models)
 {
 	//Shader setup
 	glUseProgram(objectShader.getShaderProgramID());
-	objectShader.setMat4(objectProjectionLocation, perspectiveCamera.getProjection());
-	objectShader.setMat4(objectViewLocation, perspectiveCamera.getView());
+	objectShader.setMat4(objectProjectionLocation, myCamera.getProjection());
+	objectShader.setMat4(objectViewLocation, myCamera.getView());
 
 	int worldMatrixOffset = 0;
 	for (int i = 0; i<objectInstances.getSize(); i++)

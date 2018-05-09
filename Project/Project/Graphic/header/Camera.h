@@ -15,17 +15,16 @@ private:
 	glm::mat4 View;
 	glm::mat4 projection;
 
-
+	//View matrix values
 	glm::vec3 cameraPosition;
 	glm::vec3 lookAtVector;
 	glm::vec3 upVector;
 
+	//Mouse values for camera angles
 	float yaw;
 	float pitch;
 	float sensitivity;
 	float speed;
-
-	
 
 public:
 	Camera();

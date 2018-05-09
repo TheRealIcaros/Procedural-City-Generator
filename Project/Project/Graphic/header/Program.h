@@ -41,7 +41,7 @@ private:
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
-	Camera* camera;
+	//Camera* camera;
 	
 	shaderCreater renderPass;
 	//Model models;
@@ -63,7 +63,7 @@ private:
 	//Mics variables
 	bool keyIsPressedF1;
 	bool shouldRun;
-	float FOV;
+	//float FOV;
 	float cameraOffsetX;
 	float cameraOffsetY;
 

@@ -27,7 +27,8 @@ private:
 
 	// Object variables
 	shaderCreater objectShader;
-	Camera perspectiveCamera;
+	shaderCreater terrainShader;
+	Camera myCamera;
 
 	Array<ObjectElement> objectElements;
 	Array<ObjectInstance> objectInstances;

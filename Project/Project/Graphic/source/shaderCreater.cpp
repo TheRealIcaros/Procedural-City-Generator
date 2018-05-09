@@ -9,9 +9,24 @@ shaderCreater::~shaderCreater()
 {
 }
 
+void shaderCreater::unload()
+{
+	if (programID)
+	{
+		glDeleteProgram(programID);
+	}
+
+	programID = 0;
+}
+
 GLuint shaderCreater::getShaderProgramID()const
 {
 	return this->programID;
+}
+
+GLuint shaderCreater::getUniform(const std::string& name)
+{
+	return glGetUniformLocation(getShaderProgramID(), name.c_str());
 }
 
 void shaderCreater::createShader(std::string vertexShader, std::string geometryShader, std::string fragmentShader)

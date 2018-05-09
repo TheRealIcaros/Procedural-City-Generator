@@ -17,7 +17,9 @@ public:
 	shaderCreater();
 	~shaderCreater();
 
+	void unload();
 	GLuint getShaderProgramID()const;
+	GLuint getUniform(const std::string& name);
 	void createShader(std::string vertexShader, std::string geometryShader, std::string fragmentShader);
 	void setFloat(std::string name, GLfloat value)const;
 	void setMat4(const std::string &name, const glm::mat4 &mat) const;
