@@ -85,7 +85,7 @@ void Render::render(ModelLoader* models)
 {
 	//Shader setup
 	glUseProgram(objectShader.getShaderProgramID());
-	//objectShader.setMat4(objectProjectionLocation, perspectiveCamera.getProjectionMatrix());
+	objectShader.setMat4(objectProjectionLocation, perspectiveCamera.getProjection());
 	objectShader.setMat4(objectViewLocation, perspectiveCamera.getView());
 
 	int worldMatrixOffset = 0;
