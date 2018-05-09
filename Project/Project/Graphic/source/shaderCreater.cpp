@@ -156,6 +156,11 @@ void shaderCreater::setMat4(const std::string &name, const glm::mat4 &mat) const
 	glUniformMatrix4fv(glGetUniformLocation(programID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
 
+void shaderCreater::setMat4(GLuint location, const glm::mat4& value)
+{
+	glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+}
+
 void shaderCreater::setMat4v(GLuint location, const glm::mat4* value, int n)
 {
 	glUniformMatrix4fv(location, n, GL_FALSE, glm::value_ptr(*value));

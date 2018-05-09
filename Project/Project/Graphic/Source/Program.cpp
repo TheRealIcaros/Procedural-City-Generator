@@ -100,6 +100,7 @@ void Program::generate()
 	genWindow->setMainRoad(block->getMainRoad());
 	genWindow->setSmallRoad(block->getSmallRoad());
 	genWindow->setSeed(seed->getSeed());
+
 	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
 		genWindow->setBuildings(i, building->getBuildings()[i]);
@@ -209,6 +210,7 @@ bool Program::Start()
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
+	//Rendering parameters
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
@@ -276,21 +278,21 @@ void Program::render()
 
 	glUseProgram(renderPass.getShaderProgramID());
 
-	glm::mat4 projection = glm::perspective(FOV, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
-	glm::mat4 view = camera->getView();
-	renderPass.setMat4("projection", projection);
-	renderPass.setMat4("view", view);
-
-	glm::mat4 model;
-	model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));	  // translate it down so it's at the center of the scene
-	model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));			 // it's a bit too big for our scene, so scale it down
-	renderPass.setMat4("model", model);
+	//glm::mat4 projection = glm::perspective(FOV, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
+	//glm::mat4 view = camera->getView();
+	//renderPass.setMat4("projection", projection);
+	//renderPass.setMat4("view", view);
+	//
+	//glm::mat4 model;
+	//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));	  // translate it down so it's at the center of the scene
+	//model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));			 // it's a bit too big for our scene, so scale it down
+	//renderPass.setMat4("model", model);
 
 	//for (int i = 0; i < models.; i++)
 	////Draws all the models in the application
 	//models.Draw(renderPass);
 
-	//ImGui that handles the graphical interface
+	//ImGui that handles the graphical interface//
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }

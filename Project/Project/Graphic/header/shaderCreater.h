@@ -21,6 +21,7 @@ public:
 	void createShader(std::string vertexShader, std::string geometryShader, std::string fragmentShader);
 	void setFloat(std::string name, GLfloat value)const;
 	void setMat4(const std::string &name, const glm::mat4 &mat) const;
+	void setMat4(GLuint location, const glm::mat4& value);
 	void setMat4v(GLuint location, const glm::mat4* value, int n);
 };
 

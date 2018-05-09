@@ -83,6 +83,11 @@ void Render::addElement(int model, int texture, const glm::vec3& position)
 
 void Render::render(ModelLoader* models)
 {
+	//Shader setup
+	glUseProgram(objectShader.getShaderProgramID());
+	//objectShader.setMat4(objectProjectionLocation, perspectiveCamera.getProjectionMatrix());
+	objectShader.setMat4(objectViewLocation, perspectiveCamera.getView());
+
 	int worldMatrixOffset = 0;
 	for (int i = 0; i<objectInstances.getSize(); i++)
 	{
