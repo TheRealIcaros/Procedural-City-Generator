@@ -1,10 +1,10 @@
 #ifndef CAMERA_H
 #define CARERA_H
 
-#include "../../Controlls/Header/Mouse.h"
+#include "..\..\Controlls\Header\Mouse.h"
 
 #include <GLFW\glfw3.h>
-#include "../../Defines.h"
+#include "..\..\Defines.h"
 
 
 class Camera
@@ -12,7 +12,6 @@ class Camera
 private:
 	//Mouse movements
 	Mouse* myMouse;
-
 
 	glm::mat4 View;
 
@@ -28,6 +27,7 @@ private:
 	
 
 public:
+	Camera();
 	Camera(GLFWwindow* window);
 	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, GLFWwindow* window);
 	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVector, GLFWwindow* window);

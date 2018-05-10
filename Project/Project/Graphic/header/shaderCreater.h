@@ -12,7 +12,6 @@ class shaderCreater
 {
 private:
 	GLuint programID;
-
 public:
 	shaderCreater();
 	~shaderCreater();

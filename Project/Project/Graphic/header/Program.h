@@ -2,10 +2,9 @@
 #define PROGRAM_H
 
 //Own made includes
-#include "Model.h"
-#include "Camera.h"
-#include "../../Controlls/Header/KeyIn.h"
+#include "Render.h"
 #include "../../Logic/header/GenWindow.h"
+#include "../../Controlls/Header/KeyIn.h"
 //#include "Deferred.h"
 
 //Imgui stuff
@@ -32,21 +31,21 @@ class Program
 {
 private:
 	//Class objects
-	PerlinNoise * noise;
-	RandomNoise * randNoise;
-	HeightMap * map;
-	District * district;
-	Block * block;
-	Building * building;
+	PerlinNoise* noise;
+	RandomNoise* randNoise;
+	HeightMap* map;
+	District* district;
+	Block* block;
+	Building* building;
 	SeedConverter* seed;
 	GLFWwindow* window;
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
 	Camera* camera;
-	//Model myModel;
 	
 	shaderCreater renderPass;
-	Model models;
+	//Model models;
+
 	//std::vector<Model> models;
 	//Deferred* deferred;
 
@@ -55,10 +54,11 @@ private:
 	bool initiateWindow(GLFWwindow* window);
 	void initiateImgui(GLFWwindow* window);
 	void initiateVariables();
-	void initiateData();
 
 	void generate();
 	void noiseGenerator(unsigned int seed);
+
+	void render();				//The render loop in the application
 
 	//Mics variables
 	bool keyIsPressedF1;
@@ -66,7 +66,6 @@ private:
 	float FOV;
 	float cameraOffsetX;
 	float cameraOffsetY;
-
 
 	Array2D<float> terrainMap;
 	Array2D<int> cityMap;
@@ -80,7 +79,6 @@ public:
 	bool Run();					//The main-loop/ Returns false when we exit it 
 	void Stop();				//Cleans upp the memory and returns everything
 
-	void render();				//The render loop in the application
 };
 
 #endif

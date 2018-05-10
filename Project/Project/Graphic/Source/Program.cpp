@@ -41,6 +41,7 @@ void Program::initiateVariables()
 	this->cameraOffsetX = 0.0f;
 	this->cameraOffsetY = 0.0f;
 
+	//Class object used by the Program class
 	this->noise = new PerlinNoise();
 	this->randNoise = new RandomNoise();
 	this->map = new HeightMap();
@@ -49,7 +50,7 @@ void Program::initiateVariables()
 	this->building = new Building();
 	this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
-	this->models = Model();
+	//this->models = Model();
 
 	this->myKeyInput = new KeyIn();
 	this->camera = new Camera(window);
@@ -57,7 +58,6 @@ void Program::initiateVariables()
 
 	terrainMap.fill(0.0f);
 }
-
 
 void Program::generate()
 {
@@ -90,6 +90,9 @@ void Program::generate()
 	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
 
 	building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
+
+	//Add structures render
+	//render->begin();
 
 	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
 	genWindow->setGenTime(std::chrono::duration<float>(end - start).count());
@@ -206,15 +209,15 @@ bool Program::Start()
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
-	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
 
 	renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
 
-	std::string const path = "./Models/Box/Box.obj";
+	//std::string const path = "./Models/Box/Box.obj";
 	//models.push_back(path);
-	models.loadModel(path, glm::vec3(0.0f, 0.0f, -2.0f));
+	//models.loadModel(path, glm::vec3(0.0f, 0.0f, -2.0f));
 	//deferred->initiateDeferred();
 
 	return returnValue;
@@ -271,13 +274,6 @@ void Program::render()
 	glClearColor(0.3f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	//Rendering the Deferred part
-	//deferred->render();
-	//glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-	//glBindVertexArray(models);
-	//glDrawArrays(GL_TRIANGLES, 0, 3);
-	
-	//// draw our first triangle
 	glUseProgram(renderPass.getShaderProgramID());
 
 	glm::mat4 projection = glm::perspective(FOV, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
@@ -290,13 +286,18 @@ void Program::render()
 	model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));			 // it's a bit too big for our scene, so scale it down
 	renderPass.setMat4("model", model);
 
-	
 	//for (int i = 0; i < models.; i++)
-
-	//Draws all the models in the application
-	models.Draw(renderPass);
+	////Draws all the models in the application
+	//models.Draw(renderPass);
 
 	//ImGui that handles the graphical interface
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
+
+//// draw our first triangle
+//Rendering the Deferred part
+//deferred->render();
+//glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
+//glBindVertexArray(models);
+//glDrawArrays(GL_TRIANGLES, 0, 3);
