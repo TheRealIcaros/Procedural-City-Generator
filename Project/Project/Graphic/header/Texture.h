@@ -2,7 +2,6 @@
 #define TEXTURE_H
 
 #include "shaderCreater.h"
-#include "../../glew.h"
 #include "../../Logic/header/Array.h"
 #include <cstdlib>
 

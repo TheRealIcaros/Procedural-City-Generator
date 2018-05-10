@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)\Includes\glad\include;$(SolutionDir)\Includes\glew\include;$(SolutionDir)\Includes\glfw\include;$(SolutionDir)\Includes\glm;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\Includes\glew\include;$(SolutionDir)\Includes\glfw\include;$(SolutionDir)\Includes\glm;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\Includes\glew\lib\Release\Win32;$(SolutionDir)\Includes\glfw\lib-vc2015;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -126,7 +126,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Includes\glad\src\glad.c" />
     <ClCompile Include="Controlls\Source\KeyIn.cpp" />
     <ClCompile Include="Controlls\Source\Mouse.cpp" />
     <ClCompile Include="Graphic\Source\Camera.cpp">
@@ -196,7 +195,6 @@
     <ClInclude Include="Controlls\Header\KeyIn.h" />
     <ClInclude Include="Controlls\Header\Mouse.h" />
     <ClInclude Include="Defines.h" />
-    <ClInclude Include="glew.h" />
     <ClInclude Include="Graphic\header\Camera.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>

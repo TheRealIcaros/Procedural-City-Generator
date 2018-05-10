@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="..\Includes\glad\src\glad.c" />
     <ClCompile Include="Controlls\Source\KeyIn.cpp" />
     <ClCompile Include="Graphic\Source\Program.cpp" />
     <ClCompile Include="Imgui\imgui.cpp" />
@@ -62,7 +61,6 @@
     <ClInclude Include="Logic\header\GenWindow.h" />
     <ClInclude Include="Logic\header\RandomNoise.h" />
     <ClInclude Include="Logic\header\SeedConverter.h" />
-    <ClInclude Include="glew.h" />
     <ClInclude Include="Graphic\header\Model.h" />
     <ClInclude Include="Graphic\header\Program.h" />
     <ClInclude Include="Graphic\header\ModelLoader.h" />

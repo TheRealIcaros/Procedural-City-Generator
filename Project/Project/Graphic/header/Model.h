@@ -1,8 +1,8 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-//#include "Texture.h"
-#include "../../glew.h"
+//Inlcudes
+#include <GL\glew.h>
 #include <GLFW\glfw3.h>
 #include <glm.hpp>
 #include <string>
