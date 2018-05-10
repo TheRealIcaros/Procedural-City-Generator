@@ -1,12 +1,15 @@
 #include "../header/Model.h"
+#include <iostream>
 
 Model::Model()
 	: vertexBuffer(0), indexBuffer(0), vertexArray(0), vertexCount(0), indexCount(0)
 {
+	
 }
 
 Model::~Model()
 {
+	
 }
 
 bool Model::load(const std::string& path)

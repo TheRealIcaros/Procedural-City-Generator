@@ -10,6 +10,13 @@ void setColor(unsigned short color)
 
 void Program::initiateGLFW()
 {
+	glewExperimental = GL_TRUE;
+	GLenum glewError = glewInit();
+	if (glewError != GLEW_OK)
+	{
+		glfwTerminate();
+		exit(EXIT_FAILURE);
+	}
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);	 //This sets the Major requierments of Opengl to Version 4.x
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);	//This sets the Minor requierments of Opengl to Version x.3
@@ -51,7 +58,7 @@ void Program::initiateVariables()
 	this->seed = new SeedConverter();
 	this->genWindow = new GenWindow();
 	this->myKeyInput = new KeyIn();
-	this->myRender = new Render();
+	this->myRender =  new Render();
 	this->myModels = ModelLoader();
 	//this->camera = new Camera(window);
 	//this->myObject = new Object();
@@ -123,8 +130,6 @@ void Program::generate()
 	cityMap.fill(7);
 	terrainMap.fill(0);
 	cityMap = Array2D<int>(genWindow->getTSizeX(), genWindow->getTSizeY());
-
-
 
 	if (genWindow->getInputBuf().compare("") != 0)
 	{
@@ -320,7 +325,7 @@ bool Program::Start()
 		std::cout << "Failed to initialize GLAD" << std::endl;
 		returnValue = false;
 	}
-	
+
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
@@ -329,12 +334,11 @@ bool Program::Start()
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
 
+	//renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
+	
 	//This loads in all textures needed for the application
 	loadAssets();
-
-	/*
-		renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
-	*/
+	//myRender->load();
 
 	//std::string const path = "./Models/Box/Box.obj";
 	//models.push_back(path);
@@ -396,7 +400,7 @@ void Program::render()
 	glClearColor(0.3f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	glUseProgram(renderPass.getShaderProgramID());
+	//glUseProgram(renderPass.getShaderProgramID());
 
 	//glm::mat4 projection = glm::perspective(FOV, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
 	//glm::mat4 view = camera->getView();
