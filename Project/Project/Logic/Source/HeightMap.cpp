@@ -47,6 +47,8 @@ void HeightMap::generate(Array2D<float>& terrainMap, int width, int height, Arra
 				n /= percTot;
 			}
 
+
+
 			n = pow(n, redistribution); //lessen/increases the differences between the heightmap pixels
 
 			terrainMap.at(j, i) = n;
