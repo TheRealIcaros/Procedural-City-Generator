@@ -12,18 +12,26 @@
     <ClCompile Include="libs\usynergy\uSynergy.c" />
     <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Singleton\GenWindow.cpp" />
-    <ClCompile Include="Graphic\Source\Object.cpp" />
     <ClCompile Include="Graphic\Source\Terrain.cpp" />
     <ClCompile Include="Graphic\Source\Camera.cpp" />
-    <ClCompile Include="Graphic\Source\Deferred.cpp" />
+    <ClCompile Include="Controlls\Source\Mouse.cpp" />
+    <ClCompile Include="Graphic\Source\Render.cpp" />
+    <ClCompile Include="Graphic\Source\Texture.cpp" />
+    <ClCompile Include="Logic\Source\Block.cpp" />
+    <ClCompile Include="Logic\Source\Building.cpp" />
+    <ClCompile Include="Logic\Source\District.cpp" />
+    <ClCompile Include="Logic\Source\HeightMap.cpp" />
+    <ClCompile Include="Logic\Source\Noise.cpp" />
     <ClCompile Include="Logic\Source\PerlinNoise.cpp" />
-    <ClCompile Include="Logic\Source\ppm.cpp" />
+    <ClCompile Include="Logic\Source\RandomNoise.cpp" />
+    <ClCompile Include="Logic\Source\SeedConverter.cpp" />
+    <ClCompile Include="Logic\Source\GenWindow.cpp" />
+    <ClCompile Include="Graphic\Source\Model.cpp" />
+    <ClCompile Include="Graphic\Source\ModelLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
     <ClInclude Include="Defines.h" />
-    <ClInclude Include="Graphic\header\Program.h" />
     <ClInclude Include="Imgui\imconfig.h" />
     <ClInclude Include="Imgui\imgui.h" />
     <ClInclude Include="Imgui\imgui_impl_glfw_gl3.h" />
@@ -36,20 +44,59 @@
     <ClInclude Include="libs\glfw\include\GLFW\glfw3.h" />
     <ClInclude Include="libs\glfw\include\GLFW\glfw3native.h" />
     <ClInclude Include="libs\usynergy\uSynergy.h" />
-    <ClInclude Include="Singleton\GenWindow.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
-    <ClInclude Include="Logic\header\PerlinNoise.h" />
-    <ClInclude Include="Logic\header\ppm.h" />
-    <ClInclude Include="Graphic\header\Object.h" />
     <ClInclude Include="Graphic\header\Terrain.h" />
     <ClInclude Include="Graphic\header\Camera.h" />
-    <ClInclude Include="Graphic\header\Deferred.h" />
+    <ClInclude Include="Controlls\Header\Mouse.h" />
+    <ClInclude Include="Graphic\header\Render.h" />
+    <ClInclude Include="Graphic\header\Texture.h" />
+    <ClInclude Include="LogicDefines.h" />
+    <ClInclude Include="Logic\header\Array2D.h" />
+    <ClInclude Include="Logic\header\Array.h" />
+    <ClInclude Include="Logic\header\Block.h" />
+    <ClInclude Include="Logic\header\Building.h" />
+    <ClInclude Include="Logic\header\District.h" />
+    <ClInclude Include="Logic\header\HeightMap.h" />
+    <ClInclude Include="Logic\header\Noise.h" />
+    <ClInclude Include="Logic\header\PerlinNoise.h" />
+    <ClInclude Include="Logic\header\GenWindow.h" />
+    <ClInclude Include="Logic\header\RandomNoise.h" />
+    <ClInclude Include="Logic\header\SeedConverter.h" />
+    <ClInclude Include="glew.h" />
+    <ClInclude Include="Graphic\header\Model.h" />
+    <ClInclude Include="Graphic\header\Program.h" />
+    <ClInclude Include="Graphic\header\ModelLoader.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Graphic\Shaders\gfragment.glsl" />
-    <None Include="Graphic\Shaders\ggeometry.glsl" />
-    <None Include="Graphic\Shaders\gvertex.glsl" />
-    <None Include="Graphic\Shaders\ffragment.glsl" />
-    <None Include="Graphic\Shaders\fvertex.glsl" />
+    <None Include="Graphic\Shaders\fragment.glsl" />
+    <None Include="Graphic\Shaders\geometry.glsl" />
+    <None Include="Graphic\Shaders\vertex.glsl" />
+    <None Include="Debug\vc141.idb" />
+    <None Include="Debug\vc141.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Object Include="Debug\Camera.obj" />
+    <Object Include="Debug\Deferred.obj" />
+    <Object Include="Debug\GenWindow.obj" />
+    <Object Include="Debug\gl3w.obj" />
+    <Object Include="Debug\glad.obj" />
+    <Object Include="Debug\imgui.obj" />
+    <Object Include="Debug\imgui_demo.obj" />
+    <Object Include="Debug\imgui_draw.obj" />
+    <Object Include="Debug\imgui_impl_glfw_gl3.obj" />
+    <Object Include="Debug\KeyIn.obj" />
+    <Object Include="Debug\main.obj" />
+    <Object Include="Debug\Mouse.obj" />
+    <Object Include="Debug\Object.obj" />
+    <Object Include="Debug\Program.obj" />
+    <Object Include="Debug\Render.obj" />
+    <Object Include="Debug\shaderCreater.obj" />
+    <Object Include="Debug\Source.obj" />
+    <Object Include="Debug\Terrain.obj" />
+    <Object Include="Debug\uSynergy.obj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Debug\Project.Build.CppClean.log" />
+    <Text Include="Debug\Project.log" />
   </ItemGroup>
 </Project>

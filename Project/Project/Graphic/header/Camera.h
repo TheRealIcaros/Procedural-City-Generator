@@ -1,15 +1,18 @@
 #ifndef CAMERA_H
 #define CARERA_H
 
-//3D-math
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp>
+#include "..\..\Controlls\Header\Mouse.h"
+
+#include <GLFW\glfw3.h>
+#include "..\..\Defines.h"
 
 
 class Camera
 {
 private:
+	//Mouse movements
+	Mouse* myMouse;
+
 	glm::mat4 View;
 
 	glm::vec3 cameraPosition;
@@ -19,17 +22,19 @@ private:
 	float yaw;
 	float pitch;
 	float sensitivity;
-
 	float speed;
+
+	
 
 public:
 	Camera();
-	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector);
-	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVector);
+	Camera(GLFWwindow* window);
+	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, GLFWwindow* window);
+	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVector, GLFWwindow* window);
 	~Camera();
 	void setLookAtVector(glm::vec3 lookAtVector);
 	void moveCameraPosition(glm::vec3 movement);
-	void mouseMovement(float xoffset, float yoffset);
+	void mouseMovement(GLFWwindow* window, float xoffset, float yoffset);
 
 	// - GET/SET
 	void setYaw(float yaw);
@@ -45,6 +50,9 @@ public:
 	void setCameraPosition(float xaxis, float yaxis, float zaxis);
 	void setHeight(float Y);
 
+
+	//Mic functions
+	//void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 };
 
 #endif

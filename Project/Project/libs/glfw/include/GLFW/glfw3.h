@@ -134,7 +134,8 @@ extern "C" {
   #if !defined(GLFW_INCLUDE_GLEXT)
    #define GL_GLEXT_LEGACY
   #endif
-  #include <OpenGL/gl.h>
+  //#include <OpenGL/gl.h>
+#include <GL/glew.h>
  #endif
  #if defined(GLFW_INCLUDE_GLU)
   #include <OpenGL/glu.h>
@@ -143,7 +144,8 @@ extern "C" {
  #if defined(GLFW_INCLUDE_GLCOREARB)
   #include <GL/glcorearb.h>
  #elif defined(GLFW_INCLUDE_ES1)
-  #include <GLES/gl.h>
+  //#include <GLES/gl.h>
+#include <GL/glew.h>
   #if defined(GLFW_INCLUDE_GLEXT)
    #include <GLES/glext.h>
   #endif
@@ -165,13 +167,15 @@ extern "C" {
  #elif defined(GLFW_INCLUDE_VULKAN)
   #include <vulkan/vulkan.h>
  #elif !defined(GLFW_INCLUDE_NONE)
-  #include <GL/gl.h>
+  //#include 
+#include <GL/glew.h>
   #if defined(GLFW_INCLUDE_GLEXT)
    #include <GL/glext.h>
   #endif
  #endif
  #if defined(GLFW_INCLUDE_GLU)
-  #include <GL/glu.h>
+  //#include <GL/glu.h>
+#include <GL/glew.h>
  #endif
 #endif
 

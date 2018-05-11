@@ -44,8 +44,9 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 		glDeleteShader(vs);
 		exit(-1);
 	}
+	
 
-	std::cout << "Vertex shader code:\n" << shaderText << std::endl;
+	/*std::cout << "Vertex shader code:\n" << shaderText << std::endl;*/
 	
 	//Geometry shader
 	GLuint gs = 0;
@@ -75,8 +76,6 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 			glDeleteShader(gs);
 			exit(-1);
 		}
-
-		std::cout << "\nGeometry shader code:\n" << shaderText << std::endl;
 	}
 
 	//Fragment shader
@@ -104,8 +103,6 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 		glDeleteShader(fs);
 		exit(-1);
 	}
-
-	std::cout << "\nFragment shader code:\n" << shaderText << std::endl;
 
 	//Link shader-program (connect vs,(gs) and fs)
 	this->programID = glCreateProgram();
@@ -149,7 +146,12 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 	glDeleteShader(fs);
 }
 
-void shaderCreater::setFloat(std::string name, int value)const
+void shaderCreater::setFloat(std::string name, GLfloat value)const
 {
 	glUniform1f(glGetUniformLocation(this->programID, name.c_str()), value);
+}
+
+void shaderCreater::setMat4(const std::string &name, const glm::mat4 &mat) const
+{
+	glUniformMatrix4fv(glGetUniformLocation(programID, name.c_str()), 1, GL_FALSE, &mat[0][0]);
 }
