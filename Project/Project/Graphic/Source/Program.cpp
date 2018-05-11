@@ -119,6 +119,52 @@ void Program::loadSection(int district, const Section& section, int type)
 	building->addSection(district, section, type);
 }
 
+void Program::addSection()
+{
+	building->addSection(0, { houseBottomSection, houseBottomTexture }, SECTION_BOTTOM);
+	building->addSection(0, { houseBottomSection, houseBottomTexture2 }, SECTION_BOTTOM);
+	building->addSection(0, { houseBottomSection, houseBottomTexture3 }, SECTION_BOTTOM);
+
+	// add some house middle sections
+	building->addSection(0, { houseMiddleSection, houseMiddleTexture }, SECTION_MIDDLE);
+	building->addSection(0, { houseMiddleSection, houseMiddleTexture2 }, SECTION_MIDDLE);
+	building->addSection(0, { houseMiddleSection, houseMiddleTexture3 }, SECTION_MIDDLE);
+
+	// add some house top sections
+	building->addSection(0, { houseTopSection, houseTopTexture }, SECTION_TOP);
+	building->addSection(0, { houseTopSection, houseTopTexture2 }, SECTION_TOP);
+	building->addSection(0, { houseTopSection2, houseTopTexture }, SECTION_TOP);
+	building->addSection(0, { houseTopSection2, houseTopTexture2 }, SECTION_TOP);
+
+	// add some skyscraper bottom sections
+	building->addSection(1, { skyBottomSection, skyBottomTexture }, SECTION_BOTTOM);
+	building->addSection(1, { skyBottomSection, skyBottomTexture2 }, SECTION_BOTTOM);
+	building->addSection(1, { skyBottomSection, skyBottomTexture3 }, SECTION_BOTTOM);
+
+	// add some skyscraper middle sections
+	building->addSection(1, { skyMiddleSection, skyMiddleTexture }, SECTION_MIDDLE);
+	building->addSection(1, { skyMiddleSection, skyMiddleTexture2 }, SECTION_MIDDLE);
+	building->addSection(1, { skyMiddleSection, skyMiddleTexture3 }, SECTION_MIDDLE);
+	building->addSection(1, { skyMiddleSection, skyMiddleTexture4 }, SECTION_MIDDLE);
+	building->addSection(1, { skyMiddleSection, skyMiddleTexture5 }, SECTION_MIDDLE);
+
+	// add some skyscraper top sections
+	building->addSection(1, { skyTopSection, skyTopTexture }, SECTION_TOP);
+	building->addSection(1, { skyTopSection, skyTopTexture2 }, SECTION_TOP);
+	building->addSection(1, { skyTopSection, skyTopTexture3 }, SECTION_TOP);
+
+
+	// add some factory bottom sections
+	building->addSection(2, { factoryBottomSection, factoryBottomTexture }, SECTION_BOTTOM);
+
+	// add some factory middle sections
+	building->addSection(2, { factoryMiddleSection, factoryMiddleTexture }, SECTION_MIDDLE);
+	building->addSection(2, { factoryMiddleSection, factoryMiddleTexture2 }, SECTION_MIDDLE);
+
+	// add some factory top sections
+	building->addSection(2, { factoryTopSection, factoryTopTexture }, SECTION_TOP);
+}
+
 void Program::generate()
 {
 	structure.clear();
@@ -172,6 +218,9 @@ void Program::generate()
 		genWindow->setBuildings(i, building->getBuildings()[i]);
 		genWindow->setGrass(i, building->getGrassTiles()[i]);
 	}
+
+	//End renderer
+	myRender->end();
 
 	//system("CLS");
 	//for (int j = 0; j < genWindow->getTSizeY(); j++)
@@ -251,7 +300,7 @@ void Program::addBuildingToRender()
 		for (int y = 0; y < genWindow->getTSizeY(); y++)
 		{
 			int cellValue = cityMap.at(x, y);
-			if (0 <= cellValue < 7)
+			if (0 <= cellValue && cellValue < 7)
 			{
 				const int NUM_STRUCTURES = structure.getSize();
 				Structure& s = structure[curStructure];
@@ -316,20 +365,13 @@ bool Program::Start()
 
 	initiateImgui(window);
 
-	/*This isn't needed anymore
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-	{
-		std::cout << "Failed to initialize GLAD" << std::endl;
-		returnValue = false;
-	}*/
-
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
 	//Rendering parameters
 	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_FRONT);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_FRONT);
 	
 	//Initiation of glew
 	glewInit();
@@ -337,6 +379,12 @@ bool Program::Start()
 	//This loads in all textures needed for the application
 	loadAssets();
 	
+	//This adds the sections to the applications
+	addSection();
+
+	//Startup the renderer
+	myRender->load(window);
+
 	//std::string const path = "./Models/Box/Box.obj";
 	//models.push_back(path);
 	//models.loadModel(path, glm::vec3(0.0f, 0.0f, -2.0f));
@@ -352,6 +400,7 @@ bool Program::Run()
 	myKeyInput->keyInput(window, genWindow, shouldRun);		//Checks if any key was pressed 
 
 	if(myKeyInput->getCameraShouldMove() == true)
+		myRender->getCamera()->mouseMovement(window, cameraOffsetX, cameraOffsetY);
 		//camera->mouseMovement(window, cameraOffsetX, cameraOffsetY);
 
 	genWindow->draw();										//Draw function for ImGui
@@ -394,11 +443,7 @@ void Program::Stop()
 
 void Program::render()
 {
-	//Cleans the color buffer and set the defaultbacgroundcolor
-	glClearColor(0.3f, 1.0f, 1.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	//glUseProgram(renderPass.getShaderProgramID());
+	//glUseProgram(myRender->getObjectShader());
 
 	myRender->render(myModels);
 

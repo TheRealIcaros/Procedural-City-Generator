@@ -16,16 +16,19 @@ Render::~Render()
 {
 }
 
-void Render::load()
+void Render::load(GLFWwindow* window)
 {
-	objectShader.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
+	this->myCamera = Camera(window);
+
+	objectShader.createShader("./Models/shaders/basic", "NULL", "./Models/shaders/basic");
+	//objectShader.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
 	//terrainShader.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
 
 	objectWorldLocation = objectShader.getUniform("WorldMatrices");
 	objectProjectionLocation = objectShader.getUniform("ProjectionMatrix");
 	objectViewLocation = objectShader.getUniform("ViewMatrix");
 
-	myCamera.setPosition(glm::vec3(0, 0, -10));
+	myCamera.setPosition(glm::vec3(0, 0, -1));
 	//myCamera.
 
 }
@@ -93,13 +96,18 @@ void Render::addElement(int model, int texture, const glm::vec3& position)
 
 void Render::render(ModelLoader* models)
 {
+	//Cleans the color buffer and set the defaultbacgroundcolor
+	glClearColor(8.0f, 8.0f, 8.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+
 	//Shader setup
 	glUseProgram(objectShader.getShaderProgramID());
 	objectShader.setMat4(objectProjectionLocation, myCamera.getProjection());
 	objectShader.setMat4(objectViewLocation, myCamera.getView());
 
 	int worldMatrixOffset = 0;
-	for (int i = 0; i<objectInstances.getSize(); i++)
+	//std::cout << objectInstances.getSize() << std::endl;
+	for (int i = 0; i < objectInstances.getSize(); i++)
 	{
 		ObjectInstance& instance = objectInstances[i];
 		objectShader.setMat4v(objectWorldLocation, &worldMatrices[worldMatrixOffset], instance.instances);
@@ -107,4 +115,14 @@ void Render::render(ModelLoader* models)
 		models->renderModel(instance.model, instance.instances);
 		worldMatrixOffset += instance.instances;
 	}
+}
+
+Camera* Render::getCamera()
+{
+	return &myCamera;
+}
+
+GLuint Render::getObjectShader()
+{
+	return objectShader.getShaderProgramID();
 }

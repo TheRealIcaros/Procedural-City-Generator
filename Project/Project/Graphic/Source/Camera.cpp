@@ -55,7 +55,7 @@ Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVec
 
 Camera::~Camera()
 {
-	delete this->myMouse;
+	//delete this->myMouse;
 }
 
 void Camera::setLookAtVector(glm::vec3 lookAtVector)

@@ -71,6 +71,8 @@
     <None Include="Graphic\Shaders\vertex.glsl" />
     <None Include="Debug\vc141.idb" />
     <None Include="Debug\vc141.pdb" />
+    <None Include="Models\shaders\basic.fs" />
+    <None Include="Models\shaders\basic.vs" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="Debug\Camera.obj" />
