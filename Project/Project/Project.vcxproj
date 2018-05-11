@@ -284,6 +284,8 @@
     <None Include="Graphic\Shaders\fragment.glsl" />
     <None Include="Graphic\Shaders\geometry.glsl" />
     <None Include="Graphic\Shaders\vertex.glsl" />
+    <None Include="Models\shaders\basic.fs" />
+    <None Include="Models\shaders\basic.vs" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="Debug\Camera.obj">

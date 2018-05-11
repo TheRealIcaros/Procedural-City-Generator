@@ -101,7 +101,7 @@ void Model::render(int instances)
 {
 	glBindVertexArray(vertexArray);
 	glDrawElementsInstanced(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, NULL, instances);
-	//glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, NULL);
+	glDrawElements(GL_TRIANGLES, indexCount, GL_UNSIGNED_INT, NULL);
 }
 
 GLuint Model::getVertexArray() const

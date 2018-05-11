@@ -37,7 +37,7 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 	//Vertex shader
 	GLuint vs = glCreateShader(GL_VERTEX_SHADER);
 	//Open glsl file and put it in a string
-	std::ifstream shaderFile(vertexShader + ".glsl");
+	std::ifstream shaderFile(vertexShader + ".vs");
 	//std::ifstream shaderFile(vertexShader);
 	std::string shaderText((std::istreambuf_iterator<char>(shaderFile)), std::istreambuf_iterator<char>());
 	shaderFile.close();
@@ -61,7 +61,7 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 	}
 	
 
-	/*std::cout << "Vertex shader code:\n" << shaderText << std::endl;*/
+	//std::cout << "Vertex shader code:\n" << shaderText << std::endl;
 	
 	//Geometry shader
 	GLuint gs = 0;
@@ -96,7 +96,7 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 	//Fragment shader
 	GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
 	//Open glsl file and put it in a string
-	shaderFile.open(fragmentShader + ".glsl");
+	shaderFile.open(fragmentShader + ".fs");
 	//shaderFile.open(fragmentShader);
 	shaderText.assign((std::istreambuf_iterator<char>(shaderFile)), std::istreambuf_iterator<char>());
 	shaderFile.close();

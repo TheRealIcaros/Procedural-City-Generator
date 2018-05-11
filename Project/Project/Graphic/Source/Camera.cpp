@@ -15,10 +15,18 @@ Camera::Camera(GLFWwindow* window)
 	this->sensitivity = 0.05f;
 	this->speed = 5.0f;
 
+	//Projection Matrix values
+	this->FOV = 0.45f;
+	this->aspecRatio = WIDTH / HEIGHT;
+	this->nearPlane = 0.1f;
+	this->farPlane = 250.0f;
+
 	//Initiates the mouse
 	this->myMouse = new Mouse(window);
 
+	//Matricies
 	this->View = glm::lookAt(this->cameraPosition, this->cameraPosition + this->lookAtVector, this->upVector);
+	this->projection = glm::perspective(FOV, aspecRatio, nearPlane, farPlane);
 }
 
 Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, GLFWwindow* window)
@@ -55,7 +63,7 @@ Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVec
 
 Camera::~Camera()
 {
-	delete this->myMouse;
+	//delete this->myMouse;
 }
 
 void Camera::setLookAtVector(glm::vec3 lookAtVector)

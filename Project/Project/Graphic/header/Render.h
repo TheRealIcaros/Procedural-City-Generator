@@ -42,7 +42,7 @@ public:
 	Render();
 	~Render();
 
-	void load();
+	void load(GLFWwindow* window);
 	void unload();
 
 	void begin();
@@ -52,7 +52,8 @@ public:
 	void render(ModelLoader* models);
 	//void render(Assets::AssetManager* assets);
 
-	shaderCreater* getObjectShader();
+	GLuint getObjectShader();
+	Camera* getCamera();
 };
 
 #endif

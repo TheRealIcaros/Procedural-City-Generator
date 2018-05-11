@@ -50,6 +50,7 @@ private:
 	void initiateVariables();
 	void loadAssets();
 	void loadSection(int district, const Section& section, int type);
+	void addSection();
 
 	void generate();
 	void noiseGenerator(unsigned int seed);
