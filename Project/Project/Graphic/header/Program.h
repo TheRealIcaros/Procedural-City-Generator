@@ -44,7 +44,7 @@ private:
 	ModelLoader myModels;
 	//Camera* camera;
 	
-	shaderCreater renderPass;
+	//shaderCreater renderPass;
 
 	//Initiation functions for the applications core functions
 	void initiateGLFW();

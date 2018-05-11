@@ -10,13 +10,8 @@ void setColor(unsigned short color)
 
 void Program::initiateGLFW()
 {
-	/*glewExperimental = GL_TRUE;
-	GLenum glewError = glewInit();
-	if (glewError != GLEW_OK)
-	{
-		glfwTerminate();
-		exit(EXIT_FAILURE);
-	}*/
+	glewExperimental = GL_TRUE;
+
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);	 //This sets the Major requierments of Opengl to Version 4.x
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);	//This sets the Minor requierments of Opengl to Version x.3
@@ -337,6 +332,8 @@ bool Program::Start()
 
 	//renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
 	
+	glewInit();
+
 	//This loads in all textures needed for the application
 	loadAssets();
 	//myRender->load();
@@ -403,24 +400,31 @@ void Program::render()
 
 	//glUseProgram(renderPass.getShaderProgramID());
 
-	//glm::mat4 projection = glm::perspective(FOV, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
-	//glm::mat4 view = camera->getView();
-	//renderPass.setMat4("projection", projection);
-	//renderPass.setMat4("view", view);
-	//
-	//glm::mat4 model;
-	//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));	  // translate it down so it's at the center of the scene
-	//model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));			 // it's a bit too big for our scene, so scale it down
-	//renderPass.setMat4("model", model);
-	//
-	//for (int i = 0; i < models.; i++)
-	////Draws all the models in the application
-	//models.Draw(renderPass);
+	
 
 	//ImGui that handles the graphical interface//
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
+
+
+
+
+
+
+//glm::mat4 projection = glm::perspective(FOV, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
+//glm::mat4 view = camera->getView();
+//renderPass.setMat4("projection", projection);
+//renderPass.setMat4("view", view);
+//
+//glm::mat4 model;
+//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));	  // translate it down so it's at the center of the scene
+//model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));			 // it's a bit too big for our scene, so scale it down
+//renderPass.setMat4("model", model);
+//
+//for (int i = 0; i < models.; i++)
+////Draws all the models in the application
+//models.Draw(renderPass);
 
 //// draw our first triangle
 //Rendering the Deferred part

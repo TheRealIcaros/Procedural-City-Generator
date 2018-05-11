@@ -55,6 +55,13 @@ void Model::unload()
 
 void Model::upload()
 {
+	if (GL_ARB_vertex_array_object == true)
+		std::cout << "Some Ice cream please" << std::endl;
+
+	std::cout << glGetString(GL_VENDOR) << std::endl;
+	std::cout << glGetString(GL_RENDERER) << std::endl;
+	std::cout << glGetString(GL_VERSION) << std::endl;
+
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
 
