@@ -26,6 +26,12 @@ private:
 	float sensitivity;
 	float speed;
 
+	//Projection values
+	float FOV;
+	float aspecRatio;
+	float nearPlane;
+	float farPlane;
+
 public:
 	Camera();
 	Camera(GLFWwindow* window);

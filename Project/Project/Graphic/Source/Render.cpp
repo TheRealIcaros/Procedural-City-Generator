@@ -28,7 +28,7 @@ void Render::load(GLFWwindow* window)
 	objectProjectionLocation = objectShader.getUniform("ProjectionMatrix");
 	objectViewLocation = objectShader.getUniform("ViewMatrix");
 
-	myCamera.setPosition(glm::vec3(0, 0, -1));
+	myCamera.setPosition(glm::vec3(0, 15, -1));
 	//myCamera.
 
 }

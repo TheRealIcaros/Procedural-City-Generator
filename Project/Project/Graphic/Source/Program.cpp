@@ -369,9 +369,9 @@ bool Program::Start()
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
 	//Rendering parameters
-	glEnable(GL_DEPTH_TEST);
-	//glEnable(GL_CULL_FACE);
-	//glCullFace(GL_FRONT);
+	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_BACK);
 	
 	//Initiation of glew
 	glewInit();
@@ -470,7 +470,7 @@ void Program::render()
 //for (int i = 0; i < models.; i++)
 ////Draws all the models in the application
 //models.Draw(renderPass);
-
+//
 //// draw our first triangle
 //Rendering the Deferred part
 //deferred->render();
