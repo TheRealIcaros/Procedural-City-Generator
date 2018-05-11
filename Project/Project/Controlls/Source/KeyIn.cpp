@@ -38,7 +38,7 @@ void KeyIn::calculateDeltaTime()
 	}
 }
 
-void KeyIn::keyInput(GLFWwindow* window, GenWindow* genWindow, bool &shouldRun)
+void KeyIn::keyInput(GLFWwindow* window, GenWindow* genWindow, bool &shouldRun, Camera* camera)
 {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 	{
@@ -73,6 +73,24 @@ void KeyIn::keyInput(GLFWwindow* window, GenWindow* genWindow, bool &shouldRun)
 		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	}
 
+
+	//new View inputs for walking on terrain
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(camera->getLookAtVector()));
+	}
+	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	{
+		camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(camera->getLookAtVector()) * -1.0f);
+	}
+	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(glm::cross(camera->getLookAtVector(), camera->getUpVector())) * -1.0f);		
+	}
+	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	{
+		camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(glm::cross(camera->getLookAtVector(), camera->getUpVector())));												
+	}
 	
 }
 
@@ -101,37 +119,37 @@ bool KeyIn::getCameraShouldMove()const
 //		this->cameraCanMove = true;
 //	}
 //
-//	//new View inputs for walking on terrain
-//	if(cameraCanMove == true)
-//	{
-//		if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-//		{
-//			camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(camera->getLookAtVector()));		//"Normal"-Camera
-//
-//			//float height = terrain.getHeightOfTerrain(camera.getPosition().x, camera.getPosition().z);	 //Collect info about terrain height
-//			//camera.setHeight(height + 2);																//Place camera 1 unit over the terrain
-//		}
-//		if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-//		{
-//			camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(camera->getLookAtVector()) * -1.0f);		//"Normal"-Camera
-//
-//			//float height = terrain.getHeightOfTerrain(camera.getPosition().x, camera.getPosition().z);	 //Collect info about terrain height
-//			//camera.setHeight(height + 2);																//Place camera 1 unit over the terrain
-//		}
-//		if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-//		{
-//			camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(glm::cross(camera->getLookAtVector(), camera->getUpVector())) * -1.0f);								 //"Normal"-Camera
-//
-//			//float height = terrain.getHeightOfTerrain(camera.getPosition().x, camera.getPosition().z);	 //Collect info about terrain height
-//			//camera.setHeight(height + 2);																//Place camera 1 unit over the terrain
-//		}
-//		if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-//		{
-//			camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(glm::cross(camera->getLookAtVector(), camera->getUpVector())));								 //"Normal"-Camera
-//
-//			//float height = terrain.getHeightOfTerrain(camera.getPosition().x, camera.getPosition().z);	 //Collect info about terrain height
-//			//camera.setHeight(height + 2);																//Place camera 1 unit over the terrain
-//		}
-//	}
+	//new View inputs for walking on terrain
+	//if(cameraCanMove == true)
+	//{
+	//	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+	//	{
+	//		camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(camera->getLookAtVector()));		//"Normal"-Camera
+
+	//		float height = terrain.getHeightOfTerrain(camera.getPosition().x, camera.getPosition().z);	 //Collect info about terrain height
+	//		camera.setHeight(height + 2);																//Place camera 1 unit over the terrain
+	//	}
+	//	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+	//	{
+	//		camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(camera->getLookAtVector()) * -1.0f);		//"Normal"-Camera
+
+	//		float height = terrain.getHeightOfTerrain(camera.getPosition().x, camera.getPosition().z);	 //Collect info about terrain height
+	//		camera.setHeight(height + 2);																//Place camera 1 unit over the terrain
+	//	}
+	//	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+	//	{
+	//		camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(glm::cross(camera->getLookAtVector(), camera->getUpVector())) * -1.0f);								 //"Normal"-Camera
+
+	//		float height = terrain.getHeightOfTerrain(camera.getPosition().x, camera.getPosition().z);	 //Collect info about terrain height
+	//		camera.setHeight(height + 2);																//Place camera 1 unit over the terrain
+	//	}
+	//	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+	//	{
+	//		camera->moveCameraPosition((camera->getSpeed() * time.deltaTime) * glm::normalize(glm::cross(camera->getLookAtVector(), camera->getUpVector())));								 //"Normal"-Camera
+
+	//		float height = terrain.getHeightOfTerrain(camera.getPosition().x, camera.getPosition().z);	 //Collect info about terrain height
+	//		camera.setHeight(height + 2);																//Place camera 1 unit over the terrain
+	//	}
+	//}
 //	
 //}

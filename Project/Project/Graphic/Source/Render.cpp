@@ -97,8 +97,8 @@ void Render::addElement(int model, int texture, const glm::vec3& position)
 void Render::render(ModelLoader* models)
 {
 	//Cleans the color buffer and set the defaultbacgroundcolor
-	glClearColor(8.0f, 8.0f, 8.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClearColor(0.3f, 0.3f, 0.7f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//Shader setup
 	glUseProgram(objectShader.getShaderProgramID());

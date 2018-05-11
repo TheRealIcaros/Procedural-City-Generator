@@ -3,7 +3,8 @@
 
 //Inlcuded classes
 #include "ModelLoader.h"
-#include "Camera.h"
+#include "..\..\Controlls\Header\KeyIn.h"
+//#include "Camera.h"
 
 struct ObjectElement
 {

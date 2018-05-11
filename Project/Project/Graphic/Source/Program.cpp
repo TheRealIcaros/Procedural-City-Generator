@@ -222,42 +222,42 @@ void Program::generate()
 	//End renderer
 	myRender->end();
 
-	//system("CLS");
-	//for (int j = 0; j < genWindow->getTSizeY(); j++)
-	//{
-	//	for (int i = 0; i < genWindow->getTSizeX(); i++)
-	//	{
-	//		if (cityMap.at(i, j) == 0)
-	//		{
-	//			setColor(11);
-	//		}
-	//		else if (cityMap.at(i, j) == 1)
-	//		{
-	//			setColor(14);
-	//		}
-	//		else if (cityMap.at(i, j) == 2)
-	//		{
-	//			setColor(4);
-	//		}
-	//		else if (cityMap.at(i, j) == 7)
-	//		{
-	//			setColor(2);
-	//		}
-	//		else if (cityMap.at(i, j) == 8)
-	//		{
-	//			setColor(13);
-	//		}
-	//		else if (cityMap.at(i, j) == 9)
-	//		{
-	//			setColor(5);
-	//		}
-	//		std::cout << cityMap.at(i, j);
-	//		if (i == genWindow->getTSizeY() - 1)
-	//		{
-	//			std::cout << "\n";
-	//		}
-	//	}
-	//}
+	/*system("CLS");
+	for (int j = 0; j < genWindow->getTSizeY(); j++)
+	{
+		for (int i = 0; i < genWindow->getTSizeX(); i++)
+		{
+			if (cityMap.at(i, j) == 0)
+			{
+				setColor(11);
+			}
+			else if (cityMap.at(i, j) == 1)
+			{
+				setColor(14);
+			}
+			else if (cityMap.at(i, j) == 2)
+			{
+				setColor(4);
+			}
+			else if (cityMap.at(i, j) == 7)
+			{
+				setColor(2);
+			}
+			else if (cityMap.at(i, j) == 8)
+			{
+				setColor(13);
+			}
+			else if (cityMap.at(i, j) == 9)
+			{
+				setColor(5);
+			}
+			std::cout << cityMap.at(i, j);
+			if (i == genWindow->getTSizeY() - 1)
+			{
+				std::cout << "\n";
+			}
+		}
+	}*/
 }
 
 void Program::noiseGenerator(unsigned int seed)
@@ -369,7 +369,7 @@ bool Program::Start()
 	glfwSetWindowSizeLimits(window, WIDTH, HEIGHT, WIDTH, HEIGHT);	//Sets the screen to a fixed size, that can't be changed by pulling the edges
 
 	//Rendering parameters
-	//glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 	
@@ -397,11 +397,12 @@ bool Program::Run()
 {
 	ImGui_ImplGlfwGL3_NewFrame();
 	
-	myKeyInput->keyInput(window, genWindow, shouldRun);		//Checks if any key was pressed 
+	myKeyInput->calculateDeltaTime();
+
+	myKeyInput->keyInput(window, genWindow, shouldRun, myRender->getCamera());		//Checks if any key was pressed 
 
 	if(myKeyInput->getCameraShouldMove() == true)
 		myRender->getCamera()->mouseMovement(window, cameraOffsetX, cameraOffsetY);
-		//camera->mouseMovement(window, cameraOffsetX, cameraOffsetY);
 
 	genWindow->draw();										//Draw function for ImGui
 
@@ -451,8 +452,6 @@ void Program::render()
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
-
-
 
 
 
