@@ -41,10 +41,7 @@ private:
 	GenWindow* genWindow;
 	KeyIn* myKeyInput;
 	Render* myRender;
-	ModelLoader myModels;
-	//Camera* camera;
-	
-	//shaderCreater renderPass;
+	ModelLoader* myModels;
 
 	//Initiation functions for the applications core functions
 	void initiateGLFW();
@@ -52,6 +49,7 @@ private:
 	void initiateImgui(GLFWwindow* window);
 	void initiateVariables();
 	void loadAssets();
+	void loadSection(int district, const Section& section, int type);
 
 	void generate();
 	void noiseGenerator(unsigned int seed);

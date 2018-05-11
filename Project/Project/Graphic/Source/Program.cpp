@@ -12,7 +12,8 @@ void Program::initiateGLFW()
 {
 	glewExperimental = GL_TRUE;
 
-	glfwInit();
+
+	glfwInit();	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);	 //This sets the Major requierments of Opengl to Version 4.x
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);	//This sets the Minor requierments of Opengl to Version x.3
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -54,7 +55,7 @@ void Program::initiateVariables()
 	this->genWindow = new GenWindow();
 	this->myKeyInput = new KeyIn();
 	this->myRender =  new Render();
-	this->myModels = ModelLoader();
+	this->myModels = new ModelLoader();
 	//this->camera = new Camera(window);
 	//this->myObject = new Object();
 
@@ -63,35 +64,35 @@ void Program::initiateVariables()
 
 void Program::loadAssets()
 {
-	this->houseBottomSection = myModels.loadModel("./Models/models/house_bot_section.model");
-    this->houseMiddleSection = myModels.loadModel("./Models/models/house_mid_section.model");
-    this->houseTopSection = myModels.loadModel("./Models/models/house_top_section.model");
-    this->houseTopSection2 = myModels.loadModel("./Models/models/house_top_section2.model");
+	this->houseBottomSection = myModels->loadModel("./Models/models/house_bot_section.model");
+    this->houseMiddleSection = myModels->loadModel("./Models/models/house_mid_section.model");
+    this->houseTopSection = myModels->loadModel("./Models/models/house_top_section.model");
+    this->houseTopSection2 = myModels->loadModel("./Models/models/house_top_section2.model");
 	
     //house textures
-    this->houseBottomTexture = myModels.loadTexture("./Models/textures/concrete1.dds");
-    this->houseBottomTexture2 = myModels.loadTexture("./Models/textures/concrete2.dds");
-    this->houseBottomTexture3 = myModels.loadTexture("./Models/textures/concrete3.dds");
-    this->houseMiddleTexture = myModels.loadTexture("./Models/textures/bricks1.dds");
-    this->houseMiddleTexture2 = myModels.loadTexture("./Models/textures/bricks2.dds");
-    this->houseMiddleTexture3 = myModels.loadTexture("./Models/textures/bricks3.dds");
-    this->houseTopTexture = myModels.loadTexture("./Models/textures/roof1.dds");
-    this->houseTopTexture2 = myModels.loadTexture("./Models/textures/roof2.dds");
+    this->houseBottomTexture = myModels->loadTexture("./Models/textures/concrete1.dds");
+    this->houseBottomTexture2 = myModels->loadTexture("./Models/textures/concrete2.dds");
+    this->houseBottomTexture3 = myModels->loadTexture("./Models/textures/concrete3.dds");
+    this->houseMiddleTexture = myModels->loadTexture("./Models/textures/bricks1.dds");
+    this->houseMiddleTexture2 = myModels->loadTexture("./Models/textures/bricks2.dds");
+    this->houseMiddleTexture3 = myModels->loadTexture("./Models/textures/bricks3.dds");
+    this->houseTopTexture = myModels->loadTexture("./Models/textures/roof1.dds");
+    this->houseTopTexture2 = myModels->loadTexture("./Models/textures/roof2.dds");
 
 	//skyscraper sections
-    this->skyBottomSection = myModels.loadModel("./Models/models/skyscraper_bot_section.model");
-    this->skyMiddleSection = myModels.loadModel("./Models/models/skyscraper_mid_section.model");
-    this->skyTopSection = myModels.loadModel("./Models/models/skyscraper_top_section.model");
+    this->skyBottomSection = myModels->loadModel("./Models/models/skyscraper_bot_section.model");
+    this->skyMiddleSection = myModels->loadModel("./Models/models/skyscraper_mid_section.model");
+    this->skyTopSection = myModels->loadModel("./Models/models/skyscraper_top_section.model");
 	
     //skyscraper textures
     this->skyBottomTexture = houseBottomTexture;
     this->skyBottomTexture2 = houseBottomTexture2;
     this->skyBottomTexture3 = houseBottomTexture3;
-    this->skyMiddleTexture = myModels.loadTexture("./Models/textures/skyscraper1.dds");
-    this->skyMiddleTexture2 = myModels.loadTexture("./Models/textures/skyscraper2.dds");
-    this->skyMiddleTexture3 = myModels.loadTexture("./Models/textures/skyscraper3.dds");
-    this->skyMiddleTexture4 = myModels.loadTexture("./Models/textures/skyscraper4.dds");
-    this->skyMiddleTexture5 = myModels.loadTexture("./Models/textures/skyscraper5.dds");
+    this->skyMiddleTexture = myModels->loadTexture("./Models/textures/skyscraper1.dds");
+    this->skyMiddleTexture2 = myModels->loadTexture("./Models/textures/skyscraper2.dds");
+    this->skyMiddleTexture3 = myModels->loadTexture("./Models/textures/skyscraper3.dds");
+    this->skyMiddleTexture4 = myModels->loadTexture("./Models/textures/skyscraper4.dds");
+    this->skyMiddleTexture5 = myModels->loadTexture("./Models/textures/skyscraper5.dds");
     this->skyTopTexture = houseBottomTexture;
     this->skyTopTexture2 = houseBottomTexture2;
     this->skyTopTexture3 = houseBottomTexture3;
@@ -102,21 +103,21 @@ void Program::loadAssets()
     this->factoryTopSection = skyTopSection;
 	
     this->factoryBottomTexture = houseBottomTexture;
-    this->factoryMiddleTexture = myModels.loadTexture("./Models/textures/bricks_large1.dds");
-    this->factoryMiddleTexture2 = myModels.loadTexture("./Models/textures/bricks_large2.dds");
+    this->factoryMiddleTexture = myModels->loadTexture("./Models/textures/bricks_large1.dds");
+    this->factoryMiddleTexture2 = myModels->loadTexture("./Models/textures/bricks_large2.dds");
     this->factoryTopTexture = houseBottomTexture2;
 
 	//Grass and road sections
-	this->roadModel = myModels.loadModel("./Models/models/house_bot_section.model");
-	this->verticalRoadTexture = myModels.loadTexture("./Models/textures/road_vertical.dds");
-	this->horizontalRoadTexture = myModels.loadTexture("./Models/textures/road_horizontal.dds");
-	this->grassTexture = myModels.loadTexture("./Models/textures/grass1.dds");
+	this->roadModel = myModels->loadModel("./Models/models/house_bot_section.model");
+	this->verticalRoadTexture = myModels->loadTexture("./Models/textures/road_vertical.dds");
+	this->horizontalRoadTexture = myModels->loadTexture("./Models/textures/road_horizontal.dds");
+	this->grassTexture = myModels->loadTexture("./Models/textures/grass1.dds");
 }
 
-//void Program::SomeThing()
-//{
-//	// Add the actual buildings sections here to be used for later
-//}
+void Program::loadSection(int district, const Section& section, int type)
+{
+	building->addSection(district, section, type);
+}
 
 void Program::generate()
 {
@@ -329,15 +330,13 @@ bool Program::Start()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);
-
-	//renderPass.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
 	
+	//Initiation of glew
 	glewInit();
 
 	//This loads in all textures needed for the application
 	loadAssets();
-	//myRender->load();
-
+	
 	//std::string const path = "./Models/Box/Box.obj";
 	//models.push_back(path);
 	//models.loadModel(path, glm::vec3(0.0f, 0.0f, -2.0f));
@@ -386,6 +385,7 @@ void Program::Stop()
 	delete this->myKeyInput;
 	delete this->genWindow;
 	delete this->myRender;
+	delete this->myModels;
 	//delete this->camera;
 	//delete this->myObject;
 
@@ -400,7 +400,7 @@ void Program::render()
 
 	//glUseProgram(renderPass.getShaderProgramID());
 
-	
+	myRender->render(myModels);
 
 	//ImGui that handles the graphical interface//
 	ImGui::Render();

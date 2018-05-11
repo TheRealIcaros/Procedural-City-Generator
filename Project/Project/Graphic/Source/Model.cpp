@@ -55,6 +55,7 @@ void Model::unload()
 
 void Model::upload()
 {
+	//Some debug-code to test if things works as they should
 	if (GL_ARB_vertex_array_object == true)
 		std::cout << "Some Ice cream please" << std::endl;
 
