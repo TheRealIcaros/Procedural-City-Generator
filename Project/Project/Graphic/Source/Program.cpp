@@ -38,7 +38,6 @@ void Program::initiateVariables()
 	//Mics
 	this->keyIsPressedF1 = false;
 	this->shouldRun = true;
-	//this->FOV = 0.45f * PI;
 
 	//Values for mousemovements
 	this->cameraOffsetY = 0.0f;
@@ -56,8 +55,6 @@ void Program::initiateVariables()
 	this->myKeyInput = new KeyIn();
 	this->myRender =  new Render();
 	this->myModels = new ModelLoader();
-	//this->camera = new Camera(window);
-	//this->myObject = new Object();
 
 	terrainMap.fill(0.0f);
 }
@@ -222,6 +219,7 @@ void Program::generate()
 	//End renderer
 	myRender->end();
 
+	//This is for testing the layout of the City-map-layout
 	/*system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
 	{
@@ -385,11 +383,6 @@ bool Program::Start()
 	//Startup the renderer
 	myRender->load(window);
 
-	//std::string const path = "./Models/Box/Box.obj";
-	//models.push_back(path);
-	//models.loadModel(path, glm::vec3(0.0f, 0.0f, -2.0f));
-	//deferred->initiateDeferred();
-
 	return returnValue;
 }
 
@@ -437,43 +430,15 @@ void Program::Stop()
 	myRender->getCamera()->deleteMouse();
 	delete this->myRender;
 	delete this->myModels;
-	//delete this->camera;
-	//delete this->myObject;
 
 	glfwTerminate();
 }
 
 void Program::render()
 {
-	//glUseProgram(myRender->getObjectShader());
-
 	myRender->render(myModels);
 
 	//ImGui that handles the graphical interface//
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
-
-
-
-
-//glm::mat4 projection = glm::perspective(FOV, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
-//glm::mat4 view = camera->getView();
-//renderPass.setMat4("projection", projection);
-//renderPass.setMat4("view", view);
-//
-//glm::mat4 model;
-//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));	  // translate it down so it's at the center of the scene
-//model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));			 // it's a bit too big for our scene, so scale it down
-//renderPass.setMat4("model", model);
-//
-//for (int i = 0; i < models.; i++)
-////Draws all the models in the application
-//models.Draw(renderPass);
-//
-//// draw our first triangle
-//Rendering the Deferred part
-//deferred->render();
-//glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-//glBindVertexArray(models);
-//glDrawArrays(GL_TRIANGLES, 0, 3);

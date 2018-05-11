@@ -13,7 +13,7 @@ Camera::Camera(GLFWwindow* window)
 	this->yaw = -90.0f;
 	this->pitch = 0.0f;
 	this->sensitivity = 0.05f;
-	this->speed = 5.0f;
+	this->speed = 10.0f;
 
 	//Projection Matrix values
 	this->FOV = 0.45f;

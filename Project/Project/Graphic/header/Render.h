@@ -4,7 +4,6 @@
 //Inlcuded classes
 #include "ModelLoader.h"
 #include "..\..\Controlls\Header\KeyIn.h"
-//#include "Camera.h"
 
 struct ObjectElement
 {
@@ -51,7 +50,6 @@ public:
 
 	void addElement(int model, int texture, const glm::vec3& position);
 	void render(ModelLoader* models);
-	//void render(Assets::AssetManager* assets);
 
 	GLuint getObjectShader();
 	Camera* getCamera();
