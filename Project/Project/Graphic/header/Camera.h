@@ -58,6 +58,7 @@ public:
 	void setPosition(glm::vec3 position);
 	void setCameraPosition(float xaxis, float yaxis, float zaxis);
 	void setHeight(float Y);
+	void deleteMouse();
 
 };
 

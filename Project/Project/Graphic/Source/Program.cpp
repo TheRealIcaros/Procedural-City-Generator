@@ -434,6 +434,7 @@ void Program::Stop()
 	delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;
+	myRender->getCamera()->deleteMouse();
 	delete this->myRender;
 	delete this->myModels;
 	//delete this->camera;

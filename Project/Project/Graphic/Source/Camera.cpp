@@ -66,6 +66,11 @@ Camera::~Camera()
 	//delete this->myMouse;
 }
 
+void Camera::deleteMouse()
+{
+	delete this->myMouse;
+}
+
 void Camera::setLookAtVector(glm::vec3 lookAtVector)
 {
 	this->lookAtVector = lookAtVector;
