@@ -65,7 +65,7 @@ void Building::generate(Array2D<int>& map, Array2D<float>& terrainMap, Array<Str
 				if (noiseResult < districtDensities[district] && abs(terrain0 - terrain1) <= HEIGHTMAP_TRESHHOLD && abs(terrain0 - terrain2) <= HEIGHTMAP_TRESHHOLD &&
 					abs(terrain0 - terrain3) <= HEIGHTMAP_TRESHHOLD)
 				{
-					/*Array<Section>& botSections = districtSections[district][SECTION_BOTTOM];
+					Array<Section>& botSections = districtSections[district][SECTION_BOTTOM];
 					Array<Section>& midSections = districtSections[district][SECTION_MIDDLE];
 					Array<Section>& topSections = districtSections[district][SECTION_TOP];
 
@@ -88,7 +88,7 @@ void Building::generate(Array2D<int>& map, Array2D<float>& terrainMap, Array<Str
 						structureHeight,
 					};
 
-					structures.add(structure);*/
+					structures.add(structure);
 					buildings[district]++;
 				}
 				else
