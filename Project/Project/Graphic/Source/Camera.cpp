@@ -120,6 +120,11 @@ glm::mat4 Camera::getView()const
 	return this->View;
 }
 
+glm::mat4 Camera::getProjection()const
+{
+	return this->projection;
+}
+
 float Camera::getSpeed()const
 {
 	return this->speed;

@@ -6,7 +6,6 @@
 #include <GLFW\glfw3.h>
 #include "..\..\Defines.h"
 
-
 class Camera
 {
 private:
@@ -14,17 +13,18 @@ private:
 	Mouse* myMouse;
 
 	glm::mat4 View;
+	glm::mat4 projection;
 
+	//View matrix values
 	glm::vec3 cameraPosition;
 	glm::vec3 lookAtVector;
 	glm::vec3 upVector;
 
+	//Mouse values for camera angles
 	float yaw;
 	float pitch;
 	float sensitivity;
 	float speed;
-
-	
 
 public:
 	Camera();
@@ -33,6 +33,8 @@ public:
 	Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVector, GLFWwindow* window);
 	~Camera();
 	void setLookAtVector(glm::vec3 lookAtVector);
+
+	//Mouse functions
 	void moveCameraPosition(glm::vec3 movement);
 	void mouseMovement(GLFWwindow* window, float xoffset, float yoffset);
 
@@ -42,6 +44,7 @@ public:
 	float getYaw()const;
 	float getPitch()const;
 	glm::mat4 getView()const;
+	glm::mat4 getProjection()const;
 	float getSpeed()const;
 	glm::vec3 getLookAtVector()const;
 	glm::vec3 getUpVector()const;
@@ -50,9 +53,6 @@ public:
 	void setCameraPosition(float xaxis, float yaxis, float zaxis);
 	void setHeight(float Y);
 
-
-	//Mic functions
-	//void mouse_callback(GLFWwindow* window, double xpos, double ypos);
 };
 
 #endif

@@ -23,9 +23,12 @@ class Render
 {
 private:
 
+	static const int MAX_INSTANCES_PER_DRAW = 100;
+
 	// Object variables
 	shaderCreater objectShader;
-	Camera perspectiveCamera;
+	shaderCreater terrainShader;
+	Camera myCamera;
 
 	Array<ObjectElement> objectElements;
 	Array<ObjectInstance> objectInstances;
@@ -50,8 +53,6 @@ public:
 	//void render(Assets::AssetManager* assets);
 
 	shaderCreater* getObjectShader();
-	shaderCreater* getTextShader();
-
 };
 
 #endif

@@ -2,6 +2,7 @@
 
 ModelLoader::ModelLoader()
 {
+
 }
 
 ModelLoader::~ModelLoader()
@@ -84,7 +85,7 @@ void ModelLoader::unload()
 int ModelLoader::find(Array<std::string>& paths, const std::string& path)
 {
 	int result = -1;
-	for (int i = 0; i<paths.getSize() && result < 0; i++)
+	for (int i = 0; i < paths.getSize() && result < 0; i++)
 	{
 		if (paths[i] == path)
 		{

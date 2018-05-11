@@ -1,12 +1,15 @@
 #include "../header/Model.h"
+#include <iostream>
 
 Model::Model()
 	: vertexBuffer(0), indexBuffer(0), vertexArray(0), vertexCount(0), indexCount(0)
 {
+	
 }
 
 Model::~Model()
 {
+	
 }
 
 bool Model::load(const std::string& path)
@@ -52,6 +55,14 @@ void Model::unload()
 
 void Model::upload()
 {
+	////Some debug-code to test if things works as they should
+	//if (GL_ARB_vertex_array_object == true)
+	//	std::cout << "Some Ice cream please" << std::endl;
+	//
+	//std::cout << glGetString(GL_VENDOR) << std::endl;
+	//std::cout << glGetString(GL_RENDERER) << std::endl;
+	//std::cout << glGetString(GL_VERSION) << std::endl;
+
 	glGenVertexArrays(1, &vertexArray);
 	glBindVertexArray(vertexArray);
 
