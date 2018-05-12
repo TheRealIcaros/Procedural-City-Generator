@@ -1,6 +1,7 @@
 #include "../header/Program.h"
 #include <Windows.h> //take away once done
 #include <chrono>
+#include <iostream>
 
 void setColor(unsigned short color)
 {

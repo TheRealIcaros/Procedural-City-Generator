@@ -28,7 +28,7 @@ void Render::load(GLFWwindow* window)
 	objectProjectionLocation = objectShader.getUniform("ProjectionMatrix");
 	objectViewLocation = objectShader.getUniform("ViewMatrix");
 
-	myCamera.setPosition(glm::vec3(0, 15, -1));
+	myCamera.setPosition(glm::vec3(0, 35, -20));
 	//myCamera.
 
 }
@@ -96,6 +96,10 @@ void Render::addElement(int model, int texture, const glm::vec3& position)
 
 void Render::render(ModelLoader* models)
 {
+	std::cout << "Camera x-Position: " << myCamera.getLookAtVector().x;
+	std::cout << " Camera y-Position: " << myCamera.getLookAtVector().y;
+	std::cout << "Camera z-Position: " << myCamera.getLookAtVector().z << std::endl;
+
 	//Cleans the color buffer and set the defaultbacgroundcolor
 	glClearColor(0.3f, 0.3f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
