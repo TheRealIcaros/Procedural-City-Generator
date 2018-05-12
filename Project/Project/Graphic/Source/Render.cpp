@@ -94,6 +94,7 @@ void Render::addElement(int model, int texture, const glm::vec3& position)
 	worldMatrices.add(glm::mat4());
 }
 
+
 void Render::render(ModelLoader* models)
 {
 	//Debug code for camera

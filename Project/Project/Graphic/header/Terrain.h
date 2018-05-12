@@ -2,6 +2,7 @@
 #define TERRAIN_H
 
 #include <glm.hpp>
+#include <vector>
 
 class Terrain
 {
@@ -19,10 +20,10 @@ private:
 
 	float* *heights;
 
-	/*vector<vec3> vertices;
-	vector<vec3> normals;
-	vector<vec2> uvs;
-	vector<unsigned int> indices;*/
+	std::vector<glm::vec3> vertices;
+	std::vector<glm::vec3> normals;
+	std::vector<glm::vec2> uvs;
+	std::vector<unsigned int> indices;
 
 public:
 	Terrain();
