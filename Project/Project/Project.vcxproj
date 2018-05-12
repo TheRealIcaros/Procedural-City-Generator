@@ -281,6 +281,8 @@
     <None Include="Debug\vc141.pdb">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </None>
+    <None Include="Graphic\Shaders\basic.fs" />
+    <None Include="Graphic\Shaders\basic.vs" />
     <None Include="Graphic\Shaders\fragment.glsl" />
     <None Include="Graphic\Shaders\geometry.glsl" />
     <None Include="Graphic\Shaders\vertex.glsl" />

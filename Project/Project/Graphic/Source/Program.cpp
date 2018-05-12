@@ -290,6 +290,11 @@ void Program::initiateImgui(GLFWwindow* window)
 	ImGui::StyleColorsDark();
 }
 
+void Program::addTerrainToRender()
+{
+
+}
+
 void Program::addBuildingToRender()
 {
 	int curStructure = 0;
@@ -300,11 +305,17 @@ void Program::addBuildingToRender()
 			int cellValue = cityMap.at(x, y);
 			if (0 <= cellValue && cellValue < 7)
 			{
+				float terrain0 = terrainMap.at(x, y);
+				float terrain1 = terrainMap.at(x + 1, y);
+				float terrain2 = terrainMap.at(x, y + 1);
+				float terrain3 = terrainMap.at(x + 1, y + 1);
+
 				const int NUM_STRUCTURES = structure.getSize();
 				Structure& s = structure[curStructure];
 				curStructure++;
 
-				glm::vec3 position(x * 2, 0.175f, y * 2);
+				//glm::vec3 position(x * 2, 0.175f, y * 2);
+				glm::vec3 position(x * 2, terrainMap.at(x, y) * 10, y * 2);
 
 				// render bottom section
 				myRender->addElement(s.bottom.model, s.bottom.texture, position);
@@ -322,7 +333,8 @@ void Program::addBuildingToRender()
 			}
 			else
 			{
-				int texture = verticalRoadTexture;
+				//Make new renderreu piplineeruuu tto thus'eru
+				/*int texture = verticalRoadTexture;
 				if (cellValue == 8)
 				{
 					texture = horizontalRoadTexture;
@@ -332,7 +344,8 @@ void Program::addBuildingToRender()
 					texture = grassTexture;
 				}
 
-				myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	
+				myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));*/
+				//myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	
 			}
 		}
 
@@ -346,19 +359,21 @@ Program::Program()
 
 Program::~Program()
 {
-	
+
 }
 
 bool Program::Start()
 {
 	bool returnValue = true;
 
+	//Creates the window for the application
 	this->window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
 	if (initiateWindow(this->window) == false)
 		returnValue = false;
 
 	glfwMakeContextCurrent(window);
 
+	//Initiates variables that Program.h needs
 	initiateVariables();
 
 	initiateImgui(window);
@@ -418,6 +433,7 @@ void Program::Stop()
 	ImGui_ImplGlfwGL3_Shutdown();
 	ImGui::DestroyContext();
 
+	//Delete all pointers when we close the application
 	delete this->noise;
 	delete this->randNoise;
 	delete this->map;
@@ -436,6 +452,7 @@ void Program::Stop()
 
 void Program::render()
 {
+	//Calls the reneder-pipeline for models and terrain
 	myRender->render(myModels);
 
 	//ImGui that handles the graphical interface//

@@ -54,6 +54,7 @@ private:
 	void generate();
 	void noiseGenerator(unsigned int seed);
 	void addBuildingToRender();
+	void addTerrainToRender();
 
 	void render();				//The render loop in the application
 

@@ -32,7 +32,7 @@ void KeyIn::calculateDeltaTime()
 	time.duration += time.deltaTime;
 	if (time.duration >= 1.0f && time.active)
 	{
-		printf("FPS: %d, dt: %d\n", time.frames, time.deltaTime);
+		//printf("FPS: %d, dt: %d\n", time.frames, time.deltaTime);
 		time.frames = 0;
 		time.duration = 0.0f;
 	}
