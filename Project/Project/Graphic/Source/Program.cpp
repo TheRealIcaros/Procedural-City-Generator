@@ -38,7 +38,6 @@ void Program::initiateVariables()
 	//Mics
 	this->keyIsPressedF1 = false;
 	this->shouldRun = true;
-	//this->FOV = 0.45f * PI;
 
 	//Values for mousemovements
 	this->cameraOffsetY = 0.0f;
@@ -56,8 +55,6 @@ void Program::initiateVariables()
 	this->myKeyInput = new KeyIn();
 	this->myRender =  new Render();
 	this->myModels = new ModelLoader();
-	//this->camera = new Camera(window);
-	//this->myObject = new Object();
 
 	terrainMap.fill(0.0f);
 }
@@ -222,7 +219,8 @@ void Program::generate()
 	//End renderer
 	myRender->end();
 
-	system("CLS");
+	//This is for testing the layout of the City-map-layout
+	/*system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
 	{
 		for (int i = 0; i < genWindow->getTSizeX(); i++)
@@ -257,7 +255,7 @@ void Program::generate()
 				std::cout << "\n";
 			}
 		}
-	}
+	}*/
 }
 
 void Program::noiseGenerator(unsigned int seed)
@@ -292,6 +290,11 @@ void Program::initiateImgui(GLFWwindow* window)
 	ImGui::StyleColorsDark();
 }
 
+void Program::addTerrainToRender()
+{
+
+}
+
 void Program::addBuildingToRender()
 {
 	int curStructure = 0;
@@ -306,7 +309,8 @@ void Program::addBuildingToRender()
 				Structure& s = structure[curStructure];
 				curStructure++;
 
-				glm::vec3 position(x * 2, 0.175f, y * 2);
+				//glm::vec3 position(x * 2, 0.175f, y * 2);
+				glm::vec3 position(x * 2, terrainMap.at(x, y) * 10, y * 2);
 
 				// render bottom section
 				myRender->addElement(s.bottom.model, s.bottom.texture, position);
@@ -324,6 +328,12 @@ void Program::addBuildingToRender()
 			}
 			else
 			{
+				float terrain0 = terrainMap.at(x, y);
+				float terrain1 = terrainMap.at(x + 1, y);
+				float terrain2 = terrainMap.at(x, y + 1);
+				float terrain3 = terrainMap.at(x + 1, y + 1);
+
+				//Make new renderreu piplineeruuu tto thus'eru
 				int texture = verticalRoadTexture;
 				if (cellValue == 8)
 				{
@@ -334,7 +344,8 @@ void Program::addBuildingToRender()
 					texture = grassTexture;
 				}
 
-				myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	
+				//myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
+				//myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	
 			}
 		}
 
@@ -348,19 +359,21 @@ Program::Program()
 
 Program::~Program()
 {
-	
+
 }
 
 bool Program::Start()
 {
 	bool returnValue = true;
 
+	//Creates the window for the application
 	this->window = glfwCreateWindow(WIDTH, HEIGHT, "Prelin Noise City", NULL, NULL);
 	if (initiateWindow(this->window) == false)
 		returnValue = false;
 
 	glfwMakeContextCurrent(window);
 
+	//Initiates variables that Program.h needs
 	initiateVariables();
 
 	initiateImgui(window);
@@ -385,11 +398,6 @@ bool Program::Start()
 	//Startup the renderer
 	myRender->load(window);
 
-	//std::string const path = "./Models/Box/Box.obj";
-	//models.push_back(path);
-	//models.loadModel(path, glm::vec3(0.0f, 0.0f, -2.0f));
-	//deferred->initiateDeferred();
-
 	return returnValue;
 }
 
@@ -397,11 +405,12 @@ bool Program::Run()
 {
 	ImGui_ImplGlfwGL3_NewFrame();
 	
-	myKeyInput->keyInput(window, genWindow, shouldRun);		//Checks if any key was pressed 
+	myKeyInput->calculateDeltaTime();
+
+	myKeyInput->keyInput(window, genWindow, shouldRun, myRender->getCamera());		//Checks if any key was pressed 
 
 	if(myKeyInput->getCameraShouldMove() == true)
 		myRender->getCamera()->mouseMovement(window, cameraOffsetX, cameraOffsetY);
-		//camera->mouseMovement(window, cameraOffsetX, cameraOffsetY);
 
 	genWindow->draw();										//Draw function for ImGui
 
@@ -424,6 +433,7 @@ void Program::Stop()
 	ImGui_ImplGlfwGL3_Shutdown();
 	ImGui::DestroyContext();
 
+	//Delete all pointers when we close the application
 	delete this->noise;
 	delete this->randNoise;
 	delete this->map;
@@ -433,47 +443,19 @@ void Program::Stop()
 	delete this->seed;
 	delete this->myKeyInput;
 	delete this->genWindow;
+	myRender->getCamera()->deleteMouse();
 	delete this->myRender;
 	delete this->myModels;
-	//delete this->camera;
-	//delete this->myObject;
 
 	glfwTerminate();
 }
 
 void Program::render()
 {
-	//glUseProgram(myRender->getObjectShader());
-
+	//Calls the reneder-pipeline for models and terrain
 	myRender->render(myModels);
 
 	//ImGui that handles the graphical interface//
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
-
-
-
-
-
-
-//glm::mat4 projection = glm::perspective(FOV, (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
-//glm::mat4 view = camera->getView();
-//renderPass.setMat4("projection", projection);
-//renderPass.setMat4("view", view);
-//
-//glm::mat4 model;
-//model = glm::translate(model, glm::vec3(0.0f, 0.0f, -1.0f));	  // translate it down so it's at the center of the scene
-//model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));			 // it's a bit too big for our scene, so scale it down
-//renderPass.setMat4("model", model);
-//
-//for (int i = 0; i < models.; i++)
-////Draws all the models in the application
-//models.Draw(renderPass);
-//
-//// draw our first triangle
-//Rendering the Deferred part
-//deferred->render();
-//glBindVertexArray(myObject->getVAO()); // seeing as we only have a single VAO there's no need to bind it every time, but we'll do so to keep things a bit more organized
-//glBindVertexArray(models);
-//glDrawArrays(GL_TRIANGLES, 0, 3);

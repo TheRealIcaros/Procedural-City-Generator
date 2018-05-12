@@ -8,12 +8,12 @@ Camera::Camera()
 Camera::Camera(GLFWwindow* window)
 {
 	this->cameraPosition = { 0.0f, 0.0f, 0.0f };
-	this->lookAtVector = { 0.0f, 0.0f, -1.0f };
+	this->lookAtVector = { -55.0f, 0.0f, 15.0f };
 	this->upVector = { 0.0f, 1.0f, 0.0f };
 	this->yaw = -90.0f;
 	this->pitch = 0.0f;
 	this->sensitivity = 0.05f;
-	this->speed = 5.0f;
+	this->speed = 10.0f;
 
 	//Projection Matrix values
 	this->FOV = 0.45f;
@@ -64,6 +64,11 @@ Camera::Camera(glm::vec3 cameraPosition, glm::vec3 lookAtVector, glm::vec3 upVec
 Camera::~Camera()
 {
 	//delete this->myMouse;
+}
+
+void Camera::deleteMouse()
+{
+	delete this->myMouse;
 }
 
 void Camera::setLookAtVector(glm::vec3 lookAtVector)

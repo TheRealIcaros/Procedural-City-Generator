@@ -4,7 +4,6 @@
 //Own made includes
 #include "Render.h"
 #include "../../Logic/header/GenWindow.h"
-#include "../../Controlls/Header/KeyIn.h"
 
 //Imgui stuff
 #include "../../Imgui/imgui.h"
@@ -55,6 +54,7 @@ private:
 	void generate();
 	void noiseGenerator(unsigned int seed);
 	void addBuildingToRender();
+	void addTerrainToRender();
 
 	void render();				//The render loop in the application
 

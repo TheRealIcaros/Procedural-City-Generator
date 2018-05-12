@@ -73,6 +73,8 @@
     <None Include="Debug\vc141.pdb" />
     <None Include="Models\shaders\basic.fs" />
     <None Include="Models\shaders\basic.vs" />
+    <None Include="Graphic\Shaders\basic.fs" />
+    <None Include="Graphic\Shaders\basic.vs" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="Debug\Camera.obj" />
