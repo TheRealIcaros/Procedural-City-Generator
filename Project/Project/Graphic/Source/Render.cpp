@@ -96,9 +96,10 @@ void Render::addElement(int model, int texture, const glm::vec3& position)
 
 void Render::render(ModelLoader* models)
 {
-	std::cout << "Camera x-Position: " << myCamera.getLookAtVector().x;
-	std::cout << " Camera y-Position: " << myCamera.getLookAtVector().y;
-	std::cout << "Camera z-Position: " << myCamera.getLookAtVector().z << std::endl;
+	//Debug code for camera
+	//std::cout << "Camera x-Position: " << myCamera.getPosition().x;
+	//std::cout << " Camera y-Position: " << myCamera.getPosition().y;
+	//std::cout << " Camera z-Position: " << myCamera.getPosition().z << std::endl;
 
 	//Cleans the color buffer and set the defaultbacgroundcolor
 	glClearColor(0.3f, 0.3f, 1.0f, 1.0f);
