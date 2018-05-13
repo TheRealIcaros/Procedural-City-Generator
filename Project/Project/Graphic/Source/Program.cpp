@@ -333,7 +333,7 @@ void Program::addBuildingToRender()
 				//float terrain1 = terrainMap.at(x + 1, y);
 				//float terrain2 = terrainMap.at(x, y + 1);
 				//float terrain3 = terrainMap.at(x + 1, y + 1);
-
+				//
 				////Make new renderreu piplineeruuu tto thus'eru
 				//int texture = verticalRoadTexture;
 				//if (cellValue == 8)
@@ -344,7 +344,7 @@ void Program::addBuildingToRender()
 				//{
 				//	texture = grassTexture;
 				//}
-
+				//
 				//myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
 				////myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	
 			}

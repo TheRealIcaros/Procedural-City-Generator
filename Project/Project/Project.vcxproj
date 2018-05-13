@@ -131,6 +131,7 @@
     <ClCompile Include="Graphic\Source\Camera.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Graphic\Source\Mesh.cpp" />
     <ClCompile Include="Graphic\Source\Model.cpp" />
     <ClCompile Include="Graphic\Source\ModelLoader.cpp" />
     <ClCompile Include="Graphic\Source\Program.cpp">
@@ -198,6 +199,7 @@
     <ClInclude Include="Graphic\header\Camera.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Graphic\header\Mesh.h" />
     <ClInclude Include="Graphic\header\Model.h" />
     <ClInclude Include="Graphic\header\ModelLoader.h" />
     <ClInclude Include="Graphic\header\Program.h" />
