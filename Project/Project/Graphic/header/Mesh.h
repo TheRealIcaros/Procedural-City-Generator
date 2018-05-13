@@ -15,18 +15,18 @@ struct TerrainVertex
 	glm::vec3 Bitangent;
 };
 
-struct Texture
+struct TerrainTexture
 {
 	unsigned int id;
 	std::string type;
 	std::string path;
 };
 
-struct Material
+struct TerrainMaterial
 {
 	std::string name;
 
-	std::vector<Texture> textures;
+	std::vector<TerrainTexture> textures;
 
 	glm::vec3 colorAmbient;
 	glm::vec3 colorDiffuse;
@@ -45,12 +45,12 @@ private:
 public:
 
 	Mesh();
-	Mesh(std::vector<TerrainVertex> vertices, std::vector<unsigned int> indices, std::vector<Material> materials, glm::vec3 startPosition);
+	Mesh(std::vector<TerrainVertex> vertices, std::vector<unsigned int> indices, std::vector<TerrainMaterial> materials, glm::vec3 startPosition);
 	~Mesh();
 
 	std::vector<TerrainVertex> vertices;
 	std::vector<unsigned int> indices;
-	std::vector<Material> materials;
+	std::vector<TerrainMaterial> materials;
 
 	glm::vec3 getModelPosition();
 

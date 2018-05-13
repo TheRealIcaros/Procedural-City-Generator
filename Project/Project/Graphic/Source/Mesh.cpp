@@ -43,7 +43,7 @@ Mesh::Mesh()
 
 }
 
-Mesh::Mesh(std::vector<TerrainVertex> vertices, std::vector<unsigned int> indices, std::vector<Material> materials, glm::vec3 startPosition)
+Mesh::Mesh(std::vector<TerrainVertex> vertices, std::vector<unsigned int> indices, std::vector<TerrainMaterial> materials, glm::vec3 startPosition)
 {
 	this->vertices = vertices;
 	this->indices = indices;

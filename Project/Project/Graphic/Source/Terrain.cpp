@@ -12,7 +12,7 @@ Terrain::Terrain(glm::vec3 startPosition, const char *heightMapPath, std::string
 	this->terrainSize = 128;
 
 	this->terrainPosition = startPosition;
-	this->texturePath = texturePath;
+	//this->texturePath = texturePath;
 	this->imageData = loadHeightMap(heightMapPath);
 
 	if (this->imageData != NULL)
@@ -31,29 +31,31 @@ void Terrain::deallocate()
 		delete this->heights[i];
 	}
 	delete[] this->heights;
-	SOIL_free_image_data(this->imageData);
+	//SOIL_free_image_data(this->imageData);
 	this->terrain.deallocate();
 }
 
 unsigned char* Terrain::loadHeightMap(const char *path)
 {
 	int nrChannels;
-	unsigned char* data = SOIL_load_image(path, &this->imageWidth, &this->imageHeight, &nrChannels, 0);
+	//unsigned char* data = SOIL_load_image(path, &this->imageWidth, &this->imageHeight, &nrChannels, 0);
 
 	if (this->imageWidth != this->imageHeight)
 	{
 		std::cout << "Height map not square" << std::endl;
-		SOIL_free_image_data(data);
-		data = NULL;
+		//SOIL_free_image_data(data);
+		//data = NULL;
 	}
-	if (!data)
+	if (/*!data*/false)
 	{
 		std::cout << "Failed to load height map" << std::endl;
-		SOIL_free_image_data(data);
-		data = NULL;
+		//SOIL_free_image_data(data);
+		//data = NULL;
 	}
 
-	return data;
+	unsigned char* test = nullptr;
+	//return data;
+	return test;
 }
 
 void Terrain::createTerrain()
@@ -137,14 +139,14 @@ void Terrain::sendToObject()
 		outData.push_back(temp);
 	}
 
-	std::vector<Material> materials;
-	Material material;
+	std::vector<TerrainMaterial> materials;
+	TerrainMaterial material;
 	material.name = "Terrain";
-	Texture tempTexture;
-	tempTexture.id = ".\Models\textures\grass1";
+	TerrainTexture tempTexture;
+	//tempTexture.id = ".\Models\textures\grass1";
 	//tempTexture.id = objLoader.TextureFromFile(this->texturePath.c_str());
 	tempTexture.type = "texture_diffuse";
-	tempTexture.path = this->texturePath;
+	//tempTexture.path = this->texturePath;
 	material.textures.push_back(tempTexture);
 
 	material.colorAmbient = glm::vec3(0.5, 0.2, 0.2);
