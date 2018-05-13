@@ -173,6 +173,7 @@ void GenWindow::draw()
 		ImGui::Separator();
 		ImGui::Spacing();
 		ImGui::Checkbox("Random Generator", &random);
+		ImGui::Checkbox("Random Building Generator", &randBuild);
 		if (ImGui::Button("Generate"))
 		{
 			generate = true;;

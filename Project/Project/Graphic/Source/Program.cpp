@@ -193,34 +193,20 @@ void Program::generate()
 
 	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
 
-	building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
+	if (genWindow->getRandBuild() == false)
+	{
+		building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
+	}
+	else
+	{
+		building->fullRandom(cityMap, terrainMap, structure);
+	}
 
 	//Add structures render
 	myRender->begin();
 
-	//Add in the buildings to the render pipeline
-	addBuildingToRender();
-
-	//For adding info to the left-side of the app window
-	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
-	genWindow->setGenTime(std::chrono::duration<float>(end - start).count());
-	genWindow->setCounter(noise->getCounter());
-	genWindow->setMainRoad(block->getMainRoad());
-	genWindow->setSmallRoad(block->getSmallRoad());
-	genWindow->setSeed(seed->getSeed());
-
-	//For adding info to the left-side of the app window
-	for (int i = 0; i < MAX_DISTRICTS; i++)
-	{
-		genWindow->setBuildings(i, building->getBuildings()[i]);
-		genWindow->setGrass(i, building->getGrassTiles()[i]);
-	}
-
-	//End renderer
-	myRender->end();
-
 	//This is for testing the layout of the City-map-layout
-	/*system("CLS");
+	system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
 	{
 		for (int i = 0; i < genWindow->getTSizeX(); i++)
@@ -255,7 +241,28 @@ void Program::generate()
 				std::cout << "\n";
 			}
 		}
-	}*/
+	}
+
+	//Add in the buildings to the render pipeline
+	addBuildingToRender();
+
+	//For adding info to the left-side of the app window
+	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+	genWindow->setGenTime(std::chrono::duration<float>(end - start).count());
+	genWindow->setCounter(noise->getCounter());
+	genWindow->setMainRoad(block->getMainRoad());
+	genWindow->setSmallRoad(block->getSmallRoad());
+	genWindow->setSeed(seed->getSeed());
+
+	//For adding info to the left-side of the app window
+	for (int i = 0; i < MAX_DISTRICTS; i++)
+	{
+		genWindow->setBuildings(i, building->getBuildings()[i]);
+		genWindow->setGrass(i, building->getGrassTiles()[i]);
+	}
+
+	//End renderer
+	myRender->end();
 }
 
 void Program::noiseGenerator(unsigned int seed)
