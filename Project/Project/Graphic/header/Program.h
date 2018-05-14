@@ -2,8 +2,8 @@
 #define PROGRAM_H
 
 //Own made includes
-#include "Render.h"
-//#include "Deferred.h"
+//#include "Render.h"
+#include "Deferred.h"
 //#include "Terrain.h"
 #include "../../Logic/header/GenWindow.h"
 
@@ -44,7 +44,7 @@ private:
 	KeyIn* myKeyInput;
 	Render* myRender;
 	ModelLoader* myModels;
-	//Deferred* deferredRender;
+	Deferred* deferredRender;
 	//Terrain* myTerrain;
 
 	shaderCreater terrainShader;

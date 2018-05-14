@@ -56,7 +56,7 @@ void Program::initiateVariables()
 	this->myKeyInput = new KeyIn();
 	this->myRender =  new Render();
 	this->myModels = new ModelLoader();
-	//this->deferredRender = new Deferred(myRender->getCamera());
+	this->deferredRender = new Deferred(myRender->getCamera());
 	//this->myTerrain = new Terrain();
 
 	terrainMap.fill(0.0f);
@@ -481,7 +481,7 @@ void Program::Stop()
 	myRender->getCamera()->deleteMouse();
 	delete this->myRender;
 	delete this->myModels;
-	//delete this->deferredRender;
+	delete this->deferredRender;
 	//this->myTerrain->deallocate();
 	//delete this->myTerrain;
 
