@@ -205,6 +205,38 @@ void Program::generate()
 	//Add structures render
 	myRender->begin();
 
+	//Add in the buildings to the render pipeline
+	addBuildingToRender();
+
+	//For adding info to the left-side of the app window
+	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
+	genWindow->setGenTime(std::chrono::duration<float>(end - start).count());
+	genWindow->setCounter(noise->getCounter());
+	genWindow->setMainRoad(block->getMainRoad());
+	genWindow->setSmallRoad(block->getSmallRoad());
+	genWindow->setSeed(seed->getSeed());
+
+	//For adding info to the left-side of the app window
+	for (int i = 0; i < MAX_DISTRICTS; i++)
+	{
+		genWindow->setBuildings(i, building->getBuildings()[i]);
+		genWindow->setGrass(i, building->getGrassTiles()[i]);
+	}
+
+	//End renderer
+	myRender->end();
+
+	ppm image(terrainMap.getWidth(), terrainMap.getHeight());
+
+	for (int kk = 0; kk < terrainMap.getWidth() * terrainMap.getHeight(); kk++)
+	{
+		float n = terrainMap[kk];
+		image.r[kk] = floor(255 * n);
+		image.g[kk] = floor(255 * n);
+		image.b[kk] = floor(255 * n);
+	}
+
+	image.write("result.bmp");
 	//This is for testing the layout of the City-map-layout
 	system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
@@ -242,27 +274,6 @@ void Program::generate()
 			}
 		}
 	}
-
-	//Add in the buildings to the render pipeline
-	addBuildingToRender();
-
-	//For adding info to the left-side of the app window
-	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
-	genWindow->setGenTime(std::chrono::duration<float>(end - start).count());
-	genWindow->setCounter(noise->getCounter());
-	genWindow->setMainRoad(block->getMainRoad());
-	genWindow->setSmallRoad(block->getSmallRoad());
-	genWindow->setSeed(seed->getSeed());
-
-	//For adding info to the left-side of the app window
-	for (int i = 0; i < MAX_DISTRICTS; i++)
-	{
-		genWindow->setBuildings(i, building->getBuildings()[i]);
-		genWindow->setGrass(i, building->getGrassTiles()[i]);
-	}
-
-	//End renderer
-	myRender->end();
 }
 
 void Program::noiseGenerator(unsigned int seed)

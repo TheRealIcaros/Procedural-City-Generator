@@ -180,6 +180,7 @@
     <ClCompile Include="Logic\Source\PerlinNoise.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Logic\Source\ppm.cpp" />
     <ClCompile Include="Logic\Source\RandomNoise.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -267,6 +268,7 @@
     <ClInclude Include="Graphic\header\shaderCreater.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Logic\header\ppm.h" />
     <ClInclude Include="Logic\header\RandomNoise.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
