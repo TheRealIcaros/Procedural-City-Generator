@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>$(SolutionDir)\Includes\glew\include;$(SolutionDir)\Includes\glfw\include;$(SolutionDir)\Includes\glm;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\Includes\glew\lib\Release\Win32;$(SolutionDir)\Includes\glfw\lib-vc2015;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)\Includes\glew\lib\Release\Win32;$(SolutionDir)\Includes\glfw\lib-vc2015;$(SolutionDir)\Project\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -81,12 +81,12 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Includes\SOIL;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\Includes\glew\lib\Release\Win32;$(SolutionDir)\Includes\glfw\lib-vc2015;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;glfw3.lib;SOIL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Includes\glew\lib\Release\Win32;$(SolutionDir)\Includes\glfw\lib-vc2015;C:\Users\adbr14\Source\Repos\Procedural-City-Generator\Project\Project\lib\SOIL;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,6 +132,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Graphic\Source\Deferred.cpp" />
+    <ClCompile Include="Graphic\Source\Mesh.cpp" />
     <ClCompile Include="Graphic\Source\Model.cpp" />
     <ClCompile Include="Graphic\Source\ModelLoader.cpp" />
     <ClCompile Include="Graphic\Source\Program.cpp">
@@ -140,6 +141,7 @@
     <ClCompile Include="Graphic\Source\Render.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="Graphic\Source\Terrain.cpp" />
     <ClCompile Include="Graphic\Source\Texture.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
@@ -198,12 +200,14 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Graphic\header\Deferred.h" />
+    <ClInclude Include="Graphic\header\Mesh.h" />
     <ClInclude Include="Graphic\header\Model.h" />
     <ClInclude Include="Graphic\header\ModelLoader.h" />
     <ClInclude Include="Graphic\header\Program.h" />
     <ClInclude Include="Graphic\header\Render.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="Graphic\header\Terrain.h" />
     <ClInclude Include="Graphic\header\Texture.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
