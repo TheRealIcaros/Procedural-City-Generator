@@ -103,8 +103,8 @@ void Render::render(ModelLoader* models)
 	//std::cout << " Camera z-Position: " << myCamera.getPosition().z << std::endl;
 
 	//Cleans the color buffer and set the defaultbacgroundcolor
-	/*glClearColor(0.3f, 0.3f, 1.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);*/
+	glClearColor(0.3f, 0.3f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//Shader setup
 	glUseProgram(objectShader.getShaderProgramID());

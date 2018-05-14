@@ -39,10 +39,8 @@ bool Deferred::initiateDeferred(Camera* camera)
 	bool returnValue = true;
 
 	//Creates the shader-program
-	//objectShader.createShader("./Models/shaders/basic", "NULL", "./Models/shaders/basic");
-	this->geometryPass.createShader("./Graphic/Shaders/GeometryPassVS", "NULL", "./Graphic/Shaders/GeometryPassFS");
-	this->lightingPass.createShader("./Graphic/Shaders/LightingPassVS", "NULL", "./Graphic/Shaders/LightingPassFS");
-
+	geometryPass.createShader("./Graphic/Shaders/GeometryPassVS", "./Graphic/Shaders/GeometryPassGS", "./Graphic/Shaders/GeometryPassFS");
+	lightingPass.createShader("./Graphic/Shaders/LightingPassVS", "NULL", "./Graphic/Shaders/LightingPassFS");
 
 	//Creates the G-Buffer for the Deferred class
 	createGbuffer();
@@ -233,8 +231,8 @@ void Deferred::renderQuad()
 			// positions        // texture Coords
 			-1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
 			-1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-			1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-			1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+			 1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
+			 1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
 		};
 
 		// Setup plane VAO

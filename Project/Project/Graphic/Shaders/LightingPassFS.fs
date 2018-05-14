@@ -24,6 +24,7 @@ uniform bool intensityKey;
 void main()
 {
 	//Get Data from gBuffer
+	gl_FragDepth =  texture(gPosition, textureCoordinates).r;
 	vec3 FragPos = texture(gPosition, textureCoordinates).rgb;
 	vec3 Normal = texture(gNormal, textureCoordinates).rgb;
 	vec3 Color = texture(gColorSpec, textureCoordinates).rgb;
