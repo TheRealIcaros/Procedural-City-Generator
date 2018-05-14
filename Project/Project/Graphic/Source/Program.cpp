@@ -13,11 +13,12 @@ void Program::initiateGLFW()
 {
 	glewExperimental = GL_TRUE;
 
-
-	glfwInit();	
+	glfwInit();
+	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);	 //This sets the Major requierments of Opengl to Version 4.x
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);	//This sets the Minor requierments of Opengl to Version x.3
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+	
 }
 
 bool Program::initiateWindow(GLFWwindow* window)
@@ -56,7 +57,7 @@ void Program::initiateVariables()
 	this->myKeyInput = new KeyIn();
 	this->myRender =  new Render();
 	this->myModels = new ModelLoader();
-	this->deferredRender = new Deferred(myRender->getCamera());
+	
 	//this->myTerrain = new Terrain();
 
 	terrainMap.fill(0.0f);
@@ -420,7 +421,7 @@ bool Program::Start()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	
+
 	//Initiation of glew
 	glewInit();
 
@@ -433,6 +434,8 @@ bool Program::Start()
 	//Startup the renderer
 	myRender->load(window);
 
+	this->deferredRender = new Deferred(myRender->getCamera());
+
 	return returnValue;
 }
 
@@ -444,8 +447,10 @@ bool Program::Run()
 
 	myKeyInput->keyInput(window, genWindow, shouldRun, myRender->getCamera());		//Checks if any key was pressed 
 
+
 	if(myKeyInput->getCameraShouldMove() == true)
 		myRender->getCamera()->mouseMovement(window, cameraOffsetX, cameraOffsetY);
+
 
 	genWindow->draw();										//Draw function for ImGui
 
@@ -496,7 +501,7 @@ void Program::render()
 
 
 	//Deferred render
-	//deferredRender->render(myRender->getCamera());
+	deferredRender->render(myRender->getCamera());
 
 	//Calls the reneder-pipeline for models and terrain
 	myRender->render(myModels);
