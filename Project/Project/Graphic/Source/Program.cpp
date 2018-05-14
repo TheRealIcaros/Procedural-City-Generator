@@ -289,7 +289,8 @@ void Program::noiseGenerator(unsigned int seed)
 	else
 	{
 		randNoise->setSeed(seed);
-		map->setNoise(randNoise);
+		noise->setSeed(seed);
+		map->setNoise(noise);
 		district->setNoise(randNoise);
 		block->setNoise(randNoise);
 		building->setNoise(randNoise);
@@ -362,7 +363,7 @@ void Program::addBuildingToRender()
 					texture = grassTexture;
 				}
 
-				//myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
+				myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
 				//myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	
 			}
 		}
