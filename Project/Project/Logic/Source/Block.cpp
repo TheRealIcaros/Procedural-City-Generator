@@ -22,6 +22,8 @@ void Block::generate(Array2D<int>& map, float width, float height)
 	assert(WIDTH > 0);
 	assert(HEIGHT > 0);
 
+	int next = 0;
+
 	//reset counters
 	mainRoads = 0;
 	smallRoads = 0;
@@ -30,22 +32,37 @@ void Block::generate(Array2D<int>& map, float width, float height)
 		float noiseResult = noise->generate(x * 10.0f, 0.0f, width, height);
 
 		noiseResult *= noiseResult; //Why?
-
-		if (noiseResult > MAIN_ROAD_THRESHOLD) //check if the generated value allows Main Road
+		if (next > 0)
 		{
-			for (int y = 0; y < HEIGHT; y++)
+			next--;
+		}
+		else
+		{
+			if (noiseResult > MAIN_ROAD_THRESHOLD) //check if the generated value allows Main Road
 			{
-				map.at(x, y) = 9;
-			}
+				for (int y = 0; y < HEIGHT; y++)
+				{
+					map.at(x, y) = 9;
+				}
 
-			if (x == 0 || map.at(x - 1, 0) >= 0)
-			{
-				mainRoads++;
+				if (x == 0 || map.at(x - 1, 0) >= 0)
+				{
+					mainRoads++;
+
+					if (noiseResult >((1 - MAIN_ROAD_THRESHOLD) / 2) + MAIN_ROAD_THRESHOLD)  //Pseudo Random addition to the next block
+					{
+						next = minRoadDistance + 1;
+					}
+					else
+					{
+						next = minRoadDistance;
+					}
+				}
 			}
 		}
 	}
 
-	int next = 0;
+	next = 0;
 	for (int x = 0; x < WIDTH; x++)
 	{
 		int startX = x;
@@ -84,7 +101,7 @@ void Block::generate(Array2D<int>& map, float width, float height)
 						}
 						else
 						{
-							next = blockSizes[DISTRICT] + 0;
+							next = blockSizes[DISTRICT];
 						}
 					}
 				}
@@ -101,4 +118,9 @@ void Block::setBlockSize(int district, int size)
 
 	blockSizes[district] = size;
 	int k = blockSizes[district];
+}
+
+void Block::setminRoadDistance(int size)
+{
+	this->minRoadDistance = size;
 }

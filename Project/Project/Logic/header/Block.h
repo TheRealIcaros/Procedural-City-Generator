@@ -23,12 +23,14 @@ private:
 	int mainRoads;
 	int smallRoads;
 	int blockSizes[MAX_DISTRICTS];
+	int minRoadDistance;
 public:
 	Block();
 	~Block();
 	void setNoise(Noise* noise);
 	void generate(Array2D<int>& map, float width, float height);
 	void setBlockSize(int district, int size);
+	void setminRoadDistance(int size);
 	int getMainRoad() { return mainRoads; }
 	int getSmallRoad() { return smallRoads; }
 };

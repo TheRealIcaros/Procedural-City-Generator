@@ -42,6 +42,7 @@ GenWindow::GenWindow()
 		this->density[i] = 100;
 		this->blockSize[i] = 2;
 	}
+	this->minMainRoadDistance = 2;
 	this->generate = false;
 }
 
@@ -137,6 +138,11 @@ void GenWindow::draw()
 		ImGui::Separator();
 		ImGui::Text("Border Blend Percentage");
 		ImGui::InputFloat("##District Perc", &borderPerc);
+		ImGui::Separator();
+		ImGui::Text("Main Road");
+		ImGui::Spacing();
+		ImGui::Text("Min Road Distance");
+		ImGui::SliderInt("##Main Road Distance", &minMainRoadDistance, 1, 5);
 		ImGui::Separator();
 		ImGui::Text("Houses");
 		ImGui::Spacing();

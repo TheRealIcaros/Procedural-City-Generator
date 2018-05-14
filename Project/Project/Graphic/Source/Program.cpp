@@ -180,6 +180,7 @@ void Program::generate()
 	}
 	noiseGenerator(seed->getSeed());
 
+	block->setminRoadDistance(genWindow->getMinMainRoadDist());
 	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
 		block->setBlockSize(i, genWindow->getBlockSize()[i]);

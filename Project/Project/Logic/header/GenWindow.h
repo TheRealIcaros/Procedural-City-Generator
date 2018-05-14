@@ -43,6 +43,7 @@ private:
 	int maxHeight[MAX_DISTRICTS];
 	int density[MAX_DISTRICTS];
 	int blockSize[MAX_DISTRICTS];
+	int minMainRoadDistance;
 	int count;
 	bool generate = false;
 	bool random = false;
@@ -67,6 +68,7 @@ public:
 	int* getMaxHeight() { return this->maxHeight; }
 	int* getDensity() { return this->density; }
 	int* getBlockSize() { return this->blockSize; }
+	int getMinMainRoadDist() { return this->minMainRoadDistance; }
 	void setSeed(unsigned int seed) { this->seed = seed; }
 	void setCounter(int count) { this->count = count; }
 	void setMainRoad(int roads) { this->mainRoads = roads; }
