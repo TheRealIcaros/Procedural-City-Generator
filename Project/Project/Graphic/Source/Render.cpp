@@ -22,7 +22,7 @@ void Render::load(GLFWwindow* window)
 
 	objectShader.createShader("./Models/shaders/basic", "NULL", "./Models/shaders/basic");
 	//objectShader.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
-	this->terrainShader.createShader("./Graphic/Shaders/TerrainVS", "./Graphic/Shaders/TerrainGS", "./Graphic/Shaders/TerrainFS");
+	//this->terrainShader.createShader("./Graphic/Shaders/TerrainVS", "./Graphic/Shaders/TerrainGS", "./Graphic/Shaders/TerrainFS");
 
 	objectWorldLocation = objectShader.getUniform("WorldMatrices");
 	objectProjectionLocation = objectShader.getUniform("ProjectionMatrix");

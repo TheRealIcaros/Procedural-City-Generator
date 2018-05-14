@@ -131,9 +131,7 @@
     <ClCompile Include="Graphic\Source\Camera.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="Graphic\Source\Mesh.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
+    <ClCompile Include="Graphic\Source\Deferred.cpp" />
     <ClCompile Include="Graphic\Source\Model.cpp" />
     <ClCompile Include="Graphic\Source\ModelLoader.cpp" />
     <ClCompile Include="Graphic\Source\Program.cpp">
@@ -141,9 +139,6 @@
     </ClCompile>
     <ClCompile Include="Graphic\Source\Render.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="Graphic\Source\Terrain.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Graphic\Source\Texture.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -202,17 +197,12 @@
     <ClInclude Include="Graphic\header\Camera.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
     </ClInclude>
-    <ClInclude Include="Graphic\header\Mesh.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-    </ClInclude>
+    <ClInclude Include="Graphic\header\Deferred.h" />
     <ClInclude Include="Graphic\header\Model.h" />
     <ClInclude Include="Graphic\header\ModelLoader.h" />
     <ClInclude Include="Graphic\header\Program.h" />
     <ClInclude Include="Graphic\header\Render.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
-    </ClInclude>
-    <ClInclude Include="Graphic\header\Terrain.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Graphic\header\Texture.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</ExcludedFromBuild>
@@ -291,9 +281,11 @@
     </None>
     <None Include="Graphic\Shaders\basic.fs" />
     <None Include="Graphic\Shaders\basic.vs" />
-    <None Include="Graphic\Shaders\TerrainFS.fs" />
-    <None Include="Graphic\Shaders\TerrainGS.gs" />
-    <None Include="Graphic\Shaders\TerrainVS.vs" />
+    <None Include="Graphic\Shaders\GeometryPassFS.fs" />
+    <None Include="Graphic\Shaders\GeometryPassGS.gs" />
+    <None Include="Graphic\Shaders\GeometryPassVS.vs" />
+    <None Include="Graphic\Shaders\LightingPassFS.fs" />
+    <None Include="Graphic\Shaders\LightingPassVS.vs" />
     <None Include="Models\shaders\basic.fs" />
     <None Include="Models\shaders\basic.vs" />
   </ItemGroup>

@@ -11,7 +11,6 @@
     <ClCompile Include="libs\usynergy\uSynergy.c" />
     <ClCompile Include="Graphic\Source\shaderCreater.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Graphic\Source\Terrain.cpp" />
     <ClCompile Include="Graphic\Source\Camera.cpp" />
     <ClCompile Include="Controlls\Source\Mouse.cpp" />
     <ClCompile Include="Graphic\Source\Render.cpp" />
@@ -28,7 +27,7 @@
     <ClCompile Include="Graphic\Source\Model.cpp" />
     <ClCompile Include="Graphic\Source\ModelLoader.cpp" />
     <ClCompile Include="Logic\Source\ppm.cpp" />
-    <ClCompile Include="Graphic\Source\Mesh.cpp" />
+    <ClCompile Include="Graphic\Source\Deferred.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controlls\Header\KeyIn.h" />
@@ -46,7 +45,6 @@
     <ClInclude Include="libs\glfw\include\GLFW\glfw3native.h" />
     <ClInclude Include="libs\usynergy\uSynergy.h" />
     <ClInclude Include="Graphic\header\shaderCreater.h" />
-    <ClInclude Include="Graphic\header\Terrain.h" />
     <ClInclude Include="Graphic\header\Camera.h" />
     <ClInclude Include="Controlls\Header\Mouse.h" />
     <ClInclude Include="Graphic\header\Render.h" />
@@ -67,7 +65,7 @@
     <ClInclude Include="Graphic\header\Program.h" />
     <ClInclude Include="Graphic\header\ModelLoader.h" />
     <ClInclude Include="Logic\header\ppm.h" />
-    <ClInclude Include="Graphic\header\Mesh.h" />
+    <ClInclude Include="Graphic\header\Deferred.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Debug\vc141.idb" />
@@ -76,9 +74,11 @@
     <None Include="Models\shaders\basic.vs" />
     <None Include="Graphic\Shaders\basic.fs" />
     <None Include="Graphic\Shaders\basic.vs" />
-    <None Include="Graphic\Shaders\TerrainFS.fs" />
-    <None Include="Graphic\Shaders\TerrainGS.gs" />
-    <None Include="Graphic\Shaders\TerrainVS.vs" />
+    <None Include="Graphic\Shaders\GeometryPassFS.fs" />
+    <None Include="Graphic\Shaders\GeometryPassGS.gs" />
+    <None Include="Graphic\Shaders\GeometryPassVS.vs" />
+    <None Include="Graphic\Shaders\LightingPassFS.fs" />
+    <None Include="Graphic\Shaders\LightingPassVS.vs" />
   </ItemGroup>
   <ItemGroup>
     <Object Include="Debug\Camera.obj" />

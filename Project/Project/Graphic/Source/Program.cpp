@@ -56,6 +56,7 @@ void Program::initiateVariables()
 	this->myKeyInput = new KeyIn();
 	this->myRender =  new Render();
 	this->myModels = new ModelLoader();
+	//this->deferredRender = new Deferred(myRender->getCamera());
 	//this->myTerrain = new Terrain();
 
 	terrainMap.fill(0.0f);
@@ -317,10 +318,6 @@ void Program::initiateImgui(GLFWwindow* window)
 
 void Program::addTerrainToRender()
 {
-
-
-
-
 	/*delete this->myTerrain;
 	this->myTerrain = new Terrain(glm::vec3(0.0, 0.0, 0.0), terrainMap, grassTexture);*/
 }
@@ -436,8 +433,6 @@ bool Program::Start()
 	//Startup the renderer
 	myRender->load(window);
 
-	this->terrainShader.createShader("./Graphic/Shaders/TerrainVS", "./Graphic/Shaders/TerrainGS", "./Graphic/Shaders/TerrainFS");
-
 	return returnValue;
 }
 
@@ -486,6 +481,7 @@ void Program::Stop()
 	myRender->getCamera()->deleteMouse();
 	delete this->myRender;
 	delete this->myModels;
+	//delete this->deferredRender;
 	//this->myTerrain->deallocate();
 	//delete this->myTerrain;
 
@@ -497,6 +493,10 @@ void Program::render()
 	//Cleans the color buffer and set the defaultbacgroundcolor
 	glClearColor(0.3f, 0.3f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+	//Deferred render
+	//deferredRender->render(myRender->getCamera());
 
 	//Calls the reneder-pipeline for models and terrain
 	myRender->render(myModels);
@@ -510,6 +510,5 @@ void Program::render()
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-https://stackoverflow.com/questions/18557176/is-there-a-good-tutorial-on-terrain-editor
-
-https://www.youtube.com/watch?v=oaAN4zSkY24
+//https://stackoverflow.com/questions/18557176/is-there-a-good-tutorial-on-terrain-editor
+//https://www.youtube.com/watch?v=oaAN4zSkY24
