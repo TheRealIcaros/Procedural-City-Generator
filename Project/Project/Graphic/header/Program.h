@@ -3,7 +3,7 @@
 
 //Own made includes
 #include "Render.h"
-#include "Terrain.h"
+//#include "Terrain.h"
 #include "../../Logic/header/GenWindow.h"
 
 //Imgui stuff
@@ -42,7 +42,7 @@ private:
 	KeyIn* myKeyInput;
 	Render* myRender;
 	ModelLoader* myModels;
-	Terrain* myTerrain;
+	//Terrain* myTerrain;
 
 	shaderCreater terrainShader;
 

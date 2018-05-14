@@ -56,7 +56,7 @@ void Program::initiateVariables()
 	this->myKeyInput = new KeyIn();
 	this->myRender =  new Render();
 	this->myModels = new ModelLoader();
-	this->myTerrain = new Terrain();
+	//this->myTerrain = new Terrain();
 
 	terrainMap.fill(0.0f);
 }
@@ -297,8 +297,8 @@ void Program::initiateImgui(GLFWwindow* window)
 
 void Program::addTerrainToRender()
 {
-	delete this->myTerrain;
-	this->myTerrain = new Terrain(glm::vec3(0.0, 0.0, 0.0), terrainMap, grassTexture);
+	/*delete this->myTerrain;
+	this->myTerrain = new Terrain(glm::vec3(0.0, 0.0, 0.0), terrainMap, grassTexture);*/
 }
 
 void Program::addBuildingToRender()
@@ -463,7 +463,7 @@ void Program::Stop()
 	delete this->myRender;
 	delete this->myModels;
 	//this->myTerrain->deallocate();
-	delete this->myTerrain;
+	//delete this->myTerrain;
 
 	glfwTerminate();
 }
@@ -475,10 +475,10 @@ void Program::render()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//Calls the reneder-pipeline for models and terrain
-	//myRender->render(myModels);
+	myRender->render(myModels);
 
 	//Render terrain
-	myRender->render(grassTexture, myTerrain);
+	//myRender->render(grassTexture, myTerrain);
 	//myTerrain->Draw(terrainShader, grassTexture);
 
 	//ImGui that handles the graphical interface//

@@ -3,7 +3,7 @@
 
 //Inlcuded classes
 #include "ModelLoader.h"
-#include "Terrain.h"
+//#include "Terrain.h"
 #include "..\..\Controlls\Header\KeyIn.h"
 
 struct ObjectElement
@@ -51,7 +51,7 @@ public:
 
 	void addElement(int model, int texture, const glm::vec3& position);
 	void render(ModelLoader* models);
-	void render(int texture, Terrain* terrain);
+	//void render(int texture, Terrain* terrain);
 	GLuint getObjectShader();
 	Camera* getCamera();
 };

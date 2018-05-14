@@ -123,15 +123,15 @@ void Render::render(ModelLoader* models)
 	}
 }
 
-void Render::render(int texture, Terrain* terrain)
-{
-	glUseProgram(terrainShader.getShaderProgramID());
-	terrainShader.setMat4(objectProjectionLocation, myCamera.getProjection());
-	terrainShader.setMat4(objectViewLocation, myCamera.getView());
-
-	terrain->Draw(terrainShader, texture);
-
-}
+//void Render::render(int texture, Terrain* terrain)
+//{
+//	glUseProgram(terrainShader.getShaderProgramID());
+//	terrainShader.setMat4(objectProjectionLocation, myCamera.getProjection());
+//	terrainShader.setMat4(objectViewLocation, myCamera.getView());
+//
+//	terrain->Draw(terrainShader, texture);
+//
+//}
 
 Camera* Render::getCamera()
 {
