@@ -204,6 +204,19 @@ void Program::generate()
 		building->fullRandom(cityMap, terrainMap, structure);
 	}
 
+	//Creates the height-map to be used in the terrain
+	ppm image(terrainMap.getWidth(), terrainMap.getHeight());
+
+	for (int kk = 0; kk < terrainMap.getWidth() * terrainMap.getHeight(); kk++)
+	{
+		float n = terrainMap[kk];
+		image.r[kk] = floor(255 * n);
+		image.g[kk] = floor(255 * n);
+		image.b[kk] = floor(255 * n);
+	}
+	//The height-map in .bmp format
+	image.write("result.bmp");
+
 	//Add structures render
 	myRender->begin();
 
@@ -230,18 +243,7 @@ void Program::generate()
 
 	//End renderer
 	myRender->end();
-
-	ppm image(terrainMap.getWidth(), terrainMap.getHeight());
-
-	for (int kk = 0; kk < terrainMap.getWidth() * terrainMap.getHeight(); kk++)
-	{
-		float n = terrainMap[kk];
-		image.r[kk] = floor(255 * n);
-		image.g[kk] = floor(255 * n);
-		image.b[kk] = floor(255 * n);
-	}
-
-	image.write("result.bmp");
+	
 	//This is for testing the layout of the City-map-layout
 	system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
@@ -315,6 +317,10 @@ void Program::initiateImgui(GLFWwindow* window)
 
 void Program::addTerrainToRender()
 {
+
+
+
+
 	/*delete this->myTerrain;
 	this->myTerrain = new Terrain(glm::vec3(0.0, 0.0, 0.0), terrainMap, grassTexture);*/
 }
@@ -503,3 +509,7 @@ void Program::render()
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
+
+https://stackoverflow.com/questions/18557176/is-there-a-good-tutorial-on-terrain-editor
+
+https://www.youtube.com/watch?v=oaAN4zSkY24
