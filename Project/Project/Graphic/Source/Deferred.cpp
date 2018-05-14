@@ -168,7 +168,7 @@ void Deferred::renderGeometryPass(Camera* camera)
 	glm::vec3 lightDir = glm::vec3(5.0, -12.0, 6.0);
 	glUniform3fv(glGetUniformLocation(geometryPass.getShaderProgramID(), "lightDir"), 1, &lightDir[0]);
 
-	//terrain.Draw(geometryPass);
+	terrain.Draw(geometryPass);
 	//objects.Draw(geometryPass);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -276,4 +276,9 @@ void Deferred::render(Camera* camera)
 	//2. Then the lighting rendering pass
 	renderLightingPass(camera);
 
+}
+
+Terrain* Deferred::getTerrain()
+{
+	return &terrain;
 }

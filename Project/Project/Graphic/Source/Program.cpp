@@ -222,8 +222,9 @@ void Program::generate()
 	//Add structures render
 	myRender->begin();
 
+	this->deferredRender->terrain = Terrain(glm::vec3(0.0, 0.0, 0.0), "./result.bmp", "asd");
 	//Add in the terrain to the render pipeline
-	addTerrainToRender();
+	//addTerrainToRender();
 
 	//Add in the buildings to the render pipeline
 	addBuildingToRender();
@@ -321,6 +322,7 @@ void Program::addTerrainToRender()
 {
 	/*delete this->myTerrain;
 	this->myTerrain = new Terrain(glm::vec3(0.0, 0.0, 0.0), terrainMap, grassTexture);*/
+	
 }
 
 void Program::addBuildingToRender()

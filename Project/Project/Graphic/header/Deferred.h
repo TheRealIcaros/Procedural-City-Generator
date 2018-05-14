@@ -2,7 +2,7 @@
 #define DEFERRED_H
 
 #include "Render.h"
-
+#include "Terrain.h"
 #include <GLFW\glfw3.h>
 #include <glm.hpp>
 #include <vector>
@@ -14,7 +14,7 @@ private:
 	shaderCreater geometryPass;
 	shaderCreater lightingPass;
 
-	//Camera* deferredCamera;
+	
 
 	//Vertex Array Object and Vertex Buffer Object
 	GLuint VAO;
@@ -81,5 +81,9 @@ public:
 	GLuint getVAO()const;
 
 	void render(Camera* camera);
+
+	//Terrain object
+	Terrain terrain;
+	Terrain* getTerrain();
 };
 #endif

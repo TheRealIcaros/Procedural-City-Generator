@@ -128,32 +128,32 @@ float Terrain::getPixelColor(vec2 pos)
 
 void Terrain::sendToObject()
 {
-	//vector<Vertex> outData;
-	//for (int i = 0; i < vertices.size(); i++)
-	//{
-	//	Vertex temp;
-	//	temp.Position = vertices[i];
-	//	temp.TexCoords = uvs[i];
-	//	outData.push_back(temp);
-	//}
+	vector<TerrainVertex> outData;
+	for (int i = 0; i < vertices.size(); i++)
+	{
+		TerrainVertex temp;
+		temp.Position = vertices[i];
+		temp.TexCoords = uvs[i];
+		outData.push_back(temp);
+	}
 
-	//vector<Material> materials;
-	//Material material;
-	//material.name = "Terrain";
-	//Texture tempTexture;
-	////tempTexture.id = objLoader.TextureFromFile(this->texturePath.c_str());
-	//tempTexture.type = "texture_diffuse";
-	//tempTexture.path = this->texturePath;
-	//material.textures.push_back(tempTexture);
+	vector<TerrainMaterial> materials;
+	TerrainMaterial material;
+	material.name = "Terrain";
+	TerrainTexture tempTexture;
+	tempTexture.id = TextureFromFile(this->texturePath.c_str());
+	tempTexture.type = "texture_diffuse";
+	tempTexture.path = this->texturePath;
+	material.textures.push_back(tempTexture);
 
-	//material.colorAmbient = vec3(0.5, 0.2, 0.2);
-	//material.colorDiffuse = vec3(0.4, 0.8, 0.8);
-	//material.colorSpecular = vec3(0.1, 0.8, 0.8);
-	//material.specularExponent = 32;
+	material.colorAmbient = vec3(0.5, 0.2, 0.2);
+	material.colorDiffuse = vec3(0.4, 0.8, 0.8);
+	material.colorSpecular = vec3(0.1, 0.8, 0.8);
+	material.specularExponent = 32;
 
-	//materials.push_back(material);
+	materials.push_back(material);
 
-	//this->terrain = Mesh(outData, this->indices, materials, this->terrainPosition);
+	this->terrain = Mesh(outData, this->indices, materials, this->terrainPosition);
 }
 
 void Terrain::Draw(shaderCreater shader)
@@ -210,4 +210,41 @@ float Terrain::barryCentric(vec3 p1, vec3 p2, vec3 p3, vec2 pos)
 void Terrain::DrawDepth(shaderCreater shader)
 {
 	this->terrain.DrawDepth(shader);
+}
+
+unsigned int Terrain::TextureFromFile(const char* texturePath)
+{
+	unsigned int textureID;
+	glGenTextures(1, &textureID);
+
+	int width, height, nrComponents;
+	unsigned char *data = SOIL_load_image(texturePath, &width, &height, &nrComponents, SOIL_LOAD_AUTO);
+	if (data)
+	{
+		GLenum format;
+		if (nrComponents == 1)
+			format = GL_RED;
+		else if (nrComponents == 3)
+			format = GL_RGBA;
+		else if (nrComponents == 4)
+			format = GL_RGBA;
+
+		glBindTexture(GL_TEXTURE_2D, textureID);
+		glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+		glGenerateMipmap(GL_TEXTURE_2D);
+
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+		SOIL_free_image_data(data);
+	}
+	else
+	{
+		std::cout << "Texture failed to load at path: " << texturePath << std::endl;
+		SOIL_free_image_data(data);
+	}
+
+	return textureID;
 }
