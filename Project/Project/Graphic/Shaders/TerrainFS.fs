@@ -1,8 +1,8 @@
 #version 430
-//layout(location = 0) out vec3 gPosition;
-//layout(location = 1) out vec4 gNormal;
-//layout(location = 2) out vec4 gColorSpec;
-//layout(location = 3) out vec4 gColorInfo;
+layout(location = 0) out vec3 gPosition;
+layout(location = 1) out vec4 gNormal;
+layout(location = 2) out vec4 gColorSpec;
+layout(location = 3) out vec4 gColorInfo;
 
 uniform sampler2D texture_diffuse1;
 uniform sampler2D texture_normal1;
