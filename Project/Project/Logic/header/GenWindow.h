@@ -46,6 +46,7 @@ private:
 	int count;
 	bool generate = false;
 	bool random = false;
+	bool randBuild = false;
 
 public:
 	GenWindow();
@@ -74,6 +75,7 @@ public:
 	void setGrass(int districts, int grass) { this->grass[districts] = grass; }
 	void setGenTime(float genTime) { this->genTime = genTime; }
 	bool getRandom() { return this->random; }
+	bool getRandBuild() { return this->randBuild; }
 	bool getGenerate() { return this->generate; }
 	void toggleGenerate() { this->generate = !this->generate; }
 };

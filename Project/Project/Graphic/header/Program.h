@@ -19,6 +19,7 @@
 #include "../../Logic/header/Block.h"
 #include "../../Logic/header/Building.h"
 #include <math.h>
+#include "../../Logic/header/ppm.h"
 
 enum
 {

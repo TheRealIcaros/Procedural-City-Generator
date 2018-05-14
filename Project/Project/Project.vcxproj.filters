@@ -27,6 +27,7 @@
     <ClCompile Include="Logic\Source\GenWindow.cpp" />
     <ClCompile Include="Graphic\Source\Model.cpp" />
     <ClCompile Include="Graphic\Source\ModelLoader.cpp" />
+    <ClCompile Include="Logic\Source\ppm.cpp" />
     <ClCompile Include="Graphic\Source\Mesh.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -65,6 +66,7 @@
     <ClInclude Include="Graphic\header\Model.h" />
     <ClInclude Include="Graphic\header\Program.h" />
     <ClInclude Include="Graphic\header\ModelLoader.h" />
+    <ClInclude Include="Logic\header\ppm.h" />
     <ClInclude Include="Graphic\header\Mesh.h" />
   </ItemGroup>
   <ItemGroup>

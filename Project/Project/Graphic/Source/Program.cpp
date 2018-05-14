@@ -195,7 +195,14 @@ void Program::generate()
 
 	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
 
-	building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
+	if (genWindow->getRandBuild() == false)
+	{
+		building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
+	}
+	else
+	{
+		building->fullRandom(cityMap, terrainMap, structure);
+	}
 
 	//Add structures render
 	myRender->begin();
@@ -224,8 +231,19 @@ void Program::generate()
 	//End renderer
 	myRender->end();
 
+	ppm image(terrainMap.getWidth(), terrainMap.getHeight());
+
+	for (int kk = 0; kk < terrainMap.getWidth() * terrainMap.getHeight(); kk++)
+	{
+		float n = terrainMap[kk];
+		image.r[kk] = floor(255 * n);
+		image.g[kk] = floor(255 * n);
+		image.b[kk] = floor(255 * n);
+	}
+
+	image.write("result.bmp");
 	//This is for testing the layout of the City-map-layout
-	/*system("CLS");
+	system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
 	{
 		for (int i = 0; i < genWindow->getTSizeX(); i++)
@@ -260,7 +278,7 @@ void Program::generate()
 				std::cout << "\n";
 			}
 		}
-	}*/
+	}
 }
 
 void Program::noiseGenerator(unsigned int seed)

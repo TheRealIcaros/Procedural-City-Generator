@@ -27,7 +27,7 @@ void Block::generate(Array2D<int>& map, float width, float height)
 	smallRoads = 0;
 	for (int x = 0; x < WIDTH; x++)
 	{
-		float noiseResult = noise->generate(x * 10, 0.0, width, height);
+		float noiseResult = noise->generate(x * 10.0f, 0.0f, width, height);
 
 		noiseResult *= noiseResult; //Why?
 
@@ -66,7 +66,7 @@ void Block::generate(Array2D<int>& map, float width, float height)
 				}
 				else
 				{
-					float noiseResult = noise->generate(x, y, width, height);
+					float noiseResult = noise->generate(x * 10.0f, y * 10.0f, width, height);
 					if (noiseResult > SMALL_ROAD_THRESHOLD) //check if the generated value allows Small Road
 					{
 						const int DISTRICT = map.at(startX, y);

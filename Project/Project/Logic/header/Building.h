@@ -57,6 +57,7 @@ public:
 	void setHeight(int district, int minHeight, int maxHeight);
 	void setDensity(int district, float density);
 	void generate(Array2D<int>& map, Array2D<float>& terrainMap, Array<Structure>& structures, int width, int height);
+	void fullRandom(Array2D<int>& map, Array2D<float>& terrainMap, Array<Structure>& structures);
 	void setNoise(Noise* noise);
 	int* getBuildings() { return buildings; }
 	int* getGrassTiles() { return grassTiles; }
