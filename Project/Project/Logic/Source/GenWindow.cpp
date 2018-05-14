@@ -180,6 +180,7 @@ void GenWindow::draw()
 		ImGui::Spacing();
 		ImGui::Checkbox("Random Generator", &random);
 		ImGui::Checkbox("Random Building Generator", &randBuild);
+		ImGui::Checkbox("Random District Generator", &randDistrict);
 		if (ImGui::Button("Generate"))
 		{
 			generate = true;;

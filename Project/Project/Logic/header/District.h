@@ -20,18 +20,21 @@ class District
 private:
 	Noise * noise;
 	Array<glm::vec2> positions;
+	float borderPerc;
 	double vec2SquareDistance(glm::vec2 first, glm::vec2 second);
 	int closestDistrict(int x, int y);
 	void findBorder(Array2D<int>& map, Array<glm::vec2>& borders);
 	void alterBorders(Array2D<int>& map, Array<glm::vec2>& borders, int nodeAlterRange);
 	void setDistrict(float width, float height);
-	void calculateMap(Array2D<int>& map, float borderPerc);
+	void calculateMap(Array2D<int>& map);
 public:
 	District();
 	District(Noise* noise);
 	~District();
 	void setNoise(Noise* noise);
-	void generate(Array2D<int>& map, float width, float height, float borderPerc);
+	void setBorderPerc(float borderPerc);
+	void generate(Array2D<int>& map, float width, float height);
+	void randGenerate(Array2D<int>& map, float width, float height);
 };
 
 #endif

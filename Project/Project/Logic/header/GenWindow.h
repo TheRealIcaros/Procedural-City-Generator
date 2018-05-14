@@ -48,6 +48,7 @@ private:
 	bool generate = false;
 	bool random = false;
 	bool randBuild = false;
+	bool randDistrict = false;
 
 public:
 	GenWindow();
@@ -78,6 +79,7 @@ public:
 	void setGenTime(float genTime) { this->genTime = genTime; }
 	bool getRandom() { return this->random; }
 	bool getRandBuild() { return this->randBuild; }
+	bool getRandDistrict() { return this->randDistrict; }
 	bool getGenerate() { return this->generate; }
 	void toggleGenerate() { this->generate = !this->generate; }
 };

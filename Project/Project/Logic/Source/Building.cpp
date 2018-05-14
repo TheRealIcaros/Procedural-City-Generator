@@ -80,6 +80,11 @@ void Building::generate(Array2D<int>& map, Array2D<float>& terrainMap, Array<Str
 					int topSection = sectionOffset % topSections.getSize();
 					int structureHeight = (int)(noiseResult * (float)(HEIGHT_DIF + 0.5f)) + MIN_HEIGHT;
 
+					if (structureHeight < 1)
+					{
+						structureHeight = 1;
+					}
+
 					Structure structure =
 					{
 						botSections[botSection],
@@ -137,6 +142,11 @@ void Building::fullRandom(Array2D<int>& map, Array2D<float>& terrainMap, Array<S
 					int midSection = rand() % midSections.getSize();
 					int topSection = rand() % topSections.getSize();
 					int structureHeight = rand() % 10;
+
+					if (structureHeight < 1)
+					{
+						structureHeight = 1;
+					}
 
 					Structure structure =
 					{

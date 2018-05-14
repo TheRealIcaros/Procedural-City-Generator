@@ -43,7 +43,12 @@ void District::setNoise(Noise * noise)
 	this->noise = noise;
 }
 
-void District::calculateMap(Array2D<int>& map, float borderPerc)
+void District::setBorderPerc(float borderPerc)
+{
+	this->borderPerc = borderPerc;
+}
+
+void District::calculateMap(Array2D<int>& map)
 {
 	const int WIDTH = map.getWidth();
 	const int HEIGHT = map.getHeight();
@@ -68,11 +73,37 @@ void District::calculateMap(Array2D<int>& map, float borderPerc)
 	this->alterBorders(map, borderCoordinates, nodeEffectAmount);
 }
 
-void District::generate(Array2D<int>& map, float width, float height, float borderPerc)
+void District::generate(Array2D<int>& map, float width, float height)
 {
 	assert(noise != nullptr);
 	this->setDistrict(width, height);
-	this->calculateMap(map, borderPerc);
+	this->calculateMap(map);
+}
+
+void District::randGenerate(Array2D<int>& map, float width, float height)
+{
+	const int WIDTH = map.getWidth();
+	const int HEIGHT = map.getHeight();
+	for (int x = 0; x < WIDTH; x++)
+	{
+		for (int y = 0; y < HEIGHT; y++)
+		{
+			double noise = this->noise->generate(x, y, 1.0f);
+
+			if (noise < 0.33f)
+			{
+				map.at(x, y) = 0;
+			}
+			else if (noise < 0.66f)
+			{
+				map.at(x, y) = 1;
+			}
+			else
+			{
+				map.at(x, y) = 2;
+			}
+		}
+	}
 }
 
 int District::closestDistrict(int x, int y)

@@ -180,6 +180,7 @@ void Program::generate()
 	}
 	noiseGenerator(seed->getSeed());
 
+	district->setBorderPerc(genWindow->getBorderPerc());
 	block->setminRoadDistance(genWindow->getMinMainRoadDist());
 	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
@@ -190,17 +191,24 @@ void Program::generate()
 
 	map->generate(terrainMap, genWindow->getTSizeX(), genWindow->getTSizeY(), genWindow->getTerrainOctave(), genWindow->getTerrainOctavePerc(), genWindow->getRedistribution());
 
-	district->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY(), genWindow->getBorderPerc());
-
-	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
-
-	if (genWindow->getRandBuild() == false)
+	if (genWindow->getRandDistrict())
 	{
-		building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
+		district->randGenerate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
 	}
 	else
 	{
+		district->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
+	}
+
+	block->generate(cityMap, genWindow->getPSizeX(), genWindow->getPSizeY());
+
+	if (genWindow->getRandBuild())
+	{
 		building->fullRandom(cityMap, terrainMap, structure);
+	}
+	else
+	{
+		building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
 	}
 
 	//Add structures render
@@ -281,11 +289,32 @@ void Program::noiseGenerator(unsigned int seed)
 {
 	if (!genWindow->getRandom())
 	{
+		if (genWindow->getRandDistrict() || genWindow->getRandBuild())
+		{
+			randNoise->setSeed(seed);
+		}
 		noise->setSeed(seed);
+
 		map->setNoise(noise);
-		district->setNoise(noise);
+
+		if (genWindow->getRandDistrict())
+		{
+			district->setNoise(randNoise);
+		}
+		else
+		{
+			district->setNoise(noise);
+		}
 		block->setNoise(noise);
-		building->setNoise(noise);
+
+		if (genWindow->getRandBuild())
+		{
+			building->setNoise(randNoise);
+		}
+		else
+		{
+			building->setNoise(noise);
+		}
 	}
 	else
 	{
