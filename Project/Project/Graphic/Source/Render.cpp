@@ -22,7 +22,7 @@ void Render::load(GLFWwindow* window)
 
 	objectShader.createShader("./Models/shaders/basic", "NULL", "./Models/shaders/basic");
 	//objectShader.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
-	//terrainShader.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
+	this->terrainShader.createShader("./Graphic/Shaders/TerrainVS", "./Graphic/Shaders/TerrainGS", "./Graphic/Shaders/TerrainFS");
 
 	objectWorldLocation = objectShader.getUniform("WorldMatrices");
 	objectProjectionLocation = objectShader.getUniform("ProjectionMatrix");
@@ -103,8 +103,8 @@ void Render::render(ModelLoader* models)
 	//std::cout << " Camera z-Position: " << myCamera.getPosition().z << std::endl;
 
 	//Cleans the color buffer and set the defaultbacgroundcolor
-	glClearColor(0.3f, 0.3f, 1.0f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	/*glClearColor(0.3f, 0.3f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);*/
 
 	//Shader setup
 	glUseProgram(objectShader.getShaderProgramID());
@@ -121,6 +121,16 @@ void Render::render(ModelLoader* models)
 		models->renderModel(instance.model, instance.instances);
 		worldMatrixOffset += instance.instances;
 	}
+}
+
+void Render::render(int texture, Terrain* terrain)
+{
+	glUseProgram(terrainShader.getShaderProgramID());
+	terrainShader.setMat4(objectProjectionLocation, myCamera.getProjection());
+	terrainShader.setMat4(objectViewLocation, myCamera.getView());
+
+	terrain->Draw(terrainShader, texture);
+
 }
 
 Camera* Render::getCamera()

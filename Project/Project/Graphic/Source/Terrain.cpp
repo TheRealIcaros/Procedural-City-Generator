@@ -5,23 +5,43 @@ Terrain::Terrain()
 
 }
 
-Terrain::Terrain(glm::vec3 startPosition, const char *heightMapPath, std::string texturePath)
+Terrain::Terrain(glm::vec3 startPosition, Array2D<float> heightMapPath, int texturePath)
 {
 	this->maxHeight = 0.10f;
 	this->imageScale = 200.0f;
-	this->terrainSize = 128;
+	this->terrainSizeX = heightMapPath.getWidth();
+	this->terrainSizeY = heightMapPath.getHeight();
+
+	this->imageWidth = terrainSizeX;
+	this->imageHeight = terrainSizeY;
 
 	this->terrainPosition = startPosition;
-	//this->texturePath = texturePath;
-	this->imageData = loadHeightMap(heightMapPath);
+	this->texturePath = texturePath;
+	this->imageData = heightMapPath;
+	//this->imageData = loadHeightMap(heightMapPath);
 
-	if (this->imageData != NULL)
+	//if (this->imageData != NULL)
 		createTerrain();
+
 }
+
+//Terrain::Terrain(glm::vec3 startPosition, const char *heightMapPath, int texturePath)
+//{
+//	this->maxHeight = 0.10f;
+//	this->imageScale = 200.0f;
+//	this->terrainSize = 128;
+//
+//	this->terrainPosition = startPosition;
+//	this->texturePath = texturePath;
+//	this->imageData = loadHeightMap(heightMapPath);
+//
+//	if (this->imageData != NULL)
+//		createTerrain();
+//}
 
 Terrain::~Terrain()
 {
-
+	deallocate();
 }
 
 void Terrain::deallocate()
@@ -35,53 +55,53 @@ void Terrain::deallocate()
 	this->terrain.deallocate();
 }
 
-unsigned char* Terrain::loadHeightMap(const char *path)
-{
-	int nrChannels;
-	//unsigned char* data = SOIL_load_image(path, &this->imageWidth, &this->imageHeight, &nrChannels, 0);
-
-	if (this->imageWidth != this->imageHeight)
-	{
-		std::cout << "Height map not square" << std::endl;
-		//SOIL_free_image_data(data);
-		//data = NULL;
-	}
-	if (/*!data*/false)
-	{
-		std::cout << "Failed to load height map" << std::endl;
-		//SOIL_free_image_data(data);
-		//data = NULL;
-	}
-
-	unsigned char* test = nullptr;
-	//return data;
-	return test;
-}
+//unsigned char* Terrain::loadHeightMap(const char *path)
+//{
+//	int nrChannels;
+//	//unsigned char* data = SOIL_load_image(path, &this->imageWidth, &this->imageHeight, &nrChannels, 0);
+//
+//	if (this->imageWidth != this->imageHeight)
+//	{
+//		std::cout << "Height map not square" << std::endl;
+//		//SOIL_free_image_data(data);
+//		//data = NULL;
+//	}
+//	if (/*!data*/false)
+//	{
+//		std::cout << "Failed to load height map" << std::endl;
+//		//SOIL_free_image_data(data);
+//		//data = NULL;
+//	}
+//
+//	unsigned char* test = nullptr;
+//	//return data;
+//	return test;
+//}
 
 void Terrain::createTerrain()
 {
-	this->heights = new float*[this->imageHeight];
-	for (int i = 0; i < this->imageHeight; i++)
+	this->heights = new float*[this->terrainSizeY];
+	for (int i = 0; i < this->terrainSizeY; i++)
 	{
-		this->heights[i] = new float[this->imageWidth];
+		this->heights[i] = new float[this->terrainSizeX];
 	}
 
 	int index = 0;
-	for (int z = 0; z < this->imageHeight; z++)
+	for (int z = 0; z < this->terrainSizeY-1; z++)
 	{
-		for (int x = 0; x < this->imageWidth; x++)
+		for (int x = 0; x < this->terrainSizeX-1; x++)
 		{
-			float gray = ((float)this->imageData[index] +
+			/*float gray = ((float)this->imageData[index] +
 				(float)this->imageData[index + 1] +
 				(float)this->imageData[index + 2]) / 3;
 
-			index += 3;
-
+			index += 3;*/
+			float gray = imageData[index];
 			gray = gray * this->maxHeight;
 			glm::vec3 position;
-			position.x = (this->terrainSize / this->imageWidth) * x;
+			position.x = (this->terrainSizeX / this->imageWidth) * x;
 			position.y = gray + this->terrainPosition.y;
-			position.z = (this->terrainSize / this->imageHeight) * z;
+			position.z = (this->terrainSizeY / this->imageHeight) * z;
 			vertices.push_back(position);
 			this->heights[x][z] = float(position.y + this->terrainPosition.y);
 
@@ -134,7 +154,9 @@ void Terrain::sendToObject()
 	for (int i = 0; i < vertices.size(); i++)
 	{
 		TerrainVertex temp;
+		vertices[i].y =* imageData.getData();
 		temp.Position = vertices[i];
+		//temp.Position = vertices[i];
 		temp.TexCoords = uvs[i];
 		outData.push_back(temp);
 	}
@@ -143,15 +165,15 @@ void Terrain::sendToObject()
 	TerrainMaterial material;
 	material.name = "Terrain";
 	TerrainTexture tempTexture;
-	//tempTexture.id = ".\Models\textures\grass1";
+	tempTexture.id = texturePath;
 	//tempTexture.id = objLoader.TextureFromFile(this->texturePath.c_str());
 	tempTexture.type = "texture_diffuse";
-	//tempTexture.path = this->texturePath;
+	tempTexture.path = this->texturePath;
 	material.textures.push_back(tempTexture);
 
-	material.colorAmbient = glm::vec3(0.5, 0.2, 0.2);
-	material.colorDiffuse = glm::vec3(0.4, 0.8, 0.8);
-	material.colorSpecular =glm::vec3(0.1, 0.8, 0.8);
+	material.colorAmbient  = glm::vec3(0.5, 0.2, 0.2);
+	material.colorDiffuse  = glm::vec3(0.4, 0.8, 0.8);
+	material.colorSpecular = glm::vec3(0.1, 0.8, 0.8);
 	material.specularExponent = 32;
 
 	materials.push_back(material);
@@ -159,8 +181,10 @@ void Terrain::sendToObject()
 	this->terrain = Mesh(outData, this->indices, materials, this->terrainPosition);
 }
 
-void Terrain::Draw(shaderCreater shader)
+void Terrain::Draw(shaderCreater shader, int textID)
 {
+	glUseProgram(shader.getShaderProgramID());
+	this->terrainTexture.bind(textID);
 	this->terrain.Draw(shader);
 }
 
@@ -168,7 +192,7 @@ float Terrain::getHeightOfTerrain(float worldX, float worldZ)
 {
 	float terrainX = worldX - this->terrainPosition.x;
 	float terrainZ = worldZ - this->terrainPosition.z;
-	float gridSquareSize = this->terrainSize / (this->imageWidth - 1);
+	float gridSquareSize = this->terrainSizeX / (this->imageWidth - 1);
 
 	int gridX = (int)floor(terrainX / gridSquareSize);
 	int gridZ = (int)floor(terrainZ / gridSquareSize);
@@ -214,3 +238,41 @@ void Terrain::DrawDepth(shaderCreater shader)
 {
 	this->terrain.DrawDepth(shader);
 }
+
+//unsigned int Terrain::TextureFromFile(const char* texturePath)
+//{
+//	//unsigned int textureID;
+//	//glGenTextures(1, &textureID);
+//	//
+//	////int width, height, nrComponents;
+//	////unsigned char *data = SOIL_load_image(texturePath, &width, &height, &nrComponents, SOIL_LOAD_AUTO);
+//	////if (data)
+//	//{
+//	//	/*GLenum format;
+//	//	if (nrComponents == 1)
+//	//		format = GL_RED;
+//	//	else if (nrComponents == 3)
+//	//		format = GL_RGBA;
+//	//	else if (nrComponents == 4)
+//	//		format = GL_RGBA;*/
+//	//
+//	//	//glBindTexture(GL_TEXTURE_2D, textureID);
+//	//	////glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+//	//	//glGenerateMipmap(GL_TEXTURE_2D);
+//	//
+//	//	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+//	//	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+//	//	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+//	//	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+//	//
+//	//	//SOIL_free_image_data(data);
+//	//}
+//	///*else
+//	//{
+//	//	std::cout << "Texture failed to load at path: " << texturePath << std::endl;
+//	//	SOIL_free_image_data(data);
+//	//}*/
+//	//
+//	//return textureID;
+//	return unsigned int 0
+//}

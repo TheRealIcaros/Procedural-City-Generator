@@ -42,6 +42,9 @@ private:
 	KeyIn* myKeyInput;
 	Render* myRender;
 	ModelLoader* myModels;
+	Terrain* myTerrain;
+
+	shaderCreater terrainShader;
 
 	//Initiation functions for the applications core functions
 	void initiateGLFW();

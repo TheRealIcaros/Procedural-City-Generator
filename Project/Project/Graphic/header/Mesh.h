@@ -19,7 +19,8 @@ struct TerrainTexture
 {
 	unsigned int id;
 	std::string type;
-	std::string path;
+	int path;
+	//std::string path;
 };
 
 struct TerrainMaterial

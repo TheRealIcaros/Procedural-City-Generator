@@ -70,7 +70,7 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 		//Geometry shader
 		gs = glCreateShader(GL_GEOMETRY_SHADER);
 		//Open glsl file and put it in a string
-		shaderFile.open(geometryShader + ".glsl");
+		shaderFile.open(geometryShader + ".gs");
 		shaderText.assign((std::istreambuf_iterator<char>(shaderFile)), std::istreambuf_iterator<char>());
 		shaderFile.close();
 		//Make a double pointer (only valid here)
@@ -91,6 +91,8 @@ void shaderCreater::createShader(std::string vertexShader, std::string geometryS
 			glDeleteShader(gs);
 			exit(-1);
 		}
+
+		//std::cout << shaderText << std::endl;
 	}
 
 	//Fragment shader

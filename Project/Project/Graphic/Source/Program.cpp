@@ -56,6 +56,7 @@ void Program::initiateVariables()
 	this->myKeyInput = new KeyIn();
 	this->myRender =  new Render();
 	this->myModels = new ModelLoader();
+	this->myTerrain = new Terrain();
 
 	terrainMap.fill(0.0f);
 }
@@ -199,6 +200,9 @@ void Program::generate()
 	//Add structures render
 	myRender->begin();
 
+	//Add in the terrain to the render pipeline
+	addTerrainToRender();
+
 	//Add in the buildings to the render pipeline
 	addBuildingToRender();
 
@@ -293,12 +297,14 @@ void Program::initiateImgui(GLFWwindow* window)
 
 void Program::addTerrainToRender()
 {
-
+	delete this->myTerrain;
+	this->myTerrain = new Terrain(glm::vec3(0.0, 0.0, 0.0), terrainMap, grassTexture);
 }
 
 void Program::addBuildingToRender()
 {
 	int curStructure = 0;
+	int texture = 0;
 	for (int x = 0; x < genWindow->getTSizeX(); x++)
 	{
 		for (int y = 0; y < genWindow->getTSizeY(); y++)
@@ -335,17 +341,24 @@ void Program::addBuildingToRender()
 				//float terrain3 = terrainMap.at(x + 1, y + 1);
 				//
 				////Make new renderreu piplineeruuu tto thus'eru
-				//int texture = verticalRoadTexture;
-				//if (cellValue == 8)
-				//{
-				//	texture = horizontalRoadTexture;
-				//}
+				
+				if (cellValue == 8)
+				{
+					texture = horizontalRoadTexture;
+					myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
+
+				}
+				else if(cellValue == 9)
+				{
+					texture = verticalRoadTexture;
+					myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
+
+				}
 				//else if (cellValue == 7)
 				//{
 				//	texture = grassTexture;
 				//}
 				//
-				//myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
 				////myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	
 			}
 		}
@@ -399,6 +412,8 @@ bool Program::Start()
 	//Startup the renderer
 	myRender->load(window);
 
+	this->terrainShader.createShader("./Graphic/Shaders/TerrainVS", "./Graphic/Shaders/TerrainGS", "./Graphic/Shaders/TerrainFS");
+
 	return returnValue;
 }
 
@@ -447,14 +462,24 @@ void Program::Stop()
 	myRender->getCamera()->deleteMouse();
 	delete this->myRender;
 	delete this->myModels;
+	//this->myTerrain->deallocate();
+	delete this->myTerrain;
 
 	glfwTerminate();
 }
 
 void Program::render()
 {
+	//Cleans the color buffer and set the defaultbacgroundcolor
+	glClearColor(0.3f, 0.3f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	//Calls the reneder-pipeline for models and terrain
-	myRender->render(myModels);
+	//myRender->render(myModels);
+
+	//Render terrain
+	myRender->render(grassTexture, myTerrain);
+	//myTerrain->Draw(terrainShader, grassTexture);
 
 	//ImGui that handles the graphical interface//
 	ImGui::Render();
