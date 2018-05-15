@@ -69,7 +69,7 @@ private:
 	std::vector<Light> lights;
 
 	//Render-functions
-	void renderGeometryPass(Camera* camera);
+	void renderGeometryPass(Camera* camera, Terrain terrain);
 	void renderLightingPass(Camera* camera);
 	void renderQuad();
 
@@ -80,10 +80,10 @@ public:
 	bool initiateDeferred(Camera* camera);
 	GLuint getVAO()const;
 
-	void render(Camera* camera);
+	void render(Camera* camera, Terrain terrain);
 
 	//Terrain object
-	Terrain terrain;
-	Terrain* getTerrain();
+	//Terrain terrain;
+	//Terrain* getTerrain();
 };
 #endif

@@ -17,7 +17,8 @@ void Program::initiateGLFW()
 	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);	 //This sets the Major requierments of Opengl to Version 4.x
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);	//This sets the Minor requierments of Opengl to Version x.3
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
 	
 }
 
@@ -206,23 +207,24 @@ void Program::generate()
 		building->fullRandom(cityMap, terrainMap, structure);
 	}
 
-	//Creates the height-map to be used in the terrain
-	ppm image(terrainMap.getWidth(), terrainMap.getHeight());
+	////Creates the height-map to be used in the terrain
+	//ppm image(terrainMap.getWidth(), terrainMap.getHeight());
 
-	for (int kk = 0; kk < terrainMap.getWidth() * terrainMap.getHeight(); kk++)
-	{
-		float n = terrainMap[kk];
-		image.r[kk] = floor(255 * n);
-		image.g[kk] = floor(255 * n);
-		image.b[kk] = floor(255 * n);
-	}
-	//The height-map in .bmp format
-	image.write("result.bmp");
+	//for (int kk = 0; kk < terrainMap.getWidth() * terrainMap.getHeight(); kk++)
+	//{
+	//	float n = terrainMap[kk];
+	//	image.r[kk] = floor(255 * n);
+	//	image.g[kk] = floor(255 * n);
+	//	image.b[kk] = floor(255 * n);
+	//}
+	////The height-map in .bmp format
+	//image.write("HMap.bmp");
 
 	//Add structures render
 	myRender->begin();
 
-	this->deferredRender->terrain = Terrain(glm::vec3(0.0, 0.0, 0.0), "./result.bmp", "asd");
+	//this->deferredRender->terrain
+	//myTerrain = Terrain(glm::vec3(0.0, 0.0, 0.0), "./b.bmp", "./Models/textures/stoneBrick.png");
 	//Add in the terrain to the render pipeline
 	//addTerrainToRender();
 
@@ -248,7 +250,7 @@ void Program::generate()
 	myRender->end();
 	
 	//This is for testing the layout of the City-map-layout
-	system("CLS");
+	/*system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
 	{
 		for (int i = 0; i < genWindow->getTSizeX(); i++)
@@ -283,7 +285,7 @@ void Program::generate()
 				std::cout << "\n";
 			}
 		}
-	}
+	}*/
 }
 
 void Program::noiseGenerator(unsigned int seed)
@@ -340,6 +342,7 @@ void Program::addBuildingToRender()
 				Structure& s = structure[curStructure];
 				curStructure++;
 
+				
 				//glm::vec3 position(x * 2, 0.175f, y * 2);
 				glm::vec3 position(x * 2, terrainMap.at(x, y) * 10, y * 2);
 
@@ -350,7 +353,7 @@ void Program::addBuildingToRender()
 				// render middle sections
 				for (int i = 0; i < s.height; i++)
 				{
-					myRender->addElement(s.middle.model, s.middle.texture, position);
+					myRender->addElement(s.middle.model , s.middle.texture, position);
 					position.y += 2.0f;
 				}
 
@@ -378,12 +381,13 @@ void Program::addBuildingToRender()
 					myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
 
 				}
-				//else if (cellValue == 7)
-				//{
-				//	texture = grassTexture;
-				//}
-				//
-				////myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	
+				else if (cellValue == 7)
+				{
+					texture = grassTexture;
+					myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
+				}
+				
+				//myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	
 			}
 		}
 
@@ -436,7 +440,7 @@ bool Program::Start()
 	//Startup the renderer
 	myRender->load(window);
 
-	this->deferredRender = new Deferred(myRender->getCamera());
+	//this->deferredRender = new Deferred(myRender->getCamera());
 
 	return returnValue;
 }
@@ -488,7 +492,7 @@ void Program::Stop()
 	myRender->getCamera()->deleteMouse();
 	delete this->myRender;
 	delete this->myModels;
-	delete this->deferredRender;
+	//delete this->deferredRender;
 	//this->myTerrain->deallocate();
 	//delete this->myTerrain;
 
@@ -503,7 +507,7 @@ void Program::render()
 
 
 	//Deferred render
-	deferredRender->render(myRender->getCamera());
+	//deferredRender->render(myRender->getCamera(), myTerrain);
 
 	//Calls the reneder-pipeline for models and terrain
 	myRender->render(myModels);

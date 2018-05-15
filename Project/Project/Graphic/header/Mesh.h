@@ -3,7 +3,7 @@
 
 #include "../../Defines.h"
 #include <vector>
-
+#include <SOIL.h>
 //Own Classes
 #include "shaderCreater.h"
 

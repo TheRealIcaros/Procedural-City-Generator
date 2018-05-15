@@ -2,7 +2,6 @@
 #define TERRAIN_H
 
 #include "Mesh.h"
-#include "SOIL.h"
 //#include "shaderCreater.h"
 //#include "Object.h"
 #include <vector>

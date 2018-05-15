@@ -53,7 +53,7 @@ bool Deferred::initiateDeferred(Camera* camera)
 	this->gpuBufferData = { World, camera->getView(), Projection };
 
 	//This creates the lights in the scene
-	lights.push_back(Light(glm::vec3(15.0, -6.0, 12.0), glm::vec3(1.0, 1.0, 1.0)));
+	lights.push_back(Light(glm::vec3(0.0, 5.0, 1.0), glm::vec3(0.5, 0.5, 0.5)));
 
 	
 
@@ -143,7 +143,7 @@ glm::mat4 Deferred::ProjectionMatrix()
 	return Projection;
 }
 
-void Deferred::renderGeometryPass(Camera* camera)
+void Deferred::renderGeometryPass(Camera* camera, Terrain terrain)
 {
 	//Use GeometryPass Shader Program
 	glUseProgram(geometryPass.getShaderProgramID());
@@ -165,7 +165,7 @@ void Deferred::renderGeometryPass(Camera* camera)
 	//glUniform3fv(glGetUniformLocation(geometryPass.getShaderProgramID(), "cameraPos"), 1, &camera.getPosition()[0]);
 	glUniform3fv(glGetUniformLocation(geometryPass.getShaderProgramID(), "cameraPos"), 1, &camera->getPosition()[0]);
 
-	glm::vec3 lightDir = glm::vec3(5.0, -12.0, 6.0);
+	glm::vec3 lightDir = glm::vec3(1.0, 1.0, 1.0);
 	glUniform3fv(glGetUniformLocation(geometryPass.getShaderProgramID(), "lightDir"), 1, &lightDir[0]);
 
 	terrain.Draw(geometryPass);
@@ -268,17 +268,17 @@ GLuint Deferred::getVAO()const
 	return this->VAO;
 }
 
-void Deferred::render(Camera* camera)
+void Deferred::render(Camera* camera, Terrain terrain)
 {
 	//1. first the geometry rendering pass
-	renderGeometryPass(camera);
+	renderGeometryPass(camera, terrain);
 
 	//2. Then the lighting rendering pass
 	renderLightingPass(camera);
 
 }
 
-Terrain* Deferred::getTerrain()
-{
-	return &terrain;
-}
+//Terrain* Deferred::getTerrain()
+//{
+//	return &terrain;
+//}

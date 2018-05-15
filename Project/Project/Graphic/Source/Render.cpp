@@ -56,7 +56,17 @@ void Render::end()
 	const glm::mat4 IDENT;
 	for (int i = 0; i<objectElements.getSize(); i++)
 	{
-		worldMatrices[i] = glm::translate(IDENT, objectElements[i].position);
+		
+
+		if (objectElements.at(i).model == 4 || objectElements.at(i).model == 0)
+		{
+			worldMatrices[i] = glm::translate(IDENT, objectElements[i].position - 0.2f);
+			worldMatrices[i] = glm::scale(worldMatrices[i], glm::vec3(1.0f, 2.2f, 1.0f));
+		}
+		else
+		{
+			worldMatrices[i] = glm::translate(IDENT, objectElements[i].position);
+		}
 	}
 
 	// convert elements to instances
@@ -87,11 +97,15 @@ void Render::addElement(int model, int texture, const glm::vec3& position)
 {
 	assert(model >= 0);
 	assert(texture >= 0);
+	glm::mat4 worldM;
 
 	ObjectElement element = { model, texture, position };
 
+	//if (model == 4 || model == 0)
+		//worldM = glm::scale(worldM,glm::vec3(5.0f, 500.0f, 5.0f));
+	
+	worldMatrices.add(worldM);
 	objectElements.add(element);
-	worldMatrices.add(glm::mat4());
 }
 
 
