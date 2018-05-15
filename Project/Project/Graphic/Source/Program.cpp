@@ -3,6 +3,7 @@
 #include <chrono>
 #include <iostream>
 
+
 void setColor(unsigned short color)
 {
 	HANDLE hcon = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -434,6 +435,44 @@ void Program::addBuildingToRender()
 	}
 }
 
+void Program::collectData()
+{
+	Array<float> data;
+	float avg = 0;
+	int counter = 0;
+	int buildings = 0;
+	for (int i = 0; i < 100; i++)
+	{
+		genWindow->setInputBuf(i);
+		generate();
+		float time = genWindow->getGenTime();
+		data.add(time);
+		avg += time;
+		counter += genWindow->getCounter();
+		buildings += genWindow->getTotalBuildings();
+	}
+	avg /= 100;
+	counter /= 100;
+	buildings /= 100;
+	float deviation = 0;
+	for (int i = 0; i < 100; i++)
+	{
+		deviation += pow(data.at(i) - avg, 2);
+	}
+	deviation /= 100;
+	deviation = sqrt(deviation);
+	toFile(avg, deviation, counter, buildings);
+}
+
+void Program::toFile(float avg, float deviation, int counter, int buildings)
+{
+	std::ofstream myfile;
+	myfile.open(std::to_string(genWindow->getTSizeX()) + "X" + std::to_string(genWindow->getTSizeY()) + ".txt");
+	myfile << "Generation time: " << std::to_string(avg) << ", Standard deviation: " << std::to_string(deviation) << ", Perlin noise calls: " << std::to_string(counter) <<
+		", Buildings: " << std::to_string(buildings);
+	myfile.close();
+}
+
 Program::Program()
 {
 	initiateGLFW();
@@ -502,7 +541,14 @@ bool Program::Run()
 
 	if (genWindow->getGenerate() == true)
 	{
-		generate();
+		if (genWindow->getPerformance())
+		{
+			collectData();
+		}
+		else
+		{
+			generate();
+		}
 		genWindow->toggleGenerate();
 	}
 

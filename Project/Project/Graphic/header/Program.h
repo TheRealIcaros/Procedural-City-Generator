@@ -125,6 +125,9 @@ private:
 	Array2D<int> cityMap;
 	Array<Structure> structure;
 
+	void collectData();
+	void toFile(float avg, float deviation, int counter, int buildings);
+
 public:
 	Program();
 	~Program();

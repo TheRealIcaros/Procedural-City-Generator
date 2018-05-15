@@ -49,12 +49,14 @@ private:
 	bool random = false;
 	bool randBuild = false;
 	bool randDistrict = false;
+	bool performance = false;
 
 public:
 	GenWindow();
 	~GenWindow();
 	void draw();
 	void toggleDebugToDraw() { this->isDrawing = !this->isDrawing; }
+	void setInputBuf(int input) { std::sprintf(inputBuf, "%d", input); }
 	std::string getInputBuf() { return this->inputBuf; }
 	bool isOpen() const { return this->isDrawing; }
 	float getPSizeX() { return this->pSizeX; }
@@ -72,15 +74,19 @@ public:
 	int getMinMainRoadDist() { return this->minMainRoadDistance; }
 	void setSeed(unsigned int seed) { this->seed = seed; }
 	void setCounter(int count) { this->count = count; }
+	int getCounter() { return this->count; }
 	void setMainRoad(int roads) { this->mainRoads = roads; }
 	void setSmallRoad(int roads) { this->smallRoads = roads; }
 	void setBuildings(int districts, int building) { this->buildings[districts] = building; }
 	void setGrass(int districts, int grass) { this->grass[districts] = grass; }
 	void setGenTime(float genTime) { this->genTime = genTime; }
+	float getGenTime() { return this->genTime; }
 	bool getRandom() { return this->random; }
 	bool getRandBuild() { return this->randBuild; }
 	bool getRandDistrict() { return this->randDistrict; }
+	bool getPerformance() { return this->performance; }
 	bool getGenerate() { return this->generate; }
+	int getTotalBuildings() { return buildings[0] + buildings[1] + buildings[2]; }
 	void toggleGenerate() { this->generate = !this->generate; }
 };
 #endif
