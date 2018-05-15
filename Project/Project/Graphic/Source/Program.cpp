@@ -335,6 +335,13 @@ void Program::addBuildingToRender()
 	{
 		for (int y = 0; y < genWindow->getTSizeY(); y++)
 		{
+			float terrain0 = terrainMap.at(x, y);
+			float terrain1 = terrainMap.at(x + 1, y);
+			float terrain2 = terrainMap.at(x, y + 1);
+			float terrain3 = terrainMap.at(x + 1, y + 1);
+
+			float finalTerrain = ((terrain0 + terrain1 + terrain2 + terrain3) / 4) * 23;
+
 			int cellValue = cityMap.at(x, y);
 			if (0 <= cellValue && cellValue < 7)
 			{
@@ -344,7 +351,7 @@ void Program::addBuildingToRender()
 
 				
 				//glm::vec3 position(x * 2, 0.175f, y * 2);
-				glm::vec3 position(x * 2, terrainMap.at(x, y) * 10, y * 2);
+				glm::vec3 position(x * 2, finalTerrain, y * 2);
 
 				// render bottom section
 				myRender->addElement(s.bottom.model, s.bottom.texture, position);
@@ -362,29 +369,31 @@ void Program::addBuildingToRender()
 			}
 			else
 			{
-				//float terrain0 = terrainMap.at(x, y);
-				//float terrain1 = terrainMap.at(x + 1, y);
-				//float terrain2 = terrainMap.at(x, y + 1);
-				//float terrain3 = terrainMap.at(x + 1, y + 1);
+				float terrain0 = terrainMap.at(x, y);
+				float terrain1 = terrainMap.at(x + 1, y);
+				float terrain2 = terrainMap.at(x, y + 1);
+				float terrain3 = terrainMap.at(x + 1, y + 1);
+
+				float finalTerrain = ((terrain0 + terrain1 + terrain2 + terrain3) / 4) * 23;
 				//
 				////Make new renderreu piplineeruuu tto thus'eru
 				
 				if (cellValue == 8)
 				{
 					texture = horizontalRoadTexture;
-					myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
+					myRender->addElement(roadModel, texture, glm::vec3(x * 2, finalTerrain, y * 2));
 
 				}
 				else if(cellValue == 9)
 				{
 					texture = verticalRoadTexture;
-					myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
+					myRender->addElement(roadModel, texture, glm::vec3(x * 2, finalTerrain, y * 2));
 
 				}
 				else if (cellValue == 7)
 				{
 					texture = grassTexture;
-					myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
+					myRender->addElement(roadModel, texture, glm::vec3(x * 2, finalTerrain, y * 2));
 				}
 				
 				//myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	

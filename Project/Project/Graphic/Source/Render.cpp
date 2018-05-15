@@ -28,7 +28,7 @@ void Render::load(GLFWwindow* window)
 	objectProjectionLocation = objectShader.getUniform("ProjectionMatrix");
 	objectViewLocation = objectShader.getUniform("ViewMatrix");
 
-	myCamera.setPosition(glm::vec3(0, 35, -20));
+	myCamera.setPosition(glm::vec3(0, 50, 105));
 	//myCamera.
 
 }
@@ -60,8 +60,8 @@ void Render::end()
 
 		if (objectElements.at(i).model == 4 || objectElements.at(i).model == 0)
 		{
-			worldMatrices[i] = glm::translate(IDENT, objectElements[i].position - 0.2f);
-			worldMatrices[i] = glm::scale(worldMatrices[i], glm::vec3(1.0f, 2.2f, 1.0f));
+			worldMatrices[i] = glm::translate(IDENT, glm::vec3(objectElements[i].position.x , objectElements[i].position.y - 2.45f, objectElements[i].position.z));
+			worldMatrices[i] = glm::scale(worldMatrices[i], glm::vec3(1.0f, 15.0f, 1.0f));
 		}
 		else
 		{
