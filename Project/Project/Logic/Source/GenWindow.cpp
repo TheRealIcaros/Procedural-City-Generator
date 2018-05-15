@@ -14,31 +14,40 @@ GenWindow::GenWindow()
 
 	this->tSizeX = 25;
 	this->tSizeY = 25;
-	this->pSizeX = 15;
-	this->pSizeY = 15;
+	this->pSizeX = 25;
+	this->pSizeY = 25;
 
 	this->terrainOctave = Array<float>(OCTAVENUMBER);
 	this->terrainOctavePerc = Array<float>(OCTAVENUMBER);
-	for (int i = 0; i < OCTAVENUMBER; i++)
-	{
-		this->terrainOctave.add(1.0);
-	}
+	this->terrainOctave.add(1.0);
+	this->terrainOctave.add(2.0);
+	this->terrainOctave.add(4.0);
+	this->terrainOctave.add(8.0);
+	this->terrainOctave.add(16.0);
+	this->terrainOctave.add(32.0);
+	this->terrainOctave.add(64.0);
+	this->terrainOctave.add(128.0);
+
 	this->terrainOctavePerc.add(0.50f);
-	this->terrainOctavePerc.add(0.35f);
-	this->terrainOctavePerc.add(0.15f);
-	this->terrainOctavePerc.add(0.0f);
-	this->terrainOctavePerc.add(0.0f);
-	this->terrainOctavePerc.add(0.0f);
-	this->terrainOctavePerc.add(0.0f);
-	this->terrainOctavePerc.add(0.0f);
+	this->terrainOctavePerc.add(0.25f);
+	this->terrainOctavePerc.add(0.125f);
+	this->terrainOctavePerc.add(0.0625);
+	this->terrainOctavePerc.add(0.03125f);
+	this->terrainOctavePerc.add(0.015625f);
+	this->terrainOctavePerc.add(0.0078125f);
+	this->terrainOctavePerc.add(0.00390625f);
 	this->redistribution = 1.0;
 	this->borderPerc = 0.2f;
+	this->minHeight[0] = 1;
+	this->maxHeight[0] = 2;
+	this->minHeight[1] = 3;
+	this->maxHeight[1] = 6;
+	this->minHeight[2] = 1;
+	this->maxHeight[2] = 2;
 	for (int i = 0; i < MAX_DISTRICTS; i++)
 	{
 		this->buildings[i] = 0;
 		this->grass[i] = 0;
-		this->minHeight[i] = 1;
-		this->maxHeight[i] = 2;
 		this->density[i] = 100;
 		this->blockSize[i] = 2;
 	}
