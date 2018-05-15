@@ -1,6 +1,7 @@
 #include "../header/Program.h"
 #include <Windows.h> //take away once done
 #include <chrono>
+#include <iostream>
 
 void setColor(unsigned short color)
 {
@@ -12,11 +13,13 @@ void Program::initiateGLFW()
 {
 	glewExperimental = GL_TRUE;
 
-
-	glfwInit();	
+	glfwInit();
+	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);	 //This sets the Major requierments of Opengl to Version 4.x
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);	//This sets the Minor requierments of Opengl to Version x.3
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
+	
 }
 
 bool Program::initiateWindow(GLFWwindow* window)
@@ -55,6 +58,8 @@ void Program::initiateVariables()
 	this->myKeyInput = new KeyIn();
 	this->myRender =  new Render();
 	this->myModels = new ModelLoader();
+	
+	//this->myTerrain = new Terrain();
 
 	terrainMap.fill(0.0f);
 }
@@ -211,8 +216,26 @@ void Program::generate()
 		building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
 	}
 
+	////Creates the height-map to be used in the terrain
+	//ppm image(terrainMap.getWidth(), terrainMap.getHeight());
+
+	//for (int kk = 0; kk < terrainMap.getWidth() * terrainMap.getHeight(); kk++)
+	//{
+	//	float n = terrainMap[kk];
+	//	image.r[kk] = floor(255 * n);
+	//	image.g[kk] = floor(255 * n);
+	//	image.b[kk] = floor(255 * n);
+	//}
+	////The height-map in .bmp format
+	//image.write("HMap.bmp");
+
 	//Add structures render
 	myRender->begin();
+
+	//this->deferredRender->terrain
+	//myTerrain = Terrain(glm::vec3(0.0, 0.0, 0.0), "./b.bmp", "./Models/textures/stoneBrick.png");
+	//Add in the terrain to the render pipeline
+	//addTerrainToRender();
 
 	//Add in the buildings to the render pipeline
 	addBuildingToRender();
@@ -234,20 +257,9 @@ void Program::generate()
 
 	//End renderer
 	myRender->end();
-
-	ppm image(terrainMap.getWidth(), terrainMap.getHeight());
-
-	for (int kk = 0; kk < terrainMap.getWidth() * terrainMap.getHeight(); kk++)
-	{
-		float n = terrainMap[kk];
-		image.r[kk] = floor(255 * n);
-		image.g[kk] = floor(255 * n);
-		image.b[kk] = floor(255 * n);
-	}
-
-	image.write("result.bmp");
+	
 	//This is for testing the layout of the City-map-layout
-	system("CLS");
+	/*system("CLS");
 	for (int j = 0; j < genWindow->getTSizeY(); j++)
 	{
 		for (int i = 0; i < genWindow->getTSizeX(); i++)
@@ -282,7 +294,7 @@ void Program::generate()
 				std::cout << "\n";
 			}
 		}
-	}
+	}*/
 }
 
 void Program::noiseGenerator(unsigned int seed)
@@ -341,16 +353,26 @@ void Program::initiateImgui(GLFWwindow* window)
 
 void Program::addTerrainToRender()
 {
-
+	/*delete this->myTerrain;
+	this->myTerrain = new Terrain(glm::vec3(0.0, 0.0, 0.0), terrainMap, grassTexture);*/
+	
 }
 
 void Program::addBuildingToRender()
 {
 	int curStructure = 0;
+	int texture = 0;
 	for (int x = 0; x < genWindow->getTSizeX(); x++)
 	{
 		for (int y = 0; y < genWindow->getTSizeY(); y++)
 		{
+			float terrain0 = terrainMap.at(x, y);
+			float terrain1 = terrainMap.at(x + 1, y);
+			float terrain2 = terrainMap.at(x, y + 1);
+			float terrain3 = terrainMap.at(x + 1, y + 1);
+
+			float finalTerrain = ((terrain0 + terrain1 + terrain2 + terrain3) / 4) * 23;
+
 			int cellValue = cityMap.at(x, y);
 			if (0 <= cellValue && cellValue < 7)
 			{
@@ -358,8 +380,9 @@ void Program::addBuildingToRender()
 				Structure& s = structure[curStructure];
 				curStructure++;
 
+				
 				//glm::vec3 position(x * 2, 0.175f, y * 2);
-				glm::vec3 position(x * 2, terrainMap.at(x, y) * 10, y * 2);
+				glm::vec3 position(x * 2, finalTerrain, y * 2);
 
 				// render bottom section
 				myRender->addElement(s.bottom.model, s.bottom.texture, position);
@@ -368,7 +391,7 @@ void Program::addBuildingToRender()
 				// render middle sections
 				for (int i = 0; i < s.height; i++)
 				{
-					myRender->addElement(s.middle.model, s.middle.texture, position);
+					myRender->addElement(s.middle.model , s.middle.texture, position);
 					position.y += 2.0f;
 				}
 
@@ -382,18 +405,28 @@ void Program::addBuildingToRender()
 				float terrain2 = terrainMap.at(x, y + 1);
 				float terrain3 = terrainMap.at(x + 1, y + 1);
 
-				//Make new renderreu piplineeruuu tto thus'eru
-				int texture = verticalRoadTexture;
+				float finalTerrain = ((terrain0 + terrain1 + terrain2 + terrain3) / 4) * 23;
+				//
+				////Make new renderreu piplineeruuu tto thus'eru
+				
 				if (cellValue == 8)
 				{
 					texture = horizontalRoadTexture;
+					myRender->addElement(roadModel, texture, glm::vec3(x * 2, finalTerrain, y * 2));
+
+				}
+				else if(cellValue == 9)
+				{
+					texture = verticalRoadTexture;
+					myRender->addElement(roadModel, texture, glm::vec3(x * 2, finalTerrain, y * 2));
+
 				}
 				else if (cellValue == 7)
 				{
 					texture = grassTexture;
+					myRender->addElement(roadModel, texture, glm::vec3(x * 2, finalTerrain, y * 2));
 				}
-
-				myRender->addElement(roadModel, texture, glm::vec3(x * 2, terrainMap.at(x, y) * 10, y * 2));
+				
 				//myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	
 			}
 		}
@@ -434,7 +467,7 @@ bool Program::Start()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-	
+
 	//Initiation of glew
 	glewInit();
 
@@ -447,6 +480,8 @@ bool Program::Start()
 	//Startup the renderer
 	myRender->load(window);
 
+	//this->deferredRender = new Deferred(myRender->getCamera());
+
 	return returnValue;
 }
 
@@ -458,8 +493,10 @@ bool Program::Run()
 
 	myKeyInput->keyInput(window, genWindow, shouldRun, myRender->getCamera());		//Checks if any key was pressed 
 
+
 	if(myKeyInput->getCameraShouldMove() == true)
 		myRender->getCamera()->mouseMovement(window, cameraOffsetX, cameraOffsetY);
+
 
 	genWindow->draw();										//Draw function for ImGui
 
@@ -495,16 +532,34 @@ void Program::Stop()
 	myRender->getCamera()->deleteMouse();
 	delete this->myRender;
 	delete this->myModels;
+	//delete this->deferredRender;
+	//this->myTerrain->deallocate();
+	//delete this->myTerrain;
 
 	glfwTerminate();
 }
 
 void Program::render()
 {
+	//Cleans the color buffer and set the defaultbacgroundcolor
+	glClearColor(0.3f, 0.3f, 1.0f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+	//Deferred render
+	//deferredRender->render(myRender->getCamera(), myTerrain);
+
 	//Calls the reneder-pipeline for models and terrain
 	myRender->render(myModels);
+
+	//Render terrain
+	//myRender->render(grassTexture, myTerrain);
+	//myTerrain->Draw(terrainShader, grassTexture);
 
 	//ImGui that handles the graphical interface//
 	ImGui::Render();
 	ImGui_ImplGlfwGL3_RenderDrawData(ImGui::GetDrawData());
 }
+
+//https://stackoverflow.com/questions/18557176/is-there-a-good-tutorial-on-terrain-editor
+//https://www.youtube.com/watch?v=oaAN4zSkY24

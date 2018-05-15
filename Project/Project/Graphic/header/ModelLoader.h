@@ -1,7 +1,6 @@
 #ifndef MODELLOADER_H
 #define MODELLOADER_H
 
-#include "Texture.h"
 #include "Model.h"
 
 class ModelLoader

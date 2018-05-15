@@ -3,6 +3,8 @@
 
 //Own made includes
 #include "Render.h"
+//#include "Deferred.h"
+//#include "Terrain.h"
 #include "../../Logic/header/GenWindow.h"
 
 //Imgui stuff
@@ -42,6 +44,10 @@ private:
 	KeyIn* myKeyInput;
 	Render* myRender;
 	ModelLoader* myModels;
+	//Deferred* deferredRender;
+	//Terrain myTerrain;
+
+	shaderCreater terrainShader;
 
 	//Initiation functions for the applications core functions
 	void initiateGLFW();

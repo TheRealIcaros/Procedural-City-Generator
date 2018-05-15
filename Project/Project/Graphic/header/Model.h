@@ -2,8 +2,7 @@
 #define MODEL_H
 
 //Inlcudes
-#include <GL\glew.h>
-#include <GLFW\glfw3.h>
+#include "Texture.h"
 #include <glm.hpp>
 #include <string>
 
@@ -19,7 +18,6 @@ struct Vertex
 class Model
 {
 private:
-	//Vertex * kalkon;
 	Vertex* vertices;
 	GLuint* indices;
 	GLuint vertexBuffer, indexBuffer;

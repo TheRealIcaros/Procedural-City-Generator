@@ -22,13 +22,13 @@ void Render::load(GLFWwindow* window)
 
 	objectShader.createShader("./Models/shaders/basic", "NULL", "./Models/shaders/basic");
 	//objectShader.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
-	//terrainShader.createShader("./Graphic/Shaders/vertex", "NULL", "./Graphic/Shaders/fragment");
+	//this->terrainShader.createShader("./Graphic/Shaders/TerrainVS", "./Graphic/Shaders/TerrainGS", "./Graphic/Shaders/TerrainFS");
 
 	objectWorldLocation = objectShader.getUniform("WorldMatrices");
 	objectProjectionLocation = objectShader.getUniform("ProjectionMatrix");
 	objectViewLocation = objectShader.getUniform("ViewMatrix");
 
-	myCamera.setPosition(glm::vec3(0, 15, -1));
+	myCamera.setPosition(glm::vec3(0, 50, 105));
 	//myCamera.
 
 }
@@ -56,7 +56,17 @@ void Render::end()
 	const glm::mat4 IDENT;
 	for (int i = 0; i<objectElements.getSize(); i++)
 	{
-		worldMatrices[i] = glm::translate(IDENT, objectElements[i].position);
+		
+
+		if (objectElements.at(i).model == 4 || objectElements.at(i).model == 0)
+		{
+			worldMatrices[i] = glm::translate(IDENT, glm::vec3(objectElements[i].position.x , objectElements[i].position.y - 2.45f, objectElements[i].position.z));
+			worldMatrices[i] = glm::scale(worldMatrices[i], glm::vec3(1.0f, 15.0f, 1.0f));
+		}
+		else
+		{
+			worldMatrices[i] = glm::translate(IDENT, objectElements[i].position);
+		}
 	}
 
 	// convert elements to instances
@@ -87,15 +97,25 @@ void Render::addElement(int model, int texture, const glm::vec3& position)
 {
 	assert(model >= 0);
 	assert(texture >= 0);
+	glm::mat4 worldM;
 
 	ObjectElement element = { model, texture, position };
 
+	//if (model == 4 || model == 0)
+		//worldM = glm::scale(worldM,glm::vec3(5.0f, 500.0f, 5.0f));
+	
+	worldMatrices.add(worldM);
 	objectElements.add(element);
-	worldMatrices.add(glm::mat4());
 }
+
 
 void Render::render(ModelLoader* models)
 {
+	//Debug code for camera
+	//std::cout << "Camera x-Position: " << myCamera.getPosition().x;
+	//std::cout << " Camera y-Position: " << myCamera.getPosition().y;
+	//std::cout << " Camera z-Position: " << myCamera.getPosition().z << std::endl;
+
 	//Cleans the color buffer and set the defaultbacgroundcolor
 	glClearColor(0.3f, 0.3f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -116,6 +136,16 @@ void Render::render(ModelLoader* models)
 		worldMatrixOffset += instance.instances;
 	}
 }
+
+//void Render::render(int texture, Terrain* terrain)
+//{
+//	glUseProgram(terrainShader.getShaderProgramID());
+//	terrainShader.setMat4(objectProjectionLocation, myCamera.getProjection());
+//	terrainShader.setMat4(objectViewLocation, myCamera.getView());
+//
+//	terrain->Draw(terrainShader, texture);
+//
+//}
 
 Camera* Render::getCamera()
 {
