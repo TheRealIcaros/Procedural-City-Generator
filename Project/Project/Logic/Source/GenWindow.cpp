@@ -17,25 +17,25 @@ GenWindow::GenWindow()
 	this->pSizeX = 25;
 	this->pSizeY = 25;
 
-	this->terrainOctave = Array<float>(OCTAVENUMBER);
-	this->terrainOctavePerc = Array<float>(OCTAVENUMBER);
-	this->terrainOctave.add(1.0);
-	this->terrainOctave.add(2.0);
-	this->terrainOctave.add(4.0);
-	this->terrainOctave.add(8.0);
-	this->terrainOctave.add(16.0);
-	this->terrainOctave.add(32.0);
-	this->terrainOctave.add(64.0);
-	this->terrainOctave.add(128.0);
+	this->octave = Array<float>(OCTAVENUMBER);
+	this->amplitude = Array<float>(OCTAVENUMBER);
+	this->octave.add(1.0);
+	this->octave.add(2.0);
+	this->octave.add(4.0);
+	this->octave.add(8.0);
+	this->octave.add(16.0);
+	this->octave.add(32.0);
+	this->octave.add(64.0);
+	this->octave.add(128.0);
 
-	this->terrainOctavePerc.add(0.50f);
-	this->terrainOctavePerc.add(0.25f);
-	this->terrainOctavePerc.add(0.125f);
-	this->terrainOctavePerc.add(0.0625);
-	this->terrainOctavePerc.add(0.03125f);
-	this->terrainOctavePerc.add(0.015625f);
-	this->terrainOctavePerc.add(0.0078125f);
-	this->terrainOctavePerc.add(0.00390625f);
+	this->amplitude.add(0.50f);
+	this->amplitude.add(0.25f);
+	this->amplitude.add(0.125f);
+	this->amplitude.add(0.0625);
+	this->amplitude.add(0.03125f);
+	this->amplitude.add(0.015625f);
+	this->amplitude.add(0.0078125f);
+	this->amplitude.add(0.00390625f);
 	this->redistribution = 1.0;
 	this->borderPerc = 0.2f;
 	this->minHeight[0] = 1;
@@ -125,23 +125,23 @@ void GenWindow::draw()
 		ImGui::InputInt("X ##Terrain", &tSizeX, 1, 1000);
 		ImGui::InputInt("Y ##Terrain", &tSizeY, 1, 1000);
 		ImGui::Text("Octaves");
-		ImGui::InputFloat("1", &terrainOctave[0]);
-		ImGui::InputFloat("2", &terrainOctave[1]);
-		ImGui::InputFloat("3", &terrainOctave[2]);
-		ImGui::InputFloat("4", &terrainOctave[3]);
-		ImGui::InputFloat("5", &terrainOctave[4]);
-		ImGui::InputFloat("6", &terrainOctave[5]);
-		ImGui::InputFloat("7", &terrainOctave[6]);
-		ImGui::InputFloat("8", &terrainOctave[7]);
+		ImGui::InputFloat("1", &octave[0]);
+		ImGui::InputFloat("2", &octave[1]);
+		ImGui::InputFloat("3", &octave[2]);
+		ImGui::InputFloat("4", &octave[3]);
+		ImGui::InputFloat("5", &octave[4]);
+		ImGui::InputFloat("6", &octave[5]);
+		ImGui::InputFloat("7", &octave[6]);
+		ImGui::InputFloat("8", &octave[7]);
 		ImGui::Text("Octaves Percentage");
-		ImGui::InputFloat("1 ##Perc", &terrainOctavePerc[0]);
-		ImGui::InputFloat("2 ##Perc", &terrainOctavePerc[1]);
-		ImGui::InputFloat("3 ##Perc", &terrainOctavePerc[2]);
-		ImGui::InputFloat("4 ##Perc", &terrainOctavePerc[3]);
-		ImGui::InputFloat("5 ##Perc", &terrainOctavePerc[4]);
-		ImGui::InputFloat("6 ##Perc", &terrainOctavePerc[5]);
-		ImGui::InputFloat("7 ##Perc", &terrainOctavePerc[6]);
-		ImGui::InputFloat("8 ##Perc", &terrainOctavePerc[7]);
+		ImGui::InputFloat("1 ##Perc", &amplitude[0]);
+		ImGui::InputFloat("2 ##Perc", &amplitude[1]);
+		ImGui::InputFloat("3 ##Perc", &amplitude[2]);
+		ImGui::InputFloat("4 ##Perc", &amplitude[3]);
+		ImGui::InputFloat("5 ##Perc", &amplitude[4]);
+		ImGui::InputFloat("6 ##Perc", &amplitude[5]);
+		ImGui::InputFloat("7 ##Perc", &amplitude[6]);
+		ImGui::InputFloat("8 ##Perc", &amplitude[7]);
 		ImGui::Text("Redistribution");
 		ImGui::InputFloat("##Redistribution", &redistribution);
 		ImGui::Separator();
@@ -173,7 +173,7 @@ void GenWindow::draw()
 		ImGui::Text("Density");
 		ImGui::SliderInt("##Skyscrapers.Density", &density[1], 1, 100);
 		ImGui::Text("Block Size");
-		ImGui::SliderInt("##Skyscrapers.Block.Size", &blockSize[1], 1, 100);
+		ImGui::SliderInt("##Skyscrapers.Block.Size", &blockSize[1], 1, 5);
 		ImGui::Separator();
 		ImGui::Text("Factories");
 		ImGui::Spacing();
@@ -184,7 +184,7 @@ void GenWindow::draw()
 		ImGui::Text("Density");
 		ImGui::SliderInt("##Factories.Density", &density[2], 1, 100);
 		ImGui::Text("Block Size");
-		ImGui::SliderInt("##Factories.Block.Size", &blockSize[2], 1, 100);
+		ImGui::SliderInt("##Factories.Block.Size", &blockSize[2], 1, 5);
 		ImGui::Separator();
 		ImGui::Spacing();
 		ImGui::Checkbox("Random Generator", &random);
@@ -201,4 +201,55 @@ void GenWindow::draw()
 
 	}
 	ImGui::End();
+}
+
+void GenWindow::randomiser()
+{
+	float max = 8;
+	float min = 1;
+	std::sprintf(inputBuf, "%d", rand());
+	int ampAmmount = rand() % ((int)max - (int)min + 1) + (int)min;
+
+	max = tSizeX;
+	pSizeX = rand() % ((int)max - (int)min + 1) + (int)min;
+	pSizeY = pSizeX;
+
+	
+	min = 0;
+	max = INT_MAX;
+	for (int k = 0; k < ampAmmount; k++)
+	{
+		octave[k] = min + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (max - min)));
+		amplitude[k] = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+	}
+
+	for (int k = ampAmmount; k < 8; k++)
+	{
+		octave[k] = 0;
+		amplitude[k] = 0;
+	}
+
+	min = 0;
+	max = 10;
+	redistribution = min + static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / (max - min)));
+
+	borderPerc = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+
+	min = 1;
+	max = 5;
+	minMainRoadDistance = rand() % ((int)max - (int)min + 1) + (int)min;
+
+	for (int k = 0; k < 3; k++)
+	{
+		min = 1;
+		max = 10;
+		minHeight[k] = rand() % ((int)max - (int)min + 1) + (int)min;;
+		maxHeight[k] = rand() % ((int)max - (int)min + 1) + (int)min;
+		max = 100;
+		density[k] = rand() % ((int)max - (int)min + 1) + (int)min;
+		max = 5;
+		blockSize[k] = rand() % ((int)max - (int)min + 1) + (int)min;
+	}
+
+
 }

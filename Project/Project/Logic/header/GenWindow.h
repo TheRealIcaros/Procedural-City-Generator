@@ -35,8 +35,8 @@ private:
 	int tSizeY;
 	float pSizeX;
 	float pSizeY;
-	Array<float> terrainOctave;
-	Array<float> terrainOctavePerc;
+	Array<float> octave;
+	Array<float> amplitude;
 	float redistribution;
 	float borderPerc;
 	int minHeight[MAX_DISTRICTS];
@@ -55,16 +55,16 @@ public:
 	GenWindow();
 	~GenWindow();
 	void draw();
+	void randomiser();
 	void toggleDebugToDraw() { this->isDrawing = !this->isDrawing; }
-	void setInputBuf(int input) { std::sprintf(inputBuf, "%d", input); }
 	std::string getInputBuf() { return this->inputBuf; }
 	bool isOpen() const { return this->isDrawing; }
 	float getPSizeX() { return this->pSizeX; }
 	float getPSizeY() { return this->pSizeY; }
 	int getTSizeX() { return this->tSizeX; }
 	int getTSizeY() { return this->tSizeY; }
-	Array<float> getTerrainOctave() { return this->terrainOctave; }
-	Array<float> getTerrainOctavePerc() { return this->terrainOctavePerc; }
+	Array<float> getTerrainOctave() { return this->octave; }
+	Array<float> getTerrainOctavePerc() { return this->amplitude; }
 	float getRedistribution() { return this->redistribution; }
 	float getBorderPerc() { return this->borderPerc; }
 	int* getMinHeight() { return this->minHeight; }

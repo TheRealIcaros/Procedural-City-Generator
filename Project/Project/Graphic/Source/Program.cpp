@@ -230,16 +230,16 @@ void Program::generate()
 	////The height-map in .bmp format
 	//image.write("HMap.bmp");
 
-	//Add structures render
-	myRender->begin();
+	////Add structures render
+	//myRender->begin();
 
 	//this->deferredRender->terrain
 	//myTerrain = Terrain(glm::vec3(0.0, 0.0, 0.0), "./b.bmp", "./Models/textures/stoneBrick.png");
 	//Add in the terrain to the render pipeline
 	//addTerrainToRender();
 
-	//Add in the buildings to the render pipeline
-	addBuildingToRender();
+	////Add in the buildings to the render pipeline
+	//addBuildingToRender();
 
 	//For adding info to the left-side of the app window
 	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
@@ -256,8 +256,8 @@ void Program::generate()
 		genWindow->setGrass(i, building->getGrassTiles()[i]);
 	}
 
-	//End renderer
-	myRender->end();
+	////End renderer
+	//myRender->end();
 	
 	//This is for testing the layout of the City-map-layout
 	/*system("CLS");
@@ -441,10 +441,11 @@ void Program::collectData()
 	float avg = 0;
 	int counter = 0;
 	int buildings = 0;
+	srand(static_cast <unsigned> (time(0)));
 	for (int i = 0; i < 100; i++)
 	{
-		genWindow->setInputBuf(i);
-		generate();
+		genWindow->randomiser();
+		generate(); 
 		float time = genWindow->getGenTime();
 		data.add(time);
 		avg += time;

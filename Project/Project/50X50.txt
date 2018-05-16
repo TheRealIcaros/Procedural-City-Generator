@@ -1,0 +1,1 @@
+Generation time: 0.063633, Standard deviation: 0.028175, Perlin noise calls: 14241, Buildings: 426
