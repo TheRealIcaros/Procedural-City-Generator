@@ -112,9 +112,12 @@ void Program::loadAssets()
 
 	//Grass and road sections
 	this->roadModel = myModels->loadModel("./Models/models/house_bot_section.model");
-	this->verticalRoadTexture = myModels->loadTexture("./Models/textures/road_vertical.dds");
-	this->horizontalRoadTexture = myModels->loadTexture("./Models/textures/road_horizontal.dds");
-	this->grassTexture = myModels->loadTexture("./Models/textures/grass1.dds");
+	//this->verticalRoadTexture = myModels->loadTexture("./Models/textures/road_vertical.dds");
+	this->verticalRoadTexture = myModels->loadTexture("./Models/textures/g.dds");
+	this->horizontalRoadTexture = myModels->loadTexture("./Models/textures/g.dds");
+	//this->horizontalRoadTexture = myModels->loadTexture("./Models/textures/road_horizontal.dds");
+	//this->grassTexture = myModels->loadTexture("./Models/textures/grass1.dds");
+	this->grassTexture = myModels->loadTexture("./Models/textures/g.dds");
 }
 
 void Program::loadSection(int district, const Section& section, int type)
@@ -217,29 +220,28 @@ void Program::generate()
 		building->generate(cityMap, terrainMap, structure, genWindow->getPSizeX(), genWindow->getPSizeY());
 	}
 
-	////Creates the height-map to be used in the terrain
-	//ppm image(terrainMap.getWidth(), terrainMap.getHeight());
+	//Creates the height-map to be used in the terrain
+	ppm image(terrainMap.getWidth(), terrainMap.getHeight());
 
-	//for (int kk = 0; kk < terrainMap.getWidth() * terrainMap.getHeight(); kk++)
-	//{
-	//	float n = terrainMap[kk];
-	//	image.r[kk] = floor(255 * n);
-	//	image.g[kk] = floor(255 * n);
-	//	image.b[kk] = floor(255 * n);
-	//}
-	////The height-map in .bmp format
-	//image.write("HMap.bmp");
+	for (int kk = 0; kk < terrainMap.getWidth() * terrainMap.getHeight(); kk++)
+	{
+		float n = terrainMap[kk];
+		image.r[kk] = floor(255 * n);
+		image.g[kk] = floor(255 * n);
+		image.b[kk] = floor(255 * n);
+	}
+	//The height-map in .bmp format
+	image.write("HeightMapA.bmp");
 
 	////Add structures render
-	//myRender->begin();
+	myRender->begin();
 
-	//this->deferredRender->terrain
-	//myTerrain = Terrain(glm::vec3(0.0, 0.0, 0.0), "./b.bmp", "./Models/textures/stoneBrick.png");
+	
 	//Add in the terrain to the render pipeline
-	//addTerrainToRender();
+	addTerrainToRender();
 
-	////Add in the buildings to the render pipeline
-	//addBuildingToRender();
+	//Add in the buildings to the render pipeline
+	addBuildingToRender();
 
 	//For adding info to the left-side of the app window
 	std::chrono::high_resolution_clock::time_point end = std::chrono::high_resolution_clock::now();
@@ -257,7 +259,7 @@ void Program::generate()
 	}
 
 	////End renderer
-	//myRender->end();
+	myRender->end();
 	
 	//This is for testing the layout of the City-map-layout
 	/*system("CLS");
