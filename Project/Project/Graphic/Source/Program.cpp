@@ -15,6 +15,7 @@ void Program::initiateGLFW()
 	glewExperimental = GL_TRUE;
 
 	glfwInit();
+	glShadeModel(GL_SMOOTH);
 	
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);	 //This sets the Major requierments of Opengl to Version 4.x
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);	//This sets the Minor requierments of Opengl to Version x.3
@@ -112,10 +113,10 @@ void Program::loadAssets()
 
 	//Grass and road sections
 	this->roadModel = myModels->loadModel("./Models/models/house_bot_section.model");
-	//this->verticalRoadTexture = myModels->loadTexture("./Models/textures/road_vertical.dds");
-	this->verticalRoadTexture = myModels->loadTexture("./Models/textures/g.dds");
-	this->horizontalRoadTexture = myModels->loadTexture("./Models/textures/g.dds");
-	//this->horizontalRoadTexture = myModels->loadTexture("./Models/textures/road_horizontal.dds");
+	this->verticalRoadTexture = myModels->loadTexture("./Models/textures/road_vertical.dds");
+	//this->verticalRoadTexture = myModels->loadTexture("./Models/textures/g.dds");
+	//this->horizontalRoadTexture = myModels->loadTexture("./Models/textures/g.dds");
+	this->horizontalRoadTexture = myModels->loadTexture("./Models/textures/road_horizontal.dds");
 	//this->grassTexture = myModels->loadTexture("./Models/textures/grass1.dds");
 	this->grassTexture = myModels->loadTexture("./Models/textures/g.dds");
 }
@@ -426,8 +427,8 @@ void Program::addBuildingToRender()
 				}
 				else if (cellValue == 7)
 				{
-					texture = grassTexture;
-					myRender->addElement(roadModel, texture, glm::vec3(x * 2, finalTerrain, y * 2));
+					//texture = grassTexture;
+					//myRender->addElement(roadModel, texture, glm::vec3(x * 2, finalTerrain, y * 2));
 				}
 				
 				//myRender->addElement(roadModel, texture, glm::vec3(x * 2, 0, y * 2));	
